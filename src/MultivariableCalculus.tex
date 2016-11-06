@@ -1,0 +1,419 @@
+\documentclass[letter, 11pt, twosided, openright]{memoir}
+
+\usepackage[no-math]{fontspec}
+\usepackage{xpatch}
+	\renewcommand{\ttdefault}{ul9}
+	\xpatchcmd{\ttfamily}{\selectfont}{\fontencoding{T1}\selectfont}{}{}
+	\DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
+\usepackage{polyglossia} % English please
+	\setdefaultlanguage[variant=us]{english}
+\usepackage[charter,cal=cmcal]{mathdesign} %different font
+\usepackage{avant}
+\usepackage{microtype} % Less badboxes
+
+\usepackage{calc, ifthen, xparse}
+\usepackage{makeidx}
+\usepackage[hidelinks]{hyperref}   % Internal hyperlinks
+\usepackage{mathtools} % replaces amsmath
+\usepackage{etoolbox}
+\usepackage{amsthm, bm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[inline,shortlabels]{enumitem}
+\setlistdepth{9}
+
+%%% Specify the cool macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\C}{\mathbb{C}}
+\renewcommand{\d}{\mathrm{d}}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Img}{img}
+\DeclareMathOperator{\Id}{id}
+\DeclareMathOperator{\Range}{range}
+\DeclareMathOperator{\Rref}{rref}
+\DeclareMathOperator{\Rank}{rank}
+\DeclareMathOperator{\Speed}{speed}
+\DeclareMathOperator{\Vel}{velocity}
+\DeclareMathOperator{\Null}{null}
+\DeclareMathOperator{\Nullity}{nullity}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Proj}{proj}
+\DeclareMathOperator{\Perp}{perp}
+\DeclareMathOperator{\Arclen}{arclen}
+\newcommand{\proj}{\Proj}
+\newcommand{\xhat}{{\hat {\mathbf x}}}
+\newcommand{\yhat}{{\hat {\mathbf y}}}
+\newcommand{\zhat}{{\hat {\mathbf z}}}
+\newcommand{\mat}[1]{\begin{bmatrix*}[r]#1\end{bmatrix*}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+% just to make sure it exists
+\providecommand\given{}
+% can be useful to refer to this outside \Set
+\newcommand\SetSymbol[1][]{%
+	\nonscript\::%
+	\allowbreak
+	\nonscript\:
+	\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{%
+	\renewcommand\given{\SetSymbol[\delimsize]}
+	#1
+}
+\renewcommand{\it}{\itshape}
+
+
+% set up some deep enumerate environments for the CC license
+\newlist{ccEnumerate}{enumerate}{9}
+\setlist[ccEnumerate,1]{label=\alph*.}
+\setlist[ccEnumerate,2]{label=\arabic*.}
+\setlist[ccEnumerate,3]{label=\Alph*.}
+\setlist[ccEnumerate,4]{label=\roman*.}
+\setlist[ccEnumerate,5]{label=(\alph*)}
+\setlist[ccEnumerate,6]{label=(\arabic*)}
+\setlist[ccEnumerate,7]{label=(\Roman*)}
+\setlist[ccEnumerate,8]{label=(\Alph*)}
+\setlist[ccEnumerate,9]{label=(\roman*)}
+
+
+%%% Specify the colors
+\definecolor{myorange}{HTML}{F29B23}
+\definecolor{myred}{HTML}{D13409}
+\definecolor{mypink}{HTML}{B3094F}
+\definecolor{mydark}{HTML}{23112A}
+
+\colorlet{chapcolor}{myred}
+\colorlet{seccolor}{myorange}
+\colorlet{headertext}{myred!70!white}
+\colorlet{ocre}{mypink}
+
+%%% Specify custom fonts
+%\newfontfamily{\sfreg}{Fira Sans}
+%\newfontfamily{\firasans}
+%  [Ligatures=TeX, % recommended
+%   UprightFont={* Light},
+%   ItalicFont={* Light Italic},
+%   BoldFont={* Medium},
+%   BoldItalicFont={* Medium Italic}]
+%  {Fira Sans}
+
+
+
+%%% PAGE LAYOUT 
+%%%------------------------------------------------------------------------------
+
+%\setlrmarginsandblock{0.15\paperwidth}{*}{1} % Left and right margin
+%\setulmarginsandblock{0.2\paperwidth}{*}{1}  % Upper and lower margin
+%\checkandfixthelayout
+
+%%% SECTIONAL DIVISIONS
+%%%------------------------------------------------------------------------------
+
+%\maxsecnumdepth{subsection} % Subsections (and higher) are numbered
+%\setsecnumdepth{subsection}
+%
+%\makeatletter %
+%\makechapterstyle{standard}{
+%  \setlength{\beforechapskip}{0\baselineskip}
+%  \setlength{\midchapskip}{1\baselineskip}
+%  \setlength{\afterchapskip}{8\baselineskip}
+%  \renewcommand{\chapterheadstart}{\vspace*{\beforechapskip}}
+%  \renewcommand{\chapnamefont}{\centering\normalfont\Large}
+%  \renewcommand{\printchaptername}{\chapnamefont \@chapapp}
+%  \renewcommand{\chapternamenum}{\space}
+%  \renewcommand{\chapnumfont}{\normalfont\Large}
+%  \renewcommand{\printchapternum}{\chapnumfont \thechapter}
+%  \renewcommand{\afterchapternum}{\par\nobreak\vskip \midchapskip}
+%  \renewcommand{\printchapternonum}{\vspace*{\midchapskip}\vspace*{5mm}}
+%  \renewcommand{\chaptitlefont}{\centering\bfseries\LARGE}
+%  \renewcommand{\printchaptertitle}[1]{\chaptitlefont ##1}
+%  \renewcommand{\afterchaptertitle}{\par\nobreak\vskip \afterchapskip}
+%}
+%\makeatother
+%
+%\chapterstyle{standard}
+
+%\setsecheadstyle{\normalfont\large\bfseries}
+%\setsubsecheadstyle{\normalfont\normalsize\bfseries}
+%\setparaheadstyle{\normalfont\normalsize\bfseries}
+%\setparaindent{0pt}\setafterparaskip{0pt}
+
+\renewcommand{\chapnumfont}{\normalfont\huge\sffamily\bfseries}
+\renewcommand{\chaptitlefont}{\color{chapcolor}\chapnumfont\mdseries}
+\renewcommand{\printchaptername}{\chapnumfont Chapter}
+\makeatletter
+	\renewcommand{\hangsecnum}{%
+	  \def\@seccntformat##1{%
+	    \makebox[0pt][r]{%
+	      \color{seccolor}%
+	      \csname the##1\endcsname
+	      \quad
+	    }%
+	  }%
+	}
+\makeatother
+%\setsecnumformat{\llap{\color{seccolor}\csname the#1\endcsname\quad}}
+
+\setsecheadstyle{\Large\bfseries\sffamily\raggedright}
+\setsubsecheadstyle{\large\sffamily\raggedright}
+\setsubsubsecheadstyle{\normalsize\sffamily\raggedright}
+\setsechook{\hangsecnum}
+\setsubsechook{\defaultsecnum}
+\setsubsubsechook{\defaultsecnum}
+
+
+\makeatletter
+	\setlength{\headwidth}{\textwidth}
+	%\addtolength{\headwidth}{\marginparsep}
+	%\addtolength{\headwidth}{\marginparwidth}
+	\makepagestyle{serifpage}
+	\makerunningwidth{serifpage}{\headwidth}
+	\makeheadrule{serifpage}{\headwidth}{\normalrulethickness}
+	\makeheadposition{serifpage}{flushright}{flushleft}{}{}
+	\makepsmarks{serifpage}{%
+		\let\@mkboth\markboth
+		\def\chaptermark##1{\markboth{\textsf{\color{headertext}##1}}{\textsf{\color{headertext}##1}}}% % left & right marks
+		\def\sectionmark##1{\markright{%
+		\ifnum \c@secnumdepth>\z@
+			{\color{seccolor}\sffamily\thesection\ }
+		\fi
+		\textsf{\color{headertext}##1}}}
+	}
+	\makeevenhead{serifpage}%
+		{\normalfont\sffamily\thepage}{}{\normalfont\sffamily \leftmark}
+	\makeoddhead{serifpage}%
+		{\normalfont\sffamily \rightmark}{}{\normalfont\sffamily\thepage}
+\makeatother
+
+\pagestyle{serifpage}
+
+%%% Theorem Environments
+
+\makeatletter
+	\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+	\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+	\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+	\newtheorem{notation}{Notation}[chapter]
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%% dedicated to boxed/framed environements %%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newtheoremstyle{ocrenumbox}% % Theorem style name
+	{0pt}% Space above
+	{0pt}% Space below
+	{\normalfont}% % Body font
+	{}% Indent amount
+	{\small\bfseries\sffamily\color{ocre}}% % Theorem head font
+	{\;}% Punctuation after theorem head
+	{0.25em}% Space after theorem head
+	{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+	\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+
+	\newtheoremstyle{blacknumex}% Theorem style name
+	{5pt}% Space above
+	{5pt}% Space below
+	{\normalfont}% Body font
+	{} % Indent amount
+	{\small\bfseries\sffamily}% Theorem head font
+	{\;}% Punctuation after theorem head
+	{0.25em}% Space after theorem head
+	{\small\sffamily{\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+	\newtheoremstyle{blacknumbox} % Theorem style name
+	{0pt}% Space above
+	{0pt}% Space below
+	{\normalfont}% Body font
+	{}% Indent amount
+	{\small\bfseries\sffamily}% Theorem head font
+	{\;}% Punctuation after theorem head
+	{0.25em}% Space after theorem head
+	{\small\sffamily\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%% dedicated to non-boxed/non-framed environements %%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newtheoremstyle{ocrenum}% % Theorem style name
+	{5pt}% Space above
+	{5pt}% Space below
+	{\normalfont}% % Body font
+	{}% Indent amount
+	{\small\bfseries\sffamily\color{ocre}}% % Theorem head font
+	{\;}% Punctuation after theorem head
+	{0.25em}% Space after theorem head
+	{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+	\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+	\makeatother
+
+	% Defines the theorem text style for each type of theorem to one of the three styles above
+	\newcounter{dummy} 
+	\numberwithin{dummy}{section}
+	\theoremstyle{ocrenumbox}
+	\newtheorem{theoremeT}[dummy]{Theorem}
+	\newtheorem{problem}{Problem}[chapter]
+	\newtheorem{exerciseT}{Exercise}[chapter]
+	\theoremstyle{blacknumex}
+	\newtheorem{exampleT}{Example}[chapter]
+	\theoremstyle{blacknumbox}
+	\newtheorem{vocabulary}{Vocabulary}[chapter]
+	\newtheorem{definitionT}{Definition}[section]
+	\newtheorem{corollaryT}[dummy]{Corollary}
+	\theoremstyle{ocrenum}
+	\newtheorem{proposition}[dummy]{Proposition}
+
+	%----------------------------------------------------------------------------------------
+	%	DEFINITION OF COLORED BOXES
+	%----------------------------------------------------------------------------------------
+
+	\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+
+	% Theorem box
+	\newmdenv[skipabove=7pt,
+	skipbelow=7pt,
+	backgroundcolor=black!5,
+	linecolor=ocre,
+	innerleftmargin=5pt,
+	innerrightmargin=5pt,
+	innertopmargin=5pt,
+	leftmargin=0cm,
+	rightmargin=0cm,
+	innerbottommargin=5pt]{tBox}
+
+	% Exercise box	  
+	\newmdenv[skipabove=7pt,
+	skipbelow=7pt,
+	rightline=false,
+	leftline=true,
+	topline=false,
+	bottomline=false,
+	backgroundcolor=ocre!10,
+	linecolor=ocre,
+	innerleftmargin=5pt,
+	innerrightmargin=5pt,
+	innertopmargin=5pt,
+	innerbottommargin=5pt,
+	leftmargin=0cm,
+	rightmargin=0cm,
+	linewidth=4pt]{eBox}	
+
+	% Definition box
+	\newmdenv[skipabove=7pt,
+	skipbelow=7pt,
+	rightline=false,
+	leftline=true,
+	topline=false,
+	bottomline=false,
+	linecolor=ocre,
+	innerleftmargin=5pt,
+	innerrightmargin=5pt,
+	innertopmargin=0pt,
+	leftmargin=0cm,
+	rightmargin=0cm,
+	linewidth=4pt,
+	innerbottommargin=0pt]{dBox}	
+
+	% Corollary box
+	\newmdenv[skipabove=7pt,
+	skipbelow=7pt,
+	rightline=false,
+	leftline=true,
+	topline=false,
+	bottomline=false,
+	linecolor=gray,
+	backgroundcolor=black!5,
+	innerleftmargin=5pt,
+	innerrightmargin=5pt,
+	innertopmargin=5pt,
+	leftmargin=0cm,
+	rightmargin=0cm,
+	linewidth=4pt,
+	innerbottommargin=5pt]{cBox}
+\makeatother
+
+% Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
+\newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
+\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
+\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
+
+\newenvironment{exercises}{{\subsection*{Exercises for \thesection}}}{}
+\newenvironment{answer}{\begin{quote}}{\end{quote}}
+
+
+
+
+
+%%% THE DOCUMENT
+%%% Where all the important stuff is included!
+%%%-------------------------------------------------------------------------------
+
+\author{Jason Siefken}
+\title{Multivariable Calculus}
+
+
+\renewcommand{\maketitlehooka}{\color{chapcolor}\chapnumfont\Huge}
+\renewcommand{\maketitlehookb}{\color{black}\normalfont}
+\renewcommand{\maketitlehookc}{\small}
+\renewcommand{\maketitlehookd}{
+	\begin{center}
+		\includegraphics[width=1in]{resources/doclicense-CC-by-sa.pdf}
+	\end{center}
+}
+\usepackage{lipsum} % Just to put in some text
+
+\begin{document}
+
+% no numbers on chapters here, etc.  it's the front matter!
+\frontmatter
+\begin{titlingpage}
+	\calccentering{\unitlength}
+	\begin{adjustwidth*}{\unitlength}{-\unitlength}
+		\maketitle
+	\end{adjustwidth*}
+\end{titlingpage}
+
+\clearpage
+
+\tableofcontents*
+\clearpage
+
+\chapter{Introduction}
+	\input{chapters/introduction.tex}
+\chapter{Licensing}
+	\input{chapters/licensing.tex}
+% number the chapters and such
+\mainmatter
+
+\chapter{Preliminaries}
+	\input{chapters/chapter1.tex}
+	\newpage
+\chapter{Vectors}
+	\input{chapters/chapter2.tex}
+	\newpage
+
+\appendix
+\renewcommand{\printchaptername}{\chapnumfont Appendix}
+\chapter{Proofs}
+	\label{APPENDIX-proofstyle}
+	\input{chapters/appendix-proofstyle.tex}
+
+\chapter{Creative Commons License Fulltext}
+	\label{APPENDIX-license}
+	\input{resources/doclicense-CC-by-sa-4.0-latex.tex}
+
+\backmatter
+
+%%% BIBLIOGRAPHY
+%%% -------------------------------------------------------------
+
+% \bibliographystyle{utphysics}
+% \bibliography{ref}
+
+\end{document}

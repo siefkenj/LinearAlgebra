@@ -1,0 +1,341 @@
+\section{Mathematical Notation}
+	Mathematics is a sophisticated and precise language, and
+	we best not adventure into calculus without learning some
+	basic words.
+
+	The most basic mathematical word is that of a \emph{set}\index{set}.  
+	A set is an unordered collection of objects.  We won't try and pin
+	it down more exactly than this---our intuition about collections
+	of objects will suffice\footnote{ When you pursue more rigorous math,
+	you rely on definitions to get yourself out of philosophical jams.  For instance,
+	with our definition of set, consider ``the set of all sets that don't
+	contain themselves.''  This is called \emph{Russel's Paradox}, and shows
+	that if we start talking about sets of sets, we may need more than
+	intuition.}. We write a set with curly-braces $\{$ and $\}$ and
+	list the objects inside.  For instance
+	\[
+		\Set{1,2,3}.
+	\]
+	This would be read aloud as ``the set containing the elements $1$, $2$, and $3$.''
+	The symbol $\in$\index{$\in$} is used to specify that some object is an element of a set, and
+	$\notin$ is used to specify it is not.  For example,
+	\[
+		3\in\Set{1,2,3}\qquad 4\notin\Set{1,2,3}.
+	\]
+	Sets can contain mixtures of objects, including other sets.  For example,
+	\[
+		\Set{1,2,a,\Set{-70,\infty}, x}
+	\]
+	is a perfectly valid set.
+
+	It is tradition to use capital letters to name sets.  So we might say $A=\{6,7,12\}$
+	or $X=\{7\}$.  There is, however, a special set which already has its own name---the
+	empty set.  The \emph{empty set} is the set containing no elements
+	and is written $\emptyset$ or $\Set{}$.  Note that $\Set{\emptyset}$ is \emph{not}
+	the empty set.  It is the set containing the empty set!  It is also traditional
+	to call elements of a set \emph{points}\index{point} regardless of whether you
+	consider them ``point-like'' objects.
+
+	\subsection{Operations on Sets}
+	If the set $A$ contains all the elements that the set $B$ does, we call $A$ a \emph{superset}\index{superset}
+	and $B$ a \emph{subset}\index{subset}.  We'll give this a formal
+	definition.
+	\begin{definition}[Subset \& Superset]
+		The set $B$ is a \emph{subset} of the set $A$, written $B\subseteq A$ if for all
+		$b\in B$ we also have $b\in A$.  In this case, $A$ is called a \emph{superset}\footnote{
+			Some mathematicians use the symbol $\subset$ instead of $\subseteq$.}.
+	\end{definition}
+
+	Some simple examples are $\Set{1,2,3}\subseteq \Set{1,2,3,4}$ and $\Set{1,2,3}\subseteq\Set{1,2,3}$.
+	There's something funny about that last example though.  Those two sets are not only subsets/supersets
+	of each other, they're \emph{equal}.  As surprising as it seems, we actually need to define
+	what it means for two sets to be equal.
+	\begin{definition}[Set Equality]
+		The sets $A$ and $B$ are \emph{equal}, written $A=B$ if $A\subseteq B$ and $B\subseteq A$.
+	\end{definition}
+	Having a definition of equality to lean on will help us when we need to prove things about sets.
+
+	Specifying sets by listing all their elements can be a hassle, and if there are an infinite
+	number of elements, it's impossible!  Fortunately, \emph{set-builder notation}\index{set-builder notation}
+	solves these problems.
+	If $X$ is a set, we can define the subset 
+	\[
+		Y= \Set{a\in X\given\text{some rule involving }a},
+	\]
+	which is read ``$Y$ is the set of $a$ in $X$ \emph{such that} some rule
+	involving $a$ is true.''  If $X$ is intuitive, we may omit it and
+	simply write $Y=\Set{a\given\text{some rule involving }a}$\footnote{ If you want
+	to get technical, to make this notation unambiguous, you define a 
+	\emph{universe of discourse}.  That is, a set $\mathcal U$ containing
+	every object you might want to talk about.  Then $\Set{a\given\text{some rule involving }a}$
+	is short for $\Set{a\in\mathcal U\given\text{some rule involving }a}$}.  You may equivalently
+	use ``$|$'' instead of ``$:$'', writing $Y=\{a\,|\,\text{some rule involving }a\}$.
+
+
+	There are also some common operations we can do with two sets.
+	\begin{definition}[Intersections \& Unions]
+		Let $A$ and $B$ be sets. Then the \emph{intersection} of $A$ and $B$, written
+		$A\cap B$, is defined by
+		\[
+			A\cap B=\Set{x\given x\in A\text{ and }x\in B}.
+		\]
+		The \emph{union} of $A$ and $B$, written $A\cup B$, is defined by
+		\[
+			A\cup B= \Set{x\given x\in A\text{ or } x\in B}.
+		\]
+	\end{definition}
+	For example, if $A=\Set{1,2,3}$ and $B=\Set{-1,0,1,2}$, then $A\cap B=\Set{1,2}$ and $A\cup B=
+	\Set{-1,0,1,2,3}$.  Set unions and intersections are \emph{associative}, which means it doesn't
+	matter how you apply parenthesis to an expression involving just unions or just intersections.
+	For example $(A\cup B)\cup C=A\cup(B\cup C)$, which means
+	we can give an unambiguous meaning to an expression like $A\cup B\cup C$ (just put
+	the parenthesis wherever you like).  But watch out, $(A\cup B)\cap C$ means something
+	different than $A\cup(B\cap C)$!
+
+	\begin{definition}[Set Subtraction]
+		For sets $A$ and $B$, the \emph{set-wise difference}\index{set subtraction} between $A$ and $B$,
+		written $A\backslash B$, is the set
+		\[
+			A\backslash B = \Set{x\given x\in A\text{ and }x\notin B}.
+		\]
+	\end{definition}
+	\begin{definition}[Cardinality]
+		For a set $A$, the \emph{cardinality}\index{cardinality} of $A$,
+		written $\abs{A}$ is the number of elements in $A$.  If $A$
+		contains infinitely many elements, we write $\abs{A}=\infty$.
+	\end{definition}
+
+	Let's define some notation for common sets.
+	\begin{align*}
+		\emptyset &= \Set{}\text{, the empty set}\\
+		\N &= \Set{0,1,2,3,\ldots}=\Set{\text{natural numbers}}\\
+		\Z &= \Set{\ldots, -3,-2,-1,0,1,2,3,\ldots}=\Set{\text{integers}}\\
+		\Q &= \Set{\text{fractions}}\\
+		\R &= \Set{\text{real numbers}}\\
+		\R^n &= \Set{\text{vectors in $n$-dimensional Euclidean space}}\\
+	\end{align*}
+
+	Besides unions, there's another way to join sets together.  Namely,
+	\emph{products}\index{Cartesian product}\index{set product}.
+	\begin{definition}[Cartesian Product]
+		Given two sets $A$ and $B$, the \emph{Cartesian product} (sometimes
+		shortened to \emph{product}) of the sets $A$ and $B$ is written
+		$A\times B$ and defined to be
+		\[
+			A\times B = \Set{(a,b)\given a\in A\text{ and }b\in B}.
+		\]
+	\end{definition}
+	The Cartesian product of two sets is just the set of all ordered pairs of elements from
+	those sets.  For example, 
+	\[
+		\Set{1,2}\times \Set{1,2,3}=\Set{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3)}.
+	\]
+	You can repeat this operation more than once.  For example, $\R\times \R\times \R$
+	is the set of all triples of real numbers.  In other words, $\R\times \R\times \R=\R^3$,
+	and if we raise a set to an exponent, we mean, iterate the Cartesian product that many times\footnote{
+		If you're scratching your head saying, ``I thought $\R^3$ was vectors in $3$-dimensional
+		space.  How do we know that's the same thing as triples of real numbers?'' your mind
+		is keen.  This is a theorem of linear algebra.
+	}.
+
+	\subsection{Functions}
+	You're probably used to seeing functions like $f(x)=x^2$, but it's worth reviewing some of the concepts
+	and terminology associated with functions.
+
+	\begin{definition}[Function]
+		A \emph{function}\index{function} with \emph{domain}\index{domain} the 
+		set $A$ and \emph{co-domain}\index{co-domain} the set $B$ is an object that
+		associates every point in the set $A$ with \emph{exactly one} point in the set $B$.
+	\end{definition}
+
+	We notate that a function $f$ has domain $A$ and co-domain\footnote{ Some
+	people use the word \emph{range} interchangeably with co-domain.} $B$ by writing $f:A\to B$.
+	If we want to further specify what the function $f$ actually is, we need to
+	express how $f$ associates each point in $A$ to a point in $B$.  This can be done
+	with an equation.  For example, we could define the function $f:\R\to\R$ by
+	\[
+		f(x)=2x,
+	\]
+	which says that each real number gets associated to its double.  We can notate
+	the same thing using a special type of arrow, ``$\mapsto$''.  Now we might write
+	\[
+		f:\R\to\R\text{ where } x\mapsto 2x,
+	\]
+	which is read ``$f$ is a function from $\R$ to $\R$ where $x\in \R$ gets mapped to $2x$.''
+
+	
+	Note that every point in the co-domain of a function doesn't need to get mapped
+	to.  For example $g:\R\to\R$ given by $g(x)=x^2$ outputs only non-negative numbers,
+	but it is still valid to specify $\R$ as the co-domain.  However, if we wanted
+	to make a point of it, we are perfectly justified in writing $g:\R\to[0,\infty)$
+	when defining $g$.
+
+	\begin{definition}[Range]
+		The \emph{range}\index{range} of a function $f:A\to B$
+		is the set of all outputs of $f$.  That is
+		\[
+			\Range f = \Set{y\in B\given y=f(x)\text{ for some }x\in A}.
+		\]
+	\end{definition}
+	\begin{definition}[Image]
+		Let $f:A\to B$ be a function.
+		The \emph{image}\index{image} of a set $X\subseteq A$, written $f(X)$ is
+		defined by
+		\[
+			f(X)=\Set{y\in B\given y=f(x)\text{ for some }x\in X}.
+		\]
+	\end{definition}
+
+	We see that if $f:A\to B$, $\Range f = f(A)$.  In words, the range of $f$ is the image
+	of its domain.  This language will become useful when we think of functions as transformations
+	that move or bend space.  If $f:\R^2\to\R^2$ is a function that warps the Cartesian plane,
+	then the image of $X$ under $f$ could be visualized by painting $X$ on the Cartesian plane,
+	warping the whole plane, and then looking at the resulting, painted shape.
+
+
+	Closely related to images, we have the idea of \emph{restriction}\index{restriction}.
+	Suppose $f(x,y)=xy$, but we were only really interested in $f$ on the unit circle, $\mathcal C$.
+	In this case, we might say $f$ attains a maximum on $\mathcal C$, or $f$ 
+	\emph{restricted to} $\mathcal C$ attains a maximum, even though $f$ itself is unbounded.
+
+	\begin{definition}[Restriction]
+		If $f:A\to B$ and $X\subseteq A$, the \emph{restriction} of $f$ to $X$, written 
+		$f\big|_X$, is defined to be the function $g:X\to A$ where $x\mapsto f(x)$.
+	\end{definition}
+
+	The last important function-related ideas for us are function composition and inverses.
+	Given two function $f:A\to B$ and $g:B\to C$, we can \emph{compose}\index{function composition}
+	$f$ and $g$ to get a new function.
+	\begin{definition}[Composition]
+		Given two functions $f:A\to B$ and $g:B\to C$, the \emph{composition} of
+		$g$ and $f$, written $g\circ f$, is the function $h:A\to C$ where 
+		$x\mapsto g(f(x))$.
+	\end{definition}
+	Note that the composition $g\circ f$ has the domain of $f$ and the co-domain of $g$.
+	When a point is fed into $g\circ f$, it moves from $A\to B\to C$.  The composition
+	$g\circ f$ only makes sense because the outputs of $f$ are allowed as inputs to $g$.
+	If we wrote $f\circ g$ it wouldn't mean much, because $g$ outputs points in $C$ and $f$
+	has no idea what to do with points in $C$.\footnote{
+		It seems a little backwards to write $f:A\to B$, $g:B\to C$ and then
+		write $g\circ f$ instead of $f\circ g$.  You can thank Euler for that.
+		He decided to write functions with their input on the right instead of
+		the left.  If we wrote functions backwards, like $((x)f)g$ for ``$g$ of $f$ of $x$,''
+		they we could just \emph{follow the arrows} and life would be simpler.
+	}
+
+	Inverses relate to composition and the \emph{identity function}\index{identity function}, the function
+	that does nothing to its inputs.
+	\begin{definition}[Identity Function]
+		The \emph{identity function} $\Id:A\to A$ is defined by the relation
+		\[
+			\Id(x)=x
+		\]
+		for all $x\in A$.
+	\end{definition}
+	Notice that for every set, there is an identity function on that set.  Since the domain
+	and co-domain are important parts of a function, we might not want to confuse them.
+	After all, $f:\Set{0,1}\to \Set{0,1}$ given by $f(x)=x^2$ is a different function from $f:\R\to\R$
+	given by $f(x)=x^2$.  For the special case of the identity function, we sometimes write
+	the domain of the function as a subscript.  So, $\Id:A\to A$ we'd write as $\Id_A$, so it
+	doesn't get confused with $\Id:B\to B$, which we'd write $\Id_B$.
+
+	\begin{definition}[Inverse Function]
+		Let $f:A\to B$ be a function.  If there exists a function $g:B\to A$ such that
+		\[
+			f\circ g=\Id_B\qquad\text{and}\qquad g\circ f=\Id_A,
+		\]
+		we say $f$ is \emph{invertible} and we call $g$ the \emph{inverse} of $f$.
+		If $f$ is invertible, we notate its inverse by $f^{-1}$.
+	\end{definition}
+
+	Inverses can be tricky some times.  For example, consider $f(x)=x^2$ and $g(x)=\sqrt{x}$.
+	Here $g\circ f(x)=\sqrt{x^2}=\abs{x}$ and $f\circ g(x) = \sqrt{x}^2=x$.  What's the deal?
+	Well, it's all about domains.  $f:\R\to[0,\infty)$ and $g:[0,\infty)\to[0,\infty)$.
+	So, the domain of $g\circ f$ is $\R$ and the domain of $f\circ g$ is $[0,\infty)$.  The
+	domains are different, and indeed $f$ is not invertible.  However, $g$ \emph{is} invertible,
+	and $g^{-1}=f\big|_{[0,\infty)}$.  If we only input non-negative numbers into $f$,
+	$f$ exactly undoes what $g$ did.  This subtle domain trickery can cause us a lot
+	of headaches if we're not used to thinking carefully, and many of our favorite functions
+	that we're used to calling ``inverse functions'' are actually only inverses when paired with
+	the right domains.
+
+\section{Proof}
+	Mathematics has the highest standard of proof of any field.  In the Platonic ideal
+	of mathematics, we start from some basic assumptions, called \emph{axioms}, that we have
+	all agreed upon.  Then from those axioms, using the rules of logic, we deduce \emph{theorems}.
+	Every single mathematical statement we make can be traced back from theorem to theorem
+	and eventually to our initial axioms.
+
+	This is contrary to other disciplines, like physics.
+	In physics, based on observation, we construct
+	\emph{laws}.  Laws are like
+	the axioms of physics, but have an important difference---they
+	can be disproven by observation.  A mathematical axiom can never be disproven.  One can
+	certainly argue that an axiom is not \emph{useful} or not \emph{interesting}, but you
+	cannot say its \emph{wrong} in the same way things can be wrong in the natural sciences.
+	Of course, as human practitioners, we may misuse logic and be wrong ourselves, but that
+	is no fault of the axioms.
+
+	But now, let's deviate from philosophical perfection and visit reality.
+	In reality, \emph{mathematics is a human pursuit to understand relationships
+	between ideas and their consequences}.  The key there is that \emph{humans} do
+	mathematics to \emph{understand} relationships.  If a theorem in math can
+	ultimately be reduced to logical statements about axioms, but the argument is
+	100000 steps long, it doesn't help a human understand why something is true.
+	Instead, a shorter argument that skips over some steps is more useful to us.
+	And, indeed, most of our mathematics to date skips over some steps\footnote{
+		There are some projects to prove all of mathematics directly from
+		the axioms using computer assistance.  They've made progress, but there
+		are still theorems in calculus that have not been reduced to the
+		axioms.  We believe that they \emph{could be} reduced to the axioms,
+		but no one has taken the time to do so.}.
+
+	We call a correct mathematical argument a \emph{proof}.  A proof starts
+	from a set of assumptions, and following the rules of logic, arrives at a conclusion.
+	Strictly speaking, a proof doesn't need to make sense or show motivation,
+	applications, or examples.  It just has to be a sequence of correct logical steps.
+	However, for us, as humans studying mathematics, we prove things for two reasons:
+	to understand why things are true and to avoid making mistakes.
+
+	Reconciling these two goals can be very hard for a novice mathematician.  If you include
+	\emph{all} the steps, it won't help with understanding, but if you don't include enough
+	steps, the argument may not be convincing and might contain mistakes.  
+	Even professionals struggle to balance
+	these competing goals, and how you balance those goals depends on your audience---if you're
+	trying to convince your math professor of something your proof will need to have more
+	detail than if you were trying to convince your friend (mathematicians are very skeptical!).
+
+	Enough talk, let's go through a 2000 year old example of a proof.
+	\begin{theorem}
+		There is no rational number $p/q$ such that $(p/q)^2=2$.
+	\end{theorem}
+	\begin{proof}
+		Suppose $p/q$ is in lowest terms and $(p/q)^2=2$.  Then $p^2=2q^2$ and so $p^2$ is even.  Since
+		$p^2$ is even, it must be that $p$ is even, and so by definition,
+		$p=2m$ for some integer $m$.  Now,
+		\[
+			\frac{p^2}{q^2}=\frac{(2m)^2}{q^2}=\frac{4m^2}{q^2}=2,
+		\]
+		with the last equality following by assumption.  Multiplying both sides by $q^2$
+		and dividing by $2$ we arrive at the equation
+		\[
+			2m^2=q^2,
+		\]
+		and so $q^2$ is even which means $q$ is even.  By definition, this means $q=2n$ for some integer $n$.
+		But now,
+		\[
+			\frac{p}{q}=\frac{2m}{2n}
+		\]
+		is not in lowest terms!  This is a contradiction and so it cannot be that $(p/q)^2=2$.
+	\end{proof}
+	This is nearly identical to the argument the ancient Greeks gave.  It's elegant, beautiful,
+	and convincing.  But, if we look closer, it does skip some steps.  For example, it relies on
+	the fact that there is such a thing as \emph{lowest terms}.  This is something that would
+	need to be proven---a priori, the conclusion of the proof could be that the assumption
+	that $p/q$ could be in lowest terms is false.  You will not, over night,
+	become a master at understanding
+	what steps you can leave out and what steps you must show.  However, with feedback,
+	you'll get better.
+
+	For a detailed guide about writing good proofs, please see Appendix \ref{APPENDIX-proofstyle}.
+

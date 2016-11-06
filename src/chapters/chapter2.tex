@@ -1,0 +1,410 @@
+A \emph{vector}\index{vector} is a quantity which is characterized by
+a \emph{magnitude} and a \emph{direction}.   Many quantities are best
+described by vectors rather than
+numbers.  For example, when driving a car,
+ it may be sufficient to
+know your speed, which can be described by a single number,
+ but the motion of an airplane must be described
+by a vector quantity---velocity---which takes into account its
+direction as well as its speed.
+
+Ordinary numerical quantities are called \emph{scalars}\index{scalar}
+when we want to emphasize that they are not vectors.
+
+Whereas numbers allow us to specify relationships between single quantities
+(put in twice as much flour as sugar), vectors will allow us to specify
+relationships between goemetric objects in space\footnote{
+	Though in this book we will treat vectors as intertwined with Euclidean
+	space, they are much more general.  For instance, someone's internet
+	browsing habits could be describe by a vector---the topics they
+	find most interesting might be the ``direction'' and the amount
+	of time they browse might be the ``magnitude.''
+}.  If we have two points, $P=(1,1)$ and $Q=(3,2)$, we specify the
+\emph{displacement}\index{displacement} from $P$ to $Q$ as a vector.
+
+XXX Figure
+
+We notate the displacement vector form $P$ to $Q$ by $\overrightarrow{PQ}$.
+The magnitude of $\overrightarrow{PQ}$ is given by the Pythagorean theorem
+to be $\sqrt{5}$ and its direction is specified by the line segment from
+$P$ to $Q$.
+
+
+\section{Vector Notation}
+There are many ways to represent vector quantities in writing.  If
+we have two points, $P$ and $Q$, $\overrightarrow{PQ}$ represents the
+vector from $P$ to $Q$.  Absent of points, bold-faced letters or a letter
+with an arrow over it are the most common typographical representations.
+For example, $\vec a$ or $\mathbf{a}$ may both be used to represent the vector
+quantity named ``$a$.''  In this book we will use $\vec a$ to represent a vector.
+The notation $\norm{\vec a}$\index{$\norm{\:\cdot\:}$}\index{magnitude}\index{norm}
+represents the magnitude of the vector $\vec a$, which is sometimes called
+the \emph{norm} of $\vec a$.
+
+Graphically vectors are represented as directed line segments (a
+line segment with an arrow at one end).  The endpoints of the segment are called the 
+\emph{initial
+point} (the base) and the \emph{terminal point} (the tip) of the vector.
+
+Let $A=(1,1)$, $B=(2,3)$, $X=(0,1)$, and $Y=(1,3)$ and consider the vectors
+$\vec a = \overrightarrow{AB}$ and $\vec x=\overrightarrow{XY}$.  Are these
+the same or different vectors?  If we drew them as directed line segments,
+the drawing would be distinct.  However, both $\vec a$ and $\vec x$ have equivalent
+magnitudes and directions.  Thus, $\vec a$ and $\vec x$ are \emph{equivalent},
+and we would be justified writing $\vec a=\vec x$.
+
+Alternatively, we could consider the \emph{rooted vector}\index{rooted vector}
+$\vec a$ rooted at the point $A$.  In this terminology, $\vec a$ rooted
+at $A$ is \emph{different} than $\vec a$ rooted at $X$.  This idea
+of rooted vectors will occasionally be useful, but our primary study will be unrooted
+vectors.
+
+\subsection{Vectors and Points}
+The distinction between vectors and points is sometimes nebulous because
+they are so closely related to each other.  A \emph{point}\index{point}
+in Euclidean space specifies an absolute position whereas a vector
+specifies a magnitude and direction.  However, given a point $P$,
+one can always specify the vector $\overrightarrow{OP}$, where $O$
+is the origin.  Similarly, given $\vec v$, we can specify the point $V$
+to be the terminal point of $\vec v$ if it were rooted at the origin.
+Thus, we have a way to unambiguously go back and forth between vectors and 
+points\footnote{ Mathematically, we say there is an \emph{isomorphism} between
+vectors and points.}.  As such \emph{we will treat vectors and points
+as interchangeable}.
+
+
+\section{Vector Arithmetic}
+Vectors provide a natural way to give directions.
+For example, suppose $\xhat$ points one mile eastwards and $\yhat$
+points one mile northwards.  Now, if you were standing at the origin
+and wanted to move to a location 3 miles east and 2 miles north, you might say:
+``Walk 3 times the length of $\xhat$  in the $\xhat$ direction and 2 times
+the length of $\yhat$ in the $\yhat$ direction.''  Mathematically we express this
+as
+\[
+	3\xhat+2\yhat.
+\]
+Of course, we've incidentally described a new vector.  Namely, let $P$
+be the point at 3-east and 2-north.  Then
+\[
+	\overrightarrow{OP}=3\xhat+2\yhat.
+\]
+If the vector $\vec y$ points north but has a length of 2 miles, we have
+a similar formula:
+\[
+	\overrightarrow{OP}=3\xhat+1\vec y,
+\]
+and the relationship $\vec y=2\yhat$.
+Our notation here is very suggestive.  Indeed, if we could make
+sense of what $\alpha\vec v$ is for any scalar $\alpha$ and vector
+$\vec v$, and we could make sense of what $\vec v+\vec w$
+means for any vectors $\vec v$ and $\vec w$, we would be able to
+do algebra with vectors.  We might even say we have \emph{an algebra
+of vectors}.
+
+Intuitively, for a vector $\vec v$, and a scalar $\alpha>0$, the
+vector $\vec w=\alpha\vec v$ should point in the same direction as
+$\vec v$ but have magnitude scaled up by $\alpha$.  That is, $\norm{\vec w}=\alpha\norm{\vec v}$.
+Similarly, $-\vec v$ should be the vector of the same length as $\vec v$ but
+pointing in the exact opposite direction.
+
+For two vectors $\vec u$ and $\vec v$, the sum $\vec w=\vec u+\vec v$
+should be the displacement vector created by first displacing along $\vec u$
+and then displacing along $\vec v$.
+
+XXX Figure
+
+Now, there is one snag.  What should $\vec v+(-\vec v)$ be?  Well, first we
+displace along $\vec v$ and then we displace in the exact opposite direction 
+by the same amount.  So we have gone nowhere.  This corresponds to a displacement
+with zero magnitude.  But, what direction did we displace?  Here we make a philosophical
+stand.
+\begin{definition}[Zero Vector]
+	The \emph{zero vector}\index{zero vector}, notated as $\vec 0$\index{$\vec 0$}, 
+	is the vector with no magnitude.
+\end{definition}
+But what direction does $\vec 0$ point?  We will be pragmatic.
+The zero vector has no direction.  Or maybe it has every direction.
+If we are to have an algebra of vectors, we
+must allow this special case where the direction of the zero vector is ill-defined\footnote{
+	In the mathematically precise definition of vector, the idea of ``magnitude''
+	and ``direction'' are dropped.  Instead, a set of vectors is defined to be
+	a set over which you can reasonably define addition and scalar multiplication.
+}.  Further along this line of thinking, we might hope that for any
+vectors $\vec u$, $\vec v$, $\vec w$ and scalars $\alpha$ and $\beta$, the
+following conditions are satisfied.
+\begin{align*}
+	(\vec u+\vec v)+\vec w&=\vec u+(\vec v+\vec w)\tag{Associativity}\\
+	\vec u+\vec v&=\vec v+\vec u\tag{Commutativity}\\
+	\alpha(\vec u+\vec v)&=\alpha\vec u+\alpha \vec v\tag{Distributivity}
+\end{align*}
+and 
+\begin{align*}
+	(\alpha\beta)\vec v&=\alpha(\beta \vec v)\tag{Associativity II}\\
+	(\alpha+\beta)\vec v&=\alpha\vec v+\beta \vec v\tag{Distributivity II}
+\end{align*}
+
+Indeed, if we intuitively think about vectors in flat, Euclidean, space
+all of these properties are satisfied\footnote{
+	If we deviate from flat space, some of these
+	rules are no longer respected.  Consider moving 100 miles
+	north then 100 miles east on a sphere.  Is this the
+	same as moving 100 miles east and then 100 miles north?
+}.  From now on, these properties of vector operations will be considered
+the 
+\emph{laws (or axioms) of vector arithmetic}.
+
+We'll be talking about these vector operations (scalar multiplication and
+vector addition) a lot.  So much so that it's worth naming.
+\begin{definition}[Linear Combination]
+	A \emph{linear combination} of the vectors $\vec v_1,\ldots \vec v_n$
+	is any vector expressible as
+	\[
+		\alpha_1\vec v_1+\cdots +\alpha_n\vec v_n.
+	\]
+\end{definition}
+
+\section{Coordinates}
+Recall that a coordinate system in the plane is specified by choosing
+an origin $O$ and then choosing two perpendicular axes meeting at
+the origin.  These axes are chosen in some order so that we know which
+axis (usually the $x$-axis) comes first and which (usually the
+$y$-axis) second.   Note that there are many different coordinate systems
+which could be used although we often draw pictures
+as if there were only one.
+
+In physics, one often has to think carefully about the
+coordinate system because
+choosing it appropriately  may greatly simplify the
+resulting analysis.  Note that the axes are usually drawn with 
+\emph{right hand orientation} where the right angle from the positive
+$x$-axis to the positive $y$-axis is in the counter-clockwise
+direction.  However, it would be equally valid to use the
+\emph{left hand orientation} in which that angle is in the
+clockwise direction.  One can easily switch the orientation of
+a coordinate system by reversing one of the axes.   (The concept of
+orientation is quite fascinating and it arises in mathematics,
+physics, chemistry, and even biology in many interesting ways.
+Note that almost all of us base our intuitive concept of orientation
+on our inborn notion of ``right'' versus ``left''.)
+
+XXX Figure
+
+For any coordinate system, there are special vectors
+associated with it.  For the plane, the vector point one unit along
+the positive $x$-axis is called $\xhat$ and the vector pointing one unit along
+the positive $y$-axis is called $\yhat$.  The vectors $\xhat$ and $\yhat$ are
+called the \emph{standard basis}\index{standard basis} vectors for $\R^2$.
+
+Notice that every point (or vector) in the plane can be represented
+as a linear combination of $\xhat$ and $\yhat$, and the vector
+$\alpha\xhat+\beta\yhat$ is the vector $\overrightarrow{OP}$ where
+$P=(\alpha,\beta)$.  Now, to state an intuitive fact.  If $\vec w$ is
+a vector in the plane, \emph{there is
+only one way to write a vector as a linear combination of
+$\xhat$ and $\yhat$}.  This means, if $\vec w=\alpha\xhat+\beta\yhat$,
+the pair $(\alpha,\beta)$ captures all information\footnote{
+	Maybe you already knew this because the point $(\alpha,\beta)$
+	is described by the pair of numbers $(\alpha,\beta)$, duh!
+	But consider, what would we do if we didn't know about coordinates
+	at all? One approach is to \emph{define} coordinates in terms
+	of vectors, which is really what we're doing.
+} about $\vec w$.
+
+
+For a vector $\vec w=\alpha\xhat+\beta\yhat$ 
+we call the pair $(\alpha,\beta)$  the 
+\emph{components}\index{components} of the vector $\vec w$.  There
+are many equivalent notations used to represent components.
+\begin{center}
+	\begin{tabular}{c p{5cm}}
+		$(\alpha,\beta)$ & parenthesis\\
+		$\langle \alpha,\beta\rangle$ & angle brackets\\
+		$\mat{\alpha&\beta}$ & square brackets in a row (a row matrix)\\
+		$\mat{\alpha\\\beta}$ & square brackets in a column (a column matrix)\\
+	\end{tabular}
+\end{center}
+
+Given what we now know about representing vectors and there equivalency
+with points, the notation $\R^2$ (pairs of real numbers) makes sense.  Further,
+since vectors in $\R^2$ are equivalent to their representation in coordinates,
+we will often write
+\[
+	\vec v=(\alpha,\beta)
+\]
+as a shorthand for $\vec v=\alpha\xhat+\beta\yhat$.
+
+
+Breaking vectors into components, and in particular, viewing vectors as linear
+combinations of the standard basis vectors allows us to solve problems that were
+difficult before.  For instance, suppose we have vectors $\vec v$ and $\vec w$.
+How can we compute $\norm{\vec v+\vec w}$?  With components, it's easy.
+
+\begin{example}
+	\label{EXAMPLE-vecadd}
+	Suppose $\vec v=\alpha_1\xhat+\beta_1\yhat$ and $\vec w=\alpha_2\xhat+\beta_2\yhat$.
+	By the laws of vector arithmetic we have
+	\[
+		\vec v+\vec w=(\alpha_1\xhat+\beta_1\yhat)+(\alpha_2\xhat+\beta_2\yhat)
+		=(\alpha_1+\alpha_2)\xhat+(\beta_1+\beta_2)\yhat.
+	\]
+	Now, since $\xhat$ and $\yhat$ are orthogonal to each other,
+	the Pythagorean theorem gives
+	\[
+		\norm{\vec v+\vec w} = \sqrt{(\alpha_1+\alpha_2)^2+(\beta_1+\beta_2)^2}.
+	\]
+\end{example}
+
+Writing things in terms of the standard basis allowed us to make easy work
+of computing $\norm{\vec v+\vec w}$ in Example \ref{EXAMPLE-vecadd}.  We can
+use the laws of vector arithmetic to produce rules for working with components.
+
+The rules are are likely familiar:
+\[
+	\mat{a\\b\\c}+\mat{\alpha\\\beta} = \mat{a+\alpha\\b+\beta}
+	\qquad\text{and}\qquad
+	\alpha \mat{a\\b}=\mat{\alpha a\\\alpha b}.
+\]
+
+\begin{exercise}
+	Prove the rules for adding the component representation
+	of vectors and multiplying the component representation 
+	of vectors directly from the laws of vector arithmetic.
+\end{exercise}
+
+Armed with these rules, we will be able to tackle sophisticated vector
+problems.
+
+\subsection{Three-dimensional Coordinates}
+In three-dimensional space, the story is very similar.  Again, we imagine
+three perpendicular axes, the $x$, $y$, and $z$ axes.  
+To draw consistent
+pictures, we have an notion of a right-handed three-dimensional coordinate
+system given by the \emph{right hand rule}.
+
+XXX Figure
+
+We now add a third standard basis vector $\zhat$ which points one
+unit along the positive $z$-axis, and any vector in three-dimensional
+space can be represented 
+in exactly one way
+as a linear combination $\alpha\xhat+\beta\yhat+\gamma\zhat$.  Thus,
+vectors in three-dimensional space, notated $\R^3$,
+are synonymous with triplets $(\alpha,\beta,\gamma)$
+of real numbers.  With some clever geometry, we deduce
+\[
+	\norm{\alpha\xhat+\beta\yhat+\gamma\zhat}=\sqrt{\alpha^2+\beta^2+\gamma^2}.
+\]
+
+Historically, three-dimensional space has been studied a lot and there
+are several notations for the standard basis vectors still in use.
+
+The following is a non-exhaustive list.
+\begin{center}
+	\begin{tabular}{c  c  c}
+		$\hat{\mathbf{x}}$ & $\hat{\mathbf{y}}$ &$\hat{\mathbf{z}}$\\
+		$\hat{\imath}$ & $\hat{\jmath}$ &$\hat{k}$\\
+		$\mathbf{i}$ & $\mathbf j$ & $\mathbf k$\\
+		$\vec e_1$ & $\vec e_2$ & $\vec e_3$
+	\end{tabular}
+\end{center}
+
+\subsection{Higher dimensions}
+One can't progress very far in the study of science and mathematics
+without encountering a need for higher dimensional ``vectors''.  For
+example, physicists have known since Einstein that the physical
+universe is best thought of as a 4-dimensional entity called
+spacetime in which time plays a role close to that of the 
+3 spatial coordinates.  Since, we don't have any way to deal with
+$\R^n$\index{$\R^n$}
+intuitively, we must
+proceed by analogy with two and three dimensions.
+The easiest
+way to proceed is to generalize the idea of a standard basis.
+From there, we can represent vectors in $\R^n$ as $n$-tuples of real numbers.
+We then define
+\[
+	\norm{(x_1,x_2,\ldots,x_n)} = \sqrt{x_12+x_2^2+\cdots+x_n^2}.	
+\]
+We've now unified our theory of vectors across all integer dimensions $n>0$.
+The case $n=1$ yields  ``geometry'' on a line, 
+the cases $n = 2$ and $n = 3$ geometry in the plane and in space, and
+the case $n = 4$ yields the geometry of ``4-vectors'' which
+are  used in the special theory of relativity.
+Larger values of $n$ are used in a
+variety of contexts, some of which we shall encounter later.
+
+
+\begin{exercises}
+	\begin{enumerate}
+		\item Find $\norm{a}$, $5\vec a-2\vec b$, and $-3\vec b$ for each of
+			the following vector pairs.
+			\begin{enumerate}
+				\item $\vec a=2\xhat+3\yhat$, $\vec b=4\xhat-9\yhat$
+				\item $\vec a=(1,2,-1)$, $\vec b=(2,-1,0)$
+			\end{enumerate}
+		\item Let $P=(7,2,9)$ and $Q=(-2,1,4)$.  Find $\overrightarrow{PQ}$
+			as a linear combination of $\xhat$, $\yhat$, and $\zhat$.
+	\end{enumerate}
+\end{exercises}
+
+
+\section{Dot Products \& Projections}
+Let $\vec a$ and $\vec b$ be vectors.  We assume they are placed so their
+tails coincide.  Let $\theta$ denote the \emph{smaller} of the
+two angles between them, so $0\le \theta \le \pi$.
+Their \emph{dot product}\index{dot product} is defined to be
+\[
+	\vec a\cdot \vec b=\norm{\vec a}\norm{\vec b}\cos \theta.
+\]
+We will call this the \emph{geometric definition of the dot product}.
+This is also sometimes called the \emph{scalar product} because
+the result is a scalar.
+Note that $\vec a\cdot\vec b = 0$ when either $\vec a$ or $\vec b$ is zero or,
+more interestingly, if their directions are perpendicular.
+If the two vectors have parallel directions, $\vec a\cdot\vec b$ is
+the product of their magnitudes if they point the same way
+or the negative of that product if they point in opposite
+directions.
+
+XXX Figure showing angle theta
+
+Algebraically, we can define the dot product in terms of components:
+\[
+	\mat{a_1\\a_2\\\vdots\,\,\,\, \\a_n}\cdot \mat{b_1\\b_2\\\vdots\,\,\,\,\\b_n}
+	=a_1b_1+a_2b_2+\cdots+a_nb_n.
+\]
+We will call this the \emph{algebraic definition of the dot product}\footnote{
+	Philosophically,
+every object should have only one definition from which equivalent characterizations
+can be deduced as theorems.  If you're bothered, pick your favorite definition
+to be the ``true'' definition and consider the other definition a theorem.
+}.
+
+By switching between algebraic and geometric definitions, we can use the dot
+product to find quantities that are otherwise difficult to find.
+\begin{example}
+	Find the angle between the vectors $\vec v=(1,2,3)$ and $\vec w=(1,1,-2)$.
+
+	From the algebraic definition of the dot product, we know
+	\[
+		\vec v\cdot \vec w = 1(1)+2(1)+3(-2) = -3.
+	\]
+	From the geometric definition, we know
+	\[
+		\vec v\cdot \vec w=\norm{\vec v}\norm{\vec w}\cos\theta
+		=\sqrt{14}\sqrt{6}\cos\theta=\sqrt{21}\cos\theta.
+	\]
+	Equating the equations coming from each definition we see
+	\[
+		\cos\theta = \frac{-3}{\sqrt{21}}
+	\]
+	and so $\theta=\arccos(-3/\sqrt{21})$.
+\end{example}
+
+The dot product is a useful concept when one needs to find the
+component of one vector in the direction of another.  For example,
+in a typical inclined plane problem in elementary mechanics, one
+needs to resolve the vertical gravitational force into components,
+one parallel to the inclined plane, and one perpendicular to it.
+To see how the dot product enters into that, note that
