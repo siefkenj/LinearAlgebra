@@ -9,7 +9,8 @@
 	of objects will suffice\footnote{ When you pursue more rigorous math,
 	you rely on definitions to get yourself out of philosophical jams.  For instance,
 	with our definition of set, consider ``the set of all sets that don't
-	contain themselves.''  This is called \emph{Russel's Paradox}, and shows
+	contain themselves.''  Such a set cannot exist!
+	This is called \emph{Russel's Paradox}, and shows
 	that if we start talking about sets of sets, we may need more than
 	intuition.}. We write a set with curly-braces $\{$ and $\}$ and
 	list the objects inside.  For instance
@@ -42,8 +43,9 @@
 	definition.
 	\begin{definition}[Subset \& Superset]
 		The set $B$ is a \emph{subset} of the set $A$, written $B\subseteq A$ if for all
-		$b\in B$ we also have $b\in A$.  In this case, $A$ is called a \emph{superset}\footnote{
-			Some mathematicians use the symbol $\subset$ instead of $\subseteq$.}.
+		$b\in B$ we also have $b\in A$.  In this case, $A$ is called a \emph{superset}
+		of $B$.\footnote{
+			Some mathematicians use the symbol $\subset$ instead of $\subseteq$.}
 	\end{definition}
 
 	Some simple examples are $\Set{1,2,3}\subseteq \Set{1,2,3,4}$ and $\Set{1,2,3}\subseteq\Set{1,2,3}$.
@@ -55,10 +57,32 @@
 	\end{definition}
 	Having a definition of equality to lean on will help us when we need to prove things about sets.
 
+	\begin{example}
+		Let $A$ be the set of numbers that can be expressed
+		as $2n$ for some whole number $n$ and let $B$ be the
+		set of numbers that can be expressed as $m+1$ where $m$ is
+		an odd whole number.  We will show $A=B$.
+
+		First, let us show $A\subseteq B$.  If $x\in A$ then $x=2n$
+		for some whole number $n$.  Therefore $x=2n=2(n-1)+1+1=m+1$ where
+		$m=2(n+1)+1$ is, by definition, an odd number.  Therefore $x\in B$.
+
+		Now we will show $B\subseteq A$.  Let $x\in B$.  By definition,
+		$x=m+1$ for some odd $m$ and so by the definition of oddness, $m=2k+1$
+		for some whole number $k$.  Thus 
+		\begin{align*}
+			x=m+1&=(2k+1)+1=2k+2\\
+			&=2(k+1)=2n,
+		\end{align*} where $n=k+1$. Thus, $x\in A$.  Since $A\subseteq B$
+		and $B\subseteq A$, by definition $A=B$.
+	\end{example}
+	
+
+	\subsubsection{Set-builder Notation}
 	Specifying sets by listing all their elements can be a hassle, and if there are an infinite
 	number of elements, it's impossible!  Fortunately, \emph{set-builder notation}\index{set-builder notation}
 	solves these problems.
-	If $X$ is a set, we can define the subset 
+	If $X$ is a set, we can define a subset 
 	\[
 		Y= \Set{a\in X\given\text{some rule involving }a},
 	\]
@@ -70,6 +94,19 @@
 	every object you might want to talk about.  Then $\Set{a\given\text{some rule involving }a}$
 	is short for $\Set{a\in\mathcal U\given\text{some rule involving }a}$}.  You may equivalently
 	use ``$|$'' instead of ``$:$'', writing $Y=\{a\,|\,\text{some rule involving }a\}$.
+
+	\begin{example}
+		The set $\Z$ is the set of integers (positive, negative,
+		and zero whole numbers).  To define $E$ as the even integers,
+		we could write
+		\[
+			E=\Set{n\in \Z\given n=2k\text{ for some }k\in \Z}.
+		\]
+		To define $P$ as the set of positive integers, we could write
+		\[
+			P=\Set{n\in\Z\given n>0}.
+		\]
+	\end{example}
 
 
 	There are also some common operations we can do with two sets.
@@ -110,12 +147,12 @@
 		\emptyset &= \Set{}\text{, the empty set}\\
 		\N &= \Set{0,1,2,3,\ldots}=\Set{\text{natural numbers}}\\
 		\Z &= \Set{\ldots, -3,-2,-1,0,1,2,3,\ldots}=\Set{\text{integers}}\\
-		\Q &= \Set{\text{fractions}}\\
+		\Q &= \Set{\text{rational numbers}}\\
 		\R &= \Set{\text{real numbers}}\\
 		\R^n &= \Set{\text{vectors in $n$-dimensional Euclidean space}}\\
 	\end{align*}
 
-	Besides unions, there's another way to join sets together.  Namely,
+	Besides unions, there's another way to join sets together:
 	\emph{products}\index{Cartesian product}\index{set product}.
 	\begin{definition}[Cartesian Product]
 		Given two sets $A$ and $B$, the \emph{Cartesian product} (sometimes
@@ -125,14 +162,18 @@
 			A\times B = \Set{(a,b)\given a\in A\text{ and }b\in B}.
 		\]
 	\end{definition}
-	The Cartesian product of two sets is just the set of all ordered pairs of elements from
+	The Cartesian product of two sets is the set of all ordered pairs of elements from
 	those sets.  For example, 
 	\[
 		\Set{1,2}\times \Set{1,2,3}=\Set{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3)}.
 	\]
-	You can repeat this operation more than once.  For example, $\R\times \R\times \R$
-	is the set of all triples of real numbers.  In other words, $\R\times \R\times \R=\R^3$,
-	and if we raise a set to an exponent, we mean, iterate the Cartesian product that many times\footnote{
+	You can repeat this operation more than once.   $\R\times \R\times \R$
+	is the set of all triples of real numbers.  Borrowing
+	notation from numbers, if you take the Cartesian product of a set
+	with itself some number of times, you can represent it with
+	an exponent.  Thus, $\R\times \R\times \R$ can be written as $\R^3$, which is a set we've
+	seen before%
+	\footnote{
 		If you're scratching your head saying, ``I thought $\R^3$ was vectors in $3$-dimensional
 		space.  How do we know that's the same thing as triples of real numbers?'' your mind
 		is keen.  This is a theorem of linear algebra.
@@ -148,8 +189,9 @@
 		associates every point in the set $A$ with \emph{exactly one} point in the set $B$.
 	\end{definition}
 
-	We notate that a function $f$ has domain $A$ and co-domain\footnote{ Some
-	people use the word \emph{range} interchangeably with co-domain.} $B$ by writing $f:A\to B$.
+	If a function $f$ has domain $A$ and co-domain\footnote{ Some
+	people use the word \emph{range} interchangeably with co-domain.} $B$,
+	we notate this by writing $f:A\to B$.
 	If we want to further specify what the function $f$ actually is, we need to
 	express how $f$ associates each point in $A$ to a point in $B$.  This can be done
 	with an equation.  For example, we could define the function $f:\R\to\R$ by
@@ -157,7 +199,7 @@
 		f(x)=2x,
 	\]
 	which says that each real number gets associated to its double.  We can notate
-	the same thing using a special type of arrow, ``$\mapsto$''.  Now we might write
+	the same thing using a special type of arrow: ``$\mapsto$''.  Now we might write
 	\[
 		f:\R\to\R\text{ where } x\mapsto 2x,
 	\]
@@ -190,22 +232,24 @@
 	of its domain.  This language will become useful when we think of functions as transformations
 	that move or bend space.  If $f:\R^2\to\R^2$ is a function that warps the Cartesian plane,
 	then the image of $X$ under $f$ could be visualized by painting $X$ on the Cartesian plane,
-	warping the whole plane, and then looking at the resulting, painted shape.
+	warping the whole plane, and then looking at the resulting, painted shape.  
 
 
 	Closely related to images, we have the idea of \emph{restriction}\index{restriction}.
-	Suppose $f(x,y)=xy$, but we were only really interested in $f$ on the unit circle, $\mathcal C$.
+	Suppose $f:\R^2\to\R$ is defined by $f(x,y)=xy$, but we were only really interested in $f$ on the unit circle, $\mathcal C$.
 	In this case, we might say $f$ attains a maximum on $\mathcal C$, or $f$ 
 	\emph{restricted to} $\mathcal C$ attains a maximum, even though $f$ itself is unbounded.
+	This idea comes up often enough to deserve its own notation.
 
 	\begin{definition}[Restriction]
-		If $f:A\to B$ and $X\subseteq A$, the \emph{restriction} of $f$ to $X$, written 
-		$f\big|_X$, is defined to be the function $g:X\to A$ where $x\mapsto f(x)$.
+		If $f:A\to B$ and $X\subseteq A$, the \emph{restriction}\index{restriction}
+		of $f$ to $X$ is written 
+		$f\big|_X$ and is defined to be the function $g:X\to A$ where $x\mapsto f(x)$.
 	\end{definition}
 
 	The last important function-related ideas for us are function composition and inverses.
 	Given two function $f:A\to B$ and $g:B\to C$, we can \emph{compose}\index{function composition}
-	$f$ and $g$ to get a new function.
+	$g$ and $f$ to get a new function.
 	\begin{definition}[Composition]
 		Given two functions $f:A\to B$ and $g:B\to C$, the \emph{composition} of
 		$g$ and $f$, written $g\circ f$, is the function $h:A\to C$ where 
@@ -214,7 +258,7 @@
 	Note that the composition $g\circ f$ has the domain of $f$ and the co-domain of $g$.
 	When a point is fed into $g\circ f$, it moves from $A\to B\to C$.  The composition
 	$g\circ f$ only makes sense because the outputs of $f$ are allowed as inputs to $g$.
-	If we wrote $f\circ g$ it wouldn't mean much, because $g$ outputs points in $C$ and $f$
+	If we wrote $f\circ g$, it wouldn't mean much, because $g$ outputs points in $C$ and $f$
 	has no idea what to do with points in $C$.\footnote{
 		It seems a little backwards to write $f:A\to B$, $g:B\to C$ and then
 		write $g\circ f$ instead of $f\circ g$.  You can thank Euler for that.
@@ -232,11 +276,13 @@
 		\]
 		for all $x\in A$.
 	\end{definition}
-	Notice that for every set, there is an identity function on that set.  Since the domain
-	and co-domain are important parts of a function, we might not want to confuse them.
+	Notice that for every set, that set
+	is the domain of an identity function.  Since the domain
+	and co-domain of a function are part of its definition, we don't want to confuse them.
 	After all, $f:\Set{0,1}\to \Set{0,1}$ given by $f(x)=x^2$ is a different function from $f:\R\to\R$
 	given by $f(x)=x^2$.  For the special case of the identity function, we sometimes write
-	the domain of the function as a subscript.  So, $\Id:A\to A$ we'd write as $\Id_A$, so it
+	the domain of the function as a subscript.  That is, 
+	for $\Id:A\to A$ we'd write $\Id_A$ so it
 	doesn't get confused with $\Id:B\to B$, which we'd write $\Id_B$.
 
 	\begin{definition}[Inverse Function]
@@ -253,11 +299,11 @@
 	Well, it's all about domains.  $f:\R\to[0,\infty)$ and $g:[0,\infty)\to[0,\infty)$.
 	So, the domain of $g\circ f$ is $\R$ and the domain of $f\circ g$ is $[0,\infty)$.  The
 	domains are different, and indeed $f$ is not invertible.  However, $g$ \emph{is} invertible,
-	and $g^{-1}=f\big|_{[0,\infty)}$.  If we only input non-negative numbers into $f$,
+	and $g^{-1}=f\big|_{[0,\infty)}$.  If we only input non-negative numbers into $f$, then
 	$f$ exactly undoes what $g$ did.  This subtle domain trickery can cause us a lot
 	of headaches if we're not used to thinking carefully, and many of our favorite functions
 	that we're used to calling ``inverse functions'' are actually only inverses when paired with
-	the right domains.
+	specific domains.
 
 \section{Proof}
 	Mathematics has the highest standard of proof of any field.  In the Platonic ideal
@@ -268,11 +314,21 @@
 
 	This is contrary to other disciplines, like physics.
 	In physics, based on observation, we construct
-	\emph{laws}.  Laws are like
-	the axioms of physics, but have an important difference---they
+	\emph{laws}.  Laws in physics are like
+	axioms in mathematics, but they have an important difference---they
 	can be disproven by observation.  A mathematical axiom can never be disproven.  One can
 	certainly argue that an axiom is not \emph{useful} or not \emph{interesting}, but you
-	cannot say its \emph{wrong} in the same way things can be wrong in the natural sciences.
+	cannot say its \emph{wrong}\footnote{
+		There are multiple ways to axiomatize geometry.  In
+		Euclidean geometry every pair of lines either coincides, intersects in
+		exactly one place, or does not intersect.  In spherical
+		geometry, every pair of lines either coincides or intersects in exactly two places.  
+		Euclidean geometry is useful when your space looks flat.  Spherical
+		geometry is useful when your space is the surface of a sphere (like 
+		the Earth).
+		Is one of these more \emph{right} than the other?  They're certainly
+		contradictory.
+	}.
 	Of course, as human practitioners, we may misuse logic and be wrong ourselves, but that
 	is no fault of the axioms.
 
@@ -310,6 +366,8 @@
 		There is no rational number $p/q$ such that $(p/q)^2=2$.
 	\end{theorem}
 	\begin{proof}
+		If $p/q$ is a rational number, it can be expressed
+		in lowest terms.
 		Suppose $p/q$ is in lowest terms and $(p/q)^2=2$.  Then $p^2=2q^2$ and so $p^2$ is even.  Since
 		$p^2$ is even, it must be that $p$ is even, and so by definition,
 		$p=2m$ for some integer $m$.  Now,
@@ -332,10 +390,11 @@
 	and convincing.  But, if we look closer, it does skip some steps.  For example, it relies on
 	the fact that there is such a thing as \emph{lowest terms}.  This is something that would
 	need to be proven---a priori, the conclusion of the proof could be that the assumption
-	that $p/q$ could be in lowest terms is false.  You will not, over night,
+	that $p/q$ could be in lowest terms is false.  
+	
+	You will not, over night,
 	become a master at understanding
 	what steps you can leave out and what steps you must show.  However, with feedback,
 	you'll get better.
-
 	For a detailed guide about writing good proofs, please see Appendix \ref{APPENDIX-proofstyle}.
 

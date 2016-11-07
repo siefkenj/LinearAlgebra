@@ -64,6 +64,13 @@
 	#1
 }
 \renewcommand{\it}{\itshape}
+% footnote without marker
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
 
 
 % set up some deep enumerate environments for the CC license
