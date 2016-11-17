@@ -26,7 +26,7 @@ XXX Figure
 
 We notate the displacement vector form $P$ to $Q$ by $\overrightarrow{PQ}$.
 The magnitude of $\overrightarrow{PQ}$ is given by the Pythagorean theorem
-to be $\sqrt{5}$ and its direction is specified by the line segment from
+to be $\sqrt{5}$ and its direction is specified by the directed line segment from
 $P$ to $Q$.
 
 
@@ -34,14 +34,14 @@ $P$ to $Q$.
 There are many ways to represent vector quantities in writing.  If
 we have two points, $P$ and $Q$, $\overrightarrow{PQ}$ represents the
 vector from $P$ to $Q$.  Absent of points, bold-faced letters or a letter
-with an arrow over it are the most common typographical representations.
+with an arrow over it are the most common typographical representations of vectors.
 For example, $\vec a$ or $\mathbf{a}$ may both be used to represent the vector
 quantity named ``$a$.''  In this book we will use $\vec a$ to represent a vector.
 The notation $\norm{\vec a}$\index{$\norm{\:\cdot\:}$}\index{magnitude}\index{norm}
 represents the magnitude of the vector $\vec a$, which is sometimes called
 the \emph{norm} of $\vec a$.
 
-Graphically vectors are represented as directed line segments (a
+Graphically, vectors are represented as directed line segments (a
 line segment with an arrow at one end).  The endpoints of the segment are called the 
 \emph{initial
 point} (the base) and the \emph{terminal point} (the tip) of the vector.
@@ -49,7 +49,7 @@ point} (the base) and the \emph{terminal point} (the tip) of the vector.
 Let $A=(1,1)$, $B=(2,3)$, $X=(0,1)$, and $Y=(1,3)$ and consider the vectors
 $\vec a = \overrightarrow{AB}$ and $\vec x=\overrightarrow{XY}$.  Are these
 the same or different vectors?  If we drew them as directed line segments,
-the drawing would be distinct.  However, both $\vec a$ and $\vec x$ have equivalent
+the drawings would be distinct.  However, both $\vec a$ and $\vec x$ have equivalent
 magnitudes and directions.  Thus, $\vec a$ and $\vec x$ are \emph{equivalent},
 and we would be justified writing $\vec a=\vec x$.
 
@@ -64,12 +64,12 @@ The distinction between vectors and points is sometimes nebulous because
 they are so closely related to each other.  A \emph{point}\index{point}
 in Euclidean space specifies an absolute position whereas a vector
 specifies a magnitude and direction.  However, given a point $P$,
-one can always specify the vector $\overrightarrow{OP}$, where $O$
-is the origin.  Similarly, given $\vec v$, we can specify the point $V$
-to be the terminal point of $\vec v$ if it were rooted at the origin.
+one associates $P$ with the vector $\vec p=\overrightarrow{OP}$, where $O$
+is the origin.  Similarly, we associate the vector $\vec v$ with
+the point $V$ so that $\overrightarrow{OV}=\vec v$.
 Thus, we have a way to unambiguously go back and forth between vectors and 
 points\footnote{ Mathematically, we say there is an \emph{isomorphism} between
-vectors and points.}.  As such \emph{we will treat vectors and points
+vectors and points.}.  As such, \emph{we will treat vectors and points
 as interchangeable}.
 
 
@@ -79,7 +79,7 @@ For example, suppose $\xhat$ points one mile eastwards and $\yhat$
 points one mile northwards.  Now, if you were standing at the origin
 and wanted to move to a location 3 miles east and 2 miles north, you might say:
 ``Walk 3 times the length of $\xhat$  in the $\xhat$ direction and 2 times
-the length of $\yhat$ in the $\yhat$ direction.''  Mathematically we express this
+the length of $\yhat$ in the $\yhat$ direction.''  Mathematically, we express this
 as
 \[
 	3\xhat+2\yhat.
@@ -89,12 +89,12 @@ be the point at 3-east and 2-north.  Then
 \[
 	\overrightarrow{OP}=3\xhat+2\yhat.
 \]
-If the vector $\vec y$ points north but has a length of 2 miles, we have
+If the vector $\vec r$ points north but has a length of 10 miles, we have
 a similar formula:
 \[
-	\overrightarrow{OP}=3\xhat+1\vec y,
+	\overrightarrow{OP}=3\xhat+\tfrac{1}{5}\vec r,
 \]
-and the relationship $\vec y=2\yhat$.
+and we have the relationship $\vec r=10\yhat$.
 Our notation here is very suggestive.  Indeed, if we could make
 sense of what $\alpha\vec v$ is for any scalar $\alpha$ and vector
 $\vec v$, and we could make sense of what $\vec v+\vec w$
@@ -102,7 +102,7 @@ means for any vectors $\vec v$ and $\vec w$, we would be able to
 do algebra with vectors.  We might even say we have \emph{an algebra
 of vectors}.
 
-Intuitively, for a vector $\vec v$, and a scalar $\alpha>0$, the
+Intuitively, for a vector $\vec v$ and a scalar $\alpha>0$, the
 vector $\vec w=\alpha\vec v$ should point in the same direction as
 $\vec v$ but have magnitude scaled up by $\alpha$.  That is, $\norm{\vec w}=\alpha\norm{\vec v}$.
 Similarly, $-\vec v$ should be the vector of the same length as $\vec v$ but
@@ -116,23 +116,29 @@ XXX Figure
 
 Now, there is one snag.  What should $\vec v+(-\vec v)$ be?  Well, first we
 displace along $\vec v$ and then we displace in the exact opposite direction 
-by the same amount.  So we have gone nowhere.  This corresponds to a displacement
+by the same amount.  So, we have gone nowhere.  This corresponds to a displacement
 with zero magnitude.  But, what direction did we displace?  Here we make a philosophical
 stand.
 \begin{definition}[Zero Vector]
 	The \emph{zero vector}\index{zero vector}, notated as $\vec 0$\index{$\vec 0$}, 
 	is the vector with no magnitude.
 \end{definition}
-But what direction does $\vec 0$ point?  We will be pragmatic.
-The zero vector has no direction.  Or maybe it has every direction.
-If we are to have an algebra of vectors, we
-must allow this special case where the direction of the zero vector is ill-defined\footnote{
+We will be pragmatic about the direction of the zero vector and say,
+\emph{the zero vector does not have a well-defined direction}\footnote{
 	In the mathematically precise definition of vector, the idea of ``magnitude''
 	and ``direction'' are dropped.  Instead, a set of vectors is defined to be
 	a set over which you can reasonably define addition and scalar multiplication.
-}.  Further along this line of thinking, we might hope that for any
-vectors $\vec u$, $\vec v$, $\vec w$ and scalars $\alpha$ and $\beta$, the
-following conditions are satisfied.
+}.  That means
+sometimes we consider the zero vector to point in every direction and sometimes
+we consider it to point in no directions.  It depends on our mood---but we must
+never talk about \emph{the} direction of the zero vector, since it's not defined.
+
+We need the zero vector if we are to make precise mathematical
+sense of vector arithmetic.
+Further along this line of thinking, we can define precisely how vector arithmetic
+should behave.  Specifically, if $\vec u$, $\vec v$, $\vec w$ are vectors and $\alpha$ and $\beta$
+are scalars, the
+following conditions should be satisfied:
 \begin{align*}
 	(\vec u+\vec v)+\vec w&=\vec u+(\vec v+\vec w)\tag{Associativity}\\
 	\vec u+\vec v&=\vec v+\vec u\tag{Commutativity}\\
@@ -144,7 +150,7 @@ and
 	(\alpha+\beta)\vec v&=\alpha\vec v+\beta \vec v\tag{Distributivity II}
 \end{align*}
 
-Indeed, if we intuitively think about vectors in flat, Euclidean, space
+Indeed, if we intuitively think about vectors in flat (Euclidean) space,
 all of these properties are satisfied\footnote{
 	If we deviate from flat space, some of these
 	rules are no longer respected.  Consider moving 100 miles
@@ -155,14 +161,51 @@ the
 \emph{laws (or axioms) of vector arithmetic}.
 
 We'll be talking about these vector operations (scalar multiplication and
-vector addition) a lot.  So much so that it's worth naming.
+vector addition) a lot.  So much so that the concept is worth naming.
 \begin{definition}[Linear Combination]
 	A \emph{linear combination} of the vectors $\vec v_1,\ldots \vec v_n$
 	is any vector expressible as
 	\[
-		\alpha_1\vec v_1+\cdots +\alpha_n\vec v_n.
+		\alpha_1\vec v_1+\cdots +\alpha_n\vec v_n,
 	\]
+	where $\alpha_1,\alpha_2,\ldots,\alpha_n$ are scalars.
 \end{definition}
+
+
+We've given laws for linear combinations of vectors, but what about
+for magnitudes of vectors?  We'd like the magnitude (or norm\index{norm}) of a vector to obey
+the following laws.
+\begin{align*}
+	\norm{\vec v} &\geq 0\tag{Non-negativity}\\
+	\norm{\vec v} &= 0\text{ only when}\vec v=\vec 0\tag{Definiteness}\\
+	\norm{\alpha\vec v}&=\abs{\alpha}\norm{\vec v}\tag{Homogeneity}\\
+	\norm{\vec v+\vec w}&\leq\norm{\vec v}+\norm{\vec w}\tag{Triangle Inequality}
+\end{align*}
+for all $\vec v$, $\vec w$, and scalars $\alpha$.  Any function on vectors satisfying
+those four properties is called a \emph{norm}, and our usual notion
+of length in three-dimensional space indeed obeys those properties\footnote{
+	The Euclidean norm comes from the Pythagorean theorem $a^2+b^2=c^2$.
+	However, by changing the exponent, we have a whole family of norms
+	coming from the equations $\abs{a}^p+\abs{b}^p=\abs{c}^p$.
+}.
+
+Homogeneity is a particularly special property of a norm.  It allows us
+to easily create \emph{unit vectors}.
+\begin{definition}[Unit Vector]
+	A \emph{unit vector}\index{unit vector} is a vector $\vec u$
+	satisfying $\norm{\vec u}=1$.
+\end{definition}
+Unit vectors are handy because if $\vec u$ is a unit vector, then $k\vec u$
+has length $\abs{k}$.  Further, we can always turn a vector into a unit vector.
+\begin{example}
+	The vector $\vec v/\norm{\vec v}$ is always a unit vector in the direction
+	of $\vec v$.  Computing,
+	\[
+		\norm*{\frac{\vec v}{\norm{\vec v}}} = \abs*{\frac{1}{\norm{\vec v}}}\norm{\vec v}=
+		\frac{1}{\norm{\vec v}}\norm{\vec v}=1.
+	\]
+\end{example}
+
 
 \section{Coordinates}
 Recall that a coordinate system in the plane is specified by choosing
@@ -175,23 +218,24 @@ as if there were only one.
 
 In physics, one often has to think carefully about the
 coordinate system because
-choosing it appropriately  may greatly simplify the
-resulting analysis.  Note that the axes are usually drawn with 
-\emph{right hand orientation} where the right angle from the positive
+choosing one appropriately may greatly simplify the
+analysis.  Note that axes for coordinate systems are usually drawn with 
+\emph{right-hand orientation}, where the right angle from the positive
 $x$-axis to the positive $y$-axis is in the counter-clockwise
 direction.  However, it would be equally valid to use the
-\emph{left hand orientation} in which that angle is in the
+\emph{left-hand orientation} in which that angle is in the
 clockwise direction.  One can easily switch the orientation of
-a coordinate system by reversing one of the axes.   (The concept of
+a coordinate system by reversing one of the axes\footnote{
+	The concept of
 orientation is quite fascinating and it arises in mathematics,
 physics, chemistry, and even biology in many interesting ways.
 Note that almost all of us base our intuitive concept of orientation
-on our inborn notion of ``right'' versus ``left''.)
+on our inborn notion of ``right'' versus ``left''.}.
 
 XXX Figure
 
 For any coordinate system, there are special vectors
-associated with it.  For the plane, the vector point one unit along
+associated with it.  For the plane, the vector pointing one unit along
 the positive $x$-axis is called $\xhat$ and the vector pointing one unit along
 the positive $y$-axis is called $\yhat$.  The vectors $\xhat$ and $\yhat$ are
 called the \emph{standard basis}\index{standard basis} vectors for $\R^2$.
@@ -199,7 +243,7 @@ called the \emph{standard basis}\index{standard basis} vectors for $\R^2$.
 Notice that every point (or vector) in the plane can be represented
 as a linear combination of $\xhat$ and $\yhat$, and the vector
 $\alpha\xhat+\beta\yhat$ is the vector $\overrightarrow{OP}$ where
-$P=(\alpha,\beta)$.  Now, to state an intuitive fact.  If $\vec w$ is
+$P=(\alpha,\beta)$.  Now, to state an intuitive fact:  if $\vec w$ is
 a vector in the plane, \emph{there is
 only one way to write a vector as a linear combination of
 $\xhat$ and $\yhat$}.  This means, if $\vec w=\alpha\xhat+\beta\yhat$,
@@ -212,7 +256,7 @@ the pair $(\alpha,\beta)$ captures all information\footnote{
 } about $\vec w$.
 
 
-For a vector $\vec w=\alpha\xhat+\beta\yhat$ 
+For a vector $\vec w=\alpha\xhat+\beta\yhat$,
 we call the pair $(\alpha,\beta)$  the 
 \emph{components}\index{components} of the vector $\vec w$.  There
 are many equivalent notations used to represent components.
@@ -226,7 +270,12 @@ are many equivalent notations used to represent components.
 \end{center}
 
 Given what we now know about representing vectors and there equivalency
-with points, the notation $\R^2$ (pairs of real numbers) makes sense.  Further,
+with points, we can now dissect the notation $\R^2$.
+On the one hand, $\R^2$ is the set of vectors in two-dimensional Euclidean
+space.  On the other hand $\R^2=\R\times \R$ is the set of all pairs of real 
+numbers.  Via the use of coordinates, we know these concepts represent the
+same thing!
+Further,
 since vectors in $\R^2$ are equivalent to their representation in coordinates,
 we will often write
 \[
@@ -236,7 +285,7 @@ as a shorthand for $\vec v=\alpha\xhat+\beta\yhat$.
 
 
 Breaking vectors into components, and in particular, viewing vectors as linear
-combinations of the standard basis vectors allows us to solve problems that were
+combinations of the standard basis vectors, allows us to solve problems that were
 difficult before.  For instance, suppose we have vectors $\vec v$ and $\vec w$.
 How can we compute $\norm{\vec v+\vec w}$?  With components, it's easy.
 
@@ -280,12 +329,14 @@ In three-dimensional space, the story is very similar.  Again, we imagine
 three perpendicular axes, the $x$, $y$, and $z$ axes.  
 To draw consistent
 pictures, we have an notion of a right-handed three-dimensional coordinate
-system given by the \emph{right hand rule}.
+system given by the \emph{right-hand rule}.
 
 XXX Figure
 
-We now add a third standard basis vector $\zhat$ which points one
-unit along the positive $z$-axis, and any vector in three-dimensional
+We now have three standard basis vectors, $\xhat$, $\yhat$,
+and $\zhat$, each pointing one unit in the positive direction of their
+respective axes.
+Any vector in three-dimensional
 space can be represented 
 in exactly one way
 as a linear combination $\alpha\xhat+\beta\yhat+\gamma\zhat$.  Thus,
@@ -308,14 +359,15 @@ The following is a non-exhaustive list.
 		$\vec e_1$ & $\vec e_2$ & $\vec e_3$
 	\end{tabular}
 \end{center}
+Keep these notations in the back of your mind.  You might see them in other classes.
 
 \subsection{Higher dimensions}
 One can't progress very far in the study of science and mathematics
 without encountering a need for higher dimensional ``vectors''.  For
 example, physicists have known since Einstein that the physical
-universe is best thought of as a 4-dimensional entity called
+universe is best thought of as a four-dimensional entity called
 spacetime in which time plays a role close to that of the 
-3 spatial coordinates.  Since, we don't have any way to deal with
+three spatial coordinates.  Since, we don't have any way to deal with
 $\R^n$\index{$\R^n$}
 intuitively, we must
 proceed by analogy with two and three dimensions.
@@ -350,22 +402,19 @@ variety of contexts, some of which we shall encounter later.
 
 
 \section{Dot Products \& Projections}
+\subsection{Dot Product}
 Let $\vec a$ and $\vec b$ be vectors.  We assume they are placed so their
 tails coincide.  Let $\theta$ denote the \emph{smaller} of the
 two angles between them, so $0\le \theta \le \pi$.
-Their \emph{dot product}\index{dot product} is defined to be
+The \emph{dot product}\index{dot product} of $\vec a$ and $\vec b$ is defined to be
 \[
 	\vec a\cdot \vec b=\norm{\vec a}\norm{\vec b}\cos \theta.
 \]
 We will call this the \emph{geometric definition of the dot product}.
-This is also sometimes called the \emph{scalar product} because
+The dot product is also sometimes called the \emph{scalar product} because
 the result is a scalar.
 Note that $\vec a\cdot\vec b = 0$ when either $\vec a$ or $\vec b$ is zero or,
 more interestingly, if their directions are perpendicular.
-If the two vectors have parallel directions, $\vec a\cdot\vec b$ is
-the product of their magnitudes if they point the same way
-or the negative of that product if they point in opposite
-directions.
 
 XXX Figure showing angle theta
 
@@ -382,7 +431,7 @@ to be the ``true'' definition and consider the other definition a theorem.
 }.
 
 By switching between algebraic and geometric definitions, we can use the dot
-product to find quantities that are otherwise difficult to find.
+product to find quantities that are otherwise difficult.
 \begin{example}
 	Find the angle between the vectors $\vec v=(1,2,3)$ and $\vec w=(1,1,-2)$.
 
@@ -395,16 +444,550 @@ product to find quantities that are otherwise difficult to find.
 		\vec v\cdot \vec w=\norm{\vec v}\norm{\vec w}\cos\theta
 		=\sqrt{14}\sqrt{6}\cos\theta=\sqrt{21}\cos\theta.
 	\]
-	Equating the equations coming from each definition we see
+	Equating the two definitions of $\vec v\cdot \vec w$, we see
 	\[
 		\cos\theta = \frac{-3}{\sqrt{21}}
 	\]
 	and so $\theta=\arccos(-3/\sqrt{21})$.
 \end{example}
 
-The dot product is a useful concept when one needs to find the
-component of one vector in the direction of another.  For example,
-in a typical inclined plane problem in elementary mechanics, one
-needs to resolve the vertical gravitational force into components,
-one parallel to the inclined plane, and one perpendicular to it.
-To see how the dot product enters into that, note that
+Recall that for vectors $\vec a$, $\vec b$ the relationship $\vec a\cdot \vec b=0$
+can hold for two reasons: (i) either $\vec a=\vec 0$, $\vec b=\vec 0$, or both
+or (ii) $\vec a$ and $\vec b$ meet at $90^{\circ}$.  Thus, the dot product
+can be used to tell if two vectors are perpendicular.  There is some strangeness
+with the zero vector here, but it turns out this strangeness simplifies our lives
+mathematically.
+
+\begin{definition}[Orthogonal]
+	The vectors $\vec u$ and $\vec v$ are \emph{orthogonal}\index{orthogonal}
+	if $\vec u\cdot\vec v=0$.
+\end{definition}
+
+The definition of orthogonal encapsulates both the idea of two vectors being
+perpendicular and the idea of one of them being $\vec 0$.
+
+Before we continue, let's pin down the idea of one vector pointing
+in the \emph{direction} of another.  There are many ways we could define
+this idea, but we'll go with this one.
+
+\begin{definition}
+	The vector $\vec u$ points in the \emph{direction} of
+	the vector $\vec v$ if $k\vec u=\vec v$ for some scalar $k$.
+\end{definition}
+
+A simple example is that $2\xhat$ points in the direction of $\xhat$ since 
+$\frac{1}{2}(2\xhat)=\xhat$.  However, nothing in the definition says the
+scalar needs to be positive, so $-\xhat$ also points in the direction $\xhat$.
+
+\subsection{Projection}
+Another common vector operation is \emph{projection}\index{projection}.
+Projection measures how much a vector points in the direction
+of another.  This quantity is encoded as a vector.  We make this
+definition mathematically precise as follows.
+
+\begin{definition}[Projection]
+	For a vector $\vec u$ and a non-zero vector $\vec v$,
+	the \emph{projection} of $\vec u$ onto $\vec v$ is written
+	as $\Proj_{\vec v}\vec u$ and is a vector in the direction
+	of $\vec v$ with the property that $\vec u-\Proj_{\vec v}\vec u$
+	is orthogonal to $\vec v$.
+
+	The vector $\vec u-\Proj_{\vec v}\vec u$ is called the
+	\emph{perpendicular component} of the projection of $\vec u$
+	onto $\vec v$ and is notated $\Perp_{\vec v}\vec u$.
+\end{definition}
+
+We can visualize
+projections with the following diagram.
+
+	\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}[>=latex,scale=2.5]
+		\draw[->,thick,black] (0,0) -- (2,1) node [above] {$\vec u$};
+		\draw[->,thick,black] (0,0) -- (3,0) node [above] {$\vec v$};
+		\draw[->,thick,black,yshift=-.07cm] (0,0) -- (2,0);
+		\draw[decoration={brace, mirror}, decorate, yshift=-.15cm] (0,0) -- (2,0) node [midway,below,yshift=-4pt] {$\Proj_{\vec v}\vec u$};
+		
+		\draw[dashed,thick,black] (2,0) -- (2,1);
+		\draw[decoration={brace, mirror}, decorate, xshift=1.15cm] (2,0) -- (2,1) node [midway,right,xshift=4pt] {$\Perp_{\vec v}\vec u$};
+		\draw[thin,black] (1.85,0)--(1.85,.15)--(2,.15);
+
+	\end{tikzpicture}
+	\end{center}
+
+From the picture it appears that $\vec u$, $\Proj_{\vec v}\vec u$,
+and $\Perp_{\vec v}\vec u$ form a right triangle.  Of course, we shouldn't
+trust the picture. We should verify this mathematically.
+
+\begin{theorem}
+	If $\vec u$ and $\vec v$ are non-zero vectors, then $\vec v$, $\Proj_{\vec v}\vec u$,
+	and $\Perp_{\vec v}\vec u$ form a (possibly degenerate) right triangle.
+\end{theorem}
+\begin{proof}
+	We need to verify that the sides $\Proj_{\vec v}\vec u$ and $\Perp_{\vec v}\vec u$
+	meet at a right angle and that the hypotenuse $\vec u$ meets the sides.  That is,
+	$\Perp_{\vec v}\vec u+\Proj_{\vec v}\vec u=\vec u$.
+
+	By the definition of projection, $\Perp_{\vec v}\vec u=\vec u-\Proj_{\vec v}\vec u$
+	is orthogonal to $\vec v$.  Since $\Proj_{\vec v}\vec u$ points in the
+	direction of $\vec v$, we have $\Proj_{\vec v}\vec u=k\vec v$ and so
+	$\Perp_{\vec v}\vec u$ is orthogonal to $\Proj_{\vec v}\vec u$.
+
+	Finally, consider
+	\[
+		\Perp_{\vec v}\vec u+\Proj_{\vec v}\vec u=
+		(\vec u-\Proj_{\vec v}\vec u)+\Proj_{\vec v}\vec u=\vec u,
+	\]
+	so indeed the vectors form a right triangle.
+\end{proof}
+
+Now that we've proved $\vec u$, $\Proj_{\vec v}\vec u$,
+and $\Perp_{\vec v}\vec u$ form a right triangle, we are free to use
+trigonometry to compute projections.  If $\theta$ is the angle between $\vec u$
+and $\vec v$ and $0\leq \theta\leq \pi/2$, 
+we know $\norm{\Proj_{\vec v}\vec u}=\norm{\vec u}\cos\theta$.  This means
+\[
+	\Proj_{\vec v}\vec u = k\vec v=\norm{\vec u}\cos\theta\frac{\vec v}{\norm{\vec v}}
+\]
+(Recall that $\vec v/\norm{\vec v}$ is a unit vector in the direction of $\vec v$).
+But $\cos \theta$ appears in the formula for the dot product.  Solving for
+$\cos\theta$ in the dot product formula, we see $\cos\theta=\frac{\vec u\cdot\vec v}{\norm{\vec u}\norm{\vec v}}$.
+Thus,
+\[
+	\Proj_{\vec v}\vec u = \norm{\vec u}\cos\theta\vec v
+	=\frac{\vec u\cdot \vec v}{\norm{\vec u}\norm{\vec v}}\left(\frac{\vec v}{\norm{\vec v}}\right)
+	=\frac{\vec u\cdot \vec v}{\norm{\vec v}^2}\vec v.
+\]
+Upon close inspection, we see $\norm{\vec v}^2=\vec v\cdot \vec v$ (since $\cos 0=1$)
+and so we finally arrive at the formula
+\[
+	\Proj_{\vec v}\vec u  
+	=\frac{\vec u\cdot \vec v}{\vec v\cdot \vec v}\vec v
+\]
+Incredibly, if we use the algebraic definition of the dot product, we can
+compute a projection without computing cosine of anything!
+
+\begin{exercises}
+\end{exercises}
+
+\section{The Cross Product}
+
+For vectors $\vec a$ and $\vec b$, the dot $\vec a\cdot \vec b$ measures
+how close $\vec a$ and $\vec b$ are to being orthogonal.  In contrast,
+the \emph{cross product}\index{cross product} of $\vec a$ and $\vec b$,
+written $\vec a\times \vec b$ will
+measure the \emph{area} of the parallelogram whose sides are given by $\vec a$ and
+$\vec b$.
+
+Let's explore this idea.  Since the cross product is a \emph{product}, we will
+demand it follow reasonable distribution laws\footnote{ The technical term
+for satisfying these laws is \emph{bilinearity}.}:
+\begin{align*}
+	\vec a\times (\vec b+\vec c) &= \vec a\times \vec b+\vec a\times\vec c\\
+	(\vec a+\vec b)\times\vec c &= \vec a\times \vec c+\vec b\times \vec c\\
+	(\alpha\vec a)\times \vec b &= \alpha(\vec a\times \vec b)\\
+	\vec a\times(\alpha \vec b) &= \alpha(\vec a\times \vec b)
+\end{align*}
+for vectors $\vec a$, $\vec b$, $\vec c$ and scalars $\alpha$.
+
+Now, suppose $\vec a\times \vec b$ indeed encapsulates the area of the parallelogram
+with sides $\vec a$ and $\vec b$.  If we slide the tip of $\vec b$ parallel to the vector
+$\vec a$, we should not change the area.  Thus the cross product of $\vec a$ and $\vec b$
+should be the same as that of $\vec a$ and $\vec b+\alpha\vec a$.  
+
+XXX Figure
+
+Using this invariance along with our distributive rules,
+we now see
+\[
+	\vec a\times \vec b = \vec a\times (\vec b+\alpha\vec a)=
+	\vec a\times \vec b+\alpha(\vec a\times\vec a),
+\]
+and so $\vec a\times \vec a=0$.  We can apply this newly-found fact to
+the vector $\vec a+\vec b$ to deduce
+\begin{align*}
+	0=(\vec a+\vec b)\times (\vec a+\vec b)&=
+	\vec a\times \vec a+\vec a\times\vec b+\vec b\times \vec a+\vec b\times \vec b\\
+	&=0+\vec a\times \vec b+\vec b\times \vec a+0\\
+	&=\vec a\times \vec b+\vec b\times \vec a,
+\end{align*}
+and so 
+\[
+	\vec a\times \vec b=-\vec b\times \vec a.
+\]
+Products with this property are called \emph{anti-commutative}.  Now
+for an incredible fact of the universe: the result of the cross product of
+two vectors in $\R^3$ can be represented by another vector in $\R^3$ whose magnitude
+corresponds to the area of the parallelogram
+with sides $\vec a$ and $\vec b$.\footnote{ This is \emph{only} true in $\R^3$.  In $\R^4$ a product that
+produces area-like quantities does exist, but the output cannot be described by
+a vector.  In higher dimensions, the cross product is called the \emph{wedge product}.}
+Using trigonometry, we deduce
+\[
+	\norm{\vec a\times \vec b}=\norm{\vec a}\norm{\vec b}\sin \theta
+\]
+where $0\leq \theta\leq \pi$ is smaller of the two angles between $\vec a$ and $\vec b$.
+What remains to be seen is what direction $\vec a\times \vec b$ points in.  For this,
+we use the standard basis for $\R^3$ as a launching point. Recall
+$\xhat$, $\yhat$, and $\zhat$ are all unit vectors and all orthogonal to each other.
+Thus, any of them cross each other must result in a unit vector.  By convention,
+\begin{align*}
+	\xhat\times\yhat &=  \zhat, \\
+	\yhat\times\zhat &=  \xhat\\
+	\zhat\times\xhat &=  \yhat.
+\end{align*}
+Let $\vec a=a_x\xhat +a_y\yhat +a_z\zhat$ and $\vec b=b_x\xhat +b_y\yhat +b_z\zhat$.
+Using the distributive laws of the cross product we see,
+\begin{align*}
+	\vec a\times\vec b &= (a_x \xhat + a_y\yhat + a_z\zhat) \times (b_x\xhat + b_y\yhat + b_z\zhat) \\
+	&= \phantom{+}a_xb_x\xhat\times\xhat + a_xb_y\xhat\times\yhat + a_xb_z\xhat\times\zhat \\
+       &\phantom{=}+ a_yb_x\yhat\times\xhat + a_yb_y\yhat\times\yhat + a_yb_z\yhat\times\zhat \\
+       &\phantom{=}+ a_zb_x\zhat\times\xhat + a_zb_y\zhat\times\yhat + a_zb_z\zhat\times\zhat \\
+	&= \phantom{+}\vec 0  + a_xb_y\zhat - a_xb_z\yhat \\
+       &\phantom{=}- a_yb_x\zhat + \vec 0 + a_yb_z \xhat \\
+	&\phantom{=}+ a_zb_x\yhat - a_zb_y\xhat + {\vec 0}\\
+\intertext{so}
+\vec a\times \vec b &= (a_yb_z - a_zb_y)\xhat - (a_xb_z - a_zb_x)\yhat + (a_xb_y - a_yb_x)\zhat.
+\end{align*}
+
+\begin{exercise}
+	Verify that $\norm{\vec a\times \vec b}=\norm{\vec a}\norm{\vec b}\sin\theta$. (Hint: you
+	can use $\vec a\cdot \vec b=\norm{\vec a}\norm{\vec b}\cos\theta$ to solve for $\theta$
+	and the proceed using components.)
+\end{exercise}
+
+Now that we know what the cross product is and how to compute it, let's explore
+some of its incredible properties.  First,
+\[
+	(\vec a\times\vec b)\cdot \vec a=(a_yb_z - a_zb_y)a_x - (a_xb_z - a_zb_x)a_y + (a_xb_y - a_yb_x)a_z=0
+\]
+and 
+\[
+	(\vec a\times\vec b)\cdot \vec b=(a_yb_z - a_zb_y)b_x - (a_xb_z - a_zb_x)b_y + (a_xb_y - a_yb_x)b_z=0.
+\]
+Thus, $\vec a\times\vec b$ is orthogonal to both $\vec a$ and $\vec b$.  
+Just based on this property, since the length of $\vec a\times \vec b$ is fixed, $\vec a\times\vec b$
+can be one of two vectors in space.
+If we investigate further, we'll
+see that $\vec a\times\vec b$ is the vector that satisfies the \emph{right-hand rule}.
+
+\begin{center}
+\definecolor{ce5d4b1}{RGB}{229,212,177}
+\definecolor{c897f6a}{RGB}{137,127,106}
+\definecolor{c963c96}{RGB}{150,60,150}
+\definecolor{c2828ff}{RGB}{40,40,255}
+\definecolor{ce12828}{RGB}{225,40,40}
+
+\begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-1.000000, xscale=1.000000, inner sep=0pt, outer sep=0pt]
+\path[draw=black,fill=ce5d4b1,line width=1.109pt] (197.7203,128.5199) ..
+  controls (187.5579,127.1341) and (171.3905,117.8956) .. (169.0809,116.5099) ..
+  controls (166.7713,115.1241) and (156.1470,103.5760) .. (150.6039,94.7994) ..
+  controls (145.0608,86.0228) and (139.9796,75.3985) .. (138.1319,69.3935) ..
+  controls (136.2842,63.3885) and (134.4365,57.3834) .. (133.9746,54.1500) ..
+  controls (133.5127,50.9165) and (134.4365,43.2947) .. (135.8223,40.0612) ..
+  controls (132.5888,37.7516) and (126.1219,37.2897) .. (123.3503,43.2947) ..
+  controls (120.5788,49.2997) and (118.2691,58.5382) .. (118.2691,64.5433) ..
+  controls (118.2691,70.5483) and (128.4315,89.9492) .. (121.9645,92.7207) ..
+  controls (115.4976,95.4923) and (114.1118,99.1877) .. (80.8532,90.8730) ..
+  controls (47.5946,82.5584) and (33.7368,81.6345) .. (30.5034,88.1015) ..
+  controls (27.2699,94.5684) and (46.2088,97.3400) .. (56.3712,99.1877) ..
+  controls (66.5335,101.0354) and (89.6395,109.6429) .. (86.3963,113.9693) ..
+  controls (84.3869,116.6493) and (82.0658,116.0424) .. (76.8303,117.8901) ..
+  controls (67.7715,121.0875) and (67.9114,122.4936) .. (56.6021,126.3641) ..
+  controls (45.3159,130.2267) and (46.0504,141.2501) .. (49.5961,143.0996) ..
+  controls (53.1419,144.9492) and (56.0705,146.0292) .. (71.0230,137.5505) ..
+  controls (77.6516,135.0839) and (85.7039,133.4463) .. (92.7866,132.8306) ..
+  controls (99.8693,132.2148) and (104.1813,158.6984) .. (111.8798,162.7019) ..
+  controls (119.5782,166.7054) and (128.5086,166.3973) .. (134.0517,166.3973) ..
+  controls (139.5948,166.3973) and (142.6740,167.3216) .. (145.7537,165.7816) ..
+  controls (148.8333,164.2415) and (157.4561,166.3968) .. (162.0754,168.8607) ..
+  controls (162.0754,168.8607) and (179.9366,177.4835) .. (181.4762,179.3312);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (90.3231,113.2759) .. controls (106.0281,112.3525) and (111.5712,127.4418) ..
+  (115.2666,135.4488);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (123.4275,101.5735) .. controls (123.5817,113.2759) and (128.5091,123.1306) ..
+  (135.1294,126.8251);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (92.7866,94.7989) .. controls (89.0912,95.4147) and (84.7800,104.0374) ..
+  (86.6277,106.5009);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (73.0776,89.8716) .. controls (70.6142,91.7193) and (65.6868,96.0304) ..
+  (66.9188,98.4943);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (50.9052,86.1762) .. controls (47.8256,88.0239) and (46.8246,93.3365) ..
+  (46.2088,94.5679);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (84.7800,117.5875) .. controls (88.4754,119.4352) and (90.3231,125.5936) ..
+  (89.0912,129.9052);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (74.9932,120.9466) .. controls (78.0729,122.7943) and (78.3413,132.0296) ..
+  (77.1093,133.8773);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (63.2381,126.1188) .. controls (67.2329,129.1144) and (67.6685,133.2944) ..
+  (65.5889,138.3441);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (117.8072,97.3400) .. controls (115.9595,101.9592) and (114.5737,105.6546) ..
+  (115.0357,108.4262);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (118.2691,64.5433) .. controls (123.7878,65.3318) and (119.5057,66.0455) ..
+  (129.8173,64.0813);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (166.3865,120.6672) .. controls (164.5388,126.2103) and (162.6911,128.0575) ..
+  (159.6114,129.9052);
+\path[draw=black,fill=ce5d4b1,line width=1.109pt] (120.5021,161.1628) ..
+  controls (127.8490,159.6934) and (133.1283,158.6993) .. (137.1314,157.4674) ..
+  controls (141.1344,156.2354) and (146.9852,152.8476) .. (148.5252,149.7685) ..
+  controls (150.0653,146.6893) and (148.8333,146.0735) .. (147.9095,143.9177) ..
+  controls (146.9856,141.7619) and (136.8238,142.9939) .. (134.3598,143.9177) ..
+  controls (131.8959,144.8416) and (129.7406,145.7654) .. (119.5782,147.3050) ..
+  controls (109.4159,148.8446) and (106.6443,149.6146) .. (101.4089,148.9984) ..
+  controls (97.1167,148.4931) and (102.0255,159.3146) .. (104.1809,160.5466) ..
+  controls (106.3362,161.7785) and (106.6443,163.9343) .. (120.5021,161.1628) --
+  cycle;
+\path[draw=black,fill=ce5d4b1,line width=1.109pt] (143.7845,133.4473) ..
+  controls (146.1343,135.9107) and (145.1269,138.3746) .. (144.4557,138.9904) ..
+  controls (143.7845,139.6061) and (136.0620,142.9934) .. (132.0331,144.2254) ..
+  controls (128.0037,145.4573) and (127.3326,144.5335) .. (119.2752,146.3812) ..
+  controls (111.2174,148.2289) and (110.5462,148.8446) .. (108.1955,149.7685) ..
+  controls (105.8452,150.6923) and (101.1451,150.3842) .. (96.7808,146.9969) ..
+  controls (92.4161,143.6096) and (93.0873,137.7584) .. (93.4231,135.9107) ..
+  controls (93.7589,134.0630) and (94.0952,130.0595) .. (102.4884,129.4438) ..
+  controls (122.7725,131.9811) and (136.5302,126.1649) .. (143.7845,133.4473) --
+  cycle;
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (95.5577,135.2950) .. controls (94.6694,143.2886) and (96.0699,143.6863) ..
+  (100.4850,146.9969);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (109.1078,135.4483) .. controls (109.1078,137.9118) and (109.7235,143.4549) ..
+  (109.7235,143.4549);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (124.3513,134.6783) .. controls (124.3513,135.9102) and (124.9675,140.8371) ..
+  (124.9675,142.6848);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (127.4305,148.5370) .. controls (127.4305,150.3847) and (130.5102,156.5435) ..
+  (130.5102,156.5435);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (112.4951,152.0781) .. controls (113.1108,153.3100) and (113.7270,158.8527) ..
+  (115.5747,159.4689);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (169.4657,135.4488) .. controls (166.3865,140.9919) and (164.5388,155.1582) ..
+  (161.4591,158.2374);
+\path[draw=c963c96,line cap=round,line width=3.326pt] (131.4340,30.1298) --
+  (131.1254,7.4955);
+\path[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}},fill=c963c96]
+  (322.8140,0.0000) -- (346.1270,60.3000) -- (322.8140,41.7880) --
+  (299.5010,60.3000) -- cycle;
+\path[draw=c2828ff,line cap=round,line width=3.326pt] (23.1190,85.4094) --
+  (0.9023,81.0705);
+\path[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}},fill=c2828ff]
+  (0.0000,192.5000) -- (63.7990,182.0440) -- (40.9000,201.0670) --
+  (54.2400,227.6800) -- cycle;
+\path[draw=ce12828,line cap=round,line width=3.326pt] (40.3862,143.0553) --
+  (26.1627,148.9449);
+\path[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}},fill=ce12828]
+  (69.0630,358.1970) -- (96.6050,315.5680) -- (95.5850,348.0050) --
+  (118.0640,371.4130) -- cycle;
+\begin{scope}[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}}]
+\end{scope}
+\path[fill=black,line join=miter,line cap=butt,line width=0.800pt]
+  (-2.2839,61.9362) node[above right] (text4204) {$\vec a$};
+\path[fill=black,line join=miter,line cap=butt,line width=0.800pt]
+  (9.0458,132.6143) node[above right] (text4204-3) {$\vec b$};
+\path[fill=black,line join=miter,line cap=butt,line width=0.800pt]
+  (146.0527,6.4312) node[above right] (text4204-7) {$\vec a\times \vec b$};
+\end{tikzpicture}\footnote{ Image credit: Acdx, from Wikipedia \url{https://en.wikipedia.org/wiki/Cross_product}}
+\end{center}
+
+A vector that encodes area, points orthogonally to others, and obeys the right-hand
+rule is handy indeed, and the cross product will be a useful tool for solving
+many problems.
+
+
+\begin{exercises}
+\end{exercises}
+
+
+\section{Lines and Planes}
+
+With a handle on vectors, we can now use them to describe some common geometric
+objects: lines and planes.
+
+\subsection{Lines}
+Consider for a moment the line $\ell$ through the points $P$ and $Q$.  If $P,Q\in\R^2$, we
+could describe this line in $y=mx+b$ form (provided it isn't a vertical line), but if
+$P,Q\in\R^3$ it's much harder to describe $\ell$ with an equation.  Using vectors
+provides an easier way.
+
+Let $\vec d=\overrightarrow{PQ}$ and consider the set of points (or vectors)
+\[
+	\vec x=t\vec d+P
+\]
+for $t\in \R$.  Geometrically, this is the set of all points we get by starting at $P$ and
+displacing by some multiple of the direction $\vec d$.  This is a line!
+Call this line $\ell$.  In set-builder notation, we would write
+\[
+	\ell=\Set{\vec x\given \vec x=t\vec d+P\text{ for some }t\in \R}.
+\]
+Notice that in set-builder notation we write ``for some $t\in \R$.'' Make sure you
+understand why replacing ``for some $t\in\R$'' with ``for
+all $t\in \R$'' would be incorrect.  
+
+Writing lines with set-builder notation all the time can be overkill, 
+so we will allow ourselves to describe lines in a shorthand called \emph{vector form}\footnote{
+	$y=mx+b$ form of a line is also shorthand.  The line $\ell$ described by the equation
+	$y=mx+b$ is actually the set $\Set{(x,y)\in\R^2\given y=mx+b}$.
+}.  
+
+\begin{definition}[Vector form of a Line]
+	A line $\ell$ is described in \emph{vector form}\index{vector form of line} if
+	there are two vectors $\vec d\neq \vec 0$ and $\vec p$ so that
+	\[
+		\vec x=t\vec d+\vec p
+	\]
+	satisfies $\vec x\in \ell$ for all $t\in \R$.  In this case we call $\vec d$ the
+	\emph{direction} of $\ell$ and the equation $\vec x=t\vec d+\vec p$ the \emph{vector equation}
+	of $\ell$.
+\end{definition}
+
+Note that if $\vec x=t\vec d+\vec p$ is the vector equation of a line $\ell$, by setting $t=0$
+we necessarily have $\vec p\in\ell$.  
+
+The direction of a line is easily obtained by finding the displacement vector between two points
+on the line.  Thus, given a line in another form, computing its vector form is straightforward.
+\begin{example}
+	Find vector form of the line $\ell$ in $\R^2$ with equation $y=2x+3$.  First, we find two
+	points on the line.  By guess-and-check we see $P=(0,3)$ and $Q=(1,5)$ are on $\ell$.
+	Thus, a direction vector for $\ell$ is given by 
+	\[
+		\vec d = (1,5)-(0,3)=(1,2).
+	\]
+	We may now write the vector equation of $\ell$ as 
+	\[
+		\vec x=t\vec d+P
+	\]
+	or, in components,
+	\[
+		\mat{x\\y} = t\mat{1\\2}+\mat{0\\3}.
+	\]
+\end{example}
+
+The downside of writing lines in vector form is that there are multiple direction vectors and multiple points
+for every line.  Thus, merely by looking at the vector equation for two lines, it can be hard to tell if
+they're equal.
+
+For example,
+\[
+	\mat{x\\y} = t\mat{1\\2}+\mat{0\\3},\qquad
+	\mat{x\\y} = t\mat{2\\4}+\mat{0\\3},\quad\text{and}\quad
+	\mat{x\\y} = t\mat{1\\2}+\mat{1\\5}
+\]
+all represent the same line.  In the second equation, the direction is parallel but scaled, and in 
+the third equation, a different point on the line was chosen.
+
+In vector form, the variable $t$ is called the \emph{parameter variable}.  It is an instance of
+a \emph{dummy variable}; that is, it is mostly there as a placeholder.  Remember, vector
+form is shorthand for set-builder notation.  
+
+Let $\vec d_1,\vec d_2\neq\vec 0$ and $\vec p_1,\vec p_2$ be vectors and define the lines
+\[
+	\ell_1=\Set{\vec x\given \vec x=t\vec d_1+\vec p_1\text{ for some }t\in\R}
+\]
+\[
+	\ell_2=\Set{\vec x\given \vec x=t\vec d_2+\vec p_2\text{ for some }t\in\R}.
+\]
+These lines have vector equations $\vec x=t\vec d_1+\vec p_1$ and $\vec x=t\vec d_2+\vec p_2$.
+However, declaring that $\ell_1=\ell_2$ if and only if $t\vec d_1+\vec p_1=t\vec d_2+\vec p_2$
+does \emph{not} make sense.   Instead $\ell_1=\ell_2$ if $\ell_1\subseteq\ell_2$ and $\ell_2\subseteq\ell_1$.
+If $\vec x\in\ell_1$ then $\vec x=t\vec d_1+\vec p_1$ for some $t\in\R$.  If $\vec x\in\ell_2$
+then $\vec x=t\vec d_2+\vec p_2$ for some \emph{possibly different} $t\in \R$.  This can get
+confusing really quickly.  The easiest solution is to use different parameter variables if
+we want to compare lines in vector form.
+
+\begin{example}
+	Determine if the lines $\ell_1$ and $\ell_2$, represented in vector form by the equations
+	\[
+		\vec x=t\mat{1\\1}+\mat{2\\1}\qquad\text{and}\qquad 
+		\vec x=t\mat{2\\2}+\mat{4\\3}
+	\]
+	are the same line.  To determine this, we need to figure out if $\vec x\in\ell_1$
+	implies $\vec x\in \ell_2$ and if $\vec x\in\ell_2$ implies $\vec x\in\ell_1$.  
+
+	If $\vec x\in\ell_1$, then $\vec x=t\mat{1\\1}+\mat{2\\1}$ for some $t\in\R$.  If
+	$\vec x\in\ell_2$, then $\vec x=s\mat{2\\2}+\mat{4\\3}$ for some $s\in \R$.  Thus if
+	\[
+		t\mat{1\\1}+\mat{2\\1} = \vec x = s\mat{2\\2}+\mat{4\\3}
+	\]
+	always has a solution, $\ell_1=\ell_2$.  Moving everything to one side we see
+	\begin{align*}
+		\vec 0 = \mat{4\\3}-\mat{2\\1} + s\mat{2\\2}-t\mat{1\\1}
+		&=\mat{2\\2}+s\mat{2\\2}-t\mat{1\\1}\\
+		&=(s+1)\mat{2\\2}-\tfrac{t}{2}\mat{2\\2}\\
+		&= (s+1-\tfrac{t}{2})\mat{2\\2}.
+	\end{align*}
+	This has a solution whenever $0=s+1-t/2$.  Since for every $t\in\R$ we can find an $s\in\R$
+	and for every $s\in \R$ we can find a $t\in \R$ satisfying this equation, we know $\ell_1=\ell_2$.
+\end{example}
+
+
+The geometry of lines in space is a bit more complicated than that of lines
+in the plane.  Lines in the plane either intersect or are parallel.
+In space,  we have to be a bit more careful about what we mean by
+``parallel lines,'' since lines with entirely different directions can
+still fail to intersect.
+
+XXX Figure
+
+\begin{example}
+Consider the lines described by
+\begin{align*}
+\vec x &= t( 1, 3, -2 ) + ( 1, 2, 1 ) \\
+\vec x &= t( -2, -6, 4) + ( 3, 1, 0 ).
+\end{align*}
+They have parallel directions since $( -2, -6, 4 ) = -2( 1, 3,-2 )$.
+Hence, in this case we say the lines are \emph{parallel}\index{parallel lines}.  (How can
+we be sure the lines are not the same?)
+\end{example}
+
+\begin{example}
+Consider the lines described by
+\begin{align*}
+	\vec x &= t(1, 3, -2 ) + ( 1, 2, 1 ) \\
+	\vec x &= t( 0, 2, 3) + ( 0, 3, 9 ).
+\end{align*}
+They are not parallel because neither of the direction
+vectors is a multiple
+of the other.  They may or may not intersect.  (If they don't,
+	we say the lines are \emph{skew}\index{skew lines}.)  How can we find out?  
+	Mirroring our earlier approach, 
+	we can set their equations equal and see if we can solve for the point
+	of intersection \emph{after ensuring we give their parametric variables
+	have
+	different names}.   We'll keep one parametric variable named $t$ and name the
+	other one $s$.  Thus, we want
+\[
+\vec x = t( 1, 3, -2 ) + ( 1, 2, 1 ) =
+s( 0, 2, 3) + ( 0, 3, 9 ),
+\]
+which after collecting terms yields
+\[
+    ( t + 1, 3t + 2, -2t + 1 ) = ( 0, 2s + 3, 3s + 9).
+\]
+Picking out the components yields three equations
+\begin{align*}
+    t + 1 &= 0 \\
+    3t +2 &= 2s + 3 \\
+    -2t + 1 &=  3s + 9
+\end{align*}
+in 2 unknowns  $s$ and $t$.  This is an {\it overdetermined\/}
+system, and it may or may not have a consistent solution.  
+The first two equations yield $t = -1$  and $s = -2$.  Putting
+these values in the last equation yields $(-2)(-1) + 1 = 3(-2) + 9$,
+which is indeed true.
+Hence, the equations are consistent, and the lines
+intersect.   To find the point of intersection, put $t = -1$
+in the equation for the first line (or
+$s = -2$ in that for the second) to obtain  $( 0, -1, 3 )$.  
+\end{example}
+
+\subsection{Planes}
