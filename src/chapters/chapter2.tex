@@ -22,7 +22,53 @@ relationships between goemetric objects in space\footnote{
 }.  If we have two points, $P=(1,1)$ and $Q=(3,2)$, we specify the
 \emph{displacement}\index{displacement} from $P$ to $Q$ as a vector.
 
-XXX Figure
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$P$};
+		\draw [mypink,fill] (B) circle (1.5pt) node [below right] {$Q$};
+		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,above,yshift=2pt] {$\overrightarrow{PQ}$};
+
+		\end{axis}
+%		\begin{axis}[
+%			anchor=origin,
+%			disabledatascaling,
+%			% tell pgfplots to use the same unit vectors
+%			% as tikz:
+%			x=1cm,y=1cm,
+%			xmin=-1,xmax=4, ymin=-1,ymax=4,grid=both]
+%			% this uses the point defined OUTSIDE of the axis
+%			\draw [blue,fill] (Point) circle (2pt)
+%			node [right] {(1,2)};
+%			% this uses a TIKZ coordinate (2,0) in the axis:
+%			\draw [blue,fill] (2,0) circle (2pt)
+%			node [right] {(2,0)};
+%			% this here will always work inside of an axis:
+%			\draw [blue,fill] (-1,0) circle (2pt)
+%			node [right] {(-1,0)};
+%		\end{axis}
+	\end{tikzpicture}
+\end{center}
 
 We notate the displacement vector form $P$ to $Q$ by $\overrightarrow{PQ}$.
 The magnitude of $\overrightarrow{PQ}$ is given by the Pythagorean theorem
@@ -32,7 +78,7 @@ $P$ to $Q$.
 
 \section{Vector Notation}
 There are many ways to represent vector quantities in writing.  If
-we have two points, $P$ and $Q$, $\overrightarrow{PQ}$ represents the
+we have two points, $P$ and $Q$, we write $\overrightarrow{PQ}$ to represent the
 vector from $P$ to $Q$.  Absent of points, bold-faced letters or a letter
 with an arrow over it are the most common typographical representations of vectors.
 For example, $\vec a$ or $\mathbf{a}$ may both be used to represent the vector
@@ -46,12 +92,54 @@ line segment with an arrow at one end).  The endpoints of the segment are called
 \emph{initial
 point} (the base) and the \emph{terminal point} (the tip) of the vector.
 
-Let $A=(1,1)$, $B=(2,3)$, $X=(0,1)$, and $Y=(1,3)$ and consider the vectors
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (-.5,2);
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point};
+		\draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point};
+		\draw[->,thick,myred!60!white] (A) -- (B);
+	\end{tikzpicture}
+\end{center}
+
+Let $A=(1,1)$, $B=(3,2)$, $X=(1,0)$, and $Y=(3,1)$ and consider the vectors
 $\vec a = \overrightarrow{AB}$ and $\vec x=\overrightarrow{XY}$.  Are these
 the same or different vectors?  If we drew them as directed line segments,
 the drawings would be distinct.  However, both $\vec a$ and $\vec x$ have equivalent
 magnitudes and directions.  Thus, $\vec a$ and $\vec x$ are \emph{equivalent},
 and we would be justified writing $\vec a=\vec x$.
+
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (2,1);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+			\draw[->,thick,myred!60!white] (1,1) -- +(A) node [midway,above,xshift=-8pt] {$\vec x=\overrightarrow{AB}$};
+			\draw[->,thick,mypink] (1,0) -- +(A) node [midway,above,xshift=-8pt] {$\vec x=\overrightarrow{XY}$};
+		%\draw[->,thick,myred!60!white] (3,1) -- +(A) node [midway,above,yshift=2pt] {$\vec x$};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
 
 Alternatively, we could consider the \emph{rooted vector}\index{rooted vector}
 $\vec a$ rooted at the point $A$.  In this terminology, $\vec a$ rooted
@@ -108,11 +196,35 @@ $\vec v$ but have magnitude scaled up by $\alpha$.  That is, $\norm{\vec w}=\alp
 Similarly, $-\vec v$ should be the vector of the same length as $\vec v$ but
 pointing in the exact opposite direction.
 
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (2,1);
+
+		\draw[->,thick,green!50!black] (1,0) -- +($(A) + (A)$) node [midway,below right ] {$2\vec v$};
+		\draw[->,thick,myred!60!white] (0,0) -- +(A) node [midway,above left] {$\vec v$};
+		\draw[->,thick,mypink] (-1,0) -- +($-.5*(A)$) node [midway,right,xshift=4pt] {$-\tfrac{1}{2}\vec v$};
+	\end{tikzpicture}
+\end{center}
+
 For two vectors $\vec u$ and $\vec v$, the sum $\vec w=\vec u+\vec v$
 should be the displacement vector created by first displacing along $\vec u$
 and then displacing along $\vec v$.
 
-XXX Figure
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (-.5,2);
+		\coordinate (C) at (3,3);
+
+		%\draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point};
+		%\draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point};
+		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,below left] {$\vec u$};
+		\draw[->,thick,mypink] (B) -- (C) node [midway,above left] {$\vec v$};
+		\draw[->,thick,green!50!black] (A) -- (C) node [midway,right] {$\vec w=\vec u+\vec v$};
+	\end{tikzpicture}
+\end{center}
 
 Now, there is one snag.  What should $\vec v+(-\vec v)$ be?  Well, first we
 displace along $\vec v$ and then we displace in the exact opposite direction 
@@ -232,7 +344,57 @@ physics, chemistry, and even biology in many interesting ways.
 Note that almost all of us base our intuitive concept of orientation
 on our inborn notion of ``right'' versus ``left''.}.
 
-XXX Figure
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=3,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={->},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel={$x$}, ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+		\end{axis}
+		\draw[] (.2,1) node[right,myorange!60!black] {Right Handed};
+	\end{tikzpicture}
+	\hspace{1cm}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=3,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    x dir=reverse,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={->},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel={$x$}, ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+		\end{axis}
+		\draw[] (-.4,1) node[left,mypink] {Left Handed};
+	\end{tikzpicture}
+\end{center}
 
 For any coordinate system, there are special vectors
 associated with it.  For the plane, the vector pointing one unit along
@@ -331,7 +493,228 @@ To draw consistent
 pictures, we have an notion of a right-handed three-dimensional coordinate
 system given by the \emph{right-hand rule}.
 
-XXX Figure
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\hspace{-3.5cm}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    scale mode=scale uniformly,
+			scale=2,
+		    %disabledatascaling,
+		    xmin=-2,xmax=2,
+		    ymin=-2,ymax=2,
+		    zmin=-2,zmax=2,
+		    %x=1cm,z=1cm,y=1cm,
+		    %grid=both,
+		    %grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    xtick={-2,...,2}, ytick={-2,...,2}, ztick={0,...,2},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={->},
+		    ticklabel style={font=\tiny},
+			xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    zlabel style={at={(ticklabel* cs:1)},anchor=south},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+		\end{axis}
+		\draw[] (.2,2) node[right,myorange!60!black] {Right Handed};
+	\end{tikzpicture}
+	\hspace{-2cm}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    scale mode=scale uniformly,
+			scale=2,
+		    x dir=reverse,
+		    y dir=reverse,
+		    %disabledatascaling,
+		    xmin=-2,xmax=2,
+		    ymin=-2,ymax=2,
+		    zmin=-2,zmax=2,
+		    %x=1cm,z=1cm,y=1cm,
+		    %grid=both,
+		    %grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    xtick={-2,...,2}, ytick={-2,...,2}, ztick={0,...,2},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={->},
+		    ticklabel style={font=\tiny},
+			xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+		    xlabel style={at={(ticklabel* cs:0)},anchor=east},
+		    zlabel style={at={(ticklabel* cs:1)},anchor=south},
+		    ylabel style={at={(ticklabel* cs:0)},anchor=east}
+		]
+
+		\end{axis}
+		\draw[] (.2,2) node[right,myorange!60!black] {Right Handed};
+	\end{tikzpicture}
+	\hspace{-1cm}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    scale mode=scale uniformly,
+			scale=2,
+		    x dir=reverse,
+		    %disabledatascaling,
+		    xmin=-2,xmax=2,
+		    ymin=-2,ymax=2,
+		    zmin=-2,zmax=2,
+		    %x=1cm,z=1cm,y=1cm,
+		    %grid=both,
+		    %grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    xtick={-2,...,2}, ytick={-2,...,2}, ztick={0,...,2},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={->},
+		    ticklabel style={font=\tiny},
+			xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+		    xlabel style={at={(ticklabel* cs:0)},anchor=east},
+		    zlabel style={at={(ticklabel* cs:1)},anchor=south},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=west}
+		]
+
+		\end{axis}
+		\draw[] (.2,2) node[right,mypink] {Left Handed};
+	\end{tikzpicture}
+	\hspace{-6cm}
+\end{center}
+\begin{center}
+\definecolor{ce5d4b1}{RGB}{229,212,177}
+\definecolor{c897f6a}{RGB}{137,127,106}
+\definecolor{c963c96}{RGB}{150,60,150}
+\definecolor{c2828ff}{RGB}{40,40,255}
+\definecolor{ce12828}{RGB}{225,40,40}
+
+\vspace{-2cm}
+\begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-1.000000, xscale=1.000000, inner sep=0pt, outer sep=0pt]
+\path[draw=black,fill=ce5d4b1,line width=1.109pt] (197.7203,128.5199) ..
+  controls (187.5579,127.1341) and (171.3905,117.8956) .. (169.0809,116.5099) ..
+  controls (166.7713,115.1241) and (156.1470,103.5760) .. (150.6039,94.7994) ..
+  controls (145.0608,86.0228) and (139.9796,75.3985) .. (138.1319,69.3935) ..
+  controls (136.2842,63.3885) and (134.4365,57.3834) .. (133.9746,54.1500) ..
+  controls (133.5127,50.9165) and (134.4365,43.2947) .. (135.8223,40.0612) ..
+  controls (132.5888,37.7516) and (126.1219,37.2897) .. (123.3503,43.2947) ..
+  controls (120.5788,49.2997) and (118.2691,58.5382) .. (118.2691,64.5433) ..
+  controls (118.2691,70.5483) and (128.4315,89.9492) .. (121.9645,92.7207) ..
+  controls (115.4976,95.4923) and (114.1118,99.1877) .. (80.8532,90.8730) ..
+  controls (47.5946,82.5584) and (33.7368,81.6345) .. (30.5034,88.1015) ..
+  controls (27.2699,94.5684) and (46.2088,97.3400) .. (56.3712,99.1877) ..
+  controls (66.5335,101.0354) and (89.6395,109.6429) .. (86.3963,113.9693) ..
+  controls (84.3869,116.6493) and (82.0658,116.0424) .. (76.8303,117.8901) ..
+  controls (67.7715,121.0875) and (67.9114,122.4936) .. (56.6021,126.3641) ..
+  controls (45.3159,130.2267) and (46.0504,141.2501) .. (49.5961,143.0996) ..
+  controls (53.1419,144.9492) and (56.0705,146.0292) .. (71.0230,137.5505) ..
+  controls (77.6516,135.0839) and (85.7039,133.4463) .. (92.7866,132.8306) ..
+  controls (99.8693,132.2148) and (104.1813,158.6984) .. (111.8798,162.7019) ..
+  controls (119.5782,166.7054) and (128.5086,166.3973) .. (134.0517,166.3973) ..
+  controls (139.5948,166.3973) and (142.6740,167.3216) .. (145.7537,165.7816) ..
+  controls (148.8333,164.2415) and (157.4561,166.3968) .. (162.0754,168.8607) ..
+  controls (162.0754,168.8607) and (179.9366,177.4835) .. (181.4762,179.3312);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (90.3231,113.2759) .. controls (106.0281,112.3525) and (111.5712,127.4418) ..
+  (115.2666,135.4488);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (123.4275,101.5735) .. controls (123.5817,113.2759) and (128.5091,123.1306) ..
+  (135.1294,126.8251);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (92.7866,94.7989) .. controls (89.0912,95.4147) and (84.7800,104.0374) ..
+  (86.6277,106.5009);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (73.0776,89.8716) .. controls (70.6142,91.7193) and (65.6868,96.0304) ..
+  (66.9188,98.4943);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (50.9052,86.1762) .. controls (47.8256,88.0239) and (46.8246,93.3365) ..
+  (46.2088,94.5679);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (84.7800,117.5875) .. controls (88.4754,119.4352) and (90.3231,125.5936) ..
+  (89.0912,129.9052);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (74.9932,120.9466) .. controls (78.0729,122.7943) and (78.3413,132.0296) ..
+  (77.1093,133.8773);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (63.2381,126.1188) .. controls (67.2329,129.1144) and (67.6685,133.2944) ..
+  (65.5889,138.3441);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (117.8072,97.3400) .. controls (115.9595,101.9592) and (114.5737,105.6546) ..
+  (115.0357,108.4262);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (118.2691,64.5433) .. controls (123.7878,65.3318) and (119.5057,66.0455) ..
+  (129.8173,64.0813);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (166.3865,120.6672) .. controls (164.5388,126.2103) and (162.6911,128.0575) ..
+  (159.6114,129.9052);
+\path[draw=black,fill=ce5d4b1,line width=1.109pt] (120.5021,161.1628) ..
+  controls (127.8490,159.6934) and (133.1283,158.6993) .. (137.1314,157.4674) ..
+  controls (141.1344,156.2354) and (146.9852,152.8476) .. (148.5252,149.7685) ..
+  controls (150.0653,146.6893) and (148.8333,146.0735) .. (147.9095,143.9177) ..
+  controls (146.9856,141.7619) and (136.8238,142.9939) .. (134.3598,143.9177) ..
+  controls (131.8959,144.8416) and (129.7406,145.7654) .. (119.5782,147.3050) ..
+  controls (109.4159,148.8446) and (106.6443,149.6146) .. (101.4089,148.9984) ..
+  controls (97.1167,148.4931) and (102.0255,159.3146) .. (104.1809,160.5466) ..
+  controls (106.3362,161.7785) and (106.6443,163.9343) .. (120.5021,161.1628) --
+  cycle;
+\path[draw=black,fill=ce5d4b1,line width=1.109pt] (143.7845,133.4473) ..
+  controls (146.1343,135.9107) and (145.1269,138.3746) .. (144.4557,138.9904) ..
+  controls (143.7845,139.6061) and (136.0620,142.9934) .. (132.0331,144.2254) ..
+  controls (128.0037,145.4573) and (127.3326,144.5335) .. (119.2752,146.3812) ..
+  controls (111.2174,148.2289) and (110.5462,148.8446) .. (108.1955,149.7685) ..
+  controls (105.8452,150.6923) and (101.1451,150.3842) .. (96.7808,146.9969) ..
+  controls (92.4161,143.6096) and (93.0873,137.7584) .. (93.4231,135.9107) ..
+  controls (93.7589,134.0630) and (94.0952,130.0595) .. (102.4884,129.4438) ..
+  controls (122.7725,131.9811) and (136.5302,126.1649) .. (143.7845,133.4473) --
+  cycle;
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (95.5577,135.2950) .. controls (94.6694,143.2886) and (96.0699,143.6863) ..
+  (100.4850,146.9969);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (109.1078,135.4483) .. controls (109.1078,137.9118) and (109.7235,143.4549) ..
+  (109.7235,143.4549);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (124.3513,134.6783) .. controls (124.3513,135.9102) and (124.9675,140.8371) ..
+  (124.9675,142.6848);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (127.4305,148.5370) .. controls (127.4305,150.3847) and (130.5102,156.5435) ..
+  (130.5102,156.5435);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (112.4951,152.0781) .. controls (113.1108,153.3100) and (113.7270,158.8527) ..
+  (115.5747,159.4689);
+\path[draw=c897f6a,line cap=round,miter limit=4.00,line width=0.739pt]
+  (169.4657,135.4488) .. controls (166.3865,140.9919) and (164.5388,155.1582) ..
+  (161.4591,158.2374);
+\path[draw=c963c96,line cap=round,line width=3.326pt] (131.4340,30.1298) --
+  (131.1254,7.4955);
+\path[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}},fill=c963c96]
+  (322.8140,0.0000) -- (346.1270,60.3000) -- (322.8140,41.7880) --
+  (299.5010,60.3000) -- cycle;
+\path[draw=c2828ff,line cap=round,line width=3.326pt] (23.1190,85.4094) --
+  (0.9023,81.0705);
+\path[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}},fill=c2828ff]
+  (0.0000,192.5000) -- (63.7990,182.0440) -- (40.9000,201.0670) --
+  (54.2400,227.6800) -- cycle;
+\path[draw=ce12828,line cap=round,line width=3.326pt] (40.3862,143.0553) --
+  (26.1627,148.9449);
+\path[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}},fill=ce12828]
+  (69.0630,358.1970) -- (96.6050,315.5680) -- (95.5850,348.0050) --
+  (118.0640,371.4130) -- cycle;
+\begin{scope}[cm={{0.46193,0.0,0.0,0.46193,(-17.99047,-11.80742)}}]
+\end{scope}
+\path[fill=black,line join=miter,line cap=butt,line width=0.800pt]
+  (-2.2839,61.9362) node[above right] (text4204) {$x$-axis};
+\path[fill=black,line join=miter,line cap=butt,line width=0.800pt]
+  (9.0458,132.6143) node[above right] (text4204-3) {$y$-axis};
+\path[fill=black,line join=miter,line cap=butt,line width=0.800pt]
+  (146.0527,6.4312) node[above right] (text4204-7) {$z$-axis};
+\end{tikzpicture}\footnote{ Image credit: Acdx, from Wikipedia \url{https://en.wikipedia.org/wiki/Cross_product}}
+\end{center}
 
 We now have three standard basis vectors, $\xhat$, $\yhat$,
 and $\zhat$, each pointing one unit in the positive direction of their
@@ -376,7 +759,7 @@ way to proceed is to generalize the idea of a standard basis.
 From there, we can represent vectors in $\R^n$ as $n$-tuples of real numbers.
 We then define
 \[
-	\norm{(x_1,x_2,\ldots,x_n)} = \sqrt{x_12+x_2^2+\cdots+x_n^2}.	
+	\norm{(x_1,x_2,\ldots,x_n)} = \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.	
 \]
 We've now unified our theory of vectors across all integer dimensions $n>0$.
 The case $n=1$ yields  ``geometry'' on a line, 
@@ -416,7 +799,46 @@ the result is a scalar.
 Note that $\vec a\cdot\vec b = 0$ when either $\vec a$ or $\vec b$ is zero or,
 more interestingly, if their directions are perpendicular.
 
-XXX Figure showing angle theta
+\begin{center}
+	\newcommand{\tikzAngleOfLine}{\tikz@AngleOfLine}                               
+	  \def\tikz@AngleOfLine(#1)(#2)#3{%                                            
+	  \pgfmathanglebetweenpoints{%                                                 
+	    \pgfpointanchor{#1}{center}}{%                                             
+	    \pgfpointanchor{#2}{center}}                                               
+	  \pgfmathsetmacro{#3}{\pgfmathresult}%                                        
+	  }                                                                            
+	\newcommand{\tikzMarkAngle}[3]{                                                
+	\tikzAngleOfLine#1#2{\AngleStart}                                              
+	\tikzAngleOfLine#1#3{\AngleEnd}                                                
+	\draw #1+(\AngleStart:0.35cm) arc (\AngleStart:\AngleEnd:0.35cm);              
+	} 
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (2,1);
+		\coordinate (B) at (.5,2);
+		\coordinate (O) at (0,0);
+
+		%\draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point};
+		%\draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point};
+		\draw[->,thick,myred!60!white] (0,0) -- +(A) node [midway,below right] {$\vec a$};
+		\draw[->,thick,mypink] (0,0) -- +(B) node [midway,above left] {$\vec b$};
+		\tikzMarkAngle{(O)}{(A)}{(B)}
+		\node at ($(O)+(50:.65)$) {$\theta$};
+	\end{tikzpicture}
+	\hspace{1cm}
+	\begin{tikzpicture}
+		\coordinate (A) at (-2,-1);
+		\coordinate (B) at (.5,2);
+		\coordinate (O) at (0,0);
+
+		%\draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point};
+		%\draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point};
+		\draw[->,thick,myred!60!white] (0,0) -- +(A) node [midway,below right] {$\vec a$};
+		\draw[->,thick,mypink] (0,0) -- +(B) node [midway,above left] {$\vec b$};
+		\tikzMarkAngle{(O)}{(B)}{(A)}
+		\node at ($(O)+(140:.65)$) {$\theta$};
+	\end{tikzpicture}
+\end{center}
 
 Algebraically, we can define the dot product in terms of components:
 \[
@@ -595,7 +1017,37 @@ with sides $\vec a$ and $\vec b$.  If we slide the tip of $\vec b$ parallel to t
 $\vec a$, we should not change the area.  Thus the cross product of $\vec a$ and $\vec b$
 should be the same as that of $\vec a$ and $\vec b+\alpha\vec a$.  
 
-XXX Figure
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (2,0);
+		\coordinate (B) at (1,2);
+		\coordinate (O) at (0,0);
+
+		%\draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point};
+		%\draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point};
+		\draw[fill,gray!30!white] (O) -- +(B) -- +($(A)+(B)$) -- +(A) -- (O);
+		\draw[->,thick,myred!60!white] (0,0) -- +(A) node [midway,below] {$\vec a$};
+		\draw[->,thick,mypink] (0,0) -- +(B) node [midway,above left] {$\vec b$};
+		\draw[black,dashed,<->] ($.6*(A)$) -- ($.6*(A)+(0,2)$) node [midway,right] {height};
+	\end{tikzpicture}
+	\hspace{1cm}
+	\begin{tikzpicture}
+		\coordinate (A) at (2,0);
+		\coordinate (B) at (1,2);
+		\coordinate (C) at ($(B)+2*(A)$);
+		\coordinate (O) at (0,0);
+
+		%\draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point};
+		%\draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point};
+		\draw[fill,gray!30!white] (O) -- +(C) -- +($(A)+(C)$) -- +(A) -- (O);
+		\draw[->,thick,myred!60!white] (0,0) -- +(A) node [midway,below] {$\vec a$};
+		\draw[->,thick,gray,dashed] (0,0) -- +(B);% node [midway,above left] {$\vec b$};
+		\draw[->,thick,gray,dashed] (B) -- +($2*(A)$);% node [midway,above] {$2\vec a$};
+		\draw[->,thick,mypink] (0,0) -- +(C) node [midway,above left] {$\vec b+2\vec a$};
+		\draw[black,dashed,<->] ($2.6*(A)$) -- ($2.6*(A)+(0,2)$) node [midway,right] {height};
+	\end{tikzpicture}
+\end{center}
 
 Using this invariance along with our distributive rules,
 we now see
@@ -825,6 +1277,90 @@ Let $\vec d=\overrightarrow{PQ}$ and consider the set of points (or vectors)
 \]
 for $t\in \R$.  Geometrically, this is the set of all points we get by starting at $P$ and
 displacing by some multiple of the direction $\vec d$.  This is a line!
+
+
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\coordinate (D) at ($(B)-(A)$);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$P$};
+		\draw [mypink,fill] (B) circle (1.5pt) node [below right] {$Q$};
+		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,below right,yshift=2pt] {$\vec d$};
+
+
+		\end{axis}
+		\foreach \x in {-1,5} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt) node [left] {\footnotesize$\tfrac{\x}{3}\vec d+P$};
+		}
+		\foreach \x in {-3,-2,4,6} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt);
+		}
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\coordinate (D) at ($(B)-(A)$);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$P$};
+		\draw [mypink,fill] (B) circle (1.5pt) node [below right] {$Q$};
+		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,below right,yshift=2pt] {$\vec d$};
+
+		\end{axis}
+
+		\foreach \x in {-3,-2,-1,0,4,5,6} {
+			\draw [->, gray!50!white] (0,0) -- ($(A)+\x/3*(D)$);
+		}
+		\foreach \x in {-1,5} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt) node [left] {\footnotesize$\tfrac{\x}{3}\vec d+P$};
+		}
+		\foreach \x in {-3,-2,4,6} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt);
+		}
+	\end{tikzpicture}
+\end{center}
+Note that sometimes when we draw pictures of vectors, drawing them as line segments is illuminating.
+Sometimes, however, drawing them as line segments can make
+it hard to see what's going on, and it is better to draw
+each vector as a dot.
+
+
 Call this line $\ell$.  In set-builder notation, we would write
 \[
 	\ell=\Set{\vec x\given \vec x=t\vec d+P\text{ for some }t\in \R}.
@@ -846,7 +1382,8 @@ so we will allow ourselves to describe lines in a shorthand called \emph{vector 
 		\vec x=t\vec d+\vec p
 	\]
 	satisfies $\vec x\in \ell$ for all $t\in \R$.  In this case we call $\vec d$ the
-	\emph{direction} of $\ell$ and the equation $\vec x=t\vec d+\vec p$ the \emph{vector equation}
+	\emph{direction} of $\ell$ and the equation $\vec x=t\vec d+\vec p$ the 
+	\emph{vector equation} or \emph{vector form}
 	of $\ell$.
 \end{definition}
 
@@ -934,9 +1471,24 @@ The geometry of lines in space is a bit more complicated than that of lines
 in the plane.  Lines in the plane either intersect or are parallel.
 In space,  we have to be a bit more careful about what we mean by
 ``parallel lines,'' since lines with entirely different directions can
-still fail to intersect.
+still fail to intersect\footnote{ Recall that in Euclidean geometry
+two lines are defined to be parallel if they coincide or never intersect.}.
 
-XXX Figure
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
+	    zmin=0,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
+	    ]
+	    \addplot3 [no marks,orange,ultra thick] coordinates {(0,10,10) (20,10,30)};
+	    \addplot3 [no marks,orange,dashed, thick] coordinates {(0,10,0) (20,10,0)};
+	    \addplot3 [no marks,mypink,ultra thick] coordinates {(0,0,20) (20,20,0)};
+	    \addplot3 [no marks,mypink,dashed, thick] coordinates {(0,0,0) (20,20,0)};
+	%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,orange, opacity=0.5,ultra thick]
+	%    ({x},{118.89/x},{2*x});
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
 
 \begin{example}
 Consider the lines described by
@@ -1013,6 +1565,25 @@ Again like lines, planes have a vector form.  $\mathcal P$ can be written in vec
 Vector form of $\mathcal P$ is not unique.  Any two different directions in $\mathcal P$
 suffice for defining $\mathcal P$ in vector form.
 
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
+	    %zmin=0,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
+	    ]
+		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+		{x+y};
+		\coordinate (A) at (axis cs:-3,-3,-6);
+		\coordinate (B) at (axis cs:3,4,7);
+		\coordinate (C) at (axis cs:-4,4,0);
+		
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
+		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
+		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
 \begin{definition}[Vector form of a plane]
 	The plane $\mathcal P$ is describe in \emph{vector form} if there are
 	three vectors $\vec d_1$, $\vec d_2$, and $\vec p$ where $\vec d_1,\vec d_2\neq \vec 0$
@@ -1028,6 +1599,28 @@ Since we will commonly be working in $\R^3$ there is another way to define a pla
 any vector $\vec n\in\R^3$, we can consider the set $\mathcal Q\subseteq\R^3$ of vectors orthogonal to $\vec n$.
 If $\vec n=\vec 0$, then $\mathcal Q=\R^3$.  Otherwise, $\mathcal Q$ is a plane through the origin.
 In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} of the plane $\mathcal Q$.
+
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
+	    %zmin=0,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
+	    ]
+		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+		{x+y};
+		\coordinate (A) at (axis cs:-3,-3,-6);
+		\coordinate (N) at (axis cs:-7,-7,2);
+		\coordinate (B) at (axis cs:3,4,7);
+		\coordinate (C) at (axis cs:-4,4,0);
+		
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
+		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
+		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
+		\draw [->, thick] (A) -- (N) node [midway,above left] {$\vec n$};
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
 
 \begin{definition}[Normal form of a plane]
 	The plane $\mathcal P$ is described in \emph{normal form} if for some $\vec n$ and $\vec p$,
@@ -1132,6 +1725,28 @@ plane $(2\vec n)\cdot(\vec x-\vec p)=0$.
 		\mat{x\\y\\z} = t\mat{2\\1\\-3}+\mat{0\\1\\1}.
 	\]
 \end{example}
+
+  \begin{tikzpicture}
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort]
+      %\addplot3 [surf, domain=0:360, domain y=5:10,samples=30, samples y=10]
+      %{-y+5};
+\addplot3[domain=4:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+	    ({x},{118.89/x},{2*x});
+      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+      {0};
+      %\addplot3 [domain=-10:10,samples=10, black,mark=none]
+	%\addplot3[domain=0:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+	 %   ({x},{y},{x+y});
+      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+      {x+y};
+      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+      {-2*x+y+3};
+      %\addplot3 [domain=0:360, samples y=0, samples=30, thick, z buffer=auto]
+      %(x,5.1,0);
+      %\addplot3 [surf,domain=0:360, domain y=0:5,samples=30, samples y=10]
+      %{-y+5};
+    \end{axis}
+  \end{tikzpicture}
 
 
 \begin{exercises}

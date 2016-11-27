@@ -21,6 +21,10 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{tikz}
+	\tikzset{>=latex}
+	\usetikzlibrary{calc}
+\usepackage{pgfplots}
+	%\pgfplotsset{compat=1.13}
 \usepackage[inline,shortlabels]{enumitem}
 \setlistdepth{9}
 
@@ -39,17 +43,20 @@
 \DeclareMathOperator{\Rank}{rank}
 \DeclareMathOperator{\Speed}{speed}
 \DeclareMathOperator{\Vel}{velocity}
+\DeclareMathOperator{\Accel}{accel}
 \DeclareMathOperator{\Null}{null}
 \DeclareMathOperator{\Nullity}{nullity}
 \DeclareMathOperator{\Char}{char}
 \DeclareMathOperator{\Proj}{proj}
 \DeclareMathOperator{\Perp}{perp}
-\DeclareMathOperator{\Arclen}{arclen}
+\DeclareMathOperator{\Arclen}{arc\,len}
+\newcommand{\Arclenfrom}[3]{\Arclen #1 \Big|_{#2}^{#3}}
 \newcommand{\proj}{\Proj}
 \newcommand{\xhat}{{\hat {\mathbf x}}}
 \newcommand{\yhat}{{\hat {\mathbf y}}}
 \newcommand{\zhat}{{\hat {\mathbf z}}}
 \newcommand{\mat}[1]{\begin{bmatrix*}[r]#1\end{bmatrix*}}
+\newcommand{\matc}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 % just to make sure it exists
@@ -209,6 +216,18 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%% dedicated to boxed/framed environements %%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newtheoremstyle{orangenumbox}% % Theorem style name
+	{0pt}% Space above
+	{0pt}% Space below
+	{\normalfont}% % Body font
+	{}% Indent amount
+	{\small\bfseries\sffamily\color{myorange}}% % Theorem head font
+	{\;}% Punctuation after theorem head
+	{0.25em}% Space after theorem head
+	{\small\sffamily\color{myorange!80!black}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+	\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+
 	\newtheoremstyle{ocrenumbox}% % Theorem style name
 	{0pt}% Space above
 	{0pt}% Space below
@@ -262,8 +281,9 @@
 	% Defines the theorem text style for each type of theorem to one of the three styles above
 	\newcounter{dummy} 
 	\numberwithin{dummy}{section}
-	\theoremstyle{ocrenumbox}
+	\theoremstyle{orangenumbox}
 	\newtheorem{theoremeT}[dummy]{Theorem}
+	\theoremstyle{ocrenumbox}
 	\newtheorem{problem}{Problem}[chapter]
 	\newtheorem{exerciseT}{Exercise}[chapter]
 	\theoremstyle{blacknumex}
@@ -284,14 +304,19 @@
 	% Theorem box
 	\newmdenv[skipabove=7pt,
 	skipbelow=7pt,
-	backgroundcolor=black!5,
-	linecolor=ocre,
+	rightline=false,
+	leftline=true,
+	topline=false,
+	bottomline=false,
+	backgroundcolor=myorange!20,
+	linecolor=myorange,
 	innerleftmargin=5pt,
 	innerrightmargin=5pt,
 	innertopmargin=5pt,
+	innerbottommargin=5pt,
 	leftmargin=0cm,
 	rightmargin=0cm,
-	innerbottommargin=5pt]{tBox}
+	linewidth=4pt]{tBox}	
 
 	% Exercise box	  
 	\newmdenv[skipabove=7pt,
@@ -346,7 +371,8 @@
 
 % Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
 \newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
-\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\end{exerciseT}\end{eBox}}				  
+%\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
 \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
 \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
@@ -368,7 +394,11 @@
 
 \renewcommand{\maketitlehooka}{\color{chapcolor}\chapnumfont\Huge}
 \renewcommand{\maketitlehookb}{\color{black}\normalfont}
-\renewcommand{\maketitlehookc}{\small}
+\renewcommand{\maketitlehookc}{\small
+	\begin{center}
+		\includegraphics[width=6in]{resources/cover-render-lines-lowres.png}
+	\end{center}
+}
 \renewcommand{\maketitlehookd}{
 	\begin{center}
 		\includegraphics[width=1in]{resources/doclicense-CC-by-sa.pdf}
@@ -401,13 +431,16 @@
 
 \chapter{Preliminaries}
 	\input{chapters/chapter1.tex}
-	\newpage
+	\clearpage
 \chapter{Vectors}
 	\input{chapters/chapter2.tex}
-	\newpage
+	\clearpage
 \chapter{Parameterization}
 	\input{chapters/chapter3.tex}
-	\newpage
+	\clearpage
+\chapter{Multi-variable Functions}
+	\input{chapters/chapter4.tex}
+	\clearpage
 
 \appendix
 \renewcommand{\printchaptername}{\chapnumfont Appendix}
