@@ -145,7 +145,7 @@ Let's try to use our new definition.  Let $\vec r(t) = \mat{\cos t\\\sin t}$.  N
 \end{align*}
 At this point we should pause.  We don't know how to take limits of vectors.  Fortunately the rule
 is simple enough---to take a limit of a vector, take the limit of each of its components\footnote{
-	As intuitive as it sounds, this rule actually has a proof which relys on the definition
+	As intuitive as it sounds, this rule actually has a proof which relies on the definition
 	of limit and the continuity of $\norm{\:\cdot\:}$.
 }.  Thus we see
 \begin{align*}
@@ -198,12 +198,12 @@ XXX Figure
 
 To find the arc-length of a curve, we will approximate each tiny piece with a straight
 line segment connecting the endpoints.  We then add up the lengths of all tiny segments
-and take a limit as our segments length goes to zero.
+and take a limit as our segment's length goes to zero.
 
 \begin{definition}[Arc-length]
 	Let $\mathcal S\subseteq \R^n$ be a curve parameterized by $\vec p:[a,b]\to\mathcal S$. 
 	The \emph{arc-length}
-	of $\mathcal S$ 
+	of $\mathcal S$ is 
 	\[
 		\Arclen\mathcal S = \lim_{\Delta t\to 0^+} \sum_{i=1}^{\frac{b-a}{\Delta t}} 
 		\,\norm{\vec p(a+(i-1)\Delta t)-\vec p(a+i\Delta t)}.
@@ -413,7 +413,7 @@ Instead of working with arc length directly, we can attempt to manipulate \emph{
 	\label{EXCANTMUL}
 	Let $\mathcal C$ and $\vec r$ be as in Example \ref{EXARCLENPARAM}.  The function $\vec q(t)=\tfrac{1}{2}\vec r(t)$
 	has speed 1 and so is an arc-length parameterization of something.  Explain why $\vec q$ is \emph{not}
-	and arc-length parameterization of $\mathcal C$.
+	an arc-length parameterization of $\mathcal C$.
 \end{exercise}
 
 In Example \ref{EXARCLENPARAM}, we adjusted the speed of a parameterization by warping time.  Suppose
