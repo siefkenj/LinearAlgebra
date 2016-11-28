@@ -1602,22 +1602,25 @@ In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} o
 
 
 \begin{center}
-  \begin{tikzpicture}
+\begin{tikzpicture}
     \begin{axis}[grid=major,view={20}{40},z buffer=sort,
-	    %zmin=0,
-	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
+	    width=12cm,
+	    scale mode=scale uniformly,
+	    zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+	    xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
 	    ]
 		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-		{x+y};
-		\coordinate (A) at (axis cs:-3,-3,-6);
-		\coordinate (N) at (axis cs:-7,-7,2);
-		\coordinate (B) at (axis cs:3,4,7);
+		{.25*x+.25*y};
+		\coordinate (A) at (axis cs:-4,-4,-2);
+		\coordinate (N) at (axis cs:-6,-6,6);
+		\coordinate (B) at (axis cs:4,4,2);
 		\coordinate (C) at (axis cs:-4,4,0);
 		
 		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
 		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
 		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
-		\draw [->, thick] (A) -- (N) node [midway,above left] {$\vec n$};
+		\draw [->, thick] (A) -- (N) node [midway,left] {$\vec n$};
     \end{axis}
   \end{tikzpicture}
 \end{center}
@@ -1726,27 +1729,27 @@ plane $(2\vec n)\cdot(\vec x-\vec p)=0$.
 	\]
 \end{example}
 
-  \begin{tikzpicture}
-    \begin{axis}[grid=major,view={20}{40},z buffer=sort]
-      %\addplot3 [surf, domain=0:360, domain y=5:10,samples=30, samples y=10]
-      %{-y+5};
-\addplot3[domain=4:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
-	    ({x},{118.89/x},{2*x});
-      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-      {0};
-      %\addplot3 [domain=-10:10,samples=10, black,mark=none]
-	%\addplot3[domain=0:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
-	 %   ({x},{y},{x+y});
-      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-      {x+y};
-      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-      {-2*x+y+3};
-      %\addplot3 [domain=0:360, samples y=0, samples=30, thick, z buffer=auto]
-      %(x,5.1,0);
-      %\addplot3 [surf,domain=0:360, domain y=0:5,samples=30, samples y=10]
-      %{-y+5};
-    \end{axis}
-  \end{tikzpicture}
+%  \begin{tikzpicture}
+%    \begin{axis}[grid=major,view={20}{40},z buffer=sort]
+%      %\addplot3 [surf, domain=0:360, domain y=5:10,samples=30, samples y=10]
+%      %{-y+5};
+%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+%	    ({x},{118.89/x},{2*x});
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {0};
+%      %\addplot3 [domain=-10:10,samples=10, black,mark=none]
+%	%\addplot3[domain=0:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+%	 %   ({x},{y},{x+y});
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {x+y};
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {-2*x+y+3};
+%      %\addplot3 [domain=0:360, samples y=0, samples=30, thick, z buffer=auto]
+%      %(x,5.1,0);
+%      %\addplot3 [surf,domain=0:360, domain y=0:5,samples=30, samples y=10]
+%      %{-y+5};
+%    \end{axis}
+%  \end{tikzpicture}
 
 
 \begin{exercises}
