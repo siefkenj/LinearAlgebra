@@ -1603,6 +1603,11 @@ In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} o
 
 \begin{center}
 \begin{tikzpicture}
+	\newcommand{\RightAngle}[4][5pt]{%
+        \draw ($#3!#1!#2$)
+        --($ #3!2!($($#3!#1!#2$)!.5!($#3!#1!#4$)$) $)
+        --($#3!#1!#4$) ;
+        }
     \begin{axis}[grid=major,view={20}{40},z buffer=sort,
 	    width=12cm,
 	    scale mode=scale uniformly,
@@ -1621,6 +1626,8 @@ In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} o
 		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
 		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
 		\draw [->, thick] (A) -- (N) node [midway,left] {$\vec n$};
+		\RightAngle{(N)}{(A)}{(C)}
+		%\RightAngle{(N)}{(A)}{(B)}
     \end{axis}
   \end{tikzpicture}
 \end{center}
