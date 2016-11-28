@@ -205,7 +205,64 @@ we will have chopped the range into tiny pieces.
 % y=-t*(t-1)*(t-2)*4*(1+t^3)/4
 % [0,2]
 
-XXX Figure
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    name=plot1,
+		    %anchor=origin,
+		    %disabledatascaling,
+		    xmin=-1,xmax=8,
+		    ymin=-1,ymax=2.5,
+		    x=1cm,y=1cm,
+		    xtick=\empty,ytick=\empty,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+		\addplot[domain=0:2, samples=80, thick, mypink] ({-(x+1)*x*(x-3)*(1+x^2)/4},{-x*(x-1)*(x-2)*4*(1+x^3)/4});
+		\addplot[domain=0:2, samples=15, only marks, mark=|, gray, thick] ({-(x+1)*x*(x-3)*(1+x^2)/4},{-x*(x-1)*(x-2)*4*(1+x^3)/4});
+		\addplot[domain=0:2, samples=15, gray,thick] ({-(x+1)*x*(x-3)*(1+x^2)/4},{-x*(x-1)*(x-2)*4*(1+x^3)/4});
+		\draw[] (0,2.5) node[right,gray] {Approximation by Line Segments};
+		\draw[] (0,.5) node[right] {Range};
+
+		\end{axis}
+		\begin{axis}[
+		    at=(plot1.below south),anchor=above north,yshift=-.5cm,
+		    %anchor=origin,
+		    %disabledatascaling,
+		    xmin=-1,xmax=8,
+		    ymin=-.2,ymax=.2,
+		    hide y axis,
+			xtick=\empty,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+			\addplot[domain=0:6, samples=2, thick, mypink] ({x},{0});
+		\addplot[domain=0:6, samples=15, only marks, mark=|, gray, thick] ({x},{0});
+		\draw[] (0,.5) node[right] {Domain};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
 
 To find the arc-length of a curve, we will approximate each tiny piece with a straight
 line segment connecting the endpoints.  We then add up the lengths of all tiny segments
