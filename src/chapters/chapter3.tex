@@ -1,0 +1,699 @@
+\emph{Parameterization}\index{parameterization} is a mouthful, but the
+fundamental idea of a parameterization is to describe one object in
+terms of another.  For example, consider the line $\ell$ described
+by the equation $y=2x$.  By its nature, $\ell$ is a set.
+Using set-builder notation, we could write
+\[
+	\ell = \Set*{\mat{x\\y}\given y=2x}.
+\]
+But, we could also write $\ell$ in vector form as 
+\[
+	\mat{x\\y}=t\mat{1\\2}.
+\]
+Writing $\ell$ in vector form shows a pairing between scalars $t\in \R$
+and points on $\ell$.  In many ways, $\ell$ is the same as $\R$, it's
+just sitting in two-dimensional space instead of being on its own.
+
+Taking a more technical viewpoint, we may consider $\ell$ to be the range of 
+a vector-valued function.  Define $\vec p(t) = t\mat{1\\2}$.  Then,
+\[
+	\ell = \Range(\vec p) = \Set*{\vec x\given \vec x=\vec p(t)\text{ for some }t\in\R}.
+\]
+Now we have something special.  The function $\vec p:\R\to\R^2$ has domain $\R$ and outputs
+every point on the line $\ell$ exactly once.  In other words, we've described
+$\ell$ in terms of $\R$ and $\vec p$.  We could make a further assertion
+that \emph{anything that you could learn by studying $\ell$, you could learn
+by studying $\R$ and $\vec p$}.
+
+However, there are other ways to create functions that describe $\ell$.
+For example, consider $\vec q:\R\to\R^2$ where $\vec q(t)=2t\vec d$.  Again,
+$\ell = \Range(\vec q)$ and so everything we could possibly learn about
+$\ell$, we could learn by studying $\R$ and $\vec q$.
+We call both $\vec p$ and $\vec q$ \emph{parameterizations of $\ell$ by $\R$}.
+
+\begin{definition}[Parameterization]
+	A \emph{parameterization} of an object $X$ by an object $Y$ is a continuous
+	function $p:Y\to X$ with the added conditions that $p$ is one-to-one\footnote{
+	Sometimes we will drop the requirement that a parameterization be one-to-one,
+	but for now we'll be strict about it.}
+	and $\Range(p)= Y$.  In this case $p$ is called a \emph{parameterization} and $Y$ is
+	called the \emph{parameter}.
+\end{definition}
+
+This definition is fairly abstract, which will come in handy later, but for
+now, we will think of $X$ as being some curve in $\R^n$ and $Y$ as being an
+interval of real numbers.
+
+\begin{example}[A Circle]
+	Let $\mathcal C\subseteq \R^2$ be the unit circle centered at the origin.
+	We can parameterize $\mathcal C$ by angles in $[0,2\pi)$.  Consider the function
+	$\vec p:[0,2\pi)\to\mathcal C$ defined by
+	\[
+		\vec p(\theta) = \mat{\cos\theta \\\sin \theta}.	
+	\]
+	Here, $\vec p$ traces out $\mathcal C$ starting at the point $(1,0)$ and
+	moving counter clockwise as the parameter $\theta$ increases.
+\end{example}
+\begin{example}[A Circle Again]
+	Let $\mathcal C\subseteq \R^2$ be the unit circle centered at the origin.
+	We will parameterize $\mathcal C$ by the interval $[0,1)$.  Here we might
+	imagine that our parameter $t\in[0,1)$ represents a point that is $t$-percentage
+	around the circle.  
+	
+	Recall $\vec p(\theta)=\mat{\cos \theta\\\sin\theta}$, which parameterizes
+	$\mathcal C$ based on angles.  Now, consider the function $w(t) =2\pi t$.
+	$w$ inputs numbers in $[0,1)$ and outputs angles in $[0,2\pi)$.  We should
+	now be able to use $w$ to parameterize $\mathcal C$ in the desired way.
+	After all, if we convert $[0,1)$ to $[0,2\pi)$ to $\mathcal C$, we win!
+
+	Let the parameterization
+		$\vec q:[0,1)\to\mathcal C$ be defined as $\vec q=\vec p\circ w$.
+	Explicitly,
+	\[
+		\vec q(t) = \vec p\circ w(t) = \vec p(2\pi t) = \mat{\sin 2\pi t\\\cos 2\pi t}.	
+	\]
+\end{example}
+
+\begin{exercise}
+	Parameterize the unit circle $\mathcal C\subseteq \R^2$ by the interval $[1/2,1)$.
+\end{exercise}
+\begin{exercise}
+	Let $\ell$ be the line segment connecting $(0,0)$ and $(1,1)$.
+	Explain why $\vec p:[-1,1]\to\ell$ given by $p(t)=(t^2,t^2)$ is \emph{not}
+	a parameterization.
+\end{exercise}
+
+\section{Speed and Velocity of a Parameterization}
+
+In our day-to-day life, almost without thinking, we make a comparison between real numbers
+and time.  Time has a forwards and backwards, which we equate to
+the real number's increasing and decreasing.  We might even say we parameterize \emph{time}
+by the real numbers.  Thus, if $\vec p:[a,b]\to \mathcal S$ is a parameterization 
+of the curve $\mathcal S$ by the interval $[a,b]$, we could think of $\vec p$ as describing
+the motion of a particle---at time $t\in[a,b]$ the particle is at $\vec p(t)$.
+
+Interpreting parameterizations in this way, the \emph{speed}\index{speed} of a parameterization
+should be the rate of change of distance with respect to time and the \emph{velocity}\index{velocity}
+of a parameterization should be the rate of change of displacement with respect to time.
+
+Suppose $\vec p:[a,b]\to\mathcal S$ is a parameterization of $\mathcal S$ and $t\in[a,b]$
+represents time.  The \emph{displacement} of $\vec p$ from time $t$ to time $t+\Delta t$ is
+$\vec p(t+\Delta t)-\vec p(t)$ and the change in \emph{distance} is $\norm{\vec p(t+\Delta t) - \vec p(t)}$.
+Thus, if $\Delta t$ is small, the velocity at time $t$ can be approximated by
+\[
+		\Vel \vec p(t) \approx \frac{\vec p(t+\Delta t) - \vec p(t)}{\Delta t}	
+\]
+and the speed\footnote{
+		Recall that speed is always positive; if a particle is moving with speed $2$
+		and we then ran the particle back in time, it would still move at speed $2$,
+		so speed is not $\text{distance}/\Delta t$, it is $\text{distance}/\abs{\Delta t}$.
+		} by
+\[
+	\Speed \vec p(t) \approx \frac{\norm{\vec p(t+\Delta t) - \vec p(t)}}{\abs{\Delta t}}.	
+\]
+Taking limits, we arrive at exact rates of change, which leads us to the following definitions.
+\begin{definition}[Speed]
+	Let $\vec p:[a,b]\to\mathcal S$ be a parameterization of $\mathcal S$.  The
+	\emph{speed} of $\vec p$ at the time $t\in[a,b]$ is 
+	\[
+		\Speed \vec p(t) = \lim_{\Delta t\to 0} \frac{\norm{\vec p(t+\Delta t) - \vec p(t)}}{\abs{\Delta t}}.	
+	\]
+\end{definition}
+\begin{definition}[Velocity]
+	Let $\vec p:[a,b]\to\mathcal S$ be a parameterization of $\mathcal S$.  The
+	\emph{velocity} of $\vec p$ at the time $t\in[a,b]$ is 
+	\[
+		\Vel \vec p(t) = \lim_{\Delta t\to 0} \frac{\vec p(t+\Delta t) - \vec p(t)}{\Delta t}.	
+	\]
+\end{definition}
+
+Both the definition of speed and the definition of velocity look a lot like the definition
+of the derivative.  In fact, if $\vec p$ were a scalar valued function, the velocity of $\vec p$
+would be exactly the derivative of $\vec p$.  For this reason, we will define a notation
+similar to that of the derivative you're familiar with.  From now on, the following notations mean
+the same thing:
+\[
+	\Vel \vec p(t) = \vec p\,'(t) = \frac{\d}{\d t}\vec p(t) = \frac{\d \vec p}{\d t}(t).
+\]
+
+Let's try to use our new definition.  Let $\vec r(t) = \mat{\cos t\\\sin t}$.  Now,
+\begin{align*}
+	\Vel \vec r(t) &=\lim_{\Delta t\to 0} \frac{\mat{\cos(t+\Delta t)\\\sin(t+\Delta t)} - \mat{\cos t\\\sin t}}{\Delta t}\\
+	&=\lim_{\Delta t\to 0} \mat{
+		\displaystyle\frac{\cos(t+\Delta t)-\cos t}{\Delta t} \\\displaystyle\frac{\sin(t+\Delta t)-\sin t}{\Delta t}
+		}.
+\end{align*}
+At this point we should pause.  We don't know how to take limits of vectors.  Fortunately the rule
+is simple enough---to take a limit of a vector, take the limit of each of its components\footnote{
+	As intuitive as it sounds, this rule actually has a proof which relys on the definition
+	of limit and the continuity of $\norm{\:\cdot\:}$.
+}.  Thus we see
+\begin{align*}
+	\Vel \vec r(t) 
+	&=\lim_{\Delta t\to 0} \mat{
+		\displaystyle\frac{\cos(t+\Delta t)-\cos t}{\Delta t} \\\frac{\displaystyle\sin(t+\Delta t)-\sin t}{\Delta t}}\\
+	&=\mat{
+		\displaystyle\lim_{\Delta t\to 0} \frac{\cos(t+\Delta t)-\cos t}{\Delta t} \\\displaystyle\lim_{\Delta t\to 0} \frac{\sin(t+\Delta t)-\sin t}{\Delta t}
+		}\\
+	&=\mat{\cos'(t)\\\sin'(t)} = \mat{-\sin t\\\cos t}.
+\end{align*}
+Our use of the notation $\vec r\,'(t)$ for $\Vel \vec r(t)$ seems further justified.
+
+Speed also appears to be a derivative.  From physics we know speed is the magnitude of 
+velocity.  Mathematically, we can prove it.
+\begin{theorem}
+	For a parameterization $\vec p:\R\to\R^n$ where $\Vel \vec p(t)$
+	exists, we have
+	\[
+		\Speed \vec p(t) = \norm{\Vel \vec p(t)} = \norm{\vec p\,'(t)}.
+	\]
+\end{theorem}
+\begin{proof}
+	The proof relies on the continuity of $\norm{\:\cdot\:}$.  Since $\norm{\:\cdot\:}$
+	is continuous, we may freely move limits in and out.  Thus
+	\begin{align*}
+		\Speed \vec p(t) &= \lim_{\Delta t\to 0} \frac{\norm{\vec p(t+\Delta t) - \vec p(t)}}{\abs{\Delta t}}\\
+		&= \lim_{\Delta t\to 0} \norm*{\frac{\vec p(t+\Delta t) - \vec p(t)}{\Delta t}}\\
+		&=\norm*{\lim_{\Delta t\to 0} \frac{\vec p(t+\Delta t) - \vec p(t)}{\Delta t}}
+		=\norm{\Vel \vec p(t)}.
+	\end{align*}
+\end{proof}
+
+\subsection{Arc-length}
+Let $\mathcal S\subseteq \R^n$ be a curve parameterized by $\vec p:[a,b]\to\R^n$.  
+The \emph{arc-length}\index{arc length} of $\mathcal S$
+should be the length of $\mathcal S$ if you somehow untwisted $\mathcal S$ into a straight
+line without stretching anything.  One of the big ideas of calculus is that 
+we can handle curvy things by chopping them up into little pieces, computing
+for each piece, and then adding them back together.  We use the same principle 
+to define arc-length.
+
+In essence, we will divide our curve $\mathcal S$ into many tiny line segments,
+add up the lengths of those line segments and take a limit as our line segments
+get tinier.  A parameterization provides us with a way to do this.  Since parameterizations
+are continuous, if we chop the domain of the parameterization into tiny pieces,
+we will have chopped the range into tiny pieces.
+
+XXX Figure
+
+To find the arc-length of a curve, we will approximate each tiny piece with a straight
+line segment connecting the endpoints.  We then add up the lengths of all tiny segments
+and take a limit as our segments length goes to zero.
+
+\begin{definition}[Arc-length]
+	Let $\mathcal S\subseteq \R^n$ be a curve parameterized by $\vec p:[a,b]\to\mathcal S$. 
+	The \emph{arc-length}
+	of $\mathcal S$ 
+	\[
+		\Arclen\mathcal S = \lim_{\Delta t\to 0^+} \sum_{i=1}^{\frac{b-a}{\Delta t}} 
+		\,\norm{\vec p(a+(i-1)\Delta t)-\vec p(a+i\Delta t)}.
+	\]
+\end{definition}
+
+There's something unsatisfying about this definition, though.  We used a parameterization
+of $\mathcal S$ to compute the arc-length of $\mathcal S$.  But $\mathcal S\subseteq \R^n$ 
+is a curve regardless of whether or not it has a parameterization, and if you use a different
+parameterization, you should get the same arc length for $\mathcal S$.  If you're worried about
+this, good!  You're thinking carefully!  We won't show it here, but in fact no matter what parameterization
+you use for a curve, this definition will always produce the same arc length.
+
+There's another reason we might be unhappy with this definition.  Limits of sums are
+hard to compute!  However, the sum involved in arc-length looks very close to a Riemann sum.
+If we can rewrite it exactly as a Riemann sum, we can replace it with an integral.  With some
+superficial manipulation we see
+
+\begin{align*}
+	\Arclen\mathcal S 
+	&= \lim_{\Delta t\to 0^+} \sum_{i=1}^{\frac{b-a}{\Delta t}} 
+	\,\norm{\vec p(a+(i-1)\Delta t)-\vec p(a+i\Delta t)}\\
+	&= \lim_{\Delta t\to 0^+} \sum_{i=1}^{\frac{b-a}{\Delta t}} 
+	\,\frac{\norm{\vec p(a+(i-1)\Delta t)-\vec p(a+i\Delta t)}}{\Delta t}\Delta t\\
+	&=\int_{a}^b \Speed \vec p(t)\,\d t.
+\end{align*}
+
+For the last equality, we noticed that 
+$\lim_{\Delta t\to 0^+} \frac{\norm{\vec p(t)-\vec p(t+\Delta t)}}{\Delta t}=\Speed \vec p(t)$,
+which involved switching a limit and an infinite sum.  In order to do this rigorously, we need
+a mathematical proof that it is logically valid.  Such a proof is the subject of a course in
+\emph{real analysis}, and won't be covered here, but it's always good to keep track of what
+you've actually proved and what you've been told is true\footnote{ In order to prove that swapping
+the limit and sum is valid, we actually need extra assumptions on $\vec p$.  If we make $\vec p$
+\emph{differentiable} rather than merely \emph{continuous}, we can prove that the swap is valid.}.
+
+Speed is easy to calculate, and we have a better handle on calculating integrals than we do 
+limits of sums, so now we have a chance of calculating arc-length.
+
+\begin{example}
+	\label{EXHARDARCLEN}
+We shall find the length of the parabola with equation $y = x^2$
+on the interval $-1\le x \le 1$.   A parametric representation
+	of the parabola is $\vec p(t) = (t,t^2)$
+where $-1 \le t \le 1$.  
+Now,
+\[
+	\frac{\d\vec p}{\d t} = \mat{1\\2t},
+\]
+so $\Speed \vec p(t)=\norm{\vec p\,'(t)} = \sqrt{ 1 + 4t^2}$.
+Hence,
+\[
+  L = \int_{-1}^1 \sqrt{1 + 4t^2} dt = \sqrt 5 + 
+\frac 14\ln\frac{\sqrt 5 + 2}{\sqrt 5 - 2}.
+\]
+\end{example}
+
+As you can see from Example \ref{EXHARDARCLEN}, the integrals involved in computing
+arc length can be difficult.  In fact, most of them don't have an elementary form, which
+means in the real world we often approximate arc length directly from the Riemann sum
+rather than calculate it exactly.
+
+\begin{exercises}
+\end{exercises}
+
+\section{Arc-length Parameterization}
+
+Recall a parameterization is a relation between two objects.  If a curve $\mathcal S\subseteq\R^n$
+is parameterized by $\R$, it means there is a continuous, one-to-one function $\vec p:\R\to\mathcal S$.
+This function can be thought of as a map from $\R$ to $\mathcal S$.  Any interval $[a,b]\subseteq\R$
+corresponds to a segment $\vec p([a,b])\subseteq \mathcal S$.
+
+XXX Figure
+
+Alternatively, we may think of $\vec p:\R\to\mathcal S$ as a function that picks up the real line,
+stretches, twists, and warps it, and sticks it into $\R^n$ in the shape of $\mathcal S$.
+In this sense, not all parameterizations are created equally.  Some significantly stretch and warp
+and others barely do at all.  The least stretchy type of parameterization is called an \emph{arc-length
+parameterization}\index{arc-length parameterization}.
+
+Before we define arc-length parameterization, let's introduce some notation.  If $\mathcal S\subseteq \R^n$
+is a curve parameterized by $\vec p:\R\to\mathcal S$, then
+\[
+	\Arclenfrom{\vec p}{a}{b}  = \text{ arc length of $\mathcal S$ between $\vec p(a)$ and $\vec p(b)$}.
+\]
+We might read $\Arclenfrom{\vec p}{a}{b}$ as the ``arc length of the curve traced by $\vec p(t)$ from
+$t=a$ to $t=b$.''  Using notion for the \emph{image} of a set, we can also write
+\[
+	\Arclenfrom{\vec p}{a}{b} = \Arclen \vec p([a,b]).
+\]
+
+\begin{definition}
+	Let $\mathcal S\subseteq\R^n$ be a curve and $\vec p:\R\to\mathcal S$ be a parameterization.
+	The parameterization $\vec p$ is called an \emph{arc-length parameterization} if for $b\geq a$,
+	\[
+		\Arclenfrom{\vec p}{a}{b}=b-a.
+	\]
+\end{definition}
+
+In plain language, if $\vec p$ is an arc-length parameterization, then the distance traveled in parameter
+space is the same as the distance traveled along the curve.
+
+XXX Figure
+
+\begin{example}
+	Find an arc-length parameterization of the line $\ell$ which passes through
+	the origin and has a direction vector $\vec d=\xhat+2\yhat+\zhat$.
+
+	Let's name our parameterization $\vec p$ and see if we can build up
+	a formula for $\vec p$.
+	Since $\ell$ passes through the origin, let's have $\vec p(0)=\vec 0$.
+	Now, $\vec p(1)$ has to be a point on $\ell$ that is distance $1$ from $\vec 0$.
+	There are two such points, so we'll arbitrarily declare
+	$
+		\vec p(1) = \frac{1}{\sqrt{6}}(1,2,1).
+	$
+	The point $\vec p(2)$ must be distance $1$ from $\vec p(1)$ and distance $2$ from $\vec p(0)$.
+	Since parameterizations aren't allowed to double-back, we only have one choice.  Namely,
+	$
+		\vec p(2) = \frac{2}{\sqrt{6}}(1,2,1).
+	$
+	Noticing the patter, let's guess
+	\[
+		\vec p(t) = \frac{t}{\sqrt{6}}\mat{1\\2\\1}.
+	\]
+	Now we'll verify that $\vec p$ is an arc-length parameterization.  Since $\ell$ is
+	a straight line this is easy:
+	\[
+		\Arclenfrom{\vec p}{a}{b}=\norm{\vec p(b)-\vec p(a)} = \abs*{\tfrac{b-a}{\sqrt{6}}}\norm*{\mat{1\\2\\1}}
+		=\abs{b-a},
+	\]
+	and so $\vec p$ is an arc-length parameterization.
+\end{example}
+
+Arc-length parameterizations can also be characterized by their speed.  For an arc-length
+parameterization, the distance traveled in parameter space must be equal to the distance
+traveled along the curve.  Therefore, an arc-length parameterization must also move at
+speed 1.
+
+\begin{theorem}
+	Let $\mathcal S\subseteq\R^n$ be a curve and $\vec p:\R\to\mathcal S$
+	a parameterization.  The parameterization $\vec p$ is an arc-length
+	parameterization if and only if $\Speed\vec p=1$.
+\end{theorem}
+\begin{proof}
+	Suppose $\vec p$ is a parameterization of $\mathcal S$ and $\Speed \vec p=1$.  Then
+	\[
+		\Arclenfrom{\vec p}{a}{b} = \int_a^b\Speed\vec p(t)\,\d t = \int_a^b1\d t = b-a.
+	\]
+
+	Now, suppose that $\vec p$ satisfies $\Arclenfrom{\vec p}{a}{b}=b-a$.  We then know if
+	$\Delta t>0$ is small
+	\[
+		\frac{\norm{\vec p(t+\Delta t)-\vec p(t)}}{\Delta t} \approx \frac{\Arclenfrom{\vec p}{t}{t+\Delta t}}{\Delta t}
+		= \frac{(t+\Delta t) - t}{\Delta t} = 1.
+	\]
+	After taking a limit as $\Delta t\to 0$, ``$\approx$'' will turn into ``$=$''.
+
+	To make this argument completely rigorous, we will have to do a little bit of
+	mathematical gymnastics.  Since the shortest distance between two points is a straight
+	line, what we really know is
+	\[
+		\norm{\vec p(t+\Delta t)-\vec p(t)} \leq \Arclenfrom{\vec p}{t}{t+\Delta t}
+		 = \Delta t
+	\]
+	for all $\Delta t$.  Now, taking a limit as $\Delta t\to 0$, we deduce $\Speed \vec p(t)\leq 1$.  But,
+	\[
+		b-a = \Arclenfrom{\vec p}{a}{b} = \int_a^b \Speed \vec p(t)\,\d t \leq
+		\int_a^b1\d t  = b-a,
+	\]
+	and so if $\Speed \vec p$ is a continuous function, $\Speed\vec p(t)=1$ for all $t$.
+	Even if speed is not continuous, we can argue that $\Speed \vec p$ is \emph{essentially} 1.\footnote{
+	Here, the word \emph{essentially} is a technical term coming from real analysis.
+		}
+\end{proof}
+
+Now we have a new way of thinking about arc-length parameterizations and a new way of creating them.
+Instead of working with arc length directly, we can attempt to manipulate \emph{speed}.
+
+\begin{example}
+	\label{EXARCLENPARAM}
+	Find an arc-length parameterization of $\mathcal C$, the circle of radius $2$ centered at the origin.
+
+	We already know a parameterization of $\mathcal C$.  Namely,
+	\[
+		\vec r(t) =\mat{2\cos t\\2\sin t}.
+	\]
+	However, $\Speed \vec r(t) =\norm{\vec r\,'(t)} = \sqrt{(-2\sin t)^2+(2\cos t)^2} = 2$.  If we could
+	somehow \emph{slow down} time, we could slow down the speed to be $1$, giving an arc-length parameterization.
+
+	Let $w(t)=t/2$.  The function $w$ stretches time by a factor of $2$.  Define
+	\[
+		\vec p(t) = \vec r\circ w(t) = \mat{2\cos t/2\\2\sin t/2}.
+	\]
+	Now, 
+	\begin{align*}
+		\Speed \vec p(t) = \norm{\vec p\,'(t)}&=\norm{(\vec r\circ w)'(t)} = \norm{(\vec r\,'\circ w(t))w'(t)}\\
+		&=\abs{w'(t)}\norm{\vec r\,'\circ w(t)} = \tfrac{1}{2}2=1.
+	\end{align*}
+
+	In this computation we made judicious use of the chain rule, however we could have computed
+	directly from our formula for $\vec p$.  Now,
+	since $\Speed\vec p(t)=1$, the function $\vec p$ is an arc-length parameterization.
+\end{example}
+
+\begin{exercise}
+	\label{EXCANTMUL}
+	Let $\mathcal C$ and $\vec r$ be as in Example \ref{EXARCLENPARAM}.  The function $\vec q(t)=\tfrac{1}{2}\vec r(t)$
+	has speed 1 and so is an arc-length parameterization of something.  Explain why $\vec q$ is \emph{not}
+	and arc-length parameterization of $\mathcal C$.
+\end{exercise}
+
+In Example \ref{EXARCLENPARAM}, we adjusted the speed of a parameterization by warping time.  Suppose
+$\mathcal S\subseteq \R^n$ is a curve parameterized by $\vec p:\R\to \mathcal S$ and let $w:\R\to\R$ be 
+a parameterization of $\R$.  In other words, $w$ stretches or squishes (or flips) $\R$ by varying amounts.
+Now consider
+\[
+	\vec r=\vec p\circ w.
+\]
+The function $\vec r$ has domain $\R$ and range $\mathcal S$.  Further, since $\vec p$ and $w$ are both
+one-to-one and continuous, we know $\vec r$ is one-to-one and continuous.  Thus, $\vec r$ is a parameterization
+of $\mathcal S$.  And, by using the chain rule,
+\[
+	\vec r\,'(t) = (\vec p\circ w)'(t) = w'(t)\big[\vec p\,'\circ \vec w(t)\big],
+\]
+so
+\[
+	\Speed\vec r\text{ at time $t$} = \abs{w'(t)}\big[\Speed \vec p\text{ at time $w(t)$}\big].
+\]
+It is important to note that we must compose $\vec p$ and $w$ in order to get a parameterization of $\mathcal S$.
+See Exercise \ref{EXCANTMUL} for an example of why you cannot multiply $\vec p$ and $w$.
+
+With the idea of stretching time in the back of our minds, let's work through a hypothetical example.
+
+Suppose $\mathcal S\subseteq \R^n$ is a curve parameterized by $\vec p:\R\to\mathcal S$ and we've computed
+the following table of values.
+\begin{center}
+	\begin{tabular}{c|c}
+		$t$ & $\Arclenfrom{\vec p}{0}{t}$\\
+		\hline
+		$0$ & $0$\\
+		$1$ & $2$\\
+		$2$ & $3.5$\\
+		$3$ & $6$\\
+		$4$ & $7$
+	\end{tabular}
+\end{center}
+
+XXX Figure
+
+We'd like to find a time-stretching function $w:\R\to\R$ so that $\vec r=\vec p\circ w$ is an arc-length
+parameterization of $\mathcal S$.  In other words, we need
+\[
+	\Arclenfrom{\vec r}{0}{t} = \Arclenfrom{(\vec p\circ w)}{0}{t}=t.
+\]
+In particular, $\Arclenfrom{\vec r}{0}{0}=0$ (this we get for free) and $\Arclenfrom{\vec r}{0}{2}=2$.
+From the table, we know that the arc length from $\vec p(0)$ to $\vec p(1)$ is $2$, and so we need
+$w(2) =1$.  This way $\vec r(2) = \vec p(w (2)) = \vec p(1)$.  Continuing in this way, we get the following
+table of values for $w$.
+\begin{center}
+	\begin{tabular}{c|c}
+		$t$ & $w(t)$\\
+		\hline
+		$0$ & $0$\\
+		$2$ & $1$\\
+		$3.5$ & $2$\\
+		$6$ & $3$\\
+		$7$ & $4$
+	\end{tabular}
+\end{center}
+
+The function $w$ is just the inverse of the function $\Arclenfrom{\vec p}{0}{t}$!  This also makes sense
+from a purely algebraic perspective.  Consider
+\[
+	x=\Arclenfrom{\vec r}{0}{x} = \Arclenfrom{(\vec p\circ w)}{0}{x}=\Arclenfrom{(\vec p)}{0}{w(x)}.
+\]
+Replacing $x$ with $w^{-1}(t)$, we see
+\[
+	w^{-1}(t) = \Arclenfrom{\vec p}{0}{w\circ w^{-1}(t)} = \Arclenfrom{\vec p}{0}{t}.
+\]
+This means the inverse of $w$ is $\Arclenfrom{\vec p}{0}{t}$ and so the inverse of $\Arclenfrom{\vec p}{0}{t}$
+must be $w$.\footnote{ Recall that for an invertible function $f$, we have $(f^{-1})^{-1}=f$.}
+
+We now have a concrete way to find an arc-length parameterization.
+\begin{example}
+	Let $\mathcal R$ be the ray parameterized by 
+	$\vec p:[0,\infty)\to\R^2$ where $\vec p(t) = (t^2,2t^2)$.  Find an arc-length
+	parameterization of $\mathcal R$.
+
+	We'll start by finding the arc-length function for $\vec p$.
+	\begin{align*}
+		a(t)=\Arclenfrom{\vec p}{0}{t} &= \int_0^t \norm{\vec p\,'(x)}\d x\\
+		&=\int_0^t \sqrt{(2x)^2+(4x)^2}\d x = t^2\sqrt{5}.
+	\end{align*}
+	Now define $w(t)=a^{-1}(t)$.  Since $t\geq 0$, the inverse of $a$ is well defined
+	and is given by
+	\[
+		w(t)=a^{-1}(t) = \sqrt{t/\sqrt{5}}.
+	\]
+	Now, define $\vec r(t) = \vec p\circ w(t)=(t/\sqrt{5},2t/\sqrt{5})$.  The parameterization
+	$\vec r$ is an arc-length parameterization!
+
+	Of course we didn't need to go through all this work in this case.  If all we wanted was
+	to find an arc-length parameterization of $\mathcal R$ we could create one directly using
+	geometry, since we know how to parameterize lines and rays.
+\end{example}
+
+\subsection{Explicit Arc-length Parameterizations}
+The idea of arc-length parameterization is very important.  However, for most curves,
+we're hopeless in finding a formula for the arc-length parameterization.  We can for a hand
+full of curves, like a circle, a line, a helix, but even something as simple as an ellipse
+cannot be arc-length parameterized with elementary functions.
+
+Why is it so hard?  Well, integrals in general are hard.  Most formulas cannot be integrated in closed
+form.  Integrals involving square roots are even harder to evaluate.  And, even if you manage
+to integrate to find the arc-length function, you still have to invert that function\footnote{ If you don't
+believe me, go ahead and 
+try to find the inverse of the function $f(x)=xe^x$. }.  So, if finding formulas for arc-length parameterizations
+is so hard, why do we bother with them at all?  The answer is that the \emph{idea} of an arc-length parameterization
+is incredibly useful. Its mere existence will aid our thinking.  And, in many of the problems we will be solving,
+the arc-length parameterization will somehow get cancelled out and we won't ever need to find a formula for it.
+
+\begin{exercises}
+\end{exercises}
+
+\section{Acceleration and Curvature}
+In the Newtonian mechanics of one-dimensional motion, acceleration\index{acceleration} is the second
+derivative of position with respect to time.  In $\R^n$ we define it in the same way.
+
+\begin{definition}[Acceleration]
+	Let $\vec p:\R\to\mathcal S$ be a parameterization of $\mathcal S$.  The \emph{acceleration}
+	of $\vec p$ is 
+	\[
+		\Accel \vec p(t) = (\Vel \vec p)'(t)=\vec p\,''(t).
+	\]
+\end{definition}
+
+Just like velocity, acceleration is a \emph{vector}.  Let's consider two examples.  Define
+\[
+	\vec l(t) = \mat{t^2\\t^2}\qquad\text{and}\qquad\vec c(t) = \mat{\cos t\\\sin t}.
+\]
+Here $\vec l$ parameterizes a ray and $\vec c$ a circle.  Further, $\vec l$ traces along the ray
+faster and faster, whereas $\vec c$ has constant speed as it traces the circle.
+We compute 
+\[
+	\Accel \vec l(t) = \mat{2\\2}\qquad\text{and}\qquad \Accel\vec c(t) = \mat{-\cos t\\ -\sin t},
+\]
+and see that the acceleration of $\vec l$ is constant whereas the acceleration of $\vec c$ is not.  Further,
+$\norm{\Accel \vec l(t)}=2$ and $\norm{\Accel \vec c(t)}=1$, and so the magnitude of the acceleration of
+both $\vec l$ and $\vec c$ is constant.
+
+In the past, you might have distinguished linear acceleration (running faster and faster along a straight line) from
+centripetal acceleration (the acceleration you experience by moving at a constant speed
+around a circle).  With vectors, these two types of acceleration are unified into a single vector.  
+
+In the previous example, $\vec l$ had purely linear acceleration and
+the acceleration vector pointed tangent to the path $\vec l$ traced.
+Analyzing $\vec c$, we see $\vec c$ had purely centripetal acceleration and the acceleration was orthogonal
+to the curve it traced.
+What happens if we mix the two types of acceleration?
+
+Consider
+\[
+	\vec r(t)=\mat{\cos t^2\\\sin t^2}.
+\]
+Computing, 
+\[
+	\Accel \vec r(t) = \mat{-2(\sin t^2+2t^2\cos t^2)\\ 2(\cos t^2-2t^2\sin t^2)}.
+\]
+There is no clear relationship between the curve $\vec r$ traces and the acceleration vector
+for $\vec r$.  To see this relationship, we need to decompose $\Accel \vec r$ into its tangential
+and normal components\index{normal acceleration}\index{tangential acceleration}.
+
+\begin{definition}[Tangential and Normal Acceleration]
+	Let $\vec p:\R\to\mathcal S$ be a parameterization of $\mathcal S$.  Then
+	$\Accel \vec p$ can be written as
+	\[
+		\Accel \vec p(t) = \vec a_T(t)+\vec a_N(t)
+	\]
+	where $\vec a_T(t)$ is tangent to $\mathcal S$ at the point $\vec p(t)$ and $\vec a_N(t)$
+	is orthogonal to $\mathcal S$ at the point $\vec p(t)$.  In this case, $\vec a_T(t)$ is
+	called the \emph{tangential component of the acceleration} and $\vec a_N(t)$ is
+	called the \emph{normal component of the acceleration} of $\vec p$.
+\end{definition}
+
+\begin{example}
+	Let $\vec r(t)=(\cos t^2,\sin t^2)$.  Find the tangential and normal components of
+	the acceleration of $\vec r$.
+
+	Earlier we computed
+	\[
+		\Accel \vec r(t) = \mat{-2(\sin t^2+2t^2\cos t^2)\\ 2(\cos t^2-2t^2\sin t^2)}.
+	\]
+	We can use projections to split $\Accel \vec r$ into its tangential and normal components.
+
+	Recall $\vec r\,'(t)$ is tangent to the curve $\vec r$ traces at the point $\vec r(t)$.  Thus,
+	\[
+		\vec a_T = \Proj_{\vec r\,'(t)} \Accel \vec r(t) = \mat{-2\sin t^2\\ 2\cos t^2},
+	\]
+	and 
+	\[
+		\vec a_N = \Accel\vec r(t) - \vec a_T(t) = \mat{-4t^2\cos t^2\\ -4t^2\sin t^2}.
+	\]
+\end{example}
+
+Suppose now that $\vec r:\R\to\mathcal S$ is an arc-length parameterization of $\mathcal S$.  Since
+the speed of $\vec r$ is constant, it is intuitive that the tangential component of 
+the acceleration of $\vec r$ is zero.  Equipped with our knowledge of vectors, it won't be
+so hard to prove our intuition.  But, it will be helpful to establish the product rule
+for dot products.
+
+\begin{exercise}
+	Let $\vec a(t)=(a_x(t),a_y(t),a_z(t))$ and $\vec b(t)=(b_x(t),b_y(t),b_z(t))$ be parameterizations.
+	Establish the \emph{product rule for dot products}\index{product rule for dot products}.  That is,
+	show that
+	\[
+		\Big[\vec a(t)\cdot \vec b(t)\Big]' = \vec a\,'(t)\cdot \vec b(t)+\vec a(t)\cdot \vec b\,'(t).
+	\]
+\end{exercise}
+
+\begin{theorem}
+	\label{THMARCLENACCEL}
+	If $\vec p:\R\to\mathcal S$ is an arc-length parameterization of $\mathcal S$ then
+	$\Accel\vec p$ is always orthogonal to $\mathcal S$.  Equivalently,
+	\[
+		\vec p\,''(t)\cdot \vec p\,'(t)=0.
+	\]
+\end{theorem}
+\begin{proof}
+	Since $\vec p$ is an arc-length parameterization, we know 
+	\[
+		\sqrt{\vec p\,'(t)\cdot \vec p\,'(t)} = \norm{\vec p\,'(t)}=1.
+	\]
+	Squaring both sides we get the relationship
+	\begin{equation}
+		\label{EQARCLENACCEL}
+		\vec p\,'(t)\cdot \vec p\,'(t)=1.
+	\end{equation}
+	Now we may take the derivative of both sides of Equation \eqref{EQARCLENACCEL} and apply the
+	product rule for dot products to find
+	\[
+		0=\big[\vec p\,'\cdot \vec p\,'\big]'(t) = \vec p\,''(t)\cdot \vec p\,'(t)+
+		\vec p\,'(t)\cdot \vec p\,''(t) = 2\vec p\,''(t)\cdot \vec p\,'(t),
+	\]
+	and so $\vec p\,''(t)$ and $\vec p\,'(t)$ are orthogonal.
+\end{proof}
+
+If you examine the proof of theorem \ref{THMARCLENACCEL} closely, you'll notice that we didn't
+actually need the speed of our parameterization to be $1$.  The proof works just as well if
+the speed is some other constant.
+
+\subsection{Curvature}
+For any curve $\mathcal S$ there are infinitely many choices of parameterizations, but in some
+sense, there is only one arc-length parameterization.  An arc-length parameterization of
+$\mathcal S$ is uniquely determined by a direction (forwards or backwards along $\mathcal S$)
+and a starting position.  Thus, we might think of an arc-length parameterization as 
+\emph{intrinsic} to a curve.
+
+The \emph{curvature}\index{curvature} of a curve is a measure of how sharply a curve bends or
+twists.  Curvature is another property of a curve---you don't need a parameterization to define
+curvature---but it is a lot easier to define with reference to an arc-length parameterization.
+
+\begin{definition}[Curvature]
+	Let $\mathcal S\subseteq\R^n$ be a curve and let $\vec p:\R\to\mathcal S$ be an arc-length
+	parameterization of $\mathcal S$.  The \emph{curvature} of $\mathcal S$ at the point
+	$\vec p(t)$ is 
+	\[
+		\norm{\Accel \vec p(t)} = \norm{\vec p\,''(t)}.
+	\]
+\end{definition}
+
+This definition of curvature can be made intuitive.  If $\vec p:\R\to\mathcal S$ is an arc-length parameterization,
+all velocity vectors are unit length.  Therefore, all acceleration of $\vec p$ must come from
+the velocity vectors changing direction (and not changing length).  If a curve has a sharp bend (high curvature),
+the velocity vectors with rapidly change direction.  If a curve is generally flat (low curvature),
+the velocity vectors hardly change direction at all.
+
+XXX Figure
+
+Curvature can be hard to calculate exactly, but it isn't so hard to eyeball.
+
+\begin{example}
+	Estimate the curvature at various points of the parabola $y=x^2$.
+
+	XXX Finish and include numerics
+\end{example}
+
+\begin{exercises}
+\end{exercises}
+
+\section{Line Integrals}
+
+\section{Multi-dimensional Parameterizations}
