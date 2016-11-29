@@ -34,7 +34,7 @@ We call both $\vec p$ and $\vec q$ \emph{parameterizations of $\ell$ by $\R$}.
 \begin{definition}[Parameterization]
 	A \emph{parameterization} of an object $X$ by an object $Y$ is a continuous
 	function $p:Y\to X$ with the added conditions that $p$ is one-to-one\footnote{
-	Sometimes we will drop the requirement that a parameterization be one-to-one,
+	Sometimes we will drop the requirement that a parameterization has to be one-to-one,
 	but for now we'll be strict about it.}
 	and $\Range(p)= Y$.  In this case $p$ is called a \emph{parameterization} and $Y$ is
 	called the \emph{parameter}.
@@ -86,7 +86,7 @@ interval of real numbers.
 \section{Speed and Velocity of a Parameterization}
 
 In our day-to-day life, almost without thinking, we make a comparison between real numbers
-and time.  Time has a forwards and backwards, which we equate to
+and time.  Time has a forward and backward, which we equate to
 the real number's increasing and decreasing.  We might even say we parameterize \emph{time}
 by the real numbers.  Thus, if $\vec p:[a,b]\to \mathcal S$ is a parameterization 
 of the curve $\mathcal S$ by the interval $[a,b]$, we could think of $\vec p$ as describing
@@ -143,7 +143,7 @@ Let's try to use our new definition.  Let $\vec r(t) = \mat{\cos t\\\sin t}$.  N
 		\displaystyle\frac{\cos(t+\Delta t)-\cos t}{\Delta t} \\\displaystyle\frac{\sin(t+\Delta t)-\sin t}{\Delta t}
 		}.
 \end{align*}
-At this point we should pause.  We don't know how to take limits of vectors.  Fortunately the rule
+At this point, we should pause.  We don't know how to take limits of vectors.  Fortunately the rule
 is simple enough---to take a limit of a vector, take the limit of each of its components\footnote{
 	As intuitive as it sounds, this rule actually has a proof which relies on the definition
 	of limit and the continuity of $\norm{\:\cdot\:}$.
@@ -159,8 +159,8 @@ is simple enough---to take a limit of a vector, take the limit of each of its co
 \end{align*}
 Our use of the notation $\vec r\,'(t)$ for $\Vel \vec r(t)$ seems further justified.
 
-Speed also appears to be a derivative.  From physics we know speed is the magnitude of 
-velocity.  Mathematically, we can prove it.
+Speed also appears to be a derivative.  From physics, we know that speed is the magnitude of 
+velocity.  We can prove it mathematically.
 \begin{theorem}
 	For a parameterization $\vec p:\R\to\R^n$ where $\Vel \vec p(t)$
 	exists, we have
@@ -393,7 +393,7 @@ XXX Figure
 	$
 		\vec p(2) = \frac{2}{\sqrt{6}}(1,2,1).
 	$
-	Noticing the patter, let's guess
+	Noticing the pattern, let's guess
 	\[
 		\vec p(t) = \frac{t}{\sqrt{6}}\mat{1\\2\\1}.
 	\]
@@ -585,14 +585,14 @@ we're hopeless in finding a formula for the arc-length parameterization.  We can
 full of curves, like a circle, a line, a helix, but even something as simple as an ellipse
 cannot be arc-length parameterized with elementary functions.
 
-Why is it so hard?  Well, integrals in general are hard.  Most formulas cannot be integrated in closed
+Why is it so hard?  Well, integrals, in general, are hard.  Most formulas cannot be integrated in closed
 form.  Integrals involving square roots are even harder to evaluate.  And, even if you manage
 to integrate to find the arc-length function, you still have to invert that function\footnote{ If you don't
 believe me, go ahead and 
 try to find the inverse of the function $f(x)=xe^x$. }.  So, if finding formulas for arc-length parameterizations
 is so hard, why do we bother with them at all?  The answer is that the \emph{idea} of an arc-length parameterization
 is incredibly useful. Its mere existence will aid our thinking.  And, in many of the problems we will be solving,
-the arc-length parameterization will somehow get cancelled out and we won't ever need to find a formula for it.
+the arc-length parameterization will somehow get canceled out and we won't ever need to find a formula for it.
 
 \begin{exercises}
 \end{exercises}
@@ -726,7 +726,7 @@ the speed is some other constant.
 \subsection{Curvature}
 For any curve $\mathcal S$ there are infinitely many choices of parameterizations, but in some
 sense, there is only one arc-length parameterization.  An arc-length parameterization of
-$\mathcal S$ is uniquely determined by a direction (forwards or backwards along $\mathcal S$)
+$\mathcal S$ is uniquely determined by a direction (forward or backward along $\mathcal S$)
 and a starting position.  Thus, we might think of an arc-length parameterization as 
 \emph{intrinsic} to a curve.
 
