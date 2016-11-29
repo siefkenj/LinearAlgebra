@@ -42,7 +42,7 @@ use more complicated equations, we get more complicated surfaces.
 	   x^2 + y^2 + z^2 = R^2
 	\]
 	may be rewritten $\norm{\vec r} = \sqrt{x^2 + y^2 + z^2} = R$, so it
-	asserts that the point with position vector $\vec r$ is at distance
+	asserts that the point with position vector $\vec r$ is at a distance
 	$R$ from the origin.  Hence, the locus of all such points is a
 	\emph{sphere} of radius $R$ centered at the origin.
 \end{example}
@@ -218,8 +218,8 @@ such points must be excluded).
 	some trouble visualizing the graph.   However, the equation
 	$z = x/y$ can be rewritten $yz = x$.   By permuting the variables,
 	you should see that the locus of $yz = x$
-	 is similar to the  saddle shaped surface
-	we just described, but oriented differently in space.  However,
+	 is similar to the  saddle-shaped surface
+	we just described but oriented differently in space.  However,
 	 the saddle
 	is not quite the graph of the function since it  contains the 
 	 $z$-axis ($y = x = 0$) but the graph of the function does not.
@@ -262,7 +262,7 @@ XXX Figure
 	You can see that the region around the origin $(0,0)$ is like a
 	``mountain pass'' with the topography rising in the first and
 	third quadrants and dropping off in the second and fourth quadrants.
-	In general a point where the graph behaves this way is called
+	In general, a point where the graph behaves this way is called
 	a \emph{saddle point}.   Saddle points indicate the added complexity
 	which can arise when one goes from functions of one variable to
 	functions of two or more variables.  At such points, the function
@@ -299,7 +299,7 @@ XXX Figure
 If exactly one of the signs are negative, the surface is called a
 \emph{hyperboloid of one sheet}.   It is centered on one axis
 \index{hyperboloid of one sheet}
-(the one associated to the negative coefficient in the equation)
+(the one associated with the negative coefficient in the equation)
 and it opens up in both positive and negative directions along
 that axis.  Its intersection with planes perpendicular to that
 axis are ellipses.   Its intersections with planes perpendicular to
@@ -309,7 +309,7 @@ the other axes are hyperbolas.
 If exactly two of the signs are negative, the surface is called
 a \emph{hyperboloid of two sheets}.   It is centered on one
 \index{hyperboloid of two sheets}
-axis (associated to the positive coefficient).  For example,
+axis (associated with the positive coefficient).  For example,
 suppose the equation is
 \[
   -\frac{x^2}{a^2}
@@ -340,7 +340,7 @@ paraboloid}.   If both signs are positive, it is centered on the
 \index{elliptic paraboloid}
 \index{paraboloid, elliptic}
 positive $z$-axis and its intersections with planes perpendicular to
-the positive $z$-axis are a family of similar ellipses which increase
+the positive $z$-axis is a family of similar ellipses which increase
 in size as $z$ increases.   If both signs are negative, the situation
 is similar, but the surface lies below the $x,y$ plane.
 
@@ -382,7 +382,7 @@ function $f$ of three independent variables to be the set of all points
 in $\R^4$ of the form $(x,y,z,f(x,y,z))$.   Such an object
 should be considered a three dimensional subset of $\R^4$, and it is
 certainly not easy to visualize.  It is more useful to consider the
-analogues of level curves for such functions.  Namely, for each
+analogs of level curves for such functions.  Namely, for each
 possible value $c$ attained by the function, we may consider the
 locus in $\R^3$ of the equation $f(x,y,z) = c$.  This is generally
 a surface called a \emph{level surface} for the function. 
@@ -518,9 +518,9 @@ in the following problems.
 
 \section{Rates of Change and the Directional Derivative}
 	
-For a function $f:\R\to\R$ of one variable we have the idea of
+For a function $f:\R\to\R$ of one variable, we have the idea of
 the \emph{rate of change} of $f$.  We might ask, ``rate of change with
-respect to what?''  For a function of one variable this question has an obvious
+respect to what?''  For a function of one variable, this question has an obvious
 answer---the rate of change with respect to the only thing that varies!
 If $g:\R^n\to\R$ is a multi-variable function, the question of ``what is the rate of change
 of $g$?'' has a less obvious answer.  After all, there are multiple variables and
@@ -571,10 +571,10 @@ to be the most useful notion of rate of change.  For that, we introduce the
 
 The directional derivative $D_{\vec a}f(\vec v)$ corresponds to the rate of change of $f$ at the point $\vec a$
 if you moved in the direction of $\vec v$ with speed $\norm{\vec v}$.  This seems 
-like a less intuitive notion than rate of change with respect to distance, but its virtues will
+like a less intuitive notion than the rate of change with respect to distance, but its virtues will
 soon become clear\footnote{ For starters, $D_{\vec a}f$ is \emph{linear}.  Namely, if $f$ is differentiable,
 then $D_{\vec a}f(\vec u+\vec v)=D_{\vec a}f(\vec u)+D_{\vec a}f(\vec v)$.  The same cannot
-be said for rate of change with respect to distance.}.
+be said for the rate of change with respect to distance.}.
 
 \begin{example}
 	Let $f:\R^2\to\R$ be given by $f(x,y)=(x-2)^2-y^2$.  Compute $D_{\vec 0}f(1,2)$.
@@ -678,7 +678,7 @@ Computing,
 	= \matc{1\\0\\\frac{\partial f}{\partial x}(a_x,a_y)}.
 \]
 
-Of course, this was just one choice of curve along $\mathcal S$.  We could
+Of course, this was just one choice of a curve along $\mathcal S$.  We could
 have just as easily used $\vec p\circ \vec r_y$ where $\vec r_y(t)=(a_x,a_y+t)$
 as a parameterization of a curve.  We could have parameterized paths
 that weren't parallel to the $x$ or $y$ axes.  For instance
@@ -840,7 +840,7 @@ fashion, we will define a class of functions based on whether or not Equation
 \eqref{EQDIRDERIVGRAD} applies\footnote{ For technical reasons we won't do exactly this.
 If we considered the set of functions for which Equation \eqref{EQDIRDERIVGRAD}
 holds at every point, we'd never have a reasonable chain rule for multivariable
-functions.  Instead we'll use the slightly stronger notation of \emph{linear approximations}.}.
+functions.  Instead, we'll use the slightly stronger notation of \emph{linear approximations}.}.
 
 \subsection{Linear Approximations}
 
@@ -858,7 +858,7 @@ The approximation $L$ is quite good around the point $a$, so we have
 	f(a+\Delta x)\approx L(a+\Delta x) = f'(a)\Delta x+f(a)
 \]
 if $\Delta x$ is small.  It's a little unclear though what ``$\approx$''
-exactly means.  In your single-variable calculus class you may or may not
+exactly means.  In your single-variable calculus class, you may or may not
 have made this precise.  Visually, the line given by $y=L(x)=f'(a)(x-a)+f(a)$
 is distinguished from all other lines passing through the point $(a,f(a))$ because
 it is \emph{tangent}.  Analytically, the linear approximation $L(x)=f'(a)(x-a)+f(a)$
@@ -876,7 +876,7 @@ the property
 \end{exercise}
 
 Equation \eqref{EQONEVARLINAPPROX} encapsulates such a strong idea that
-it could in fact be used (and sometimes is used) to define the derivative
+it could, in fact, be used (and sometimes is used) to define the derivative
 of a single-variable function.  We will use the multi-dimensional
 analog of Equation \eqref{EQONEVARLINAPPROX} to define differentiability.
 
