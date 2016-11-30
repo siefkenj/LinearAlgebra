@@ -1223,6 +1223,142 @@ than it is in the single variable case.
 
 \section{Optimization}
 
+Optimization is a fancy word for finding minimums and maximums.  If
+$f:\R\to\R$ is a function of one variable, the procedure should be
+familiar: find critical points of $f$ and check whether they are
+minimums, maximums, or neither; then, check the boundary.  For
+a multivariable function, the procedure is similar.
+
+Let's consider an example.  Let $f:\R^2\to\R$ be defined by $f(x,y)=4-x^2-y^2$.
+This example is nice because we already know where the maximum occurs!
+
+XXX Figure
+
+A global maximum of $4$ for $f$ occurs at $(0,0)$.  Now, suppose $\vec p:\R\to\R^2$, given
+by
+\[
+	\vec p(t) = t\vec d+\vec 0
+\]
+is the parameterization of a line passing through $(0,0)$.  Since $4$ is a global
+maximum of $f$ achieved at $(0,0)$ and $\vec p$ passes through $(0,0)$, the function
+$f\circ \vec p$ must attain a global maximum of $4$ exactly when $\vec p(t)=\vec 0$.
+
+XXX Figure
+
+Since $f\circ \vec p:\R\to\R$ is a function of one variable, all of its maximums
+must occur at either a critical point or a boundary point of the domain.  Since
+the domain is unbounded and $(f\circ \vec p)'$ always exists, we know a maximum
+of $f\circ \vec p$ must occur when
+\begin{equation}
+	\label{EQCOMPDERIV}
+	(f\circ\vec p)'(t)=0.
+\end{equation}
+If both $f$ and $\vec p$ were single-variable functions, we could
+apply the chain rule to Equation \eqref{EQCOMPDERIV}.  Unfortunately they
+are not.  So, before we continue, let's see if we can figure out a multivariable
+chain rule.
+
+\subsection{The Multivariable Chain Rule}
+
+In mathematics, when you don't know the answer, a technique\footnote{
+In math, some things are called tricks and some techniques.  The difference is:
+a technique is used more than once.} is to
+replace your objects of study with something simpler.  In differential calculus,
+the simplest thing you could hope for is something flat (a line, a plane, etc.), which
+are precisely characterized by affine functions.
+
+Suppose $f:\R^2\to\R$ is an affine function and $\vec p:\R\to\R^2$ is a differentiable
+parameterization of a curve.  Since $f$ is an affine function, it can be written
+as $f(x,y)=\alpha_x x+\alpha_y y+c$ or alternatively as
+$f(\vec x) = \vec \alpha\cdot \vec x+c$.  Let $p_x:\R\to\R$ and $p_y:\R\to\R$ be the components
+of $\vec p$.  Now we have
+\[
+	f\circ \vec p(t) = f(\vec p(t)) = f(p_x(t),p_y(t))=\alpha_xp_x(t)+\alpha_yp_y(t)+c.
+\]
+This is a function of one variable so we can take a derivative as usual:
+\[
+	(f\circ\vec p)'(t) = \alpha_xp_x'(t)+\alpha_yp_y'(t) = \vec \alpha\cdot \vec p\,'(t).
+\]
+But, since $f$ is an affine function, $\nabla f(\vec x)=\vec \alpha$ for
+all $\vec x$, and so we in fact have
+\begin{equation}
+	\label{EQMULTIVARCHAIN1}
+	(f\circ\vec p)'(t) = \nabla f(\vec x)\cdot \vec p\,'(t).
+\end{equation}
+For an affine function $\nabla f$ is constant, so we don't need to specify what
+$\vec x$ is for Equation \eqref{EQMULTIVARCHAIN1} to make sense.  However, without
+knowing what $\vec x$ should be, it's difficult to see the \emph{meaning} behind
+Equation \eqref{EQMULTIVARCHAIN1}
+point we're taking the gradient.
+
+Let's consider a more general case.  Let $f:\R^2\to\R$ be a
+function that is differentiable at the point $\vec a$
+and let $\vec p:\R\to\R^2$ be the parameterization of a curve so that
+$\vec p(t_0)=\vec a$.
+Since $f$ is differentiable at $\vec a$, we know there is an affine
+function $L:\R^2\to\R$ that approximates $f$ very well near the point $\vec a$.
+This means, 
+\[
+	f\circ \vec p(t) \approx L\circ \vec p(t)\qquad\text{when}\qquad t\approx t_0.
+\]
+
+From Equation \eqref{EQMULTIVARCHAIN1}, we know $(L\circ \vec p)'(t)=\nabla L(\vec x)\cdot
+\vec p\,'(t)$ for any $\vec x$.  Further, $\nabla L(\vec a)=\nabla f(\vec a)$ and $\vec a=
+\vec p(t_0)$.  Putting this all together,
+\begin{align*}
+	(L\circ \vec p)'(t_0) &= \nabla L(\vec a)\cdot \vec p\,'(t_0)\\
+	&=\nabla f(\vec p(t_0))\cdot \vec p\,'(t_0) = D_{\vec p(t_0)} f(\vec p'(t_0)).
+\end{align*}
+
+That equation is a mouthful, but the right hand side involves only $f$ and $\vec p$.
+If we could show that $(L\circ \vec p)'(t_0)=(f\circ \vec p)'(t_0)$, we would
+have a formula for the multivariable chain rule.  Fortunately, we have the following
+theorem.
+
+\begin{theorem}
+	\label{THMMULTIVARCHAIN1}
+	Let $f:\R^n\to\R$ be a function that is differentiable at $\vec a$ and
+	let $L_{\vec a}:\R^n\to\R$ be the affine function coming from
+	the definition of differentiability.
+	Let $\vec p:\R\to\R^n$ satisfy $\vec p(t_0)=\vec a$.  Then,
+	\[
+		(f\circ \vec p)'(t_0)=(L_{\vec a}\circ \vec p)'(t_0).
+	\]
+\end{theorem}
+
+We will not prove Theorem \ref{THMMULTIVARCHAIN1} in the general context.
+However, if $\vec p$ parameterizes a line, the proof is straightforward. 
+Suppose $\vec p$ parameterizes a line, and for simplicity, assume 
+$t_0=0$.  Then $\vec p(t) = \vec a+t\vec v$ for some $\vec v$.  Now,
+\[
+	(f\circ \vec p)'(0) = D_{\vec a}f(\vec v)\qquad\text{and}
+	\qquad(L_{\vec a}\circ \vec p)'(0) = D_{\vec a}L_{\vec a}(\vec v),
+\]
+and we have previously established that $D_{\vec a}f(\vec v)=D_{\vec a}L_{\vec a}(\vec v)$.
+Proving Theorem \ref{THMMULTIVARCHAIN1} in the general case amounts to
+showing that you can replace $\vec p$ by \emph{its} affine approximation,
+which parameterizes a line.
+
+We may now write down the multivariable chain rule.
+\begin{theorem}[Multivariable Chain Rule]
+	If $f:\R^n\to\R$ is differentiable at $\vec a$
+	and $\vec p:\R\to\R^n$ is differentiable and
+	satisfies $\vec p(t_0)=\vec a$, then
+	\[
+		(f\circ\vec p)'(t_0)=
+		D_{\vec p(t_0)}f\big(\vec p\,'(t_0)\big).
+	\]
+	Equivalently,
+	\[
+		(f\circ\vec p)'(t_0)=
+		\nabla f\big(\vec p(t_0)\big)\cdot\vec p\,'(t_0).
+	\]
+\end{theorem}
+
+\subsection{The Multivariable First-Derivative Test}
+\subsection{The Multivariable Second-Derivative Test}
+\subsection{Lagrange Multipliers}
+
 \begin{exercises}
 \end{exercises}
 
