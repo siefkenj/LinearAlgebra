@@ -1221,6 +1221,225 @@ than it is in the single variable case.
 \begin{exercises}
 \end{exercises}
 
+\section{Polynomial Approximation}
+
+When we try to model the real world with mathematics, we often
+encounter very complicated functions.  The more complicated
+a function, the more difficult it is to analyze, so a common mathematical
+strategy is to substitute complicated functions for simple ones.
+
+Among the simplest mathematical functions are \emph{polynomials}, and in the
+multivariable context, this means polynomials of multiple variables.
+Before we dive into the details of polynomial approximations, let us
+introduce some terminology.
+
+\begin{definition}[Polynomial]
+	Let $x_1,x_2,\ldots,x_n$ denote variables.  A \emph{degree-$m$ term}\index{term}
+	is a product of the form
+	\[
+		x_1^{\alpha_1}x_2^{\alpha_2}\cdots x_n^{\alpha_n}
+	\]
+	where $\alpha_i\geq 0$ and $\sum_{i=1}^n \alpha_i = m$.
+
+	A \emph{degree-$m$ polynomial}\index{polynomial} is a linear combination
+	of terms of degree at most $m$.  A \emph{degree-$0$ polynomial} is constant.
+\end{definition}
+
+In the definition of polynomial, we always interpret $x_i^{0}$ as $1$.  You're intimately
+familiar with polynomials of a single variable.  For instance, $x^3-2x$ is a degree-$3$ 
+polynomial.  However, when it comes to the multivariable context, $x^2y-2x$ and $xyz-2x$ are
+also degree-$3$ polynomials.
+
+Affine functions are all degree-$1$ polynomials, and the definition of 
+$f:\R^n\to\R$ being differentiable
+depended on being able to find an affine function that approximated $f$ very well.
+There is a similar concept for higher degree polynomial functions.
+
+\begin{definition}[Taylor Approximation]
+	Given a continuous
+	function $f:\R^n\to\R$, a degree $m$ polynomial $p$, and a point 
+	$\vec a\in\R^n$, we
+	call $p$ the \emph{degree-$m$ Taylor approximation of $f$ at $\vec a$} if
+	\[
+		\lim_{\vec r\to \vec 0} \frac{f(\vec a+\vec r)-p(\vec a+\vec r)}{\norm{\vec r}^m}=0.
+	\]
+\end{definition}
+
+Note that if $\norm{\vec r}<1$, then $\norm{\vec r} > \norm{\vec r}^2> \cdots >\norm{\vec r}^m$.
+Thus, 
+\[
+	\frac{f(\vec a+\vec r)-p(\vec a+\vec r)}{\norm{\vec r}^m}<\cdots<
+\frac{f(\vec a+\vec r)-p(\vec a+\vec r)}{\norm{\vec r}},
+\]
+and so having a degree-$m$ Taylor approximation is a bigger demand that merely being
+differentiable.
+
+\begin{example}
+	Let $f(x,y)=(x-2)^2+y^2$.  Find the degree $1$, $2$, and $3$ Taylor
+	approximations to $f$ at $(0,0)$.
+
+	On the one hand, since $f$ is itself a polynomial, we know it is differentiable.  
+	Therefore it has an affine approximation coming from the definition of differentiability
+	which coincides with a degree-$1$ Taylor approximation.  Further $f$ is a degree-$2$
+	polynomial and so it is its own degree-$2$ and degree-$3$ Taylor approximation.
+
+	On the other hand, let's imagine we weren't so clever.  Let $p_1(x,y)=ax+by+c$
+	be a degree-$1$ polynomial.  If $p$ is a degree-$1$ Taylor approximation to $f$
+	at $\vec 0$, then
+	\[
+		\lim_{\vec r\to \vec 0} \frac{f(\vec 0+\vec r)-p_1(\vec 0+\vec r)}{\norm{\vec r}}=0.
+	\]
+	Let $r_x$ and $r_y$ stand for the $x$ and $y$ components of $\vec r$.
+	Expanding, we see
+	\begin{align*}
+		\lim_{\vec r\to \vec 0} \frac{f(\vec 0+\vec r)-p_1(\vec 0+\vec r)}{\norm{\vec r}}&=
+		\lim_{\vec r\to \vec 0} \frac{(r_x-2)^2+r_y^2 -(ar_x+br_y+c)}{\sqrt{r_x^2+r_y^2}}\\
+		&=\lim_{\vec r\to \vec 0} \frac{r_x^2-4r_x+4+r_y^2 -ar_x-br_y-c}{\sqrt{r_x^2+r_y^2}}=0
+	\end{align*}
+	if and only if $a=-4$, $b=0$, and $c=4$.  Thus $p_1(x,y)=-4x+4$ is the unique degree-$1$
+	Taylor approximation to $f$.
+
+	We can use a similar process to find the degree-$2$ Taylor approximation to $f$.
+	Let $p_3(x,y)=ax^2+by^2+cxy+dx+ey+h$ be a degree-$2$ polynomial.  Then
+	\begin{align*}
+		\lim_{\vec r\to \vec 0} \frac{f(\vec 0+\vec r)-p_3(\vec 0+\vec r)}{\norm{\vec r}^2}&=
+		\lim_{\vec r\to \vec 0} \frac{(r_x-2)^2+r_y^2 -(ar_x^2+br_y^2+cr_xr_y+dr_x+er_y+h)}{r_x^2+r_y^2}\\
+		&=\lim_{\vec r\to \vec 0} \frac{r_x^2-4r_x+4+r_y^2 -(ar_x^2+br_y^2+cr_xr_y+dr_x+er_y+h)}{r_x^2+r_y^2}=0
+	\end{align*}
+	if and only if $a=1$, $b=1$, $c=0$, $d=-4$, $e=0$, and $h=4$.  Therefore
+	the degree-$2$ Taylor approximation of $f$ is $p_3(x,y)=x^2-4x+4+y^2=(x-2)^2+y^2$, which
+	is just $f$ itself.
+
+	We could continue on to use the limit definition to find a degree-$3$ Taylor
+	approximation to $f$, or we could notice that $f(x,y)-p_2(x,y)=0$ for all $x$ and $y$.
+	Since $\lim_{t\to0} 0/t=0$ and $p_2$ satisfies the definition of a degree-$3$ polynomial
+	(none of its terms exceed degree $3$), $p_2$ must be a degree-$3$ Taylor approximation
+	of $f$.  Further, if we used the limit definition, we would conclude that $p_2$ is
+	actually the \emph{unique} degree-$3$ Taylor approximation of $f$.
+\end{example}
+
+There's a faster way to find degree-$m$ Taylor approximations
+than taking a limit each time.  We can rely on higher-order 
+partial derivatives\index{higher-order partial derivatives}.
+
+\subsection{Higher-order Partial Derivatives}
+Recall that if $f:\R^n\to\R$ is a differentiable function, then
+$
+	\frac{\partial f}{\partial x_i}(\vec a)
+$
+is a well-defined number for all $\vec a\in\R^n$.  
+Thus, we may view $\frac{\partial f}{\partial x_i}(\vec a)$ as
+a function of $\vec a$.  From this perspective, 
+\[
+	\frac{\partial f}{\partial x_i}:\R^n\to\R
+\]
+is just another multivariable function.  If this function is differentiable, we may consider
+\[
+	\frac{\partial \frac{\partial f}{\partial x_i}}{\partial x_j}(\vec a),
+\]
+and so on.  A function is called an \emph{$m$th order partial derivative}\index{$n$th order partial derivative}
+if this process has been repeated $m$ times.
+The nesting fraction notation can get pretty awkward, pretty quickly, so, modeling after
+the notation from single-variable calculus, we write
+\[
+	\frac{\partial^2 f}{\partial x_j\partial x_i}(\vec a)=\frac{\partial \frac{\partial f}{\partial x_i}}{\partial x_j}(\vec a).
+\]
+The expression $\frac{\partial^2 f}{\partial x_i\partial x_j}(\vec a)$ is
+an \emph{iterated partial derivative}.  If $x_i\neq x_j$, it is called
+a \emph{mixed partial derivative}\index{mixed partial derivative}.  If
+$x_i=x_j$, we further simplify our notation and write
+\[
+	\frac{\partial^2 f}{\partial x_i^2}(\vec a).
+\]
+
+\begin{example}
+	Compute $\frac{\partial^2 f}{\partial x\partial y}(x,y)$ where $f(x,y)=e^{x-2xy}$.
+
+	XXX Finish
+\end{example}
+
+Strictly speaking, $\frac{\partial^2 f}{\partial x_j\partial x_i}(\vec a)$ means take a derivative
+with respect to $x_i$ first and then with respect to $x_j$, and a priori, it could be that
+$\frac{\partial^2 f}{\partial x_j\partial x_i}(\vec a)\neq \frac{\partial^2 f}{\partial x_i\partial x_j}(\vec a)$.
+However, if our function has a degree-$2$ Taylor approximation, these two quantities are
+always equal.
+\begin{theorem}[Clairaut's Theorem]
+	If $f:\R^n\to\R$ has a degree-$2$ Taylor approximation at $\vec a\in\R^n$, then
+	\[
+\frac{\partial^2 f}{\partial x_j\partial x_i}(\vec a)= \frac{\partial^2 f}{\partial x_i\partial x_j}(\vec a)
+	\]
+	for all choices of variables $x_i,x_j$.
+\end{theorem}
+
+Clairaut's Theorem will apply to most functions we encounter, but
+some fairly reasonable looking functions can fail.
+
+\begin{example}
+	Consider $f(x,y)=\begin{cases} \frac{xy(x^2-y^2)}{x^2+y^2} &\text{ if } (x,y)\neq (0,0)\\
+	0 &\text{ if }(x,y)=(0,0)\end{cases}$.
+
+	XXX Example where mixed partials aren't equal
+\end{example}
+
+Higher order partial derivatives are interesting in their own right,
+but the following theorem makes them useful for finding Taylor approximations.
+
+\begin{theorem}
+	\label{THMPOLYNOMIALPARIALS}
+	Suppose $f:\R^n\to\R$ has a degree-$m$ Taylor approximation $p:\R^n\to\R$
+	at $\vec a\in\R^n$.
+	Then, every $i$th-order partial derivative of $f$ at the point $\vec a$
+	agrees with every $i$th-order
+	partial derivative of $p$ at the point $\vec a$ for $i\leq m$.
+	Symbolically,
+	\[
+		\frac{\partial^i f}{\partial x_{j_1}\cdots \partial x_{j_i}}(\vec a)
+		=
+		\frac{\partial^i p}{\partial x_{j_1}\cdots \partial x_{j_i}}(\vec a)
+	\]
+	for $i\leq m$.
+\end{theorem}
+
+Theorem \ref{THMPOLYNOMIALPARIALS} is not difficult to prove, but it is a notational
+nightmare, so we won't prove it here.  Theorem \ref{THMPOLYNOMIALPARIALS} also
+simplifies the task of finding a Taylor approximation (provided we know one already exists).
+
+\begin{example}
+	XXX Finish
+\end{example}
+
+\subsection{Uses of Polynomial Approximations}
+As we have seen previously if $f:\R^n\to\R$
+has a degree-$1$ Taylor approximation at $\vec a$,
+that approximation captures
+all information about directional derivatives of $f$ at $\vec a$ 
+(we used this fact to prove $D_{\vec a} f(\vec v)=\nabla f(\vec a)\cdot \vec v$).
+Similarly, a degree-$m$ Taylor approximation to $f$ at $\vec a$ captures
+all $m$-th order derivative information.  This statement can be made
+precise with a theorem.
+
+\begin{theorem}
+	\label{THMYOUCANUSEPOLYS}
+	Let $f:\R^n\to\R$ be a function and let $p:\R^n\to\R$ be the 
+	degree-$m$ Taylor approximation to $f$ at $\vec a$.  If
+	$\vec r:\R\to\R^n$ is an
+	$m$-times differentiable parameterization of a curve with $\vec p(0)=\vec a$,
+	then
+	\begin{align*}
+		(f\circ \vec r)'(0)&=(p\circ \vec r)'(0)\\
+		(f\circ \vec r)''(0)&=(p\circ \vec r)''(0)\\
+		&\ \ \vdots \\
+		(f\circ \vec r)^{(m)}(0)&=(p\circ \vec r)^{(m)}(0).
+	\end{align*}
+	That is, the first $m$ derivatives of $f\circ \vec r$ and $p\circ\vec r$ agree
+	at $0$.
+\end{theorem}
+
+The implications of Theorem \ref{THMYOUCANUSEPOLYS} are far reaching. 
+You can use polynomial approximations to study curvature, concavity, local
+minimums and maximums, etc.---and we will.
+
+
 \section{Optimization}
 
 Optimization is a fancy word for finding minimums and maximums.  If
@@ -1356,7 +1575,135 @@ We may now write down the multivariable chain rule.
 \end{theorem}
 
 \subsection{The Multivariable First-Derivative Test}
+
+We can now develop the multivariable first derivative test for local extrema.
+Recall that if $f:\R^n\to\R$ and $\vec p:\R\to\R^n$ is a parameterization such
+that $f$ attains a local maximum at $\vec p(0)$, then
+\[
+	(f\circ \vec p)'(0)=0.
+\]
+Using the multivariable chain rule we see
+\[
+	(f\circ \vec p)'(0) = D_{\vec p(0)} f\big(\vec p'(0)\big) = 0.
+\]
+This is true for any parameterization that passes through a local extreme.
+Since we can pass through the local extreme from any direction, we have the following
+theorem.
+
+\begin{theorem}[Multivariable First Derivative Test]
+	\label{THMMULTFIRSTDERIVTEST}
+	If $f:\R^n\to\R$ is differentiable at $\vec a\in\R^n$ and $f$ attains a
+	local maximum or local minimum at $\vec a$ then 
+	\[
+		D_{\vec a}f(\vec v) = 0
+	\]
+	for all vectors $\vec v$.  Equivalently,
+	\[
+		\nabla f(\vec a)=\vec 0.
+	\]
+\end{theorem}
+Note that Theorem \ref{THMMULTFIRSTDERIVTEST} does not say that if $\nabla f(\vec a)=\vec 0$
+then $f$ \emph{must} have a local max or min at $\vec a$.  It only says that if
+you have a local max or min at $\vec a$, then you have $\nabla f(\vec a)=\vec 0$.
+
+This is just like the single-variable first derivative test.  If $g:\R\to\R$ and $g'(a)=0$,
+it need not be the case that $g$ has a local max or min at $a$.
+
+XXX Figure
+
+\begin{definition}[Critical Point]
+	For a function $f:\R^n\to\R$, the point $\vec a\in\R^n$ is called
+	a \emph{critical point}\index{critical point} if $f$ is not
+	differentiable at $\vec a$ or if $\nabla f(\vec a)=\vec 0$.
+\end{definition}
+
+\begin{example}
+	Let $f:\R^2\to\R$ be given by $f(x,y)=4-x^2-y^2$.  Find all critical
+	points of $f$.
+
+	Computing, $\nabla f(x,y) = (2x,-2y)$.  Since $f$ is differentiable everywhere,
+	the only critical points of $f$ must occur when $\nabla f(x,y)=(0,0)$.  Thus the only
+	critical points are at $(x,y)=(0,0)$.
+\end{example}
+
+\begin{example}
+	XXX Finish (Find Local Max)
+\end{example}
+
+\begin{example}
+	XXX Finish Find (Local saddle point)
+\end{example}
+
+
 \subsection{The Multivariable Second-Derivative Test}
+
+Inspired by the single-variable second-derivative test, we will
+create a multivariable second-derivative test.  First, a reminder about
+the single-variable case.
+
+\begin{theorem}[Single-variable Second-Derivative Test]
+	Suppose $f:\R\to\R$ is a twice differentiable function and 
+	$f'(a)=0$.  Then, if $f''(a)>0$, it must be that $f(a)$ is a local
+	minimum and if $f''(a) < 0$, it must be that $f(a)$ is a local maximum.
+	If $f''(a)=0$, nothing can be concluded about whether $f(a)$ is a
+	local maximum, local minimum, or neither.
+\end{theorem}
+
+Now, imagine $f:\R^n\to\R$ has a local maximum at $\vec a$.  Let $\vec u$
+be a unit vector and let $\ell$ be the line with direction $\vec u$
+passing through $\vec a$.  Then, $\ell$ has a parameterization $\vec p(t)=a+t\vec u$.
+The function $f\circ p$ can be thought of as the restriction of $f$ to $\ell$.
+Since $f$ has a local max at $\vec a$, we know $f\circ \vec p$ has a local max at $0$
+(since $\vec p(0)=\vec a$), and we would expect $f\circ \vec p$ to be a concave-down
+function.
+
+XXX Figure
+
+Thus, we expect $(f\circ \vec p)''(0) < 0$.  We call $(f\circ \vec p)''(0)$ a
+\emph{second order directional derivative in the direction $\vec u$}.  This inspires
+the multivariable second derivative test.
+
+\begin{theorem}[Multivarialbe Second-Derivative Test]
+	Suppose $f:\R^n\to\R$ is differentiable at $\vec a$ and
+	$D_{\vec a} f(\vec v)=0$ for all $\vec v$.  Let $\vec p_{\vec v}(t) = \vec a+t\vec v$.
+	If 
+	\[
+		(f\circ \vec p_{\vec v})''(0) < 0
+	\]
+	for all $\vec v$, then $f$ has a local maximum at $\vec a$ and if
+	\[
+		(f\circ \vec p_{\vec v})''(0) > 0
+	\]
+	for all $\vec v$, then $f$ has a local minimum at $\vec a$.  Further, if
+	there are $\vec v_1$ and $\vec v_2$ such that
+	\[
+		(f\circ \vec p_{\vec v_1})''(0) < 0 < (f\circ \vec p_{\vec v_2})''(0),
+	\]
+	then $f$ has neither a local minimum or a local maximum at $\vec a$.  In any
+	other case, $f(\vec a)$ may have a local minimum, a local maximum, or neither.
+\end{theorem}
+
+The multivariable second-derivative test is more complicated because more
+things can happen in higher dimensions.  Consider the following examples.
+
+\begin{example}
+	$f(x,y)=x^2+y^2$
+
+	XXX Finish
+\end{example}
+
+\begin{example}
+	$f(x,y)=x^2-y^2$
+
+	XXX Finish
+\end{example}
+
+\begin{example}
+	$f(x,y)=x^3+y^3$
+
+	XXX Finish
+\end{example}
+
 \subsection{Lagrange Multipliers}
 
 \begin{exercises}
