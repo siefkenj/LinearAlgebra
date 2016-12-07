@@ -1483,8 +1483,8 @@ In mathematics, when you don't know the answer, a technique\footnote{
 In math, some things are called tricks and some techniques.  The difference is:
 a technique is used more than once.} is to
 replace your objects of study with something simpler.  In differential calculus,
-the simplest thing you could hope for is something flat (a line, a plane, etc.), which
-are precisely characterized by affine functions.
+the simplest thing you could hope for is something flat (a line, a plane, etc.).
+These are precisely characterized by affine functions.
 
 Suppose $f:\R^2\to\R$ is an affine function and $\vec p:\R\to\R^2$ is a differentiable
 parameterization of a curve.  Since $f$ is an affine function, it can be written
@@ -1492,7 +1492,7 @@ as $f(x,y)=\alpha_x x+\alpha_y y+c$ or alternatively as
 $f(\vec x) = \vec \alpha\cdot \vec x+c$.  Let $p_x:\R\to\R$ and $p_y:\R\to\R$ be the components
 of $\vec p$.  Now we have
 \[
-	f\circ \vec p(t) = f(\vec p(t)) = f(p_x(t),p_y(t))=\alpha_xp_x(t)+\alpha_yp_y(t)+c.
+	f\circ \vec p(t) = f(\vec p(t)) = f\big(p_x(t),p_y(t)\big)=\alpha_xp_x(t)+\alpha_yp_y(t)+c.
 \]
 This is a function of one variable so we can take a derivative as usual:
 \[
@@ -1504,11 +1504,10 @@ all $\vec x$, and so we in fact have
 	\label{EQMULTIVARCHAIN1}
 	(f\circ\vec p)'(t) = \nabla f(\vec x)\cdot \vec p\,'(t).
 \end{equation}
-For an affine function $\nabla f$ is constant, so we don't need to specify what
+For an affine function, $\nabla f$ is constant, so we don't need to specify what
 $\vec x$ is for Equation \eqref{EQMULTIVARCHAIN1} to make sense.  However, without
 knowing what $\vec x$ should be, it's difficult to see the \emph{meaning} behind
-Equation \eqref{EQMULTIVARCHAIN1}
-point we're taking the gradient.
+Equation \eqref{EQMULTIVARCHAIN1}.
 
 Let's consider a more general case.  Let $f:\R^2\to\R$ be a
 function that is differentiable at the point $\vec a$
@@ -1704,7 +1703,173 @@ things can happen in higher dimensions.  Consider the following examples.
 	XXX Finish
 \end{example}
 
+For complicated functions, using the multivariable second-derivative test
+involves a lot of computation.  Fortunately, we can use Theorem \ref{THMYOUCANUSEPOLYS}
+to replace our function with a degree-$2$ Taylor approximation at a critical point.  
+Since all second-order directional derivatives of our function and our Taylor approximation
+will agree, we can instead use the Taylor approximation to determine whether we have a local
+minimum, local maximum, or neither. 
+
+\begin{example}
+	$f(x,y)=\frac{1}{1+x^2+y^2}$
+
+	XXX Finish
+\end{example}
+
+
 \subsection{Lagrange Multipliers}
+
+We've just explored how to find local minimums and maximums on an unconstrained domain,
+but what if we wish to restrict the domain.  
+
+\begin{example}
+	\label{EXMESSYMIN}
+	Let $f(x,y)=(x-2)^2+(y-3)^2$
+	and let $\mathcal D$ be the disk of radius one centered at $\vec 0$.  We wish to find
+	the minimum of $f\big|_{\mathcal D}$.  That is, we wish to find the minimum of $f$ restricted
+	to the disk $\mathcal D$.
+
+	Computing, the only critical point of $f$ occurs at $(2,3)$ which is outside of $\mathcal D$.
+	We can conclude that $f\big|_{\mathcal D}$ does not have a minimum on the interior of $\mathcal D$,
+	but $f\big|_{\mathcal D}$ still may have a minimum on the boundary of $\mathcal D$.
+
+	The boundary of $\mathcal D$ is the unit circle which can be parameterized by $\vec r(t)=(\cos t,
+	\sin t)$.  Thus, we need to find the minimum of 
+	\begin{align*}
+		f\circ \vec r(t) = (\cos t-2)^2+(\sin t-3)^2&=\cos^2t+\sin^2t-6\sin t-4\cos t+13\\
+		&= -6\sin t-4\cos t+14.
+	\end{align*}
+	Since this is a single-variable differentiable function, we need only find the places
+	where $(f\circ \vec r)'(t)=0$.  In other words, we need to solve
+	\[
+		4\sin t-6\cos t=0.
+	\]
+	This simplifies to $\tan t = 3/2$ and so the equation is satisfies when $t=t_1=\arctan \tfrac{3}{2}$
+	or $t=t_2=\pi+\arctan \tfrac{3}{2}$.
+
+	Evaluating, $f\circ \vec r(t_1)=14-2\sqrt{13}$ and $f\circ \vec r(t_2)=14+2\sqrt{13}$, and so 
+	$f\big|_{\mathcal D}$ attains a minimum of $14-2\sqrt{13}$ at $(\cos t_1,\sin t_1)=(\tfrac{2}{\sqrt{13}},
+	\tfrac{3}{\sqrt{13}})$.
+\end{example}
+
+Example \ref{EXMESSYMIN} involved complicated, but doable, trigonometry.  But, we can make our lives
+much easier by thinking geometrically for a while.
+
+Let $f:\R^n\to \R$ and suppose $\mathcal R$ is a region whose boundary is parameterized by
+$\vec r:\R\to\R^n$.  To find the extrema of $f\big|_{\mathcal R}$, we first check for
+critical points in $\mathcal R$, and then we need to check for minimums and maximums along
+the boundary of $\mathcal R$.  Since $\vec r$ parameterizes the boundary of $\mathcal R$, we know
+\[
+	0=(f\circ \vec r)'(t) = D_{\vec r(t)}f\big(\vec r\,'(t)\big)=\nabla f(\vec r(t))\cdot \vec r\,'(t)
+\]
+whenever $\vec r(t)$ is at a local minimum or local maximum along the boundary.  Now, observe
+that $\vec r\,'(t)$ is one of many vectors tangent to the boundary of $\mathcal R$
+at the point $\vec r(t)$.  Let $\vec T_{\vec r(t)}$ be an arbitrary tangent vector
+to the boundary of $\mathcal R$.  We now have that 
+\[
+	0= D_{\vec r(t)}f\big(\vec T_{\vec r(t)}\big)=\nabla f(\vec r(t))\cdot \vec T_{\vec r(t)}
+\]
+whenever $\vec r(t)$ is at a local minimum or local maximum along the boundary.
+
+XXX Figure
+
+We're going to generalize slightly more.  Suppose $\vec T:\R^n\to\R^n$ is a function
+such that if $\vec a$ is on the boundary of $\mathcal R$, we
+have $\vec T(\vec a)$ is a tangent vector to the boundary of $\mathcal R$.  We won't care
+about how $\vec T(\vec a)$ is defined if $\vec a$ is not on the boundary of $\mathcal R$.
+
+XXX Figure of such a function
+
+Now, if $f\big|_{\mathcal R}$ has a local extreme at some point $\vec a$ on the
+boundary of $\mathcal R$, we know
+\[
+	0=\nabla f(\vec a)\cdot \vec T(\vec a).
+\]
+This gives us another way to approach the problem of finding extrema of $f\big|_{\mathcal R}$.
+
+\begin{example}
+	\label{EXMESSYMIN}
+	Let $f(x,y)=(x-2)^2+(y-3)^2$
+	and let $\mathcal D$ be the disk of radius one centered at $\vec 0$.  Find
+	the minimum of $f\big|_{\mathcal D}$.  
+
+	As before, we know that $f\big|_{\mathcal D}$ attains its minimum on the boundary
+	of $\mathcal D$ which can be parameterized by $\vec r(t)=(\cos t,\sin t)$.  
+	Now, consider the function $\vec T(x,y)=(-y,x)$.  
+	$\vec T$ has the property that $\vec T(\vec r(t))=\vec r\,'(t)$.  Thus, if
+	\[
+		0=(f\circ \vec r)'(t)
+	\]
+	we must have
+	\[
+		0=\nabla f(\vec a)\cdot \vec T(\vec a)
+	\]
+	for some $\vec a=\vec r(t)$ on the boundary of $\mathcal D$.  Let $\vec a=(x,y)$.
+	Solving, we see
+	\begin{align*}
+		0=\nabla f(x,y)\cdot \vec T(x,y)&=\mat{2x-4\\2y-6}\cdot \mat{-y\\x}\\
+		&=-2xy+4y+2xy-6x=-6x+4y
+	\end{align*}
+	and so $y=\tfrac{3}{2}x$.  Finally, since $\vec a=(x,y)$ is on the unit circle
+	we must have $x^2+y^2=1$ and so $(x,y)=(\tfrac{2}{\sqrt{13}},
+	\tfrac{3}{\sqrt{13}})$ or $(x,y)=(-\tfrac{2}{\sqrt{13}},
+	-\tfrac{3}{\sqrt{13}})$.  Checking each of these points, we see $f\big|_{\mathcal D}$
+	attains a minimum at $(x,y)=(\tfrac{2}{\sqrt{13}},
+	\tfrac{3}{\sqrt{13}})$.
+\end{example}
+
+Now, suppose we wish to find the extrema of $f\big|_{\mathcal C}$ and $\mathcal C$ can
+be expressed as a level curve of some function $h:\R^n\to\R$.  Without loss of generality, we may
+assume that $\mathcal C=\Set{\vec x\given h(\vec x)=0}$.  (Make sure you understand why
+we can always assume the level curve takes the form $h(\vec x)=0$.)  Again, we have
+the same geometric intuition as before---we are looking for a place where $\nabla f\cdot \vec T=0$
+where $\vec T$ is a tangent vector to $\mathcal C$.  
+
+Since $\mathcal C$ is a level set of $h$, we know every tangent vector to $\mathcal C$ must
+be orthogonal to $\nabla h$.  Thus we have $\nabla h\cdot \vec T=0$ and $\nabla f\cdot \vec T=0$,
+at a local extreme.  Since this is true for any $\vec T$ that is a tangent vector at a local extreme,
+we must have that both $\nabla h$ and $\nabla f$ are normal vectors for the tangent line/tangent plane
+to $\mathcal C$ at the local extreme.  Thus, $\nabla f$ and $\nabla h$ are parallel and so
+either $\nabla f=0$ or $\nabla h=0$ or $\nabla f=\lambda \nabla h$ for some $\lambda\neq 0$.  This
+observation leads to the method of \emph{Lagrange Multipliers}.
+
+\begin{example}
+	Let $f(x,y)=(x-2)^2+(y-3)^2$
+	and let $\mathcal D$ be the disk of radius one centered at $\vec 0$.  Find
+	the minimum of $f\big|_{\mathcal D}$.  
+
+	As before, we know that $f\big|_{\mathcal D}$ attains its minimum on the boundary
+	of $\mathcal D$.  Let $h(x,y)=x^2+y^2-1$.  Then the boundary of $\mathcal D$
+	is precisely the level curve $h(x,y)=0$.
+	We therefore seek to find all solutions to the system
+	\[
+		\begin{cases}
+			\nabla f(x,y)=\lambda \nabla h(x,y)\\
+			h(x,y)=0
+		\end{cases}.
+	\]
+	Computing $\nabla f$ and $\nabla h$ our system becomes
+	\[
+		\begin{cases}
+			2x-4=2\lambda x\\
+			2y-6=2\lambda y\\
+			x^2+y^2=1
+		\end{cases}.
+	\]
+	We don't actually care about what $\lambda$ is, so we can quickly eliminate it from the equations.
+	Assuming that $x\neq 0$ and $y\neq 0$ we obtain
+	\[
+		\frac{2x-4}{2x}=\lambda =\frac{2y-6}{2y}
+	\]
+	and so $y=\tfrac{3}{2}x$.  Since we also have $x^2+y^2=1$ we have candidate local
+	extremes at $(x,y)=(\tfrac{2}{\sqrt{13}},
+	\tfrac{3}{\sqrt{13}})$ or $(x,y)=(-\tfrac{2}{\sqrt{13}},-\tfrac{3}{\sqrt{13}})$.
+	Now we must handle the case where $x=0$ or $y=0$.  These cases give us
+	candidate points of $(x,y)=(0,\pm 1)$ or $(x,y)=(\pm 1,0)$.  Testing these six
+	points we see that a local minimum occurs at $(x,y)=(\tfrac{2}{\sqrt{13}},
+	\tfrac{3}{\sqrt{13}})$.
+\end{example}
+
 
 \begin{exercises}
 \end{exercises}
