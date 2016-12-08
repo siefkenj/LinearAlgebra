@@ -1,5 +1,111 @@
 \section{Multiple Integrals}
 
+Fundamentally, an integral is the result of chopping a region up into tiny
+pieces, adding all the pieces up again, and taking a limit as the size of
+the tiny pieces goes to zero.  Thus far, the domain of this procedure---the
+thing we chop into tiny pieces---has been a line or curve.  We will now consider
+integrating over multi-dimensional domains.
+
+Consider the motivating example of finding the area of a region in the plane.
+Let $\mathcal R\subseteq \R^2$ be the region below the line $y=1$ and above the
+curve $y=x^2$.  We wish to find the area of $\mathcal R$.
+
+Using the usual calculus strategy, we will chop $\mathcal R$ up into little rectangles
+of width $\Delta x$ and height $\Delta y$.  Then
+\[
+	\text{area of }\mathcal R \quad\approx \sum_{\text{tiny rectangles}}\text{area of tiny rectangle}
+\]
+and
+\[
+	\text{area of }\mathcal R =\lim_{\Delta x,\Delta y\to 0} \sum_{\text{tiny rectangles}}\text{area of tiny rectangle}.
+\]
+
+XXX Figure
+
+Using integral notation, we would write
+\[
+	\text{area of }\mathcal R=\int_{\mathcal R} \d A.
+\]
+Here $\d A$ represents a ``tiny area,'' the subscript $\mathcal R$ represents the region of integration,
+and the integral sign means we're adding things up.  In this case, we're finding area, so $\d A=1\d A$ is
+exactly what we're adding up.  In other situations we'll be adding up more complicated functions.
+
+This is all well and good, but how do we actually \emph{find} the area.  To do this, we'll
+need to convert $\int_{\mathcal R}\d A$ into a more traditional-looking integral---one that we
+know how to evaluate.
+
+Let's write down our sum more carefully.  We need to sum over all tiny rectangles that fit inside
+$\mathcal R$.  To do so, we can take a systematic approach: let's sum all the rectangles
+in a column first and then sum up all the columns.  The lower left corner of all 
+rectangles in a single column share a common $x$-coordinate.  Consider
+the column with lower left corner at $(x_0,?)$.  Counting, we see there
+are approximately $(1-x_0^2)/\Delta y$ such rectangles.  Further, there are approximately
+$2/\Delta x$ columns.  Therefore,
+\[
+	\text{area of }\mathcal R\approx 
+	\sum_{i=1}^{2/\Delta x}\quad\sum_{j=1}^{(1-(-1+i\Delta x)^2)/\Delta y} \Delta y\Delta x.
+\]
+That sum is really hard to parse, so we'll write it another way.
+\[
+	\text{area of }\mathcal R\approx
+	\sum_{x_0=-1,-1+\Delta x,-1+2\Delta x,\ldots,1}
+	\quad
+	\sum_{y_0=x_0^2,x_0^2+\Delta y,x_0^2+2\Delta y,1}
+	\Delta y\Delta x.
+\]
+This is still hard to read, but it's looking more like an integral.  The inner sum
+is adding up things from $y_0=x_0^2$ to $y_0=1$ and the outer sum is adding up
+things from $x_0=-1$ to $x_0=1$.  Upon taking a limit, this directly translates to an
+integral, giving
+\begin{equation}
+	\label{EQITERATEDINT}
+	\text{area of }\mathcal R\quad
+	=\quad
+	\int_{\mathcal R}\d A \quad =\quad \int_{x=-1}^{x=1}\int_{y=x^2}^{y=1} \d y\d x.
+\end{equation}
+Now, we should take a moment to make sure we understand what we've just written.  The
+right side of Equation \eqref{EQITERATEDINT} is an \emph{iterated integral}\index{iterated integral}.
+That is,
+\[
+	\int_{x=-1}^{x=1}\int_{y=x^2}^{y=1} \d y\d x
+	\quad 
+	=
+	\quad \int_{x=-1}^{x=1}\left(\int_{y=x^2}^{y=1} \d y\right)\d x
+\]
+and so the integral with respect to $y$ \emph{must} be done before the integral with respect to $x$.
+To be clear, $\d y$ and $\d x$ are \emph{not} being multiplied.  However, $\Delta y$ and $\Delta x$ 
+\emph{were} being multiplied in our sum expression.  What happened?  The answer is some slight of
+hand.  The full thought process should look like
+\[
+	\lim_{\Delta x,\Delta y\to 0} \sum_{x_i}\sum_{y_i} \Delta y\Delta x
+	=
+	\lim_{\Delta x,\Delta y\to 0} \sum_{x_i}\left(\sum_{y_i} \Delta y\right)\Delta x
+	=\int_{x=-1}^{x=1}\left(\int_{y=x^2}^{y=1} \d y\right)\d x.
+\]
+
+Now we can evaluate this iterated integral to conclude
+\[
+	\text{area of }\mathcal R
+	\quad
+	=\quad
+	\int_{\mathcal R}\d A \quad=\quad 
+	\int_{x=-1}^{x=1}\left(\int_{y=x^2}^{y=1} \d y\right)\d x \quad=\quad
+	\tfrac{4}{3}.
+\]
+But, there was another way we could have divided up our original sum.  We could have summed
+along rows first and then summed up each row.  Working from this approach, we see
+\[
+	\lim_{\Delta x,\Delta y\to 0} \sum_{y_i}\sum_{x_i} \Delta x\Delta y
+	=
+	\lim_{\Delta x,\Delta y\to 0} \sum_{y_i}\left(\sum_{x_i} \Delta x\right)\Delta y
+	=\int_{y=0}^{y=1}\left(\int_{x=-\sqrt{y}}^{x=\sqrt{y}} \d x\right)\d y.
+\]
+Computing this integral, we again get $4/3$, as expected.
+
+
+
+\subsection{Integral Notation}
+
 \section{The Volume Form}
 
 \section{Surface Integrals}

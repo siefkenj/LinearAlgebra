@@ -5,31 +5,27 @@ $f(x,y)$ of two independent
 variables and functions $f(x,y,z)$ of three independent
 variables.   However, in general, we need to consider functions
 $f(x_1, x_2, \dots, x_n)$ of any number 
-of independent variables.   We shall use the notation $\R^n$ as
-before to stand for the set of all $n$-tuples $(x_1,x_2,\dots,x_n)$
-with real entries $x_i$.  For $n = 2$, we shall identify 
-$\R^2$ with the plane and, for $n = 3$, we shall identify $\R^3$
-with space.   We shall use the old fashioned term \emph{locus}
+of independent variables.   Recall, $\R^n$ stands
+for the set of all $n$-tuples $(x_1,x_2,\dots,x_n)$
+with real entries $x_i$.  We shall use the old fashioned term \emph{locus}\index{locus}
 to denote the set of all points satisfying some equation or condition.
-\index{locus}
-  
 
 \section{Graphing in Many Variables}
 
 We shall encounter equations involving two, three, or more variables.
 As you know, an equation of the form
 \[
-     f(x,y) = C
+     f(x,y) = c
 \]
 may be viewed as defining a curve in the plane.  For example,
-$ax + by = c$ has plane locus a line, while $x^2 + y^2 = R^2$
-has plane locus a circle of radius $R$ centered at the origin.
+$ax + by = c$ defines a line in $\R^2$, while $x^2 + y^2 = r^2$
+defines a circle of radius $r$ centered at the origin.
 Similarly, an equation involving three variables
 \[
-   f(x,y,z) = C
+   f(x,y,z) = c
 \]
 may be thought of as defining a \emph{surface} in space.
-Thus, we saw previously that the locus in $\R^3$ of a linear equation
+We saw previously that the locus in $\R^3$ of a linear equation
 \[
    ax + by + cz = d
 \]
@@ -39,12 +35,12 @@ use more complicated equations, we get more complicated surfaces.
 \begin{example}
 	The equation
 	\[
-	   x^2 + y^2 + z^2 = R^2
+	   x^2 + y^2 + z^2 = r^2
 	\]
 	may be rewritten $\norm{\vec r} = \sqrt{x^2 + y^2 + z^2} = R$, so it
 	asserts that the point with position vector $\vec r$ is at distance
-	$R$ from the origin.  Hence, the locus of all such points is a
-	\emph{sphere} of radius $R$ centered at the origin.
+	$r$ from the origin.  Hence, the locus of all such points is a
+	\emph{sphere} of radius $r$ centered at the origin.
 \end{example}
 
 \begin{example}
@@ -68,11 +64,11 @@ use more complicated equations, we get more complicated surfaces.
 	Consider the locus of the equation $z = x^2 + y^2$ (which could
 	also be written $x^2 + y^2 - z = 0$).  To see what this looks like,
 	we consider its intersection with various planes.   Its intersection
-	with the $y,z$-plane is obtained by setting $x = 0$ to get
-	$z = y^2$.  This is a parabola in the $y,z$-plane.  
-	Similarly, its intersection with the $x,z$-plane is the parabola
+	with the $yz$-plane is obtained by setting $x = 0$ to get
+	$z = y^2$.  This is a parabola in the $yz$-plane.  
+	Similarly, its intersection with the $xz$-plane is the parabola
 	given by $z = x^2$.   To fill in the picture,  consider
-	intersections with planes parallel to the $x,y$-plane.  Any
+	intersections with planes parallel to the $xy$-plane.  Any
 	such plane has the equation $z = h$, so the intersection has the equation
 	$x^2 + y^2 = h = (\sqrt h)^2$, which you should recognize as a circle
 	of radius $\sqrt h$, if $h > 0$.  Note that the circle is
@@ -80,9 +76,24 @@ use more complicated equations, we get more complicated surfaces.
 	If $z = h = 0$, then the circle reduces to a single point, and for 
 	$z = h < 0$, there is no locus.
 	The surface is ``bowl'' shaped and is called a \emph{circular
-	paraboloid}.
+	paraboloid}\index{paraboloid}.
 
-	XXX Figure
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper
+		    %width=12cm,
+		    %scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    %xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    ]
+		    \addplot3[surf, domain=-4:4, samples=30]{x*x+y*y};
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 Graphing a surface in $\R^3$ by sketching its traces on various
@@ -96,13 +107,33 @@ Chapter 10 is a good reference for this material.
 \begin{example}
 	Consider the locus in space of $\displaystyle{\frac{x^2}4 +
 	\frac{y^2} 9} = 1$.   Its intersection with a plane $z = h$
-	parallel to the $x,y$-plane is an ellipse centered on the $z$-axis
+	parallel to the $xy$-plane is an ellipse centered on the $z$-axis
 	and with semi-minor and semi-major axes  2 and 3, respectively.   The surface
-	is a \emph{cylinder} perpendicular to the $x,y$-plane with
+	is a \emph{cylinder} perpendicular to the $xy$-plane with
 	elliptical cross sections.
 	Note that the locus \emph{in space} is not just the ellipse
-	in the $x,y$-plane with the same equation.
+	in the $xy$-plane with the same equation.
 	
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper
+		    %width=12cm,
+		    %scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    %xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    ]
+		    \addplot3[surf, 
+		    z buffer=sort,samples=20,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=-2:3]
+			({2*cos(u)}, {3*sin(u)}, {v});
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 	XXX Figure
 \end{example}
 
@@ -111,38 +142,89 @@ Chapter 10 is a good reference for this material.
 	$z = \dfrac 1{x^2 + y^2}$.   Its intersection with the plane $z = h$
 	(for $h > 0$) is the circle with equation
 	$ x^2 + y^2 = 1/h = (\sqrt{1/h})^2$.   The surface does not intersect
-	the $x,y$-plane itself ($z = 0$) nor any plane below the $x,y$-plane.
-	Its intersection with the $x,z$-plane ($y = 0$) is the curve
+	the $xy$-plane itself ($z = 0$) nor any plane below the $xy$-plane.
+	Its intersection with the $xz$-plane ($y = 0$) is the curve
 	$z = 1/x^2$, which is asymptotic to the $x$-axis
 	and to the positive $z$-axis.  Similarly, for its intersection
-	with the $y,z$-plane,   the surface flattens out and approaches the
-	$x,y$-plane as $r = \sqrt{x^2 + y^2} \to \infty$.  It approaches the
+	with the $yz$-plane,   the surface flattens out and approaches the
+	$xy$-plane as $r = \sqrt{x^2 + y^2} \to \infty$.  It approaches the
 	positive $z$-axis as $r \to 0$.
+
+
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/hot,
+		    %width=12cm,
+		    %scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    %xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    restrict z to domain=0:5
+		    ]
+		    %\addplot3[surf, domain=-4:4, samples=30]{1/(x*x+y*y)};
+		    \addplot3[surf, 
+		    z buffer=sort,samples=20, samples y=35,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=.2:4]
+			({v*cos(u)}, {v*sin(u)}, {1/(v*v)});
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 \begin{example}
 	Consider the locus in space of the equation $yz = 1$.   Its intersection
-	with a plane parallel to the $y,z$-plane ($x = d$) is a hyperbola
+	with a plane parallel to the $yz$-plane ($x = d$) is a hyperbola
 	asymptotic to the $y$ and $z$ axes.  The surface is perpendicular
-	to the $y,z$-plane.  Such a surface is also called a \emph{cylinder},
+	to the $yz$-plane.  Such a surface is also called a \emph{cylinder},
 	although it doesn't close upon itself as the elliptical cylinder considered
 	above.
 \end{example}
 
 \begin{example}
 	Consider the locus of the equation $x^2 + z^2 = y^2 - 1$.  For
-	each plane parallel to the $x,z$-plane ($y = c$), the intersection
-	is a circle $x^2 + z^2 = c^2 - 1 = (\sqrt{c^2 - 1})^2$ centered
+	each plane parallel to the $xz$-plane ($y = c$), the intersection
+	is a circle $x^2 + z^2 = c^2 - 1 = \left(\sqrt{c^2 - 1}\right)^2$ centered
 	on the $y$-axis, at least of $c^2 > 1$.  For $y = c = \pm 1$,
 	the locus is a point, and for $-1 < y = c < 1$, the locus is
 	empty.   In addition, the intersection of the surface with the
-	$x,y$-plane ($z = 0$) is the hyperbola with equation $x^2 - y^2
-	 = -1$, and similarly for its intersection with the $y,z$-plane.
+	$xy$-plane ($z = 0$) is the hyperbola with equation $x^2 - y^2
+	 = -1$, and similarly for its intersection with the $yz$-plane.
 	The surface comes in two pieces which open up as ``bowls'' centered
 	on the positive and negative $y$-axes.   The surface is called
 	a \emph{hyperboloid of 2 sheets}.    
-
-	XXX Figure
+	
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={60}{40},z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper,
+		    %width=12cm,
+		    %scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    %xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    ]
+		    %\addplot3[surf, domain=-4:4, samples=30]{1/(x*x+y*y)};
+		    \addplot3[surf, 
+		    z buffer=sort,samples=40, samples y=15,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=0:4]
+			({v*cos(u)}, {sqrt(v*v+1)}, {v*sin(u)});
+		    \addplot3[surf, 
+		    z buffer=sort,samples=40, samples y=15,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=0:4]
+			({v*cos(u)}, {-sqrt(v*v+1)}, {v*sin(u)});
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 \subsection{Graphing Functions}
@@ -192,19 +274,44 @@ such points must be excluded).
 	Let $f(x,y) = xy$ for all $(x,y)$ in $\R^2$.    The graph is the
 	locus of the equation $z = xy$.  We can sketch it by considering
 	traces on various planes.  Its intersection with a plane parallel
-	to the $x,y$-plane ($z =$ constant) is a hyperbola asymptotic to
+	to the $xy$-plane ($z =$ constant) is a hyperbola asymptotic to
 	lines parallel to the $x$ and $y$ axes.   For $z > 0$, the hyperbola
 	is in the first and third quadrants of the plane, but for
 	$z < 0$, it is in the second and fourth quadrants.  For $z = 0$,
 	the equation is $xy = 0$ with locus consisting of the $x$-axis
 	($y = 0$) and the $y$-axis ($x = 0$).   Thus, the graph intersects
-	the $x,y$-plane in two straight lines.  The surface is generally
+	the $xy$-plane in two straight lines.  The surface is generally
 	shaped like an ``infinite saddle.''  It is called a {\it hyperbolic
 	paraboloid}.  It is clear where the term ``hyperbolic'' comes from.
 	Can you see any parabolas?  (Hint: Try planes perpendicular to
-	the $x,y$-plane with equations of the form  $y = mx$).
+	the $xy$-plane with equations of the form  $y = mx$).
 
-	XXX Figure
+	%\begin{center}
+	%\begin{tikzpicture}
+	%    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
+	%	    colormap/copper,
+	%	    unbounded coords=jump,
+	%	    restrict y to domain=-6:6
+	%	    ]
+	%	    \addplot3[surf, domain=-4:4, samples=50]({x}, {1/x}, {1});
+	%	    \addplot3[surf, domain=-4:4, samples=50]({x}, {2/x}, {2});
+	%	    \addplot3[surf, domain=-4:4, samples=50]({x}, {3/x}, {3});
+	%	    \addplot3[surf, domain=-4:4, samples=50]({x}, {-1/x}, {-1});
+	%	    \addplot3[surf, domain=-4:4, samples=50]({x}, {-2/x}, {-2});
+	%	    \addplot3[surf, domain=-4:4, samples=50]({x}, {-3/x}, {-3});
+	%    \end{axis}
+	%  \end{tikzpicture}
+	%\end{center}
+	
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
+		    colormap/copper
+		    ]
+		    \addplot3[surf, domain=-4:4, samples=30]{x*y};
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 \begin{example}
@@ -349,7 +456,7 @@ If the signs are different, the surface is called a {\it
 hyperbolic paraboloid}.  Its intersection with planes perpendicular
 to the $z$-axis are hyperbolas asymptotic to the lines in
 those planes parallel to the lines $x/a = \pm y/b$.   Its intersection
-with the $x,y$-plane is just those two lines.  The surface has
+with the $xy$-plane is just those two lines.  The surface has
 a saddle point at the origin.
 \index{hyperbolic paraboloid}
 \index{paraboloid, hyperbolic}
@@ -357,7 +464,7 @@ a saddle point at the origin.
 
 
 The locus of the equation $z = cxy, c\not= 0$ is also a hyperbolic
-paraboloid, but rotated so it intersects the $x,y$-plane in the
+paraboloid, but rotated so it intersects the $xy$-plane in the
 $x$ and $y$ axes. 
 
 XXX Figure
