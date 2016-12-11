@@ -1,4 +1,4 @@
-\section{Multiple Integrals}
+\section{Multivariable Integrals}
 
 Fundamentally, an integral is the result of chopping a region up into tiny
 pieces, adding all the pieces up again, and taking a limit as the size of
@@ -39,11 +39,11 @@ $\mathcal R$.  To do so, we can take a systematic approach: let's sum all the re
 in a column first and then sum up all the columns.  The lower left corner of all 
 rectangles in a single column share a common $x$-coordinate.  Consider
 the column with lower left corner at $(x_0,?)$.  Counting, we see there
-are approximately $(1-x_0^2)/\Delta y$ such rectangles.  Further, there are approximately
+are approximately $(1-x_0^2)/\Delta y$ rectangle in this column.  Further, there are approximately
 $2/\Delta x$ columns.  Therefore,
 \[
 	\text{area of }\mathcal R\approx 
-	\sum_{i=1}^{2/\Delta x}\quad\sum_{j=1}^{(1-(-1+i\Delta x)^2)/\Delta y} \Delta y\Delta x.
+	\sum_{i=1}^{2/\Delta x}\quad\sum_{j=1}^{(1-(i\Delta x)^2)/\Delta y} \Delta y\Delta x.
 \]
 That sum is really hard to parse, so we'll write it another way.
 \[
@@ -55,7 +55,7 @@ That sum is really hard to parse, so we'll write it another way.
 \]
 This is still hard to read, but it's looking more like an integral.  The inner sum
 is adding up things from $y_0=x_0^2$ to $y_0=1$ and the outer sum is adding up
-things from $x_0=-1$ to $x_0=1$.  Upon taking a limit, this directly translates to an
+things from $x_0=-1$ to $x_0=1$.  Upon taking a limit, we may rewrite this as an
 integral, giving
 \begin{equation}
 	\label{EQITERATEDINT}
@@ -75,7 +75,10 @@ That is,
 and so the integral with respect to $y$ \emph{must} be done before the integral with respect to $x$.
 To be clear, $\d y$ and $\d x$ are \emph{not} being multiplied.  However, $\Delta y$ and $\Delta x$ 
 \emph{were} being multiplied in our sum expression.  What happened?  The answer is some slight of
-hand.  The full thought process should look like
+hand.  We can write a more complete list of steps:\footnote{ Even still, we skipped steps.
+In particular, we split up $\lim_{\Delta x,\Delta y\to 0}$ into two limits 
+$\lim_{\Delta x\to 0}\lim_{\Delta y\to 0}$.  Then, we exchanged a limit and a sum.  These
+steps require justification, but we won't trouble ourselves with that here.}
 \[
 	\lim_{\Delta x,\Delta y\to 0} \sum_{x_i}\sum_{y_i} \Delta y\Delta x
 	=
@@ -102,10 +105,524 @@ along rows first and then summed up each row.  Working from this approach, we se
 \]
 Computing this integral, we again get $4/3$, as expected.
 
+We can use very similar reasoning to turn integrals of other functions
+over regions into iterated integrals that we already know how to evaluate.
 
+\begin{example}
+	Let $f(x,y) = x^2 + y^2$,
+	and let $\mathcal D$ be the region between the
+	parabola $x = y^2$ on the left and the line $x = y + 2$
+	on the right.  These curves intersect when $y^2=y+2$.  In
+	other words, the curves intersect when $y=2$ or $y=1$.  Thus,
+	$\mathcal D$ 
+	also lies between $y = -1$ below and $y = 2$
+	above.   
+
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+	    	\addplot[name path=f,no marks,mypink,thick,domain=-1:2, samples=25, draw=none] ({x*x},{x});
+	    	\addplot[no marks,mypink,thick,domain=-2:3, samples=25] ({x*x},{x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-2:5, samples=2] ({x+2},{x});
+		\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split];
+		\draw (1,0) node[above] {$\mathcal D$};
+		\draw [mypink,fill] (A)  node [above left] {$x=y^2$};
+		\draw [green!50!black,fill] (3,1)  node [below right] {$x=y+2$};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+	Thus
+	\begin{align*}
+		\int_{\mathcal D} f\, \d A &= 
+		\int_{y=-1}^{y=2}\left(\int_{x = y^2}^{x=y+2} x^2 + y^2\, \d x\right) \d y \\
+	   &=\int_{-1}^2 \left( \left.\frac{x^3}3 + xy^2\right|_{x=y^2}^{x=y+2}\right) \d y \\
+	   &=\int_{-1}^2 \left(\frac {(y + 2)^3}3 + (y + 2)y^2 -
+	    \frac{y^6}3 - y^4 \right) \d y \\
+	   &=\left. \left(\frac {(y + 2)^4}{12} + \frac{y^4}4 + \frac{2y^3}3 -
+	    \frac{y^7}{21} - \frac{y^5}5 \right)\right|_{-1}^2 \\
+	   &=\tfrac{256}{12} + \tfrac{16}4 + \tfrac{16}3 - \tfrac{128}{21} - \tfrac{32}5
+	     - \tfrac 1{12} - \tfrac 14 + \tfrac 23 - \tfrac 1{21} - \tfrac 15 \\
+	   &=\tfrac{639}{35} \approx 18.26.
+	\end{align*}
+	Note that the region is also bounded vertically by graphs, so in
+	principle the integral could be evaluated in the other order.
+	However, there is a serious hindrance to trying this.
+	The top graph is that of  $y = h_{\text{top}}(x) = \sqrt x$,
+	 but the bottom
+	graph is described by two different formulas depending on what $x$
+	is.  It is a parabola to the left of the point $(1,-1)$ and a line
+	to the right of that point, so  
+	\[
+		h_{\text{bot}}(x) = \begin{cases}
+			-\sqrt{x} & \text{ if }0\leq x\leq 1\\
+			x-2 &\text{ if }1 < x\leq 4
+			\end{cases}.
+	\]
+
+\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,}
+		]
+
+	    	\addplot[name path=f,no marks,mypink,thick,domain=-1:2, samples=25, draw=none] ({x*x},{x});
+	    	\addplot[no marks,mypink,thick,domain=0:3, samples=25] ({x*x},{x});
+	    	\addplot[no marks,blue,thick,domain=-2:0, samples=25] ({x*x},{x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-2:5, samples=2] ({x+2},{x});
+		\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split];
+
+		\addplot[color=gray, dashed, thick, domain=-3:3] ({1},{x});
+		\draw (1.2,0) node[above right] {$\mathcal D$};
+		\draw [mypink,fill=white] (A)  node [above left] {$y=\sqrt{x}$};
+		\draw [blue,fill=white] (.5,-1)  node [left] {$y=-\sqrt{x}$};
+		\draw [green!50!black,fill] (3,1)  node [below right] {$y=x+2$};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+	(The $x$-values at the relevant points are determined from the corresponding
+	$y$-values which were calculated above.)  That means to actually
+	compute the integral we must decompose the region
+	$\mathcal D$ into two subregions meeting along the line $x = 1$ and treat each
+	one separately.   Doing so,
+	\[
+		\int_{\mathcal D} f\, \d A
+	=
+	\int_{x=0}^{x=1}\left(\int_{y = -\sqrt x}^{y= \sqrt x} x^2 + y^2\, \d y\right) \d x 
+	+
+	\int_{x=1}^{x=4}\left(\int_{y = x-2}^{y= \sqrt x} x^2 + y^2\, \d y\right) \d x .
+	\]
+	You should work out the two iterated integrals on the right just to check
+	that their sum gives the same answer as above.
+
+\end{example}
 
 \subsection{Integral Notation}
 
+In single-variable calculus, you used the notation $\tfrac{\d}{\d x}f(x)=\tfrac{\d f}{\d x}(x)$ 
+to represent the derivative
+of the function $f$ and $\int_{a}^b f(x)\d x$ to represent the integral from $a$ to $b$ of the function
+$f$.  This notation was invented by Gottfried Leibniz in the 1600s and was inspired by geometric thinking.
+Though the infinitely large and infinitely small need to be handled with mathematical care,
+the idea that ``$\d x$'' represents and infinitesimally small change in the variable $x$ gives
+rise to fruitful intuitions.
+
+We will extend on this idea.  Consider $f:\R^n\to\R$ and a region $\mathcal R\subseteq \R^n$.
+We will write
+\[
+	\int_{\mathcal R} f\,\d V
+\]
+to notate \emph{the integral of $f$ over the region $\mathcal R$ with respect to volume}.
+If $f:\R^2\to\R$, we may write $\d A$ in place of $\d V$, since a two-dimensional volume
+is traditionally called an area.  If the context is clear, we might even omit the $\d V$
+entirely, opting to write
+\[
+	\int_{\mathcal R} f.
+\]
+
+This notation can replace single-variable calculus notation.  For example
+\[
+	\int_a^b f(x)\,\d x = \int_{[a,b]} f.
+\]
+As always, the purpose of notation is to facilitate our thinking, not to be a formal grammar\footnote{
+	Sometimes notation's dual purpose is to be a formal grammar.  For instance,
+	most programming languages could be though of as very stringent 
+	systems of notation.}, and so you should use whatever notation
+most clearly conveys your thoughts.  For us, $\int_{\mathcal R}f$ will often suffice.
+
+When we write iterated integrals, we will omit parenthesis.  For example, we write
+\[
+	\int \left(\int f(x,y)\,\d x\right)\d y\qquad\text{as}\qquad \int \int f(x,y)\,\d x\d y,
+\]
+and to keep ourselves from getting the bounds of integration mixed up, we will label
+the bounds of integration for iterated integrals with the variable they bound.  For example,
+we write
+\[
+	\int_{y=a}^{y=b}\int_{x=c}^{x=d} f(x,y)\,\d x\d y\qquad\text{instead of}\qquad
+	\int_{a}^{b}\int_{c}^{d} f(x,y)\,\d x\d y.
+\]
+This will prevent us from becoming confused when we swap the order of integration.
+
+Finally, it is worth being aware of other notation that you might encounter.  For example,
+some textbooks write
+\[
+	\iint f\,\d A\qquad\text{and}\qquad \iiint f\,\d V
+\]
+for integrals with respect to area and volume.  The motivation being that the number of integral
+signs should match the number of dimensions you're integrating over.
+
+\subsection{Iterated Integrals}
+
+We've already seen how an integral over a region can be turned into an iterated
+integral in multiple ways.  We will turn this into a technique for evaluating
+some difficult iterated integrals.  Namely, if we are given an iterated integral,
+we can try to convert it into an integral over a region, and then convert it back to a different
+iterated integral.
+
+\begin{example}
+	Consider the iterated integral
+	\[
+		\int_{x=0}^{x=1}\int_{y=x}^{y=1} \frac{\sin y}{y}\d y \d x.
+	\]
+	This is the iterated integral obtained from the double integral
+	of the function $f(x,y) = \sin y/y$ for the triangular
+	region $\mathcal D$ contained
+	between the vertical lines  $x = 0, x = 1$, the line
+	$y = x$ below, and the line $y = 1$ above.
+
+	XXX Figure
+
+	   The indefinite
+	integral (anti-derivative) 
+	\[
+	     \int \frac{\sin y}y dy
+	\]
+	{\it cannot be expressed in terms of known elementary functions}.
+	(Try to integrate it or look in an integral table if you don't
+	believe that.)   Hence, the iterated integral cannot be evaluated
+	by anti-derivatives.  However, the triangular region may be
+	described just as well by bounding it horizontally by graphs:
+	it lies between $y = 0$ and $y = 1$ and for each $y$ between
+
+	XXX Figure
+
+	$x = 0$ and $x = y$.  
+	 Thus, the double integral can be evaluated
+	from the  iterated integral
+	\begin{align*}
+		\int_{y=0}^{y=1}\int_{x=0}^{x=y}\frac{\sin y}y\d x\d y &=
+		\int_0^1\, \left. \frac{\sin y}y x\right|_{x=0}^{x=y}\, \d y  \\
+		&= \int_0^1\,  \frac{\sin y}y y\, \d y
+		= \int_0^1\ \sin y\, \d y  \\
+		&= \left. -\cos y\right|_0^1 = 1 - \cos 1.
+	\end{align*}
+
+	Note that in order to set up the iterated integral in the other
+	order, \emph{we had to draw a diagram} and work directly from
+	that.   \emph{There are no algebraic rules which will allow you
+	to switch orders without using a diagram.}
+\end{example}
+
+Swapping the order of integration is a neat trick, and if an
+iterated integral comes from the integral of some function over a
+region, then we can always swap the order of integration\footnote{ Depending
+on how we define things, this may be a circular argument.  In our definition
+of an integral over a region, we had to sum up a bunch of tiny areas in an unspecified
+order.  We might \emph{define} this to make sense only if every possible order we could
+sum results in the same number.}.  However, if we're given an iterated integral,
+a priori, we don't know that we can swap the order of integration.
+
+\begin{example}
+	Let $f(x,y)=\frac{x^2-y^2}{(x^2+y^2)^2} = 
+	-\tfrac{\partial}{\partial x}\left(\tfrac{\partial}{\partial y}\arctan(y/x)\right)$.  Now,
+	\[
+		\int_{x=0}^{x=1}\int_{y=1}^{y=1} f(x,y)\,\d y\d x = \frac{\pi}{4}
+	\]
+	and
+	\[
+		\int_{y=0}^{y=1}\int_{x=1}^{x=1} f(x,y)\,\d x\d y = -\frac{\pi}{4}.
+	\]
+	The order of integration matters for $f$ and so the iterated integrals $\iint f\, \d x\d y$
+	and $\iint f\,\d y\d x$ cannot have come from the integration of $f$ over a region---an
+	integral of $f$ over a region cannot be reasonably defined.
+\end{example}
+
+For us, it will be uncommon to come across iterated integrals where the order of integration
+cannot be changed.  However, the following theorem from analysis gives us explicit conditions
+for when it is okay.
+
+\begin{theorem}[Fubini's Theorem]
+	Let $f:\R^2\to R$ and suppose that 
+	\[
+		\int_{x=a}^{x=b}\int_{y=c}^{y=d} \abs{f(x,y)}\,\d y\d x < \infty.
+	\]
+	Then,
+	\[
+		\int_{x=a}^{x=b}\int_{y=c}^{y=d} f(x,y)\,\d y\d x =
+		\int_{y=c}^{y=d}\int_{x=b}^{x=a} f(x,y)\,\d x\d y.
+	\]
+\end{theorem}\index{Fubini's Theorem}
+
+\begin{exercises}
+\end{exercises}
+
 \section{The Volume Form}
 
+Let $f:\R^2\to \R$ and $\mathcal D\subseteq \R^2$ be the unit disk centered at the origin.
+If we wanted to compute $\int_{\mathcal D} f\,\d A$, we could split this up into an iterated
+integral like so:
+\[
+	\int_{\mathcal D} f\,\d A = \int_{x=-1}^{x=1}\int_{y=-\sqrt{1-x^2}}^{y=\sqrt{1-x^2}} f(x,y)\,\d y\d x.
+\]
+However, the thought of integrating square roots is painful.  Especially, when $\mathcal D$ has
+a simple description in polar coordinates.  If we could use polar coordinates, our iterated
+integral might look more like $\int_{\theta=0}^{\theta=2\pi}\int_{r=0}^{r=1} f$.  Much less intimidating!
+
+Let's see if we can figure out how to integrate in polar coordinates.  The principle should be the same.
+If we divide $\mathcal D$ into tiny \emph{sectors}, then
+\[
+	\int_{\mathcal D} f\,\d A =\lim_{\text{sector size}\to 0} \sum_{\text{sectors}\ \in\ \mathcal D} (\text{sector
+	area})f(\text{sector location}).
+\]
+When we previously used iterated integrals to compute integrals over regions, we chopped 
+our region into little rectangles of width $\Delta x$ and height $\Delta y$.  This meant
+that the area of each sector was $\Delta x\Delta y$, and so we had the formula
+\[
+	\int_{\mathcal D} f\,\d A =\lim_{\text{sector size}\to 0} \sum_{\text{sectors}\ \in\ \mathcal D} 
+	(\Delta x\Delta y) f(x,y).
+\]
+For polar coordinates\index{polar coordinates}, 
+the natural way to chop up $\mathcal D$ is not into rectangles, but
+into \emph{annular sectors}.
+
+XXX Figure comparing rectangular chopping and annular sector chopping.
+
+When we compute the exact area of the annular sector between the curves
+$\theta=\theta_0$, $\theta=\theta_0+\Delta\theta$, $r=r_0$, and $r=r_0+\Delta r$, 
+we get 
+\[
+	\text{annular sector area} = r_0\Delta r\Delta \theta + \tfrac{1}{2}\Delta\theta(\Delta r)^2.
+\]
+The first thing to note is that the quantity $r_0$ shows up in the area formula.  
+This makes sense, because if you fix two $\theta$ values, the further ``out'' (i.e., the larger
+$r_0$ is) you are, the larger the area.  This didn't happen in rectangular coordinates---all the rectangular
+sectors had exactly the same area.
+
+Now, just as before, we can write a sum expression for our integral.
+\begin{equation}
+	\label{EQPOLARSUM}
+	\int_{\mathcal D} f\,\d A =\lim_{\Delta r,\Delta \theta\to 0}
+	\sum_{r=0,\Delta r,2\Delta r,\ldots,1}\ \ \sum_{\theta=0,\Delta\theta,
+	2\Delta\theta, \ldots, 2\pi} \Big(
+		r\Delta r\Delta \theta + \tfrac{1}{2}\Delta\theta(\Delta r)^2
+	\Big)f(r,\theta)
+\end{equation}
+However, it isn't clear how to rewrite Equation \eqref{EQPOLARSUM} as an iterated integral
+for easy evaluation.
+
+\subsection{Order Analysis}
+We can rewrite Equation \eqref{EQPOLARSUM} into one that looks more like a Riemann sum by
+doing some \emph{order analysis}\index{order analysis}.  Order analysis allows us to determine
+with precision
+which parts of an expression become negligible and which parts are non-negligible.  Often
+times order analysis will show that we can ignore or erase large parts of a formula and still
+get the correct answer in the end.
+
+
+Consider the right hand side of Equation \eqref{EQPOLARSUM}.
+\[
+	\lim_{\Delta r,\Delta \theta\to 0}
+	\sum_{r=0,\Delta r,2\Delta r,\ldots,1}\ \ \sum_{\theta=0,\Delta\theta,
+	2\Delta\theta, \ldots, 2\pi} \Big(
+		r\Delta r\Delta \theta + \tfrac{1}{2}\Delta\theta(\Delta r)^2
+	\Big)f(r,\theta)
+\]
+In this expression, both $\Delta r$
+and $\Delta \theta$ are tending towards $0$ and so 
+\[
+	r\Delta r\Delta \theta + \tfrac{1}{2}\Delta\theta(\Delta r)^2\to 0.
+\]
+But, we don't expect the entire limit to go to zero because as $\Delta\theta$ and $\Delta r$
+get smaller, each of the two sums get more and more terms.  The outer sum will have roughly
+$1/\Delta r$ terms and the inner sum will have roughly $1/\Delta \theta$ terms\footnote{
+We say roughly because the number of terms involved is always an integer and the quantities
+$1/\Delta r$ and $1/\Delta \theta$ may not be integers.
+}.  
+Now, $\sum_{i=1}^n K=nK$ if $K$ is a constant.  The inside of our sums are not constant, but if
+they were bounded, we could replace them with constants and apply squeeze-theorem arguments to them.
+For order analysis, since we are only interested in whether a term
+\emph{must} go to zero, we bypass the detailed squeeze theorem arguments 
+by just imagining all terms inside our sum are constant and seeing what happens.
+To proceed, we first split up
+our sum to figure out which parts are negligible.
+\[
+			\sum_{r=0,\Delta r,2\Delta r,\ldots,1}\ \ \sum_{\theta=0,\Delta\theta,
+	2\Delta\theta, \ldots, 2\pi} \Big(
+		r\Delta r\Delta \theta + \tfrac{1}{2}\Delta\theta(\Delta r)^2
+		\Big)f(r,\theta)
+\]
+\[
+	\phantom{XXXXXXXX}=\sum_{\theta}\sum_{r} r\Delta r\Delta \theta f(r,\theta)
+	+ 
+		\sum_{\theta}\sum_{r} \tfrac{1}{2}(\Delta r)^2\Delta \theta f(r,\theta)
+\]
+Doing order analysis on the first part of the sum, we see
+\begin{align*}
+	\lim_{\Delta r,\Delta\theta\to 0}
+	\sum_{\theta}\sum_{r} r\Delta r\Delta \theta f(r,\theta)
+	&\sim
+	\lim_{\Delta r,\Delta\theta\to 0}
+	\frac{1}{\Delta r}\left(\frac{1}{\Delta \theta} r\Delta r\Delta\theta f(r,\theta)\right)\\
+	&=rf(r,\theta),
+\end{align*}
+where $\sim$ means \emph{order equivalent}\footnote{ There is a formal theory of
+order equivalence and a slew of specialized notations.  We don't need those formalities
+right now.}.  Since this term is not order-equivalent to zero, it is non-negligible, and so 
+we must keep it.  
+
+Analyzing the other component of the sum, we see a different story:
+\begin{align*}
+	\lim_{\Delta r,\Delta\theta\to 0}
+	\sum_{\theta}\sum_{r} \tfrac{1}{2}(\Delta r)^2\Delta \theta f(r,\theta)
+	&\sim
+	\lim_{\Delta r,\Delta\theta\to 0}
+	\frac{1}{\Delta r}\left(\frac{1}{\Delta \theta} \tfrac{1}{2}(\Delta r)^2\Delta\theta f(r,\theta)\right)\\
+	&=\lim_{\Delta r,\Delta\theta \to 0}\tfrac{1}{2}\Delta rf(r,\theta) = 0,
+\end{align*}
+and so this part of the sum \emph{is} negligible.  We may therefore conclude,
+\[
+	\lim_{\Delta r,\Delta \theta\to 0}
+	\sum_{r=0,\Delta r,2\Delta r,\ldots,1}\ \ \sum_{\theta=0,\Delta\theta,
+	2\Delta\theta, \ldots, 2\pi} \Big(
+		r\Delta r\Delta \theta + \tfrac{1}{2}\Delta\theta(\Delta r)^2
+	\Big)f(r,\theta)
+\]
+\[
+	=\lim_{\Delta r,\Delta \theta\to 0}
+	\sum_{r=0,\Delta r,2\Delta r,\ldots,1}\ \ \sum_{\theta=0,\Delta\theta,
+	2\Delta\theta, \ldots, 2\pi} 
+		r\Delta r\Delta \theta f(r,\theta),
+\]
+which is looking a lot more line a Riemann sum that can be converted into an iterated integral.
+In fact, if $f$ is a reasonable function (for example, one where Fubini's theorem would hold),
+\[
+	\lim_{\Delta r,\Delta \theta\to 0}
+	\sum_{r=0,\Delta r,2\Delta r,\ldots,1}\ \ \sum_{\theta=0,\Delta\theta,
+	2\Delta\theta, \ldots, 2\pi} 
+		r\Delta r\Delta \theta f(r,\theta)
+		=\int_{\theta=0}^{\theta=2\pi}\int_{r=0}^{r=1}f(r,\theta)r\d r\d \theta.
+\]
+
+Order analysis can be very powerful, but we should take note about the assumptions we made.
+First off, for the order analysis that we did, we assume $f$ was \emph{bounded} on the region
+$\mathcal D$.  We could still do order analysis on an unbounded function, but it would take more 
+care\footnote{
+	Order analysis on $\sum_{i=1}^n i$ shows that it is order $n^2$, not order $n$.
+	This is because the part inside the sum, $i$, is not bounded.
+}.  Further, it'd be nice if there were a quicker way to come up with an iterated
+integral in various coordinate systems, rather than lugging around Riemann sums
+all the time---and there is.
+
+\subsection{The Volume Form}
+
+The \emph{volume form} is a formal way to rewrite integrals as iterated integrals
+with respect to different coordinate systems.  What is really does is give a way
+to relate areas or volumes described in a particular coordinate system to ``true''
+areas and volumes in Euclidean space---and if your mind is tingling with thoughts
+of parameterizations, you're on the right track.
+
+
+Let's think back to line integrals.  Suppose $\vec p:[a,b]\to\R^n$ is an
+arc-length parameterization
+of the curve $\mathcal S$. Then, if $f:\R^n\to\R$,
+\[
+	\int_{\mathcal S} f = \int_{a}^b f\circ \vec p(t) \d t.
+\]
+However, if $\vec q:[c,d]\to\R^n$ is a non-arc-length parameterization of $\mathcal S$, we have to
+use a different formula.  Namely,
+\[
+	\int_{\mathcal S} f = \int_{c}^d f\circ \vec q(t)\norm{\vec q\,'(t)} \d t.
+\]
+In this expression, $\norm{\vec q\,'(t)}$ compensates for the fact that as the parameter
+$t$ marches on, the arc-length traced out by $\vec q$ is non-uniform.  The volume form does
+the same thing but for parameterizations of multi-dimensional regions.
+
+
+\begin{definition}
+	Suppose $\mathcal F$ is a coordinate system for $\R^2$ with a relationship
+	to rectangular coordinates given by $(x,y)=\vec f(a,b)$.
+	The \emph{pre-volume form} associated with $\mathcal F$ at the point $(a,b)$
+	is written $\Delta V(a,b)$ and is defined to be the area of
+	$\vec f\big([a,a+\Delta a]\times [b,b+\Delta b]\big)$.
+	
+	The \emph{volume form} associated with $\mathcal F$ at the point $(a,b)$
+	is the infinitesimal $\d V(a,b)=V(a,b)\d a\d b$ where $V:\R^2\to\R$ is the 
+	unique function satisfying
+	\[
+		\lim_{\Delta a,\Delta b\to 0} \frac{\Delta V(a,b)}{V(a,b)\Delta a\Delta b}=1.
+	\]
+\end{definition}
+
+There are a few peculiarities in the definition of the volume form.
+First, the word ``infinitesimal'' shows up in the definition.  As of yet,
+this has not been a formal term for us.  Further, the volume form has
+``$\d a\d b$'' built into it.  This is because the term \emph{volume form}
+comes from the field of differential geometry.  In differential geometry,
+$\d a$ has a unique meaning all by itself and is called a \emph{differential form}.  For
+us, $\d a$  by itself has no precise
+meaning and only appears as a notational book-keeping device in integrals and derivatives.
+Of course, the intuitive meaning of $\d a$ is that it is an infinitesimal quantity.
+At this point, we won't dive into the details of how and why differential geometry and differential forms
+work, but we
+will use the language of differential geometry.
+
+\begin{example}
+	Compute the volume form for polar coordinates.
+
+	We know that $p:[0,\infty)\times [0,2\pi)\to\R^2$ given 
+	by $\vec p(r,\theta)=(r\cos\theta,r\sin\theta)$ converts from polar to rectangular
+	coordinates.  Further, we already computed the pre-volume form for polar
+	coordinates.  Namely, $\Delta V(r,\theta) = r\Delta r\Delta \theta+\tfrac{1}{2}(\Delta r)^2\Delta \theta$.
+
+	XXX Figure
+
+
+	To compute the volume form for polar coordinates, we need to find a function $V$ so that
+	\begin{align*}
+		\lim_{\Delta r,\Delta \theta\to 0}
+		\frac{r\Delta r\Delta \theta+\tfrac{1}{2}(\Delta r)^2\Delta \theta}{V(r,\theta)\Delta r\Delta\theta}
+		&=\lim_{\Delta r,\Delta \theta\to 0}
+		\frac{r}{V(r,\theta)} + \frac{\Delta r}{2V(r,\theta)}\\
+		&=\frac{r}{V(r,\theta)} = 1.
+	\end{align*}
+	There's a clear choice.  Namely, $V(r,\theta)=r$.  Therefore, the volume form for
+	polar coordinates is $r\d r\d \theta$.
+
+\end{example}
+
+\begin{exercises}
+\end{exercises}
+
 \section{Surface Integrals}
+
+\begin{exercises}
+\end{exercises}
