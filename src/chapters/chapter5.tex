@@ -10,6 +10,41 @@ Consider the motivating example of finding the area of a region in the plane.
 Let $\mathcal R\subseteq \R^2$ be the region below the line $y=1$ and above the
 curve $y=x^2$.  We wish to find the area of $\mathcal R$.
 
+
+\begin{center}
+	\begin{tikzpicture}
+
+		\begin{axis}[
+		    anchor=origin,
+		    set layers=standard,
+		    disabledatascaling,
+		    xmin=-2,xmax=2,
+		    ymin=-1,ymax=2,
+		    x=1.3cm,y=1.3cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+	    	\addplot[name path=f,no marks,mypink,thick,domain=-1:1, samples=25, draw=none] ({x},{x*x});
+	    	\addplot[no marks,mypink,thick,domain=-2:2, samples=25,smooth] ({x},{x*x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-3:3, samples=2] ({x},{1});
+		\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split];
+		\draw (0,.3) node[above right] {$\mathcal R$};
+		\draw [mypink,fill] (1.2,1)  node [above right] {$y=x^2$};
+		\draw [green!50!black,fill] (-2,1)  node [below right] {$y=1$};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
 Using the usual calculus strategy, we will chop $\mathcal R$ up into little rectangles
 of width $\Delta x$ and height $\Delta y$.  Then
 \[
@@ -20,7 +55,64 @@ and
 	\text{area of }\mathcal R =\lim_{\Delta x,\Delta y\to 0} \sum_{\text{tiny rectangles}}\text{area of tiny rectangle}.
 \]
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[x=2cm,y=2cm,
+]
+
+\begin{scope}[	spy using outlines={circle, lens={scale=4}, size=3cm, connect spies}]
+		\coordinate (A) at (.3,.15*4);
+		\coordinate (B) at (.4,.15*5);
+		\fill[gray,opacity=.5] (A) rectangle (B);
+
+
+		\begin{axis}[
+		    anchor=origin,
+		    set layers=standard,
+		    disabledatascaling,
+		    xmin=-1,xmax=1,
+		    ymin=0,ymax=1,
+		    x=2cm,y=2cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.4},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+	    	\addplot[name path=f,no marks,mypink,thick,domain=-1:1, samples=25, draw=none] ({x},{x*x});
+	    	\addplot[no marks,mypink,thick,domain=-2:2, samples=25,smooth] ({x},{x*x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-3:3, samples=2] ({x},{1});
+		\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split];
+
+		\end{axis}
+			\foreach \x in {-1,-.9,...,1} {
+				\draw ($(\x,1)$) -- ($(\x,\x*\x)$);
+			}
+			\foreach \y in {0,.15,...,1} {
+				\draw ({-\y^.5,\y}) -- ({\y^.5,\y});
+			}
+
+
+		\spy [blue] on ($.5*(A)+.5*(B)$)
+             in node (a) at (3,1);
+
+
+\end{scope}
+	\coordinate (L) at ($(a.center) - (.2,.3)$);
+\coordinate (R) at ($(a.center) - (-.2,.3)$);
+\coordinate (T) at ($(a.center) + (.2,.3)$);
+		\draw[decoration={brace, mirror}, decorate, mypink] ($(R)+(.03,0)$) -- ($(T)+(.03,0)$) node[midway, right] {$\Delta y$};
+\draw[decoration={brace, mirror}, decorate,mypink] ($(L)-(0,.03)$) -- ($(R)-(0,.03)$) node[midway, below] {$\Delta x$};
+
+		
+	\end{tikzpicture}
+\end{center}
+
 
 Using integral notation, we would write
 \[
@@ -38,8 +130,8 @@ Let's write down our sum more carefully.  We need to sum over all tiny rectangle
 $\mathcal R$.  To do so, we can take a systematic approach: let's sum all the rectangles
 in a column first and then sum up all the columns.  The lower left corner of all 
 rectangles in a single column share a common $x$-coordinate.  Consider
-the column with lower left corner at $(x_0,?)$.  Counting, we see there
-are approximately $(1-x_0^2)/\Delta y$ rectangle in this column.  Further, there are approximately
+the column with lower left corner at $(x_0,y_0)$.  Counting, we see there
+are approximately $(1-x_0^2)/\Delta y$ rectangles in this column.  Further, there are approximately
 $2/\Delta x$ columns.  Therefore,
 \[
 	\text{area of }\mathcal R\approx 
@@ -96,7 +188,7 @@ Now we can evaluate this iterated integral to conclude
 	\tfrac{4}{3}.
 \]
 But, there was another way we could have divided up our original sum.  We could have summed
-along rows first and then summed up each row.  Working from this approach, we see
+along rows first and then summed up each row.  Using this approach, we see
 \[
 	\lim_{\Delta x,\Delta y\to 0} \sum_{y_i}\sum_{x_i} \Delta x\Delta y
 	=
@@ -105,8 +197,37 @@ along rows first and then summed up each row.  Working from this approach, we se
 \]
 Computing this integral, we again get $4/3$, as expected.
 
-We can use very similar reasoning to turn integrals of other functions
-over regions into iterated integrals that we already know how to evaluate.
+Note that when we swapped the order of the sums (and hence the order of the integrals)
+the bounds changed.  This is worth considering carefully.
+
+When we integrate with respect to $y$ and then $x$, it means that we first imagine
+$x$ is fixed and we let $y$ vary between bounds (which may depend on the fixed $x$).
+When we integrate with respect to $x$ first, the situation is reversed.  Geometrically,
+it's easy to see why our bounds change.
+
+XXX Figure
+
+However, there's also an algebraic argument for why our bounds change.
+Suppose $(x,y)\in\mathcal R$.  Then $-1\leq x\leq 1$ and $x^2\leq y\leq 1$.  These were the
+bounds we used adding up along columns first.  However, we also know that $0\leq y\leq 1$
+and $-\sqrt{x}\leq y\leq \sqrt{x}$, which gives the bounds when adding up
+along rows first.  These two system of inequalities don't contradict each
+other; they contain the exact same information.  The difference is in
+which coordinates you can verify without the others.
+
+Given $-1\leq x\leq 1$ and $x^2\leq y\leq 1$, you can check the $x$-coordinate of the
+point $(x_0,y_0)$ without needing the $y$-coordinate.  To check the $y$-coordinate, you 
+need to compute $x_0^2$ and so you need the $x$-coordinate.  On the other hand, if you
+were given $0\leq y\leq 1$
+and $-\sqrt{x}\leq y\leq \sqrt{x}$, you could check the $y$-coordinate without needing
+to know what the $x$-coordinate was, but you would need the $y$-coordinate to check the $x$ coordinate.
+
+When computing an iterated integral, we expect to end up with a number.  Thus, the bounds
+of the outer-most integral cannot depend on any other variables.  The bounds of the second
+outer-most integral can only depend on on variables ``further out.''  Keeping this in mind
+will give us a way to quickly judge if we've written down correct bounds for iterated integrals.
+
+Now we turn to integrating other functions over regions.
 
 \begin{example}
 	Let $f(x,y) = x^2 + y^2$,
@@ -119,12 +240,12 @@ over regions into iterated integrals that we already know how to evaluate.
 	above.   
 
 \begin{center}
-	\usetikzlibrary{patterns,decorations.pathreplacing}
 	\begin{tikzpicture}
 		\coordinate (A) at (1,1);
 		\coordinate (B) at (3,2);
 		\begin{axis}[
 		    anchor=origin,
+		    set layers=standard,
 		    disabledatascaling,
 		    xmin=-1,xmax=5,
 		    ymin=-1,ymax=2,
@@ -142,7 +263,7 @@ over regions into iterated integrals that we already know how to evaluate.
 		]
 
 	    	\addplot[name path=f,no marks,mypink,thick,domain=-1:2, samples=25, draw=none] ({x*x},{x});
-	    	\addplot[no marks,mypink,thick,domain=-2:3, samples=25] ({x*x},{x});
+	    	\addplot[no marks,mypink,thick,domain=-2:3, samples=20,smooth] ({x*x},{x});
 	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-2:5, samples=2] ({x+2},{x});
 		\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split];
 		\draw (1,0) node[above] {$\mathcal D$};
@@ -303,29 +424,114 @@ iterated integral.
 	\[
 		\int_{x=0}^{x=1}\int_{y=x}^{y=1} \frac{\sin y}{y}\d y \d x.
 	\]
-	This is the iterated integral obtained from the double integral
-	of the function $f(x,y) = \sin y/y$ for the triangular
+	This is the iterated integral obtained from the  integral
+	of the function $f(x,y) = \sin y/y$ over the triangular
 	region $\mathcal D$ contained
 	between the vertical lines  $x = 0, x = 1$, the line
 	$y = x$ below, and the line $y = 1$ above.
 
-	XXX Figure
+	\begin{center}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\begin{axis}[
+		    anchor=origin,
+		    set layers=standard,
+		    disabledatascaling,
+		    xmin=-.5,xmax=1,
+		    ymin=-.5,ymax=1,
+		    x=2.2cm,y=2.2cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=1,
+		    enlargelimits={abs=0.4},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+	    	\addplot[name path=f,no marks,mypink,thick,domain=0:1, samples=2, draw=none] ({x},{x});
+	    	\addplot[no marks,mypink,thick,domain=-2:3, samples=20,smooth] ({x},{x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-2:5, samples=2] ({x},{1});
+			\addplot[no marks,green!50!black,thick,domain=-2:5, samples=2] ({0},{x});
+			\addplot[no marks,green!50!black,thick,domain=-2:5, samples=2] ({1},{x});
+		\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split,soft clip={domain=0:1}];
+		\draw (.33,.66) node[] {$\mathcal D$};
+		\draw [mypink,fill] (.5,.5)  node [below right] {$y=x$};
+		\draw [green!50!black,fill] (.5,1)  node [above] {$y=1$};
+		\draw [green!50!black,fill] (1,-.75)  node [left] {$x=1$};
+		\draw [green!50!black,fill] (0,-.75)  node [left] {$x=0$};
+
+		\end{axis}
+	\end{tikzpicture}
+	\end{center}
 
 	   The indefinite
 	integral (anti-derivative) 
 	\[
 	     \int \frac{\sin y}y dy
 	\]
-	{\it cannot be expressed in terms of known elementary functions}.
+	\emph{cannot be expressed in terms of known elementary functions}.
 	(Try to integrate it or look in an integral table if you don't
 	believe that.)   Hence, the iterated integral cannot be evaluated
 	by anti-derivatives.  However, the triangular region may be
 	described just as well by bounding it horizontally by graphs:
 	it lies between $y = 0$ and $y = 1$ and for each $y$ between
-
-	XXX Figure
-
 	$x = 0$ and $x = y$.  
+
+	\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    set layers=standard,
+		    disabledatascaling,
+		    xmin=-.5,xmax=1,
+		    ymin=-.5,ymax=1,
+		    x=2.2cm,y=2.2cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=1,
+		    enlargelimits={abs=0.4},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+	    	\addplot[name path=f,no marks,mypink,thick,domain=0:1, samples=2, draw=none] ({x},{x});
+	    	\addplot[no marks,mypink,thick,domain=-2:3, samples=20,smooth] ({x},{x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-2:5, samples=2] ({x},{1});
+			\addplot[no marks,green!50!black,thick,domain=-2:5, samples=2] ({0},{x});
+
+		\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split,soft clip={domain=0:1}];
+		\draw (.25,.75) node[] {$\mathcal D$};
+		\draw [mypink,fill] (.5,.5)  node [below right] {$y=x$};
+		\draw [green!50!black,fill] (.5,1)  node [above] {$y=1$};
+		\draw [green!50!black,fill] (0,-.75)  node [left] {$x=0$};
+
+		\coordinate (A) at (-.01,.58);
+		\coordinate (B) at (-1,.57);
+		\coordinate (C) at (.6,.58);
+		\coordinate (D) at (1.2,.57);
+
+		\draw[fill=gray,draw=none] (0,.57) rectangle (.6,.6);
+		\end{axis}
+
+
+	
+		\path[thick] (B) edge[bend left, ->] node[]{} (A);
+		\draw[] (B) node[left] {$(0,y_0)$};
+		\path[thick] (D) edge[bend right, ->] node[]{} (C);
+		\draw[] (D) node[right] {$(y_0,y_0)$};
+
+	\end{tikzpicture}
+	\end{center}
+
 	 Thus, the double integral can be evaluated
 	from the  iterated integral
 	\begin{align*}
@@ -333,7 +539,7 @@ iterated integral.
 		\int_0^1\, \left. \frac{\sin y}y x\right|_{x=0}^{x=y}\, \d y  \\
 		&= \int_0^1\,  \frac{\sin y}y y\, \d y
 		= \int_0^1\ \sin y\, \d y  \\
-		&= \left. -\cos y\right|_0^1 = 1 - \cos 1.
+		&= \left. -\cos y\right|_0^1 = 1 - \cos 1\approx 0.46.
 	\end{align*}
 
 	Note that in order to set up the iterated integral in the other
@@ -388,12 +594,12 @@ for when it is okay.
 \section{The Volume Form}
 
 Let $f:\R^2\to \R$ and $\mathcal D\subseteq \R^2$ be the unit disk centered at the origin.
-If we wanted to compute $\int_{\mathcal D} f\,\d A$, we could split this up into an iterated
+If we wanted to compute $\int_{\mathcal D} f\,\d A$, we could split it up into an iterated
 integral like so:
 \[
 	\int_{\mathcal D} f\,\d A = \int_{x=-1}^{x=1}\int_{y=-\sqrt{1-x^2}}^{y=\sqrt{1-x^2}} f(x,y)\,\d y\d x.
 \]
-However, the thought of integrating square roots is painful.  Especially, when $\mathcal D$ has
+However, the thought of integrating square roots makes me cringe.  Especially, when $\mathcal D$ has
 a simple description in polar coordinates.  If we could use polar coordinates, our iterated
 integral might look more like $\int_{\theta=0}^{\theta=2\pi}\int_{r=0}^{r=1} f$.  Much less intimidating!
 
@@ -443,7 +649,8 @@ for easy evaluation.
 We can rewrite Equation \eqref{EQPOLARSUM} into one that looks more like a Riemann sum by
 doing some \emph{order analysis}\index{order analysis}.  Order analysis allows us to determine
 with precision
-which parts of an expression become negligible and which parts are non-negligible.  Often
+which parts of an expression become negligible and which parts are non-negligible\footnote{ \emph{Negligible}
+is a fancy way of saying ``this can be safely ignored.''}.  Often
 times order analysis will show that we can ignore or erase large parts of a formula and still
 get the correct answer in the end.
 
@@ -471,7 +678,7 @@ Now, $\sum_{i=1}^n K=nK$ if $K$ is a constant.  The inside of our sums are not c
 they were bounded, we could replace them with constants and apply squeeze-theorem arguments to them.
 For order analysis, since we are only interested in whether a term
 \emph{must} go to zero, we bypass the detailed squeeze theorem arguments 
-by just imagining all terms inside our sum are constant and seeing what happens.
+by just imagining all bounded terms inside our sum are constant and seeing what happens.
 To proceed, we first split up
 our sum to figure out which parts are negligible.
 \[
@@ -491,7 +698,7 @@ Doing order analysis on the first part of the sum, we see
 	\sum_{\theta}\sum_{r} r\Delta r\Delta \theta f(r,\theta)
 	&\sim
 	\lim_{\Delta r,\Delta\theta\to 0}
-	\frac{1}{\Delta r}\left(\frac{1}{\Delta \theta} r\Delta r\Delta\theta f(r,\theta)\right)\\
+	\frac{1}{\Delta r}\left(\frac{1}{\Delta \theta} \Big(r\Delta r\Delta\theta f(r,\theta)\Big)\right)\\
 	&=rf(r,\theta),
 \end{align*}
 where $\sim$ means \emph{order equivalent}\footnote{ There is a formal theory of
@@ -499,13 +706,13 @@ order equivalence and a slew of specialized notations.  We don't need those form
 right now.}.  Since this term is not order-equivalent to zero, it is non-negligible, and so 
 we must keep it.  
 
-Analyzing the other component of the sum, we see a different story:
+Analyzing the other component of the sum tells a different story:
 \begin{align*}
 	\lim_{\Delta r,\Delta\theta\to 0}
 	\sum_{\theta}\sum_{r} \tfrac{1}{2}(\Delta r)^2\Delta \theta f(r,\theta)
 	&\sim
 	\lim_{\Delta r,\Delta\theta\to 0}
-	\frac{1}{\Delta r}\left(\frac{1}{\Delta \theta} \tfrac{1}{2}(\Delta r)^2\Delta\theta f(r,\theta)\right)\\
+	\frac{1}{\Delta r}\left(\frac{1}{\Delta \theta} \Big(\tfrac{1}{2}(\Delta r)^2\Delta\theta f(r,\theta)\Big)\right)\\
 	&=\lim_{\Delta r,\Delta\theta \to 0}\tfrac{1}{2}\Delta rf(r,\theta) = 0,
 \end{align*}
 and so this part of the sum \emph{is} negligible.  We may therefore conclude,
@@ -545,7 +752,7 @@ all the time---and there is.
 \subsection{The Volume Form}
 
 The \emph{volume form} gives a formal way to rewrite integrals as iterated integrals
-with respect to different coordinate systems.  What is really does is give a way
+with respect to different coordinate systems.  What it really does is give a way
 to relate areas or volumes described in a particular coordinate system to ``true''
 areas and volumes in Euclidean space---and if your mind is tingling with thoughts
 of parameterizations, you're on the right track.
@@ -563,11 +770,11 @@ use a different formula.  Namely,
 	\int_{\mathcal S} f = \int_{c}^d f\circ \vec q(t)\norm{\vec q\,'(t)} \d t.
 \]
 In this expression, $\norm{\vec q\,'(t)}$ compensates for the fact that as the parameter
-$t$ marches on, the arc-length traced out by $\vec q$ is non-uniform.  The volume form does
+$t$ marches on, the arc-length traced out by $\vec q$ is non-uniform.  The volume form\index{volume form} does
 the same thing but for parameterizations of multi-dimensional regions.
 
 
-\begin{definition}
+\begin{definition}[Volume Form]
 	Suppose $\mathcal F$ is a coordinate system for $\R^2$ with a relationship
 	to rectangular coordinates given by $(x,y)=\vec f(a,b)$.
 	The \emph{pre-volume form} associated with $\mathcal F$ at the point $(a,b)$
@@ -581,13 +788,22 @@ the same thing but for parameterizations of multi-dimensional regions.
 		\lim_{\Delta a,\Delta b\to 0} \frac{\Delta V(a,b)}{V(a,b)\Delta a\Delta b}=1.
 	\]
 \end{definition}
+We only wrote down the definition of the volume form for two-dimensional coordinate systems,
+but the definition for three and higher dimensions is similar.  To define the
+volume form in an $n$-dimensional coordinate system, you take the image
+of $n$-dimensional rectangles instead of two-dimensional ones and you replace $\Delta a\Delta b$
+with $\Delta x_1\Delta x_2\Delta x_3\cdots\Delta x_n$.
 
 There are a few peculiarities in the definition of the volume form.
 First, the word ``infinitesimal'' shows up in the definition.  As of yet,
 this has not been a formal term for us.  Further, the volume form has
-``$\d a\d b$'' built into it.  This is because the term \emph{volume form}
-comes from the field of differential geometry.  In differential geometry,
-$\d a$ has a unique meaning all by itself and is called a \emph{differential form}.  For
+``$\d a\d b$'' built into it.  These features hark back to the origins
+of the volume form.  The term \emph{volume form}
+comes from the field of differential geometry, and in differential geometry,
+$\d a$ has a unique meaning all by itself and is called a \emph{differential form}.  
+Differential forms can be multiplied with each other and added together and the
+result still has meaning.
+For
 us, $\d a$  by itself has no precise
 meaning and only appears as a notational book-keeping device in integrals and derivatives.
 Of course, the intuitive meaning of $\d a$ is that it is an infinitesimal quantity.
@@ -617,6 +833,255 @@ will use the language of differential geometry.
 	There's a clear choice.  Namely, $V(r,\theta)=r$.  Therefore, the volume form for
 	polar coordinates is $r\d r\d \theta$.
 
+\end{example}
+
+\subsection{Using the Volume Form}
+
+Once we have gone through the work of finding the volume form for a particular
+coordinate system, writing down iterated integrals in that coordinate
+system becomes easy---you can just replace ``$\d V$'' with the volume form
+and integrate away.
+
+Intuitively the volume form plays the same role that $\norm{\vec q\,'(t)}\d t$ did
+in line integrals.  It \emph{compensates} for any stretching or warping that
+an alternate coordinate system may do to area.
+
+\begin{example}
+	Let $f:\R^2\to\R$ be defined by $f(x,y)=x^2+y^2$ and let $\mathcal D$ be the unit
+	disk centered at the origin.  Compute $\int_{\mathcal D} f\,\d V$.
+
+	We've already computed the volume form in polar coordinates.  It is
+	$r\d r\d\theta$.  Further, $f$ is easy to describe in polar coordinates,
+	since $x^2+y^2=r^2$.  Lastly, in polar coordinates, $\mathcal D$ 
+	is the region where $r\in[0,1]$ and $\theta\in[0,2\pi)$.  Therefore,
+	\[
+		\int_{\mathcal D}f\,\d V =
+		\int_{\theta=0}^{\theta=2\pi}\int_{r=0}^{r=1} (r^2)r\d r\d \theta
+		=\int_{\theta=0}^{\theta=2\pi}\int_{r=0}^{r=1} r^3\d r\d \theta.
+	\]
+\end{example}
+
+\begin{example}
+	Consider the two-dimensional 
+	skewed coordinate system $\mathcal S$.  The $\mathcal S$
+	coordinate system uses the variables $a$ and $b$ and relates
+	to rectangular coordinates by the equations $x=a+b$ and $y=a-b$.
+	Let $f:\R^2\to\R$ be given by the formula $f(a,b)=a+6b$ and let $\mathcal R\subseteq\R^2$
+	be the region defined in $\mathcal S$ coordinates by the inequalities
+	$1\leq a\leq 2$ and $4\leq b\leq 6$.  Compute $\int_{\mathcal R} f\d V$.
+
+	At present, we have two options.  We could rewrite everything in 
+	rectangular coordinates or we could figure out the volume form for $\mathcal S$ 
+	coordinates and set our iterated integral up with respect to $\mathcal S$ coordinates.
+	Let's do the second way---it sounds more fun.
+
+	Finding the pre-volume form is often the hardest part.  It helps 
+	to write down change-of-coordinate functions and draw a picture.
+	First off, let $\vec s:\R^2\to\R^2$ be the function that takes points
+	written in $\mathcal S$ coordinates and rewrites them in rectangular coordinates.
+	From the relationships given above, we see $\vec s(a,b) = (a+b,a-b)$.  Now
+	we can draw $[a_0,a_0+\Delta a]\times [b_0,b_0+\Delta b]$ in the $ab$-coordinate
+	plane and draw $\vec s([a_0,a_0+\Delta a]\times [b_0,b_0+\Delta b])$ in the
+	$xy$-coordinate plane.
+
+	\begin{center}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\coordinate (D) at ($(B)-(A)$);
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$a$},
+			ylabel={$b$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\draw[fill=blue,opacity=0.05] (1,1) rectangle (1.8,2.5);	
+\addplot[color=myorange, dashed, thick, domain=-3:5] ({1},{x}) node[midway, left,yshift=.5cm] {$a=a_0$};
+\addplot[color=myorange, dashed, thick, domain=-3:5] ({1.8},{x}) node[midway, right,yshift=.5cm] {$a=a_0+\Delta a$};
+\addplot[color=blue, dashed, thick, domain=-3:5] ({x},{1}) node[midway, below left] {$b=b_0$};
+\addplot[color=blue, dashed, thick, domain=-3:5] ({x},{2.5}) node[midway,above left] {$b=b_0+\Delta b$};
+	
+
+		\end{axis}
+
+		\draw[] (2.5,3.5) node[above right] {Area in $ab$-plane = $\Delta a\Delta b$};
+		\path[thick] (3.5,3.5) edge[bend left, ->] node[] {} (1.5,1.8);
+
+
+		\begin{axis}[
+			%at=(plot1.east),
+			at={(7.5,0)},
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1.4,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\draw[fill=blue,opacity=0.05] (2,0) -- (3.5,-1.5) -- (4.3,-.7) -- (2.8,.8);	
+\addplot[name path=aone, color=myorange, dashed, thick, domain=-3:5] ({1+x},{1-x}) node[near start, left] {$a=a_0$};
+\addplot[name path=atwo, color=myorange, dashed, thick, domain=-3:5] ({1.8+x},{1.8-x}) node[near start, right] {$a=a_0+\Delta a$};
+\addplot[name path=bone, color=blue, dashed, thick, domain=-3:5] ({x+1},{x-1}) node[at={(0,-2)}, above left] {$b=b_0$};
+\addplot[name path=btwo, color=blue, dashed, thick, domain=-3:5] ({x+2.5},{x-2.5}) node[at={(3,-2)}, above left] {$b=b_0+\Delta b$};
+
+	
+		\end{axis}	
+		\draw[] (2.5+7.5,3.5) node[above right,xshift=-1cm] {Area in $xy$-plane = $V(a_0,b_0)\Delta a\Delta b$};
+		\path[thick] (3.5+7.5,3.5) edge[bend left, ->] node[] {} (3+7.5,.2);
+
+	\end{tikzpicture}
+	\end{center}
+
+	Conveniently enough, the result is still a rectangle in the $xy$-coordinate plane, so 
+	it's area is easy to compute (after finding the lengths of each
+	side of the rectangle): $2\Delta a\Delta b$.
+
+	Now, we're looking for a function $V:\R^2\to\R$ so that
+	\[
+		\lim_{\Delta a,\Delta b\to 0} \frac{2\Delta a\Delta b}{V(a,b)\Delta a\Delta b} = 1,
+	\]
+	and such a function can be directly guessed.  It's given by $V(a,b)=2$.  Thus,
+	the volume form for the $\mathcal S$ coordinate system is $2\d a\d b$.
+
+	Since everything else is already written in terms of the $\mathcal S$ coordinate system,
+	we can just write down the iterated integral.
+	\begin{align*}
+		\int_{\mathcal R} f\,\d V &= \int_{b=4}^{b=6}\int_{a=1}^{a=2} f(a,b)\, 2\d a\d b\\
+			&= \int_{b=4}^{b=6}\int_{a=1}^{a=2} 2a+12b\,\d a\d b=126
+		.
+	\end{align*}
+\end{example}
+
+Volume forms are really convenient, but you may be asking: didn't you just stress that
+in an expression like $\iint \d a\d b$, the symbols $\d a$ and $\d b$ are not being multiplied
+and are just notation?  When we use volume forms aren't we treating $\d a \d b$ like it has meaning
+and then working backwards to write down an integral?  This is an astute observation.  Yes,
+when we use volume forms, we're assuming that everything will work out as purported.  We won't prove
+the details (if you're interested, look in a book on differential geometry), but it is worth noting
+that volume forms only exist for \emph{smooth} parameterizations.  That means, every component function
+of the parameterization is differentiable in every coordinate.  Most coordinate systems that we
+will come across have this property.
+
+When trying to write down an iterated integral in non-rectangular coordinates, computing the volume
+form can be the hardest part.  We've been computing volume forms directly from the definition, but
+there are several ways that avoid the trouble of finding the pre-volume form.  They include 
+the algebra of differential forms and the Jacobian.  We won't discuss the details of these computational
+tools here, but it is worth listing the volume forms for some common coordinate systems.
+
+\begin{center}
+	\begin{tabular}{c c}
+		Coordinate System & Volume Form\\
+		\hline
+		Rectangular Coordinates in $\R^2$ & $\d x\d y$\\
+		Polar Coordinates & $r\d r\d \theta$\\
+		Rectangular Coordinates in $\R^3$ & $\d x\d y\d z$\\
+		Cylindrical Coordinates & $r\d r\d \theta\d z$\\
+		Spherical Coordinates & $r^2\sin\phi\d r\d \phi\d \theta$
+	\end{tabular}
+\end{center}
+
+\subsection{The Chain Rule for Volume Forms}
+Suppose $\vec p:\R^2\to\R^2$ is a parameterization.  We can think of $\vec p$ as a function
+that takes points in one coordinate system and outputs points in rectangular coordinates.
+Call the coordinate system that $\vec p$ inputs the $\mathcal P$ coordinate system with variables
+$\alpha$ and $\beta$.  Now, there is some volume form associated with the $\mathcal P$ coordinate
+system and it takes the form $V_{\vec p}(\alpha,\beta)\d\alpha \d\beta$.  We interpret $V_{\vec p}(\alpha,\beta)$
+as the amount that $\vec p$ stretches or shrinks volume by at the point $(\alpha,\beta)$ (in $\mathcal P$ coordinates).
+
+Now, suppose $\vec q:\R^2\to\R^2$ is another parameterization.  Similarly to $\vec p$, associate
+$\vec q$ with the $\mathcal Q$ coordinate system with variables $\gamma$ and $\delta$.  Let
+$V_{\vec q}(\gamma,\delta)\d\gamma\d\delta$ be the volume form for $\mathcal Q$ coordinates.
+
+Now, $\vec p$ and $\vec q$ relate to coordinate systems, but they are really just parameterizations with domain
+$\R^2$ and range $\R^2$.  So, $\vec s=\vec q\circ \vec p$ is another parameterization.
+Associate it with the $\mathcal S$ coordinate system with the variables $a$ and $b$.  Can we write the volume
+form for the $\mathcal S$ coordinate system in terms of the volume form for $\mathcal P$ and
+$\mathcal Q$ coordinates?
+
+Yes, we can!  The process is fairly straightforward.  We know $V_{\vec p}(\alpha,\beta)$ is how
+much $\vec p$ changes area by at the point $(\alpha,\beta)$ and we know $V_{\vec q}(\gamma,\delta)$
+is how $\vec q$ changes area at the point $(\gamma,\delta)$.  Further, considering the composition
+$\vec s=\vec q\circ \vec p$, we could interpret $\vec p$ as inputing $\vec P$ coordinates and then
+outputting $\vec Q$ coordinates, which then get taken by $\vec q$ and finally converted to rectangular coordinates.
+Thus, at the point $(\alpha,\beta)$, area first gets changed by $V_{\vec p}(\alpha,\beta)$
+and then at the point $\vec p(\alpha,\beta)$, area gets changed by $V_{\vec q}\circ \vec p(\alpha,\beta)$.
+Change in area is multiplicative, so
+\begin{equation}
+	\label{EQVOLFORMCHAINRULE}
+	V_{\vec s}(\alpha,\beta) = V_{\vec p}(\alpha,\beta)\Big(V_{\vec q}\circ \vec p(\alpha,\beta)\Big).
+\end{equation}
+Does that look a little like the chain rule?
+
+Let's try this again in one dimension.  Let $f:\R\to\R$ and $g:\R\to\R$ both be parameterizations.
+In one dimension the limit involved in finding a volume form turns out to be equivalent to taking
+a derivative (go ahead, compute the one-dimension volume form of a few of your favorite functions!).
+Therefore,
+\[
+	V_{f}(a) = f'(a)\qquad\text{and}\qquad V_{g}(b) = g'(b).
+\]
+Let $h=g\circ f$.  Expanding with Equation \eqref{EQVOLFORMCHAINRULE}, we get
+\[
+	h'(a) = V_{h}(a) = V_f(a)\Big(V_g\circ f(a)\Big) = f'(a)\Big(g'\circ f(a)\Big),
+\]
+which is exactly what the chain rule says!  This is no coincidence. Equation
+\eqref{EQVOLFORMCHAINRULE} really is the chain rule in disguise\footnote{ 
+Hold the phone!  There's something strange going on.  The derivative
+of a function can take negative values but by definition a volume form must take only
+positive values.  So, on the surface $w'=V_{w}$ can only hold for special parameterizations
+$w:\R\to\R$.  This is true, and this is all fixed in the land of differential forms
+where volumes and areas are allowed to be \emph{signed}.}.  
+
+While we're still in the mood to look at Equation \eqref{EQVOLFORMCHAINRULE}, let's
+make one more observation.  We could interpret the symbol ``$V$'' as an operator
+that inputs a function and outputs a new function.  Namely,
+if $\vec w:\R^n\to\R^n$, then $V_{\vec w}:\R^n\to\R$ is a function associated
+with $\vec w$.  Let's choose a more evocative notation for ``$V$''.  Define and alternate notation
+for ``$V$'' by
+\[
+	V_{\vec w}(\vec x) = \frac{\d \vec w}{\d \vec x}.
+\]
+In this notation, Equation \eqref{EQVOLFORMCHAINRULE} says
+\[
+	\frac{\d \vec s}{\d \vec x} = \frac{\d\vec p}{\d \vec x}\,\frac{\d\vec q}{\d \vec p}.
+\]
+Now this really looks like the chain rule! At this point, using a notation that looks like
+derivative notation is mostly whimsy---when $\vec w:\R^n\to\R^n$ and $n>1$,
+we don't even know what the derivative of $\vec w$ should mean---but 
+in the field of differential geometry, such notation can be justified.
+
+
+Enough whimsy.  Let's use the chain rule for volume forms to solve a problem.
+\begin{example}
+	XXX Finish.  Maybe an isometric rotation and a stretching of some sort?
 \end{example}
 
 \begin{exercises}
