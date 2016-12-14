@@ -24,12 +24,23 @@
 	\tikzset{>=latex}
 	\usetikzlibrary{calc}
 	\usetikzlibrary{backgrounds}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\usetikzlibrary{spy}
 \usepackage{pgfplots}
 	\pgfplotsset{compat=1.11}
+	\usepgfplotslibrary{colormaps}
+	\usepgfplotslibrary{patchplots}
+	\usepgfplotslibrary{fillbetween}
 \usepackage[inline,shortlabels]{enumitem}
 \setlistdepth{9}
 
 \usepackage{datatool}
+
+
+\usepgfplotslibrary{external}
+\tikzexternalize
+%\tikzexternalize[mode=list and make]
+
 
 %%% Specify the cool macros
 \newcommand{\R}{\mathbb{R}}

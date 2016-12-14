@@ -1060,26 +1060,27 @@ positive values.  So, on the surface $w'=V_{w}$ can only hold for special parame
 $w:\R\to\R$.  This is true, and this is all fixed in the land of differential forms
 where volumes and areas are allowed to be \emph{signed}.}.  
 
-While we're still in the mood to look at Equation \eqref{EQVOLFORMCHAINRULE}, let's
-make one more observation.  We could interpret the symbol ``$V$'' as an operator
-that inputs a function and outputs a new function.  Namely,
-if $\vec w:\R^n\to\R^n$, then $V_{\vec w}:\R^n\to\R$ is a function associated
-with $\vec w$.  Let's choose a more evocative notation for ``$V$''.  Define and alternate notation
-for ``$V$'' by
-\[
-	V_{\vec w}(\vec x) = \frac{\d \vec w}{\d \vec x}.
-\]
-In this notation, Equation \eqref{EQVOLFORMCHAINRULE} says
-\[
-	\frac{\d \vec s}{\d \vec x} = \frac{\d\vec p}{\d \vec x}\,\frac{\d\vec q}{\d \vec p}.
-\]
-Now this really looks like the chain rule! At this point, using a notation that looks like
-derivative notation is mostly whimsy---when $\vec w:\R^n\to\R^n$ and $n>1$,
-we don't even know what the derivative of $\vec w$ should mean---but 
-in the field of differential geometry, such notation can be justified.
-
-
-Enough whimsy.  Let's use the chain rule for volume forms to solve a problem.
+%While we're still in the mood to look at Equation \eqref{EQVOLFORMCHAINRULE}, let's
+%make one more observation.  We could interpret the symbol ``$V$'' as an operator
+%that inputs a function and outputs a new function.  Namely,
+%if $\vec w:\R^n\to\R^n$, then $V_{\vec w}:\R^n\to\R$ is a function associated
+%with $\vec w$.  Let's choose a more evocative notation for ``$V$''.  Define and alternate notation
+%for ``$V$'' by
+%\[
+%	V_{\vec w}(\vec x) = \frac{\d \vec w}{\d \vec x}.
+%\]
+%In this notation, Equation \eqref{EQVOLFORMCHAINRULE} says
+%\[
+%	\frac{\d \vec s}{\d \vec x} = \frac{\d\vec p}{\d \vec x}\,\frac{\d\vec q}{\d \vec p}.
+%\]
+%Now this really looks like the chain rule! At this point, using a notation that looks like
+%derivative notation is mostly whimsy---when $\vec w:\R^n\to\R^n$ and $n>1$,
+%we don't even know what the derivative of $\vec w$ should mean---but 
+%in the field of differential geometry, such notation can be justified.
+%
+%
+%Enough whimsy.  
+Let's use the chain rule for volume forms to solve a problem.
 \begin{example}
 	XXX Finish.  Maybe an isometric rotation and a stretching of some sort?
 \end{example}
@@ -1088,6 +1089,175 @@ Enough whimsy.  Let's use the chain rule for volume forms to solve a problem.
 \end{exercises}
 
 \section{Surface Integrals}
+We will now turn our attention to integrals over non-flat regions.  Suppose
+we wanted to find the average temperature of the surface of a perfectly
+spherical earth.  Conceptually, we can compute this with a Riemann sum
+just like before.  We chop the surface of the earth up into little regions
+and find the temperature in each region.  We then compute
+\[
+	\text{average temp}\quad\approx\quad\frac{1}{\text{total surface area}} \sum_{\text{sectors}}
+	(\text{temp at sector})(\text{area of sector}),
+\]
+with equality after we take a limit as the sector size tends towards zero.  
+
+\begin{example}
+	\label{EXSURFACEAREABYDEF}
+	Let $\mathcal S\subseteq \R^3$ be the unit sphere centered at the origin,
+	and consider the parameterization $\vec s:[0,2\pi)\times[0,\pi]\to\mathcal S$ of $\mathcal S$ given
+	by
+	\[
+		\vec s(\theta,\phi) = \matc{\sin\phi\cos\theta\\\sin\phi\sin\theta\\\cos\phi}.
+	\]
+	We wish to compute the average value of $T:\mathcal S\to\R$ over the surface $\mathcal S$.
+
+	The parameterization $\vec s$ gives us a natural way to chop $\mathcal S$ up into tiny pieces.
+	In particular, if $\Delta \theta$ and $\Delta \phi$ are tiny then $\vec s\big([\theta_0,\theta_0+\Delta
+	\theta]\times[\phi_0,\phi_0+\Delta\phi]\big)\subseteq\mathcal S$ will be a tiny sector
+	of $\mathcal S$.
+
+	XXX Figure
+
+	The exact area of this sector turns out to be $\big(\cos\phi_0-\cos(\phi_0+\Delta\phi)\big)\Delta\theta$.
+	The total surface area of $\mathcal S$ is $4\pi$ and so we have
+	\[
+		\text{average of }T\quad=\quad \frac{1}{4\pi}\  \lim_{\Delta\theta,\Delta\phi\to0}
+		\sum_{\theta_i}\sum_{\phi_i} T\circ \vec s(\theta_i,\phi_i)\Big(\cos\phi_i-\cos(\phi_i+\Delta\phi)\Big)\Delta\theta,
+	\]
+	where the sums are taken over $\theta_i=0,\Delta\theta,2\Delta\theta,\ldots,2\pi$ and
+	$\phi_i=0,\Delta\phi,2\Delta\phi,\ldots,\pi$.
+
+	Evaluating that Riemann sum looks challenging, but we can use the idea of volume
+	forms to rewrite it as an iterated integral.  Notice
+	\[
+		\lim_{\Delta\theta,\Delta\phi\to0} \frac{\big(\cos\phi-\cos(\phi+\Delta\phi)\big)\Delta \theta}
+		{\Delta \phi\Delta\theta}
+		=\,-\lim_{\Delta\theta,\Delta\phi\to0} \frac{\cos(\phi+\Delta\phi)-\cos\phi}
+		{\Delta \phi} = \sin\phi,
+	\]
+	since the expression in the middle is just the derivative of cosine in disguise.  Now,
+	we can view $T\circ \vec s$ as a function from $\R^2\to\R$ being integrated in a different
+	coordinate system.  And, we just computed the volume form of that different coordinate
+	system to be $\sin\phi\d\phi\d\theta$.  Therefore,
+	\[
+		\text{average of }T\quad=\quad\frac{1}{4\pi}\int_{\theta=0}^{\theta=2\pi}\int_{\phi=0}^{\phi=\pi}
+		T\circ \vec s(\theta,\phi)\sin\phi\d\phi\d\theta.
+	\]
+	Given a formula for $T$, we now have a much better chance of being able to evaluate its average!
+\end{example}
+
+The reasoning used in Example \ref{EXSURFACEAREABYDEF} closely follows the reasoning
+used for integrating functions over flat regions, and we would be justified in extending our integral
+notation.  If $\mathcal S\subseteq\R^3$ is a surface and $f:\mathcal S\to\R$ is a function,
+then
+\[
+	\int_{\mathcal S} f  = \int_{\mathcal S} f\,\d A
+\]
+is defined to be result of chopping up $\mathcal S$ into tiny sectors, summing up the
+area of each sector multiplied by the value of $f$ on that sector, and then taking the limit as
+the size of each sector goes to zero.  Just like before, since we don't explicitly define the way
+that $\mathcal S$ must be chopped up into sectors and we don't define the order in which we
+should sum the sectors, the expression $\int_{\mathcal S}f$ is only defined if the way we chop
+and the order we sum doesn't matter.  Again, if $f$ and $\mathcal S$ are nice (for example, $\mathcal S$
+has a tangent plane at every point and $f$ satisfies the conditions of Fubini's theorem), then
+$\int_{\mathcal S} f$ is defined.  Most functions and surfaces we will encounter will be nice.
+
+Another thing to notice about Example \ref{EXSURFACEAREABYDEF} is that doing the
+computation was somewhat difficult.
+For starters, how could we find the sector area if we weren't given an explicit formula for it?
+This is as difficult, if not more difficult, than finding the pre-volume form\footnote{
+At this point, we don't actually have a definition of the ``surface area'' of a curved surface, 
+so how could we compute the area of a sector?}.  Like we did with volume forms, we will leverage
+our intuition and leave it to other mathematicians to verify the details.
+
+\subsection{Approximating Surfaces}
+
+Suppose $\mathcal S\subset \R^3$ and that $\vec s\in\mathcal S$.  Let $\mathcal P_{\vec s}$ be the
+tangent plane to $\mathcal S$ at the point $\vec s$.  There are many ways we could write down
+a formula for $\mathcal P_{\vec s}$, but if we were given a parameterization for $\mathcal S$,
+there would be a particularly direct way to describe $\mathcal P_{\vec s}$ in vector form.
+
+\begin{definition}[Canonical Representation of the Tangent Plane]
+	Given a surface $\mathcal S\subseteq\R^3$ parameterized by $\vec p:\R^2\to\mathcal S$,
+	the \emph{canonical representation} of the tangent plane to $\mathcal S$
+	relative to the parameterization $\vec p$
+	at the point $\vec p(a,b)\in\mathcal S$ is given by the first-order
+	(affine) approximation to $\vec p$ at $(a,b)$.  In vector form, this representation
+	is
+	\[
+		\vec x = t \frac{\partial \vec p}{\partial a}(a,b) + s\frac{\partial \vec p}{\partial b}(a,b)
+		+\vec p(a,b).
+	\]
+\end{definition}
+
+There are two ways to unpack the canonical representation of a tangent plane.
+Let $\mathcal S\subseteq\R^3$ be parameterized by $\vec p:\R^2\to\mathcal S$ as before
+and let $\vec s\in\mathcal S$.  Further, suppose that $\vec p(a,b)=\vec s$.  Now,
+to write down a formula for the tangent plane $\mathcal P_{\vec s}$, all we need is to
+find two vectors, $\vec d_1$ and $\vec d_2$, that are tangent to $\mathcal S$ at the point $\vec s$.
+Then, we can describe $\mathcal P_{\vec s}$ in vector form by
+\[
+	\vec x=t\vec d_1+s\vec d_2+\vec s.
+\]
+Further, the curve traced out by $\vec p(t,b)$ as $t$ varies and $b$ is held constant is
+contained in $\mathcal S$ and passes through $\vec s$ exactly when $t=a$.  Therefore, we can
+find a tangent vector to $\mathcal S$ at $\vec s$ by finding a velocity vector for this curve.
+\[
+	\frac{\d}{\d t} \vec p(t,b)\Big|_{t=a} = \frac{\partial \vec p}{\partial a}(a,b).
+\]
+Similarly, we can find a second tangent vector by considering the curve traced out by $\vec p(a,t)$
+as $t$ varies and $a$ is held constant.  This gives us a tangent vector of
+\[
+	\frac{\d}{\d t} \vec p(a,t)\Big|_{t=b} = \frac{\partial \vec p}{\partial b}(a,b).
+\]
+
+XXX Figure
+
+For all reasonable parameterizations, $\frac{\partial \vec p}{\partial a}(a,b)$ and $\frac{\partial \vec p}{\partial b}(a,b)$
+will point in different directions, and so we may represent $\mathcal P_{\vec s}$ in vector form as
+	\begin{align*}
+		\vec x &= t \frac{\partial \vec p}{\partial a}(a,b) + s\frac{\partial \vec p}{\partial b}(a,b)
+		+\vec s\\
+		&= t \frac{\partial \vec p}{\partial a}(a,b) + s\frac{\partial \vec p}{\partial b}(a,b)
+		+\vec p(a,b).
+	\end{align*}
+This is the \emph{canonical} way to write down a tangent plane if you are given a parameterization.
+
+
+There's another way to view the canonical representation of the tangent plane with respect to $\vec p$,
+and that is as a first-order approximation.  Recall that to find the first-order approximation
+of a function $\vec p:\R^2\to\R^3$, you first find the first-order approximations of each of $\vec p$'s
+component functions.  These component approximations become the component functions
+of the first order approximation to $\vec p$.  When all is said and done, we arrive at the following
+formula for $\vec L_{\vec p}$, the first-order approximation of $\vec p$ at the point $(a,b)$.
+\[
+	\vec L_{\vec p}(t,s) = t \frac{\partial \vec p}{\partial a}(a,b) + s\frac{\partial \vec p}{\partial b}(a,b)
+		+\vec p(a,b)
+\]
+
+Let $\vec L_{\vec p}:\R^2\to\R^3$ be the canonical representation of the tangent plane to $\mathcal S$,
+relative to $\vec p$, at the point $\vec p(a,b)$.  Since $\vec L_{\vec p}$ is a first-order
+approximation to $\vec p$, we know that if $(t,s)$ is close to $(a,b)$, then
+\[
+	\vec L_{\vec p}(t,s)\approx \vec p(t,s).
+\]
+It's now not so far fetched to to believe
+\[
+	\text{area of }\vec L_{\vec p}([a,a+\Delta a]\times [b,b+\Delta b]) \approx
+	\text{area of }\vec p([a,a+\Delta a]\times [b,b+\Delta b]).
+\]
+That is, the area of the tiny sector in $\mathcal S$ close to the point $\vec p(a,b)$
+is approximately equal to the area of the corresponding
+tiny sector on the tangent plane to $\mathcal S$ at the point $\vec p(a,b)$.
+
+XXX Figure
+
+In fact, if $\vec p$ is differentiable, we have
+\[
+	\lim_{\Delta a,\Delta b\to0} \frac{\text{area of }\vec L_{\vec p}([a,a+\Delta a]\times [b,b+\Delta b])}{\Delta a\Delta b}
+	=
+	\lim_{\Delta a,\Delta b\to0} \frac{\text{area of }\vec p([a,a+\Delta a]\times [b,b+\Delta b])}{\Delta a\Delta b},
+\]
+which is exactly what we need to compute a volume form!
 
 \begin{exercises}
 \end{exercises}

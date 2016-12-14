@@ -949,11 +949,13 @@ If we considered the set of functions for which Equation \eqref{EQDIRDERIVGRAD}
 holds at every point, we'd never have a reasonable chain rule for multivariable
 functions.  Instead, we'll use the slightly stronger notation of \emph{linear approximations}.}.
 
-\subsection{Linear Approximations}
+\subsection{Linear and First-Order Approximations}
 
 Recall from single variable calculus, if $f:\R\to\R$ was a differentiable function,
 a \emph{linear approximation} of $f$ at the point $a\in\R$ was a function $L:\R\to\R$
-whose graph is the tangent line to $y=f(x)$ at the point $(a,f(a))$.
+whose graph is the tangent line to $y=f(x)$ at the point $(a,f(a))$.  A linear approximation
+is equivalently called a \emph{first-order approximation}\footnote{ This phrasing comes from
+language used in Taylor approximations.}.
 
 XXX Figure
 
@@ -1378,7 +1380,7 @@ Thus,
 	\frac{f(\vec a+\vec r)-p(\vec a+\vec r)}{\norm{\vec r}^m}<\cdots<
 \frac{f(\vec a+\vec r)-p(\vec a+\vec r)}{\norm{\vec r}},
 \]
-and so having a degree-$m$ Taylor approximation is a bigger demand that merely being
+and so having a degree-$m$ Taylor approximation is a more stringent demand that merely being
 differentiable.
 
 \begin{example}
@@ -1546,6 +1548,59 @@ The implications of Theorem \ref{THMYOUCANUSEPOLYS} are far reaching.
 You can use polynomial approximations to study curvature, concavity, local
 minimums and maximums, etc.---and we will.
 
+\subsection{Approximations of Parameterizations}
+Thus far we have only concerned ourselves with functions $f:\R^n\to\R$
+where the co-domain is $\R$.  However, there are a host of interesting
+functions of the form $\vec g:\R^n\to\R^m$.  In particular, a parameterization
+of a curve takes the form $\vec r:\R\to\R^m$ and a parameterization of
+a surface takes the form $\vec s:\R^2\to\R^m$.
+
+We can define first-order and higher-order approximations to functions $\vec g:\R^n\to\R^m$
+by using components.
+
+\begin{definition}
+	Let $\vec f:\R^n\to\R^m$ have component functions
+	$f_1,f_2,\ldots,f_m:\R^n\to\R$.  The order $n$ approximation
+	to $f$ at the point $\vec a\in\R^n$ is the function
+	\[
+		\vec g(\vec x) = \matc{g_1(\vec x)\\g_2(\vec x)\\\vdots\\g_m(\vec x)}
+	\]
+	where $g_i$ is an $n$th order polynomial approximation to $f_i$ at $\vec c$
+	for each $i=1,\ldots,m$.
+\end{definition}
+
+\begin{example}
+	Let $\vec p:\R^2\to\R^2$ be the parameterization of $\R^2$ coming from
+	polar coordinates.  That is $\vec p(r,\theta) = (r\cos\theta,r\sin\theta)$.
+	Find the first-order approximation to $\vec p$ at $(2,0)$.
+
+	Let $x(r,\theta)=r\cos\theta$ and $y(r,\theta)=r\sin\theta$ be the component
+	functions of $\vec p$.  We need to find first-order approximations to $x$ and $y$
+	at the point $(2,0)$.  Using gradients we can quickly compute these linear
+	approximations.
+	\[
+		L_x(r,\theta) = \nabla x(2,0)\cdot(r-2,\theta-0) + x(2,0)= r
+	\]
+	and
+	\[
+		L_y(r,\theta) = \nabla y(2,0)\cdot(r-2,\theta-0) + y(2,0)= 2\theta.
+	\]
+
+	Therefore, the first-order approximation to $\vec p$ at the point $(2,0)$ is
+	\[
+		\vec L_{\vec p}(r,\theta) = \mat{r\\2\theta}.
+	\]
+\end{example}
+
+In a similar way, we can define what it means for a vector-valued function
+$\vec f:\R^n\to\R^m$ to be differentiable.
+
+\begin{definition}[Differentiable (Vector-valued Function)]
+	Let $\vec f:\R^n\to\R^m$ have component functions
+	$f_1,f_2,\ldots,f_m:\R^n\to\R$.  The vector-valued function $\vec f$
+	is \emph{differentiable} if $f_i$ is differentiable for
+	$i=1,\ldots,m$.
+\end{definition}
 
 \section{Optimization}
 
