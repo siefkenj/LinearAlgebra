@@ -172,7 +172,10 @@ velocity.  We can prove it mathematically.
 \end{theorem}
 \begin{proof}
 	The proof relies on the continuity of $\norm{\:\cdot\:}$.  Since $\norm{\:\cdot\:}$
-	is continuous, we may freely move limits in and out.  Thus
+	is continuous, we may freely move limits in and out\footnote{
+		This limit rule actually says if $f$ is continuous 
+		\emph{and} $\lim_{x\to a} g(x)$ exists, then $\lim_{x\to a}f(g(x))
+		=f\big(\lim_{x\to a}g(x)\big)$.}.  Thus
 	\begin{align*}
 		\Speed \vec p(t) &= \lim_{\Delta t\to 0} \frac{\norm{\vec p(t+\Delta t) - \vec p(t)}}{\abs{\Delta t}}\\
 		&= \lim_{\Delta t\to 0} \norm*{\frac{\vec p(t+\Delta t) - \vec p(t)}{\Delta t}}\\
@@ -332,7 +335,7 @@ Hence,
 
 As you can see from Example \ref{EXHARDARCLEN}, the integrals involved in computing
 arc length can be difficult.  In fact, most of them don't have an elementary form, which
-means in the real world we often approximate arc length directly from the Riemann sum
+means in the real world we often use a computer to approximate arc length directly from the Riemann sum
 rather than calculate it exactly.
 
 \begin{exercises}
