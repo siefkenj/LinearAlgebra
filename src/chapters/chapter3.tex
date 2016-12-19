@@ -985,4 +985,566 @@ Curvature can be hard to calculate exactly, but it isn't so hard to eyeball.
 
 \section{Multi-dimensional Parameterizations}
 
-\subsection{Coordinate Systems}
+Parameterizations aren't just for curves---higher dimensional objects can also be parameterized.
+For example, let $\mathcal P\subseteq \R^3$ be the plane with equation $x+y+z=0$.  We can write this plane
+in vector form as 
+\[
+	\vec x = t\mat{1\\-1\\0} + s\mat{0\\1\\-1}.	
+\]
+Written in vector form, we see that $\mathcal P$ is the range of a function $\vec p:\R^2\to\mathcal P$
+defined by 
+\[
+	\vec p(t,s) = t\mat{1\\-1\\0} + s\mat{0\\1\\-1}.
+\]
+We could further verify that $\vec p$ is one-to-one and continuous, and so $\vec p$ is a parameterization
+of $\mathcal P$.
+
+Just like parameterizations of curves, for any given multi-dimensional object, there are
+infinitely many parameterizations.  For instance,
+\[
+	\vec q(t,s) = t^3\mat{1\\-1\\0} + (1-s)\mat{0\\1\\-1}\qquad\text{and}\qquad
+	\vec h(t,s) = t\mat{3\\-3\\0} + s\mat{0\\1\\7}
+\]
+are also both parameterizations of $\mathcal P$.
+
+\subsection{Converting Between Parameterizations}
+Suppose $\vec p:\R\to\mathcal C$ and $\vec q:\R\to\mathcal C$ are both parameterizations of
+the same curve $\mathcal C$ and that $\vec p(0)=\vec q(0)$.  Based on our previous explorations,
+we know that we can convert from $\vec p$ to $\vec q$ by stretching, warping, or flipping ``time''
+in some way.  That is, we can find a function $w:\R\to\R$ so that $\vec p\circ w=\vec q$.
+
+Such time-warping functions, which we should really call \emph{domain}-warping,
+are themselves parameterizations of of $\R$.  Using similar logic, we can also
+convert between parameterizations of multi-dimensional objects by conjuring up the
+appropriate domain-warping function.
+
+\begin{theorem}
+	If $\vec p:\R^n\to\mathcal S$ and $\vec q:\R^n\to\mathcal S$ are both
+	parameterizations of $\mathcal S$, then there exists a parameterization
+	$\vec w:\R^n\to\R^n$ so that 
+	\[
+		\vec p\circ \vec w = \vec q.
+	\]
+\end{theorem}
+\begin{proof}
+	First, recall that the composition of two continuous functions is continuous.  Further,
+	if a function $f:\R^n\to\R^m$ is continuous and invertible, then $f^{-1}$ is also continuous.
+
+	Now, since $\vec p:\R^n\to\mathcal S$ is one-to-one, $\vec p^{-1}\Big|_{\mathcal S}$ exists
+	and so $\vec w:\R^n\to\R^n$ given by $\vec w=\vec p^{-1}\circ\vec q$ is well defined.  Further, $\vec w$
+	is a composition of parameterizations and therefore a parameterization.  It now directly follows that
+	$\vec p\circ \vec w= \vec p\circ\vec p^{-1}\circ \vec q = \vec q$.
+\end{proof}
+
+\begin{example}
+	Let $\mathcal P$ be a plane parameterized by $\vec p:\R^2\to\mathcal P$ and $\vec q:\R^2\to\mathcal P$.
+	Given that
+	\[
+		\vec p(t,s) =  t\mat{1\\-1\\0} + s\mat{0\\1\\-1}\qquad\text{and}\qquad
+		\vec q(t,s) =  t^3\mat{1\\-1\\0} + s\mat{1\\1\\-2},
+	\]
+	find a function $\vec w:\R^2\to\R^2$ such that $\vec p\circ \vec w=\vec q$.
+
+	 We will find $\vec w$ by analyzing how it needs to adjust each of its parameters.
+	Suppose $\vec w(t,s)=(a,b)$.  Then, if $\vec p\circ\vec w = \vec q$, we must have
+	\[
+		\vec p\circ \vec w(t,s) = \vec p(a,b) = a\mat{1\\-1\\0}+b\mat{0\\1\\-1}
+		=t^3\mat{1\\-1\\0}+s\mat{1\\1\\-2}=\vec q(t,s).
+	\]
+	If we can find a formula for $a$ and $b$ in terms of $t$ and $s$, we can write down
+	a formula for $\vec w$.
+
+	From the vector equation above, we get the following system of equations.
+	\begin{align*}
+		a &= t^3+s\\
+		-a+b&=-t^3+s\\
+		-b&=-2s
+	\end{align*}
+	We conclude that $a=t^3+s$ and $b=2s$.  Therefore,
+	\[
+		\vec w(t,s) = (t^3+s, 2s).
+	\]
+\end{example}
+
+\subsection{Isometric Parameterizations}
+
+When parameterizing curves, the arc-length parameterization stands out as special.  If
+you have an arc-length parameterization of a curve, line integrals become easy, speed is always one,
+and you can imagine the curve as the real line picked up and bent, but \emph{not stretched}, while it is
+placed in space.  The analog in higher dimensions is an \emph{isometric parameterization}\index{isometric
+parameterization}.
+
+\begin{definition}[Isometric Parameterization]
+	Let $\vec p:\R^n\to\mathcal S$ be a parameterization of $\mathcal S$.  The parameterization
+	$\vec p$ is called an \emph{isometric parameterization} if the speed of $\vec p$ with
+	respect to each parameter is one and $\vec p$ preserves area.
+\end{definition}
+
+Suppose $\mathcal S$ is a surface (that is, a two dimensional object) and that $\vec p:\R^2\to\mathcal S$
+is an isometric parameterization.  We can then view $\mathcal S$ as the plane $\R^2$ picked up, bent, 
+but \emph{not stretched}, and placed into space.  Any calculations you might want to do on 
+the surface $\mathcal S$ can be done equally well by using $\vec p$ to convert them to calculations
+on $\R^2$.
+
+\begin{example}
+	Show that $\vec p:\R^2\to\R^2$ given by $\vec p(t,s)=\tfrac{t}{\sqrt{2}}\mat{1\\1}+\tfrac{s}{\sqrt{2}}\mat{1\\-1}$
+	is an isometric parameterization of $\R^2$.
+
+	To show that $\vec p$ is an isometric parameterization of $\R^2$, we need to show that the speed with respect
+	to each parameter is one and that it preserves area.  We'll verify the speed first.
+	Let $t_0$ and $s_0$ be fixed and consider
+	\begin{align*}
+		\text{speed with respect to $t$} &= \lim_{h\to 0} 
+		\frac{\norm*{\left(\tfrac{t_0+h}{\sqrt{2}} \mat{1\\1} + \tfrac{s_0}{\sqrt{2}}\mat{1\\-1}\right)
+		-\left(\tfrac{t_0}{\sqrt{2}} \mat{1\\1} + \tfrac{s_0}{\sqrt{2}}\mat{1\\-1}\right)}
+		}{\abs{h}}\\
+		&= \frac{\abs*{\tfrac{h}{\sqrt{2}}}}{\abs{h}}\norm*{\mat{1\\1}} = 1.
+	\end{align*}
+	Computing the speed with respect to $s$ is similar and, indeed, the speed with
+	respect to $s$ is $1$.
+
+	Now, to verify that $\vec p$ preserves area, we only need to consider the image
+	of rectangles under $\vec p$.\footnote{
+		Using rectangles, we can decompose an area into the limit of the sum of a bunch of
+		rectangles}
+	Recall that $[t,t+\Delta t]\times[s,s+\Delta s]\subseteq\R^2$ is a rectangle with 
+	lower left corner at $(t,s)$ and sides of length $\Delta t$ and $\Delta s$.
+	Thus, we only need to verify
+	that $\vec p([t,t+\Delta t]\times[s,s+\Delta s])$ has area $\Delta t\Delta s$.
+
+	Graphing, we see that the corners of $\vec p([t,t+\Delta t]\times[s,s+\Delta s])$ are at
+
+	XXX Finish
+\end{example}
+
+\begin{example}
+	Find an isometric parameterization the cylinder with radius one and height one centered at
+	the origin in $\R^3$ and oriented with height along the $z$-axis.
+
+	XXX Finish
+\end{example}
+
+Isometric parameterizations are really neat, and as we'll see in the future, if we have an isometric
+parameterization, many computations become easier.  Alas, though for most curves there exists
+an arc-length parameterization, very few multi-dimensional objects have isometric parameterizations.
+If an object has \emph{intrinsic} curvature, like a sphere, there could never be an isometric parameterization.
+Asking that both speed and area be preserved is just too much.
+
+However, there are several other special types of parameterizations for multiple dimensional objects.
+
+\begin{definition}[Conformal Mapping]
+	A parameterization $\vec p:\R^n\to\mathcal S$ is called a \emph{conformal map}\footnote{ \emph{Map}
+	is just another word for function.}
+	if it preserves angles.
+\end{definition}
+
+\begin{definition}[Volume Preserving Transformation]
+	A parameterization $\vec p:\R^n\to\mathcal S$ is called a \emph{volume-preserving transformation}\footnote{ 
+	\emph{Transformation} is just another word for function} if $\vec p$ preserves volume.
+\end{definition}
+
+Every isometric parameterization is both a conformal mapping and a volume-preserving transformation, but
+there can be conformal mappings which aren't volume-preserving or isometric and volume-preserving transformations
+which aren't conformal or isometric.  We won't study these types of parameterizations in detail, but
+they show up in the domains of \emph{complex analysis} and the study of \emph{general relativity}.
+
+
+\begin{exercises}
+\end{exercises}
+
+\section{Coordinate Systems}
+
+Coordinate systems are an important special case of multi-dimensional parameterizations.
+In fact, any parameterization $\vec p:\R^n\to\R^n$ gives rise to a coordinate system
+(typically the domain and range of the parameterization are the same).  Rather than
+discuss coordinate systems from a theoretical perspective, let's look at an
+important coordinate system for $\R^2$.
+
+\subsection{Polar Coordinates}
+Polar coordinates\index{polar coordinates} describe points in $\R^2$ by a \emph{distance}, denoted $r$,
+and an \emph{angle}, denoted $\theta$.  A point $\vec x\in\R^2$ specified by the polar-coordinates
+$(r,\theta)$ is then the point which is distance $r$ from the origin at an angle of $\theta$
+measured counter clockwise from the $x$-axis.
+
+XXX Figure
+
+Using trigonometry, we can deduce that the rectangular coordinates of a point in polar coordinates.
+In particular,
+\begin{equation}
+	\label{EQPOLAR}
+	x=r\cos\theta\qquad\text{and}\qquad y=\sin\theta.
+\end{equation}
+We can also write the polar coordinates of a point $\vec x=(x,y)$ from its rectangular coordinates via
+\[
+	r=\sqrt{x^2+y^2}\qquad\text{and}\qquad \theta=\arctan\left( \tfrac{y}{x}\right).
+\]
+
+Typically when we use polar coordinates we assume $r\in[0,\infty)$ and $\theta\in[0,2\pi)$, however
+Equations \eqref{EQPOLAR} are valid for all $r,\theta\in\R$, and so when it suits us we will let
+$r$ and $\theta$ take non-traditional values.
+
+There are a couple of things to notice about polar coordinates.  First, if you list
+the coordinates in the order $(r,\theta)$, then polar coordinates form a right-handed
+coordinate system\footnote{ We haven't defined what it means for a coordinate system
+whose ``axes'' are curved to be right-handed.  For polar coordinates it means that if
+you take velocity vectors for the $r$ direction and the $\theta$ direction, the $\theta$
+velocity vector is oriented counter clockwise compared to the $r$ velocity vector.  A more
+appropriate name for this would be \emph{locally} right handed.}. 
+
+XXX Figure
+
+Another thing is that polar coordinates are not unique.  The point described by $(1,\pi)$
+is also described by $(-1,0)$.  Most of the non-uniqueness issues are solved by insisting
+$0\leq r <\infty$ and $0\leq\theta < 2\pi$.  However, even then we have the issue that
+$(0,\theta)$ describes the same point, the origin, no matter what $\theta$ is.  For this reason,
+we call the origin in polar coordinates a \emph{singularity}\footnote{ In mathematics, the word
+\emph{singularity} is used to describe a point where ``bad things'' happen.  Ironically, the
+singularity of polar coordinates is the place where there \emph{isn't} a singular description
+in terms of polar coordinates.}.
+
+
+Shapes with radial symmetry can often be described more easily in polar coordinates than
+in rectangular.  For instance, the circle, $\mathcal C$, of radius $7$ centered at the origin is
+$\mathcal C=\Set{(r,\theta)\given r=7}$ in polar coordinates.  This doesn't have a dramatic
+advantage over the representation $\mathcal C=\Set{(x,y)\given x^2+y^2=7^2}$ until you try to write
+$\mathcal C$ as the graph of a function.  $\mathcal C$ cannot be described as the graph of a function
+in rectangular coordinates but it is the graph of the function $r=7$ in polar coordinates.
+
+Circles and polar coordinates go together hand in hand.  Even circles centered away from the origin
+have nice descriptions in polar coordinates.
+\begin{example}
+	Graph the function whose equation is given in polar coordinates by $r=\sin\theta$.
+
+	XXX Finish
+\end{example}
+
+\subsection{Multiple Perspectives on Coordinate Systems}
+
+We now have two coordinate systems for $\R^2$ under our belt: rectangular and polar.  
+It's time to get philosophical so that we avoid getting confused later on.
+
+Recall that we've been using $\R^2$ to represent two-dimensional Euclidean space---the plane.
+We also use $\R^2$ to represent \emph{pairs of real numbers}.  If we were really pedantic,
+we would use a different symbol for these two concepts because they really are different things.
+However, once we draw $x$ and $y$ axes in the Euclidean plane, we see that pairs of real numbers
+are \emph{equivalent} to points in the Euclidean plane.  That is, given any point in the Euclidean
+plane, I can assign it to exactly one pair of real numbers and any pair of real numbers corresponds
+to a point in the Euclidean plane.
+
+XXX
+
+This justified our use of $\R^2$ for both pairs of real numbers and the Euclidean plane.  However, our
+situation now is more complicated.  Polar coordinates are \emph{also} pairs of real numbers
+and polar coordinates \emph{also} describe points in the Euclidean plane.  Further, consider the function
+$\vec p:\R^2\to\R^2$ defined by
+\begin{equation}
+	\label{EQPOLARPARAM}
+	\vec p(r,\theta) = (r\cos\theta,r\sin\theta).
+\end{equation}
+On the one hand, $\vec p$ can be interpreted as a function that inputs polar coordinates and outputs
+rectangular coordinates.  Under this interpretation, $\vec p$ \emph{doesn't do anything} to
+the Euclidean plane.  On the other hand, we could interpret $\vec p$ as a function that takes in
+rectangular coordinates and outputs rectangular coordinates.  Remember, $r$ and $\theta$ in Equation
+\eqref{EQPOLARPARAM} are dummy variables.  They only have meaning insofar as they allow us to make
+sense of the definition.  But we could have just as easily defined $\vec p$ by $\vec p(x,y) = (x\cos y,x\sin y)$.
+It would have made no difference.  Under this interpretation $\vec p$ twists and warps the Euclidean
+plane significantly.
+
+When we start writing functions down in multiple coordinate systems, we need to be careful
+that we know how to interpret these functions.  There are systems of notation what would allow
+us to deal with multiple coordinate systems in an unambiguous manner, but we will take a more
+pragmatic approach and have variable names carry extra meaning when talking about multiple coordinate systems.
+
+For example, when we defined polar coordinates, we introduced the parameters of polar coordinates
+as $r$ and $\theta$.  Therefore, if we write an equation using those variables,
+for example $r=\sin2\theta$, that equation should be interpreted as a relationship in polar coordinates
+and given a point $\vec x\in\R^2$, if we write $\vec x=(r,\theta)$ we interpret the description of $\vec x$
+as given in polar coordinates.  Similarly, if we write $\vec x=(x,y)$ we interpret the description of $\vec x$
+in rectangular coordinates.  This can lead to unfortunate-looking equations like $(r,\theta)=\vec x=(x,y)$.
+This equation would be more clearly expressed as
+\[
+	(r,\theta)_{\text{polar}} = \vec x=(x,y)_{\text{rectangular}},
+\]
+but we will be sloppy if the context allows.  Other times we will just say in words, for example, ``the
+point $(a,b)$ interpreted in polar coordinates,'' to make it clear what we mean.
+
+There are also times when we want to interpret $(r,\theta)$ as a pair of real numbers instead
+of as describing a point in Euclidean space.  In this situation, we may talk about the
+point $(r,\theta)$ in the $r\theta$-plane.  This is code for, ``interpret $(r,\theta)$
+as a pair of numbers that describe the rectangular coordinates of a point in the plane.''
+However, by distinguishing the $r\theta$-plane from the usual $xy$-plane, we can draw helpful distinctions.
+
+For example, recall $\vec p$ from earlier defined by $\vec p(r,\theta)=(r\cos\theta,r\sin\theta)$.  The function
+$\vec p$ converts from polar coordinates to rectangular coordinates, but will also interpret it as
+mapping the $r\theta$-plane to the $xy$-plane.
+
+XXX Figure
+
+While the graph of $r=2\theta$ is a line in the $r\theta$-plane, it is a spiral in the $xy$-plane.
+
+XXX Figure
+
+Despite this discussion, expect coordinate systems to occasionally be confusing.  Still,
+their usefulness in applications outweighs the inconvenience of being confused.  We will examine
+a couple more of the most popular non-rectangular coordinate systems.
+
+\subsection{Cylindrical Coordinates}
+Cylindrical coordinates\index{cylindrical coordinates} is a coordinate system for $\R^3$
+that arises as a straightforward extension of polar coordinates.  Every point in $\R^3$ is
+described by three numbers denoted by $r$, $\theta$, and $z$.
+
+Recall that $\R^3$ can be described as $\R^2\times\R$.  That is, any point in $\R^3$ can be described
+as a point in $\R^2$ coupled with a ``$z$-height.''  Cylindrical coordinates are obtained by
+writing points in $\R^2$ in polar coordinates and then adding a $z$ component.
+
+XXX Figure
+
+It's related to rectangular coordinates by the formulas
+\[
+	x=r\cos\theta\qquad
+	y=r\sin\theta\qquad
+	z=z
+\]
+where $(r,\theta,z)$ represents a point in cylindrical coordinates and $(x,y,z)$ is the same point in rectangular
+coordinates.
+
+
+
+\begin{example}  $r = a$ describes an (infinite) cylinder
+of radius $a$ centered on the $z$-axis.  If we let $a$ vary, we
+obtain an infinite family of concentric cylinders.  We can treat
+the case $a = 0$ (the $z$-axis) as a degenerate cylinder of
+radius 0.
+
+XXX Figure
+\end{example}
+
+\begin{example}$\theta = \alpha$ describes a \emph{half
+plane} making angle $\alpha$ with the positive $xz$-plane.
+In this half plane, $r$ can assume any non-negative
+value and $z$ can assume any value.
+
+XXX Figure
+\end{example}
+\begin{example}  $z = mr$  describes an (infinite)
+  cone centered
+on the $z$-axis with vertex at the origin.  For a fixed value
+of $\theta$, we obtain a ray in this cone which starts at
+the origin and extends to infinity.  This ray makes angle
+$\arctan m$ with the $z$-axis, and if we let $\theta$
+vary, the ray rotates around the $z$-axis generating the
+cone.  Note also that if $m > 0$, the angle with the $z$-axis
+is acute and the cone lies above the $x,y$-plane.  If
+$m < 0$, the angle is obtuse, and the cone lies below the
+$xy$-plane.  The case $m = 0$ yields the $x,y$-plane
+($z = 0$) which may be considered a special `cone'.
+
+Note that in rectangular coordinates,  $z = mr$ becomes
+$z = m\sqrt{x^2 + y^2}$.
+
+XXX Figure
+\end{example}
+
+\begin{example}  $r^2 + z^2 = a^2$ describes a sphere
+of radius $a$ centered at the origin.  The easiest way to
+see this is to put $r^2 = x^2 + y^2$ whence the equation
+becomes $x^2 + y^2 + z^2 = a^2$.  The top hemisphere of the
+sphere would be described by $z = \sqrt{a^2 - r^2}$
+and the bottom hemisphere by
+ $z = -\sqrt{a^2 - r^2}$.
+\end{example}
+
+
+\subsection{Spherical Coordinates}
+
+Cylindrical coordinates are one way to generalize polar coordinates
+to $\R^3$, but there is another way that is more useful for
+problems with spherical symmetry. 
+\emph{Spherical
+coordinates}
+\index{spherical coordinates}
+\index{coordinates, spherical}
+are denoted with the variables $\rho$, $\phi$, and $\theta$.
+
+A point $P$ in space is defined by the coordinates $(\rho,\theta,\phi)$ as follows.   
+The coordinate $\rho$ gives the distance
+$\norm{\overrightarrow{OP}}$ of the point
+to the origin.  It is always non-negative, and it should be
+distinguished from the cylindrical coordinate $r$ which is the
+distance from the $z$-axis.  The coordinate $\phi$ gives
+the \emph{azimuthal angle}\index{azimuthal angle}, which
+is the angle of declination between $\overrightarrow{OP}$ and the positive $z$-axis.
+We will assume $\phi\in[0,\pi]$.  Finally, the coordinate $\theta$
+denotes the \emph{longitudinal angle}\index{longitudinal angle},
+and is the same as the $\theta$ from cylindrical coordinates.
+Again, we assume $\theta\in[0,2\pi)$.
+
+XXX Figure of spherical coords
+
+Note the reason we restrict $\phi$ to the interval $[0,\pi]$ (rather than
+$[0,2\pi)$. Fix $\rho$
+and $\theta$.   If $\phi = 0$,
+the point is on the positive $z$-axis, and, as $\phi$ increases,
+the point swings down toward the negative $z$-axis. However, it stays
+in the half plane determined by that value of $\theta$.  For
+$\phi = \pi$, the point is on the negative $z$-axis, but if we
+allow $\phi$ to increase further, the point swings into the
+\emph{opposite} half plane with longitudinal angle $\theta + \pi$.
+Such points can be obtained just as well by swinging down from
+the positive $z$-axis in the opposite half plane determined by
+$\theta + \pi$.
+
+XXX Figure
+
+The following relationships hold between spherical coordinates,
+cylindrical coordinates, and rectangular coordinates. 
+\begin{align*}
+	r & = \rho \sin\phi \\
+	z & = \rho \cos\phi \\
+	\intertext{so}
+	x &=  \rho \sin\phi \cos\theta \\
+	y &=  \rho \sin\phi \sin\theta \\
+	z & = \rho \cos\phi\\
+	\intertext{and}
+	\rho &= \sqrt{r^2 + z^2} = \sqrt{x^2 + y^2 + z^2} \\
+	\tan\phi &= \frac rz\qquad\text{if } z \ne 0.
+\end{align*}
+
+It is important to note that unlike rectangular, polar, or cylindrical coordinates,
+mathematicians and physicists use two different conventions for spherical coordinates.
+We have introduced spherical coordinates in the order $(\rho,\theta,\phi)$.  This
+paints spherical coordinates as an extension of polar coordinates in the $xy$-plane by
+the addition of a third coordinate, $\phi$.  However, ordered this way, spherical
+coordinates produce a \emph{left-handed} coordinate system.  Since physicists prefer
+right-handed coordinate systems, they tend to use the order $(\rho,\phi,\theta)$ when
+describing points in spherical coordinates\footnote{ Mathematics and physicists
+differ in their conventions in several other regards.  Often times a force that is negative
+to a physicist is positive to a mathematician and mathematicians tend to reverse the temperature
+scale when doing thermodynamics.  All of the theorems come out the same, of course,
+but it takes some interpretation to understand theorems from another field.}.  
+We will primarily use the mathematical convention,
+but when you read problems presented in spherical coordinates in other contexts, be
+aware of what convention the author is using!
+
+
+\begin{example}
+$\rho = a$ describes a sphere of radius $a$ centered at the origin.
+\end{example}
+
+\begin{example}
+$\phi = \alpha$ describes a cone making angle $\alpha$ with the
+positive $z$-axis.  If $\phi<\pi/2$ the cone lies above the $xy$-plane;
+	if $\phi>\pi/2$, the cone lies below the $xy$-plane; 
+	and if $\phi=\pi/2$, the (degenerate) cone \emph{is} the $xy$-plane.
+\end{example}
+
+\begin{example}
+$\theta = \beta$ describes a half plane starting from the $z$-axis
+as before.
+\end{example}
+
+\begin{example}
+$\rho = 2a\cos\phi$ describes a sphere of radius
+$a$ centered at $(0,0,a)$.  You can see this by looking at
+the half plane determined by fixing $\theta$.  In that half
+plane, the locus is the \emph{semi-circle} with the given
+radius and center.  If we then let $\theta$ vary, the effect is
+to rotate the semi-circle about the $z$-axis and generate the
+sphere
+
+XXX Figure
+\end{example}
+
+If we fix $\rho = a$, we obtain a sphere of radius $a$.
+Then $(\phi, \theta)$ specify the position of a point on
+that sphere.  
+
+For $\theta = $ constant, we obtain the semi-circle
+which is the intersection of the half plane for that $\theta$
+with the sphere.  That circle is called a {\it meridian of
+longitude}.  This is exactly the concept of longitude used to
+\index{meridian of longitude}
+\index{longitude}
+measure position on the surface of the Earth, except that we
+use radians instead of degrees.  Earth's longitude is usually
+measured in degrees east or west of the Greenwich Meridian.
+That corresponds in our case to the positive and negative
+directions from the 0-meridian.  
+
+XXX Figure
+
+For $\phi = $ constant, we obtain the circle which is the
+intersection of the cone for that $\phi$ with the sphere.
+Such circles are called {\it circles of latitude}.
+\index{circle of latitude}
+\index{latitude}
+The coordinate $\phi$ is related to the notion of latitude on the surface
+of the Earth, except that the latter is an angle
+in degrees north or south of the \emph{equatorial plane}.  The
+spherical coordinate $\phi$ is sometimes called \emph{co-latitude},
+and we have $\phi = \pi/2 - \lambda$, where $\lambda$ is the latitude
+measures from the equatorial plane (assuming both $\lambda$ and $\phi$ are
+measured in radians).
+The unique point with $\phi = 0$ is called the
+\emph{north pole}, that with $\phi = \pi$ is called the
+\emph{south pole}, and at the  poles $\theta$ is not well defined.
+
+XXX Figure
+
+\subsection{Coordinate Systems from Parameterizations}
+We've looked at several important coordinate systems for $\R^2$ and $\R^3$,
+but any parameterization of $\R^2$ or $\R^3$ gives rise to a coordinate system.
+
+Consider $\vec p:\R^2\to\R^2$ given by $\vec p(a,b)=(a+b,a-b)$.  
+
+\begin{exercise}
+	Show that $\vec p:\R^2\to\R^2$ given by $\vec p(a,b)=(a+b,a-b)$ is
+	a parameterization.  That is, that it is a continuous 
+	one-to-one and onto function.
+\end{exercise}
+
+Geometrically, we can view $\vec p$ as taking the plane, rotating it by $45^\circ$,
+and then
+stretching it uniformly in all directions by a factor of $\sqrt{2}$.
+
+XXX Figure
+
+Alternatively, we can imagine that $\vec p$ describes how to take points described
+in ``$ab$-coordinates'' and rewrite them in rectangular coordinates.  Call this new coordinate
+system $\mathcal A$. We then get that
+$\mathcal A$ coordinates relate to rectangular coordinates by
+\[
+	x=a+b\qquad\text{and}\qquad y=a-b.
+\]
+Drawing the lines $a=0$ and $b=0$ we see that $\mathcal A$ coordinates are very similar to
+rectangular coordinates but with rotated and scaled axes.
+
+XXX Figure
+
+There might be good reason to use $\mathcal A$ coordinates, depending on your application.
+For example, suppose you were working on a construction project and you are using rectangular
+coordinates $(x,y)$ to represent the position north and east from the origin of your construction
+lot.  If you're building a diagonal building, it might be nicer to describe locations in your building
+using $\mathcal A$ coordinates.
+
+\bigskip
+
+Now, we might be tempted to propose that all coordinate systems come from parameterizations,
+and this is \emph{almost} true.  However, coordinate systems like polar, cylindrical, and spherical
+all have \emph{singularities}.  That is, there are points in space that are not uniquely
+describable in those coordinate systems.  Thus, if we consider, for example, the function
+$\vec p:\R^2\to\R^2$ which converts polar coordinates to rectangular coordinates, it isn't a true
+parameterization because it isn't one-to-one at the origin.  We won't let this detail bother us---polar,
+cylindrical, and spherical coordinates are still useful and they \emph{almost} come from parameterizations.
+Occasionally we will even slip up and proclaim that $\R^2$ is parameterized by polar coordinates
+or that $\R^3$ is parameterized by spherical coordinates\footnote{
+	To a novice mathematician, it can be hard to discern the 
+	patterns in what determines where a professional mathematician allows
+	herself to be sloppy and where she maintains excruciating logical precision.
+	Rest assured, after enough mistakes, one learns where one needs to tread carefully
+	and where one can be more lax.
+}.
+
+
+\begin{exercises}
+\end{exercises}
