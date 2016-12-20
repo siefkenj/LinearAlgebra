@@ -1155,15 +1155,15 @@ they show up in the domains of \emph{complex analysis} and the study of \emph{ge
 \section{Coordinate Systems}
 
 Coordinate systems are an important special case of multi-dimensional parameterizations.
-In fact, any parameterization $\vec p:\R^n\to\R^n$ gives rise to a coordinate system
-(typically the domain and range of the parameterization are the same).  Rather than
-discuss coordinate systems from a theoretical perspective, let's look at an
+In fact, any parameterization $\vec p:\R^n\to\R^n$ gives rise to a coordinate system.  Rather than
+starting off with a theoretical discussion of coordinate systems,
+let's look at an
 important coordinate system for $\R^2$.
 
 \subsection{Polar Coordinates}
 Polar coordinates\index{polar coordinates} describe points in $\R^2$ by a \emph{distance}, denoted $r$,
 and an \emph{angle}, denoted $\theta$.  A point $\vec x\in\R^2$ specified by the polar-coordinates
-$(r,\theta)$ is then the point which is distance $r$ from the origin at an angle of $\theta$
+$(r,\theta)$ is the point at distance $r$ from the origin at an angle of $\theta$
 measured counter clockwise from the $x$-axis.
 
 \begin{center}
@@ -1229,9 +1229,9 @@ We can also write the polar coordinates of a point $\vec x=(x,y)$ from its recta
 	r=\sqrt{x^2+y^2}\qquad\text{and}\qquad \theta=\arctan\left( \tfrac{y}{x}\right).
 \]
 
-Typically when we use polar coordinates we assume $r\in[0,\infty)$ and $\theta\in[0,2\pi)$, however
-Equations \eqref{EQPOLAR} are valid for all $r,\theta\in\R$, and so when it suits us we will let
-$r$ and $\theta$ take non-traditional values.
+Typically when we use polar coordinates, we assume $r\in[0,\infty)$ and $\theta\in[0,2\pi)$, however
+Equations \eqref{EQPOLAR} are valid for all $r,\theta\in\R$, and so we will let
+$r$ and $\theta$ take non-traditional values when it suits us.
 
 There are a couple of things to notice about polar coordinates.  First, if you list
 the coordinates in the order $(r,\theta)$, then polar coordinates form a right-handed
@@ -1295,22 +1295,25 @@ yticklabels={,,}
 	\end{tikzpicture}
 \end{center}
 
-Another thing is that polar coordinates are not unique.  The point described by $(1,\pi)$
-is also described by $(-1,0)$.  Most of the non-uniqueness issues are solved by insisting
-$0\leq r <\infty$ and $0\leq\theta < 2\pi$.  However, even then we have the issue that
-$(0,\theta)$ describes the same point, the origin, no matter what $\theta$ is.  For this reason,
+Secondly, polar coordinates are not unique.  If we allow $r$ to take negative
+values, the point described by $(r,\theta)=(1,\pi)$ is the same point described by $(r,\theta)=(-1,0)$.  
+Most non-uniqueness issues are solved by insisting
+$0\leq r <\infty$ and $0\leq\theta < 2\pi$.  However, even then 
+$(r,\theta)=(0,\theta_0)$ describes the same point (the origin) no matter
+the value of $\theta_0$.  For this reason,
 we call the origin in polar coordinates a \emph{singularity}\footnote{ In mathematics, the word
 \emph{singularity} is used to describe a point where ``bad things'' happen.  Ironically, the
 singularity of polar coordinates is the place where there \emph{isn't} a singular description
 in terms of polar coordinates.}.
 
-
+\bigskip
 Shapes with radial symmetry can often be described more easily in polar coordinates than
-in rectangular.  For instance, the circle, $\mathcal C$, of radius $7$ centered at the origin is
+in rectangular.  For instance, let $\mathcal C$ be the circle of radius $7$ centered at the origin.
+$\mathcal C$ can be described as
 $\mathcal C=\Set{(r,\theta)\given r=7}$ in polar coordinates.  This doesn't have a dramatic
 advantage over the representation $\mathcal C=\Set{(x,y)\given x^2+y^2=7^2}$ until you try to write
 $\mathcal C$ as the graph of a function.  $\mathcal C$ cannot be described as the graph of a function
-in rectangular coordinates but it is the graph of the function $r=7$ in polar coordinates.
+in rectangular coordinates, but it is the graph of the function $r=7$ in polar coordinates.
 
 Circles and polar coordinates go together hand in hand.  Even circles centered away from the origin
 have nice descriptions in polar coordinates.
