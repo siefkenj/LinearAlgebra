@@ -996,14 +996,15 @@ defined by
 \[
 	\vec p(t,s) = t\mat{1\\-1\\0} + s\mat{0\\1\\-1}.
 \]
-We could further verify that $\vec p$ is one-to-one and continuous, and so $\vec p$ is a parameterization
+We could further verify that $\vec p$ is one-to-one and continuous,  
+making $\vec p$ a parameterization
 of $\mathcal P$.
 
 Just like parameterizations of curves, for any given multi-dimensional object, there are
 infinitely many parameterizations.  For instance,
 \[
 	\vec q(t,s) = t^3\mat{1\\-1\\0} + (1-s)\mat{0\\1\\-1}\qquad\text{and}\qquad
-	\vec h(t,s) = t\mat{3\\-3\\0} + s\mat{0\\1\\7}
+	\vec h(t,s) = t\mat{3\\-3\\0} + s\mat{1\\1\\-2}
 \]
 are also both parameterizations of $\mathcal P$.
 
@@ -1013,14 +1014,15 @@ the same curve $\mathcal C$ and that $\vec p(0)=\vec q(0)$.  Based on our previo
 we know that we can convert from $\vec p$ to $\vec q$ by stretching, warping, or flipping ``time''
 in some way.  That is, we can find a function $w:\R\to\R$ so that $\vec p\circ w=\vec q$.
 
-Such time-warping functions, which we should really call \emph{domain}-warping,
-are themselves parameterizations of of $\R$.  Using similar logic, we can also
+Such time-warping functions, which we should really call \emph{domain}-warping
+functions,
+are themselves parameterizations of $\R$.  We can also
 convert between parameterizations of multi-dimensional objects by conjuring up the
 appropriate domain-warping function.
 
 \begin{theorem}
 	If $\vec p:\R^n\to\mathcal S$ and $\vec q:\R^n\to\mathcal S$ are both
-	parameterizations of $\mathcal S$, then there exists a parameterization
+	parameterizations of an $n$-dimensional object $\mathcal S$, then there exists a parameterization
 	$\vec w:\R^n\to\R^n$ so that 
 	\[
 		\vec p\circ \vec w = \vec q.
@@ -1031,9 +1033,9 @@ appropriate domain-warping function.
 	if a function $f:\R^n\to\R^m$ is continuous and invertible, then $f^{-1}$ is also continuous.
 
 	Now, since $\vec p:\R^n\to\mathcal S$ is one-to-one, $\vec p^{-1}\Big|_{\mathcal S}$ exists
-	and so $\vec w:\R^n\to\R^n$ given by $\vec w=\vec p^{-1}\circ\vec q$ is well defined.  Further, $\vec w$
+	and so $\vec w:\R^n\to\R^n$ given by $\vec w=\vec p^{\,-1}\circ\vec q$ is well defined.  Further, $\vec w$
 	is a composition of parameterizations and therefore a parameterization.  It now directly follows that
-	$\vec p\circ \vec w= \vec p\circ\vec p^{-1}\circ \vec q = \vec q$.
+	$\vec p\circ \vec w= \vec p\circ(\vec p^{-1}\circ \vec q) = \vec q$.
 \end{proof}
 
 \begin{example}
@@ -1068,10 +1070,11 @@ appropriate domain-warping function.
 
 \subsection{Isometric Parameterizations}
 
-When parameterizing curves, the arc-length parameterization stands out as special.  If
+When parameterizing curves, arc-length parameterizations stands out as special.  If
 you have an arc-length parameterization of a curve, line integrals become easy, speed is always one,
-and you can imagine the curve as the real line picked up and bent, but \emph{not stretched}, while it is
-placed in space.  The analog in higher dimensions is an \emph{isometric parameterization}\index{isometric
+and you can imagine the curve as the real line picked up and bent, but \emph{not stretched}, and
+placed into space.  The higher-dimensional analog of
+an arc-length parameterization is an \emph{isometric parameterization}\index{isometric
 parameterization}.
 
 \begin{definition}[Isometric Parameterization]
