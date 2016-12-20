@@ -1166,9 +1166,59 @@ and an \emph{angle}, denoted $\theta$.  A point $\vec x\in\R^2$ specified by the
 $(r,\theta)$ is then the point which is distance $r$ from the origin at an angle of $\theta$
 measured counter clockwise from the $x$-axis.
 
-XXX Figure
+\begin{center}
+	\newcommand{\tikzAngleOfLine}{\tikz@AngleOfLine}                               
+	  \def\tikz@AngleOfLine(#1)(#2)#3{%                                            
+	  \pgfmathanglebetweenpoints{%                                                 
+	    \pgfpointanchor{#1}{center}}{%                                             
+	    \pgfpointanchor{#2}{center}}                                               
+	  \pgfmathsetmacro{#3}{\pgfmathresult}%                                        
+	  }                                                                            
+	\newcommand{\tikzMarkAngle}[3]{                                                
+	\tikzAngleOfLine#1#2{\AngleStart}                                              
+	\tikzAngleOfLine#1#3{\AngleEnd}                                                
+	\draw #1+(\AngleStart:0.55cm) arc (\AngleStart:\AngleEnd:0.55cm);              
+	} 
 
-Using trigonometry, we can deduce that the rectangular coordinates of a point in polar coordinates.
+	
+\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west},
+xticklabels={,,},
+yticklabels={,,}
+		]
+
+	\coordinate (A) at (2.5,2);
+	\coordinate (X) at (-.07,.07);
+		\draw[,myred!60!white,dashed] (A) -- (0,0) ;
+			\draw [mypink,fill] (A) circle (1.5pt) node [ right] {$(r,\theta)$};
+	
+		\draw[decoration={brace, mirror}, decorate] ($(A)+(X)$) -- ($(0,0) +(X)$)
+			node [midway,above left] {$r$};
+\coordinate (O) at (0,0);
+\coordinate (B) at (1,0);
+
+		\node[] at (.75,.23) {$\theta$};
+		\end{axis}
+	\tikzMarkAngle{(O)}{(A)}{(B)};
+	\end{tikzpicture}
+\end{center}
+
+Using trigonometry, we can deduce the rectangular coordinates of a point in polar coordinates.
 In particular,
 \begin{equation}
 	\label{EQPOLAR}
@@ -1191,7 +1241,59 @@ you take velocity vectors for the $r$ direction and the $\theta$ direction, the 
 velocity vector is oriented counter clockwise compared to the $r$ velocity vector.  A more
 appropriate name for this would be \emph{locally} right handed.}. 
 
-XXX Figure
+\begin{center}
+	\newcommand{\tikzAngleOfLine}{\tikz@AngleOfLine}                               
+	  \def\tikz@AngleOfLine(#1)(#2)#3{%                                            
+	  \pgfmathanglebetweenpoints{%                                                 
+	    \pgfpointanchor{#1}{center}}{%                                             
+	    \pgfpointanchor{#2}{center}}                                               
+	  \pgfmathsetmacro{#3}{\pgfmathresult}%                                        
+	  }                                                                            
+	\newcommand{\tikzMarkAngle}[3]{                                                
+	\tikzAngleOfLine#1#2{\AngleStart}                                              
+	\tikzAngleOfLine#1#3{\AngleEnd}                                                
+	\draw #1+(\AngleStart:0.55cm) arc (\AngleStart:\AngleEnd:0.55cm);              
+	} 
+
+	
+\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west},
+xticklabels={,,},
+yticklabels={,,}
+		]
+
+	\coordinate (A) at (2.5,2);
+\coordinate (MA) at (-2, 2.5);
+	\coordinate (X) at (-.07,.07);
+		\draw [mypink,fill] (A) circle (1.5pt) node [ right] {};
+	
+		\draw[,myred!60!white,dashed] (A) -- (0,0)node [midway,above left, black] {$r$} ;
+
+	\draw[->,thick,mypink] (A) -- ($(A)+ 1/sqrt(2.5^2+2^2)*(A)$)node[midway, right, xshift=.2cm] {$r$ direction};
+\draw[->,thick, myred!60!white] (A) -- ($(A)+ 1/sqrt(2.5^2+2^2)*(MA)$) node[midway, left,yshift=-.07cm] {$\theta$ direction};
+\coordinate (O) at (0,0);
+\coordinate (B) at (1,0);
+
+		\node[] at (.75,.23) {$\theta$};
+		\end{axis}
+	\tikzMarkAngle{(O)}{(A)}{(B)};
+	\end{tikzpicture}
+\end{center}
 
 Another thing is that polar coordinates are not unique.  The point described by $(1,\pi)$
 is also described by $(-1,0)$.  Most of the non-uniqueness issues are solved by insisting
@@ -1228,10 +1330,9 @@ We also use $\R^2$ to represent \emph{pairs of real numbers}.  If we were really
 we would use a different symbol for these two concepts because they really are different things.
 However, once we draw $x$ and $y$ axes in the Euclidean plane, we see that pairs of real numbers
 are \emph{equivalent} to points in the Euclidean plane.  That is, given any point in the Euclidean
-plane, I can assign it to exactly one pair of real numbers and any pair of real numbers corresponds
-to a point in the Euclidean plane.
+plane, we can assign it exactly one pair of real numbers and any pair of real numbers corresponds
+to exactly one point in the Euclidean plane.
 
-XXX
 
 This justified our use of $\R^2$ for both pairs of real numbers and the Euclidean plane.  However, our
 situation now is more complicated.  Polar coordinates are \emph{also} pairs of real numbers
