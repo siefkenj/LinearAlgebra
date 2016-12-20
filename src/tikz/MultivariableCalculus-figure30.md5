@@ -1,0 +1,1 @@
+\begingroup \toks 0={macro:-> \begin {axis}[grid=major,view={20}{20},z buffer=sort, colormap/hot, unbounded coords=jump, restrict z to domain=0:5 ] \addplot 3[surf, z buffer=sort,samples=20, samples y=35, variable=\u , variable y=\v , domain=-180:180, y domain=.2:4] ({v*cos(u)}, {v*sin(u)}, {1/(v*v)}); \end {axis} }\xdef \tikzexternallastkey {\the \toks 0 }\endgroup %
