@@ -1267,7 +1267,7 @@ objects: lines and planes.
 \subsection{Lines}
 Consider for a moment the line $\ell$ through the points $P$ and $Q$.  If $P,Q\in\R^2$, we
 could describe this line in $y=mx+b$ form (provided it isn't a vertical line), but if
-$P,Q\in\R^3$ it's much harder to describe $\ell$ with an equation.  Using vectors
+$P,Q\in\R^3$, it's much harder to describe $\ell$ with an equation.  Using vectors
 provides an easier way.
 
 Let $\vec d=\overrightarrow{PQ}$ and consider the set of points (or vectors)
@@ -1356,14 +1356,14 @@ displacing by some multiple of the direction $\vec d$.  This is a line!
 Note that sometimes when we draw pictures of vectors, drawing them as line segments is illuminating.
 Sometimes, however, drawing them as line segments can make
 it hard to see what's going on, and it is better to draw
-each vector as a dot.
+each vector by marking only its terminal point.
 
 
-Call this line $\ell$.  In set-builder notation, we would write
+Call the line described above $\ell$.  In set-builder notation, we would write
 \[
 	\ell=\Set{\vec x\given \vec x=t\vec d+P\text{ for some }t\in \R}.
 \]
-Notice that in set-builder notation we write ``for some $t\in \R$.'' Make sure you
+Notice that in set-builder notation, we write ``for some $t\in \R$.'' Make sure you
 understand why replacing ``for some $t\in\R$'' with ``for
 all $t\in \R$'' would be incorrect.  
 
@@ -1391,7 +1391,9 @@ we necessarily have $\vec p\in\ell$.
 The direction of a line is easily obtained by finding the displacement vector between two points
 on the line.  Thus, given a line in another form, computing its vector form is straightforward.
 \begin{example}
-	Find vector form of the line $\ell$ in $\R^2$ with equation $y=2x+3$.  First, we find two
+	Find vector form of the line $\ell\subseteq\R^2$ with equation $y=2x+3$.  
+	
+	First, we find two
 	points on the line.  By guess-and-check we see $P=(0,3)$ and $Q=(1,5)$ are on $\ell$.
 	Thus, a direction vector for $\ell$ is given by 
 	\[
@@ -1422,8 +1424,9 @@ the third equation, a different point on the line was chosen.
 
 In vector form, the variable $t$ is called the \emph{parameter variable}.  It is an instance of
 a \emph{dummy variable}; that is, it is mostly there as a placeholder.  Remember, vector
-form is shorthand for set-builder notation.  
+form is shorthand for a set described in set-builder notation.  
 
+\bigskip
 Let $\vec d_1,\vec d_2\neq\vec 0$ and $\vec p_1,\vec p_2$ be vectors and define the lines
 \[
 	\ell_1=\Set{\vec x\given \vec x=t\vec d_1+\vec p_1\text{ for some }t\in\R}
