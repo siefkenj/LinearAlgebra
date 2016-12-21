@@ -1086,8 +1086,8 @@ parameterization}.
 Suppose $\mathcal S$ is a surface (that is, a two dimensional object) and that $\vec p:\R^2\to\mathcal S$
 is an isometric parameterization.  We can then view $\mathcal S$ as the plane $\R^2$ picked up, bent, 
 but \emph{not stretched}, and placed into space.  Any calculations you might want to do on 
-the surface $\mathcal S$ can be done equally well by using $\vec p$ to convert them to calculations
-on $\R^2$.
+the surface $\mathcal S$ can be done equally well by using $\vec p$ to convert the calculation
+to one in $\R^2$.
 
 \begin{example}
 	Show that $\vec p:\R^2\to\R^2$ given by $\vec p(t,s)=\tfrac{t}{\sqrt{2}}\mat{1\\1}+\tfrac{s}{\sqrt{2}}\mat{1\\-1}$
@@ -1108,11 +1108,12 @@ on $\R^2$.
 
 	Now, to verify that $\vec p$ preserves area, we only need to consider the image
 	of rectangles under $\vec p$.\footnote{
-		Using rectangles, we can decompose an area into the limit of the sum of a bunch of
-		rectangles}
+		We can decompose an area into the limit of the sum of a bunch of
+		rectangles, so if we prove the area of rectangles are preserved, we've 
+		proved all areas are preserved.}
 	Recall that $[t,t+\Delta t]\times[s,s+\Delta s]\subseteq\R^2$ is a rectangle with 
 	lower left corner at $(t,s)$ and sides of length $\Delta t$ and $\Delta s$.
-	Thus, we only need to verify
+	We only need to verify
 	that $\vec p([t,t+\Delta t]\times[s,s+\Delta s])$ has area $\Delta t\Delta s$.
 
 	Graphing, we see that the corners of $\vec p([t,t+\Delta t]\times[s,s+\Delta s])$ are at
@@ -1133,7 +1134,7 @@ an arc-length parameterization, very few multi-dimensional objects have isometri
 If an object has \emph{intrinsic} curvature, like a sphere, there could never be an isometric parameterization.
 Asking that both speed and area be preserved is just too much.
 
-However, there are several other special types of parameterizations for multiple dimensional objects.
+However, there are several other special types of parameterizations for multi-dimensional objects.
 
 \begin{definition}[Conformal Mapping]
 	A parameterization $\vec p:\R^n\to\mathcal S$ is called a \emph{conformal map}\footnote{ \emph{Map}
