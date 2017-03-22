@@ -15,7 +15,7 @@
 \usepackage{avant}
 \usepackage{microtype} % Less badboxes
 
-\usepackage{calc, ifthen, xparse}
+\usepackage{calc, ifthen, xparse, xspace}
 \usepackage{makeidx}
 \usepackage[hidelinks]{hyperref}   % Internal hyperlinks
 \usepackage{mathtools} % replaces amsmath
@@ -23,6 +23,7 @@
 \usepackage{amsthm, bm}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{multicol}
 \usepackage{tikz}
 	\tikzset{>=latex}
 	\usetikzlibrary{calc}
@@ -34,6 +35,8 @@
 	\usepgfplotslibrary{colormaps}
 	\usepgfplotslibrary{patchplots}
 	\usepgfplotslibrary{fillbetween}
+\usepackage{tcolorbox}
+	\tcbuselibrary{breakable}
 \usepackage[inline,shortlabels]{enumitem}
 \setlistdepth{9}
 
@@ -43,6 +46,9 @@
 \usepgfplotslibrary{external}
 \tikzexternalize[prefix=tikz/]
 %\tikzexternalize[mode=list and make]
+
+
+
 
 
 %%% Specify the cool macros
@@ -99,6 +105,17 @@
 }
 
 
+% labels for sources
+\NewDocumentCommand{\openstax}{o}{%
+	\IfNoValueTF{#1}{%
+		{\color{blue}\sffamily{OS}}%
+	}{%
+		{\color{blue}\sffamily{OS}}%  XXX Todo, make this href to the appropriate problem number
+	}\xspace%
+}
+
+
+
 % set up some deep enumerate environments for the CC license
 \newlist{ccEnumerate}{enumerate}{9}
 \setlist[ccEnumerate,1]{label=\alph*.}
@@ -110,6 +127,25 @@
 \setlist[ccEnumerate,7]{label=(\Roman*)}
 \setlist[ccEnumerate,8]{label=(\Alph*)}
 \setlist[ccEnumerate,9]{label=(\roman*)}
+
+
+% other enumerate environments
+\NewDocumentCommand{\prob}{o}{%
+	\IfNoValueTF{#1}{%
+		\refstepcounter{enumi}%
+		\item[\theenumi]%
+	}{%
+		\refstepcounter{enumi}%
+		\item[\theenumi \textsuperscript{#1}]%
+	}%
+}
+\newenvironment{problist}{%
+	\begin{enumerate}
+	}{%
+	\end{enumerate}
+}
+%\newlist{problist}{enumerate}{3}
+%\setlist[problist]{label=\arabic*}
 
 
 %%% Specify the colors
@@ -135,7 +171,7 @@
 
 
 
-%%% PAGE LAYOUT 
+%%% PAGE LAYOUT
 %%%------------------------------------------------------------------------------
 
 \setlrmarginsandblock{0.15\paperwidth}{*}{1} % Left and right margin
@@ -297,7 +333,7 @@
 	\makeatother
 
 	% Defines the theorem text style for each type of theorem to one of the three styles above
-	\newcounter{dummy} 
+	\newcounter{dummy}
 	\numberwithin{dummy}{section}
 	\theoremstyle{orangenumbox}
 	\newtheorem{theoremeT}[dummy]{Theorem}
@@ -334,9 +370,9 @@
 	innerbottommargin=5pt,
 	leftmargin=0cm,
 	rightmargin=0cm,
-	linewidth=4pt]{tBox}	
+	linewidth=4pt]{tBox}
 
-	% Exercise box	  
+	% Exercise box
 	\newmdenv[skipabove=7pt,
 	skipbelow=7pt,
 	rightline=false,
@@ -351,7 +387,7 @@
 	innerbottommargin=5pt,
 	leftmargin=0cm,
 	rightmargin=0cm,
-	linewidth=4pt]{eBox}	
+	linewidth=4pt]{eBox}
 
 	% Definition box
 	\newmdenv[skipabove=7pt,
@@ -367,7 +403,7 @@
 	leftmargin=0cm,
 	rightmargin=0cm,
 	linewidth=4pt,
-	innerbottommargin=0pt]{dBox}	
+	innerbottommargin=0pt]{dBox}
 
 	% Corollary box
 	\newmdenv[skipabove=7pt,
@@ -385,17 +421,39 @@
 	rightmargin=0cm,
 	linewidth=4pt,
 	innerbottommargin=5pt]{cBox}
+
+	% Exercises box
+	\newmdenv[skipabove=7pt,
+	skipbelow=7pt,
+	rightline=false,
+	leftline=false,
+	topline=false,
+	bottomline=false,
+	linecolor=gray,
+	backgroundcolor=blue!5,
+	innerleftmargin=5pt,
+	innerrightmargin=18pt,
+	innertopmargin=0pt,
+	innerbottommargin=6pt,
+	leftmargin=0cm,
+	rightmargin=0cm,
+	linewidth=4pt]{exsBox}
 \makeatother
 
 % Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
 \newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
-\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\end{exerciseT}\end{eBox}}				  
-%\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
-\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
-\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
-\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\end{exerciseT}\end{eBox}}
+%\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
+\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
 
-\newenvironment{exercises}{{\subsection*{Exercises for \thesection}}}{}
+\newenvironment{exercises}{%
+	\begin{multicols*}{2}[\begin{exsBox}{\subsection*{Exercises for \thesection}}\vspace{-0pt}\end{exsBox}]\small %
+	}{%
+	\end{multicols*}%
+	\clearpage
+}
 \newenvironment{openstaxexercises}{{\subsection*{Exercises from Openstax for \thesection}}}{}
 \newenvironment{answer}{\begin{quote}}{\end{quote}}
 
