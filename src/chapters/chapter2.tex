@@ -789,26 +789,61 @@ Larger values of $n$ are used in a
 variety of contexts, some of which we shall encounter later.
 
 \begin{exercises}
-	\begin{enumerate}
-		\item  Find $\norm{a}$, $5\vec a-2\vec b$, and $-3\vec b$ for each of the following
+	\begin{problist}
+        \prob  Find $\norm{\vec{a}}$, $5\vec a-2\vec b$, and $-3\vec b$ for each of the following
 			vector pairs.
 			\begin{enumerate}
-				\item $\vec a=2\xhat+3\yhat$, $\vec b=4\xhat-9\yhat$
-				\item $\vec a=(1,2,-1)$, $\vec b=(2,-1,0)$
+				\item   $\vec a=2\xhat+3\yhat$, $\vec b=4\xhat-9\yhat$
+				\item   $\vec a=(1,2,-1)$, $\vec b=(2,-1,0)$
 			\end{enumerate}
-		\item  Let $P=(7,2,9)$ and $Q=(-2,1,4)$.  Find $\overrightarrow{PQ}$ as a linear
+            \begin{solution}
+                \begin{enumerate}
+                    \item   $\norm{\vec{a}} = \sqrt{13}$, $5\vec{a} - 2\vec{b} = 2\xhat + 33\yhat$,
+                        $-3\vec{b} = -12\xhat + 27\yhat$.
+                    \item   $\norm{\vec{a}} = \sqrt{6}$, $5\vec{a} - 2\vec{b} = (1, 12, -5)$, $-3\vec{b}
+                        = (-6, 3, 0)$.
+                \end{enumerate}
+            \end{solution}
+
+		\prob  Let $P=(7,2,9)$ and $Q=(-2,1,4)$.  Find $\overrightarrow{PQ}$ as a linear
 			combination of $\xhat$, $\yhat$, and $\zhat$.
-		\item  Find unit vectors with the same direction as the vectors (a) $(-4, -2)$,
-			(b) $3\xhat + 5\yhat$, (c) $(1, 3, -2)$.
-		\item  Show by direct calculation that the rule $\overrightarrow{AB} +
-			\overrightarrow{BC} + \overrightarrow{CA} = \bold 0$ holds for the three points
+            \begin{solution}
+                $\overrightarrow{PQ} = -9\xhat -\yhat - 5\zhat$.
+            \end{solution}
+
+		\prob  Find unit vectors with the same direction as the vectors a) $(-4, -2)$,
+			b) $3\xhat + 5\yhat$, c) $(1, 3, -2)$.
+            \begin{solution}
+                \begin{enumerate}
+                    \item   $\frac{1}{\sqrt{5}}(-2, -1)$
+                    \item   $\frac{1}{\sqrt{34}}(3, 5)$
+                    \item   $\frac{1}{\sqrt{14}}(1, 3, -2)$
+                \end{enumerate}
+            \end{solution}
+
+		\prob  Show by direct calculation that the rule $\overrightarrow{AB} +
+            \overrightarrow{BC} + \overrightarrow{CA} = \vec{0}$ holds for the three points
 			$A(2, 1, 0)$, $B(-4, 1, 3)$, and $C(0, 12, 0)$.  Can you prove the general rule
 			for any three points in space?
-		\item  Use Newton's Second Law, $\vec{F} = m\vec{a}$, to find the acceleration of a 10
-			kg box if a 120 N force is applied in the horizontal direction.  Draw the vector
-			diagram.  Are $\vec{F}$ and $\vec{a}$ in the same direction?  Is this always
-			true?  Why?  What if the force were applied at a $30$ angle to the horizontal?
-		\item  If an airplane flies with apparent velocity $\vec{v}_a$ relative to air, and the
+            \begin{solution}
+                In the specific case, $\overrightarrow{AB} = (-6, 0, 3)$, $\overrightarrow{BC} = (4, 11,
+                -3)$, $\overrightarrow{CA} = (2, -11, 0)$, so that 
+                \[
+                    \overrightarrow{AB} + \overrightarrow{BC} + \overrightarrow{CA} = \mat{-6 + 4 + 2\\
+                    0 + 11 - 11\\ 3 - 3 + 0} = \mat{0\\0\\0}
+                \]
+                More generally, suppose that we have the points $A(a_1, a_2, a_3)$, $B(b_1, b_2, b_3)$,
+                and $C(c_1, c_2, c_3)$. Then $\overrightarrow{AB} = (b_1 - a_1, b_2 - a_2, b_3 - a_3)$,
+                $\overrightarrow{BC} = (c_1 - b_1, c_2 - b_2, c_3 - b_3)$, and $\overrightarrow{CA} =
+                (a_1 - c_1, a_2 - c_2, a_3 - c_3)$. Thus, 
+                \[
+                    \overrightarrow{AB} + \overrightarrow{BC} + \overrightarrow{CA} = 
+                    \mat{(b_1 - a_1) + (c_1 - b_1) + (a_1 - c_1)\\ (b_2 - a_2) + (c_2 - b_2) + (a_2 -
+                    c_2) \\ (b_3 - a_3) + (c_3 - b_3) + (a_3 - c_3)} = \mat{0\\0\\0}
+                \]
+            \end{solution}
+
+		\prob  If an airplane flies with apparent velocity $\vec{v}_a$ relative to air, and the
 			wind velocity is denoted $\vec{w}$, then the planes true velocity relative to
 			the ground, is $\vec{v}_g = \vec{v}_a + \vec{w}$.  Draw the diagram to assure
 			yourself of this.
@@ -819,18 +854,60 @@ variety of contexts, some of which we shall encounter later.
 					$\vec{v}_a$ be?
 				\item   What if the wind were northeasterly?  Southeasterly?
 			\end{enumerate}
-		\item  Suppose a right handed coordinate system has been set up in space.  What happens
+            \begin{solution}
+                \begin{enumerate}
+                    \item   $10 \sqrt{65}$ km/h, $\tan^{-1}\left(\frac18\right)^\circ$ east of north.
+                    \item   for a northeasterly wind:
+                        $2\sqrt{\left(40+\frac{5\sqrt{2}}{2}\right)^2 + \frac{25}{2}}$ at
+                        $\tan^{-1}\left(\frac{5\sqrt{2}}{80+5\sqrt{2}}\right)^\circ$
+                        east of north 
+
+                        for a southeasterly wind:
+                        $2\sqrt{\left(40-\frac{5\sqrt{2}}{2}\right)^2 + \frac{25}{2}}$ at
+                        $\tan^{-1}\left(\frac{5\sqrt{2}}{80-5\sqrt{2}}\right)^\circ$
+                        east of north
+                \end{enumerate}
+            \end{solution}
+
+		\prob  Suppose a right handed coordinate system has been set up in space.  What happens
 			to the orientation of the coordinate system if you make the following changes?
-			(a) Change the direction of one axis.  (b) Change the direction of two axes.
-			(c) Change the direction of all three axes.  (d) Interchange the x and y axes.
-		\item  In body-centered crystals, a large atom (assumed spherical) is surrounded by
+            \begin{enumerate}
+                \item   Change the direction of one axis.
+                \item   Change the direction of two axes.
+                \item   Change the direction of all three axes.
+                \item   Interchange the $x$ and $y$-axes.
+            \end{enumerate}
+            \begin{solution}
+                \begin{enumerate}
+                    \item   the orientation changes.
+                    \item   the orientation stays the same.
+                    \item   the orientation changes.
+                    \item   the orientation changes.
+                \end{enumerate}
+            \end{solution}
+
+		\prob  In body-centered crystals, a large atom (assumed spherical) is surrounded by
 			eight smaller atoms.  If the structure is placed in a "box" that just contains
 			the large atom, the smaller atoms each occupy a corner.  If the central atom has
 			radius $R$, what is the greatest atomic radii the smaller atoms may have?
-		\item  Prove that the diagonals of a parallelogram bisect each other.  (Hint: show that
-			the position vectors from the origin to the midpoints are equal).
+            \begin{solution}
+                $(2 - \sqrt{3})R$
+            \end{solution}
 
-	\end{enumerate}
+		\prob  Prove that the diagonals of a parallelogram bisect each other.  (Hint: show that
+			the position vectors from the origin to the midpoints are equal).
+            \begin{solution}
+                Suppose that the parallelogram is defined by two vectors $\vec{a}$ and $\vec{b}$. Then
+                the first diagonal (which originates from the origin) is given by $\vec{d}_1 = \vec{a} +
+                \vec{b}$ and the second diagonal (which originates from the tip of $\vec{b}$) is given
+                by $\vec{d}_2 = \vec{a} - \vec{b}$. Then, the position of the midpoint of the first
+                diagonal is given by $\vec{d}_1 / 2 = 1/2(\vec{a} + \vec{b})$ and the position of the
+                midpoint of the second diagonal is given by $\vec{b} + \vec{d}_2 / 2 = \vec{b} +
+                1/2(\vec{a} - \vec{b}) = 1/2(\vec{a} + \vec{b})$. Thus, the position vectors of the
+                midpoints are equal, and so the diagonals must bisect each other.
+            \end{solution}
+
+	\end{problist}
 \end{exercises}
 
 
@@ -1047,10 +1124,25 @@ compute a projection without computing cosine of anything!
 				\item $\vec{a} = (4, -1, 2)$, $\vec{b} = (3, 0, -6)$
 				\item $\vec{a} = 3\xhat - 2\yhat$, $\vec{b} = -2\xhat - 4\zhat$
 			\end{enumerate}
+            \begin{solution}
+                \begin{enumerate}
+                    \item   $\vec{a} \cdot \vec{b} = -12 + 12 = 0$, so $\vec{a}$ and $\vec{b}$ are
+                        orthogonal.
+                    \item   $\vec{a} \cdot \vec{b} = 12 + 0 - 12 = 0$, so $\vec{a}$ and $\vec{b}$ are
+                        orthogonal.
+                    \item   $\vec{a} \cdot \vec{b} = -6 + 8 = 2$, so $\vec{a}$ and $\vec{b}$ are not
+                        orthogonal.
+                \end{enumerate}
+            \end{solution}
+
 		\prob   Assume $\vec{u} = (a, b)$ is a non-zero plane vector.  Show that $\vec{v} = (-b,
-			a)$ is perpendicular to $\vec{u}$.  By examining all possible signs for $a$ and
+			a)$ is orthogonal to $\vec{u}$.  By examining all possible signs for $a$ and
 			$b$, convince yourself that the $90$ degree angle between $\vec{u}$ and
 			$\vec{v}$ is in the counter-clockwise direction.
+            \begin{solution}
+                $\vec{u} \cdot \vec{v} = -ab + ba = 0$, so $\vec{u}$ and $\vec{v}$ are orthogonal.
+            \end{solution}
+
 		\prob   The methane molecule, $CH_4$, has four Hydrogen atoms at the vertices of a
 			regular tetrahedron and a Carbon atom at its center.  Choose as the vertices of
 			this tetrahedron the points $(0,0,0)$, $(1,1,0)$, $(1,0,1)$, and $(0,1,1)$.
@@ -1058,16 +1150,34 @@ compute a projection without computing cosine of anything!
 				\item Find the angle between two edges of the tetrahedron.
 				\item Find the bond angle between two Carbon--Hydrogen bonds.
 			\end{enumerate}
+            \begin{solution}
+                \begin{enumerate}
+                    \item   $60^\circ$
+                    \item   $\cos^{-1}\left(\frac{1}{3}\right)^\circ$
+                \end{enumerate}
+            \end{solution}
+
 		\prob   An inclined plane makes an angle of $30$ degrees with the horizontal.  Use
 			vectors and the dot product to find the projection of the gravitational
 			acceleration vector $-g\yhat$ along a unit vector pointing along the inclined
 			plane.
-		\prob   Show that if the velocity vector $\vec{v}$ is perpendicular to the acceleration
-			vector $\vec{a}$ at every point of a path,  then the speed $\norm{\vec{v}}$ is
-			constant.
+            \begin{solution}
+                $\frac{-g\sqrt3}{4}\xhat - \frac{g}{4}\yhat$
+            \end{solution}
+
 		\prob   Derive the formula \[\norm{\vec{a} + \vec{b}}^2 = \norm{\vec{a}}^2 +
 			\norm{\vec{b}}^2 + 2\norm{\vec{a}}\,\norm{\vec{b}}\cos\theta.\] How is it
 			related to the Law of Cosines?  A picture might help.
+            \begin{solution}
+                \begin{align*}
+                    \norm{\vec{a}+\vec{b}}^2 &= (\vec{a}+\vec{b})\cdot(\vec{a}+\vec{b}) \\
+                                             &= \vec{a}\cdot\vec{a} + \vec{a}\cdot\vec{b} + \vec{b}
+                    \cdot \vec{a} + \vec{b} \cdot \vec{b} \\
+                    &= \norm{\vec{a}}^2 + \norm{\vec{b}}^2 + 2\vec{a}\cdot\vec{b} \\
+                    &= \norm{\vec{a}}^2 + \norm{\vec{b}}^2 + 2\norm{\vec{a}}\,\norm{\vec{b}}\cos\theta
+                \end{align*}
+            \end{solution}
+
 		\prob   Use the dot product to determine if the points $P(3,1,2)$, $Q(-1,0,2)$, and
 			$R(11, 3, 2)$ are collinear.
 
@@ -1368,6 +1478,60 @@ many problems.
 
 
 \begin{exercises}
+    \begin{problist}
+        \prob   Find $\vec{a} \times \vec{b}$ for the following pairs:
+        \begin{enumerate}
+            \item   $\vec{a} = (4, -2, 0)$, $\vec{b} = (2, 1, -1)$
+            \item   $\vec{a} = (3, 3, 0)$, $\vec{b} = (4, -3, 2)$
+            \item   $\vec{a} = 2\xhat + 3\yhat + 4\zhat$, $\vec{b} = \xhat - 3\yhat + 4\zhat$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $(2,4,8)$
+                \item   $(15,6,-21)$
+                \item   $24\xhat -4\yhat -9\zhat$
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Use the cross product to find the areas of the following figures.
+        \begin{enumerate}
+            \item   The parallelogram with vertices $(0,0,0)$, $(1, 1, 0)$, $(1,2,1)$ and $(0,1,1)$.
+                (Perhaps you should first check that this is a parallelogram.)
+            \item   The triangle with vertices $(1,0,0)$, $(0,1,0)$, and $(0,0,1)$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $\sqrt3$
+                \item   $\frac{\sqrt3}{2}$
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Prove that the cross product is not associative by calculating $\vec{a} \times (\vec{b}
+        \times \vec{c})$ and $(\vec{a} \times \vec{b}) \times \vec{c}$ for $\vec{a} = \xhat$, $\vec{b} =
+        \vec{c} = \yhat$.
+        \begin{solution}
+            $\xhat \times (\yhat \times \yhat)=\xhat \times \vec{0} = \vec{0}$ while $(\xhat \times
+            \yhat) \times \yhat = \zhat \times \yhat = -\xhat$
+        \end{solution}
+        
+        \prob   Verify the formula.
+        \[ 
+            \norm{\vec{a} \times \vec{b}}^2 = \norm{\vec{a}}^2 \norm{\vec{b}}^2 - (\vec{a} \cdot
+            \vec{b})^2.  
+        \] 
+        Hint: Use the definitions in terms of the sine and cosine of the included angle $\theta$.
+        \begin{solution}
+            \begin{align*}
+                \norm{\vec{a} \times \vec{b}}^2 &= (\norm{\vec{a}} \norm{\vec{b}}\sin\theta)^2 \\
+                                                &= \norm{\vec{a}}^2 \norm{\vec{b}}^2\sin^2\theta \\
+                                                &= \norm{\vec{a}}^2 \norm{\vec{b}}^2(1-\cos^2\theta) \\
+                                                &= \norm{\vec{a}}^2 \norm{\vec{b}}^2 - \norm{\vec{a}}^2
+                \norm{\vec{b}}^2\cos^2\theta \\
+                &= \norm{\vec{a}}^2 \norm{\vec{b}}^2 - (\norm{\vec{a}} \norm{\vec{b}}\cos\theta)^2 \\
+                &= \norm{\vec{a}}^2 \norm{\vec{b}}^2 - (\vec{a} \cdot\vec{b})^2.
+            \end{align*}
+        \end{solution}
+    \end{problist}
 \end{exercises}
 
 
