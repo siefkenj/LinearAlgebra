@@ -20,6 +20,7 @@
 \usepackage[hidelinks]{hyperref}   % Internal hyperlinks
 \usepackage{mathtools} % replaces amsmath
 \usepackage{etoolbox}
+\usepackage{newenviron}
 \usepackage{amsthm, bm}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -106,7 +107,7 @@
 }
 
 
-% labels for sources
+% labels for source attributions
 \NewDocumentCommand{\openstax}{o}{%
 	\IfNoValueTF{#1}{%
 		{\color{blue}\sffamily{OS}}%
@@ -145,6 +146,13 @@
 	}{%
 	\end{enumerate}
 }
+% an environment to store problem solutions
+\newenvironment{solution}{%
+		\par\color{blue} Solution: 
+	}{%
+		\ignorespacesafterend
+}
+
 %\newlist{problist}{enumerate}{3}
 %\setlist[problist]{label=\arabic*}
 
