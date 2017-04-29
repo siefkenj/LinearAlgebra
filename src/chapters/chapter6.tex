@@ -1,7 +1,494 @@
+A \emph{scalar field}\index{scalar field}
+is a function that assigns each point in space a
+scalar value.  For example, given latitude and longitude $(x,y)$,
+the function that outputs the elevation of the surface of the earth
+at position $(x,y)$ is a scalar field.  However,
+we might ask for a function that when given $(x,y)$ returns
+a vector (maybe the velocity of the wind at that point on the earth).
+Functions that assign a vector to each point in space
+are called \emph{vector fields}\index{vector field}.
+
+Vector fields are key in physics because they model
+vector quantities that are non-constant with respect to
+space.  For example, force is a vector!  The force due to of gravity
+around a point mass is always directed towards the origin---that
+means, as you move in space, the direction of the force 
+changes.  Suppose there is a point mass at the origin.
+We might model the force\footnote{ Despite what is peddled in
+Star Wars, this is a real \emph{force field}.} due to this point mass acting on a particle
+at position $(x,y,z)$ with the vector field
+\[
+	\vec F(x,y,z) = \tfrac{1}{(x^2+y^2+z^2)^{3/2}}\mat{-x\\-y\\-z}.
+\]
+Indeed, the vector $\vec F(x,y,z)$ always points towards the origin,
+and $\norm{\vec F(x,y,z)}=\frac{1}{x^2+y^2+z^2}$ is $1/d^2$ where $d$
+is the distance from the origin.
+
+
+\subsection{Notation}
+Notationally, $\vec F:\R^n\to\R^m$ indicates that $\vec F$ inputs points or vectors in $\R^n$
+and outputs points or vectors in $\R^m$.  Oftentimes in physics $n=m$, but doesn't need to.
+
+When defining a vector field, sometimes it's convenient to use components
+and sometimes it's easier to work with vectors.  For example, the force field
+$\vec F:\R^2\to\R^3$ above was defined in terms of components as
+\[
+	\vec F(x,y,z) = \tfrac{1}{(x^2+y^2+z^2)^{3/2}}\mat{-x\\-y\\-z},
+\]
+but we could have equivalently defined it using vectors by the equation
+\[
+	\vec F(\vec v) = -\frac{\vec v}{\norm{\vec v}^3}.
+\]
+
+
 \section{Graphing Vector Fields}
+
+Traditionally, a function $f:\R\to\R$ is graphed on a coordinate
+plane by picking one axis to be the domain, one
+axis to be the range, and then putting a point at each pair $(x,f(x))$.
+For a function $g:\R^2\to\R$, we do something similar, except, this time,
+the domain is a plane.  But, no matter, we arrange a third axis orthogonal
+to a plane and graph points $(x,y,f(x,y))$ in this three-dimensional space.
+
+With vector fields, we cannot graph in the same way.  A vector field
+$\vec F:\R^2\to\R^2$ inputs vectors in a plane and outputs vectors in
+a plane. To traditionally ``graph'' this function, we would need to
+plot points in $\R^2\times\R^2=\R^4$.  Four-dimensional plots are hard to make!
+Fortunately, the goal of graphing is rarely to make a faithful representation
+of a function---it is to make a visual representation of a function
+to aid our thinking.  With this perspective, representing four-dimensional
+graphs won't be hard.
+
+If we think of $\vec F:\R^2\to\R^2$ as attaching a vector to each point in
+$\R^2$, we might graph $\vec F$ by drawing vectors at each point in $\R^2$.
+
+XXX Figure
+
+This type of plot is called a \emph{quiver plot}\index{quiver plot},
+and it will be the main way we visualize vector fields.
+
+\begin{example}
+	Graph the vector field $\vec F:\R^2\to\R^2$ defined by $\vec F(x,y)=\mat{x\\y}$.
+
+	XXX Finish
+\end{example}
+
+When making a quiver plot, there are two things to consider: (i) how
+densely do you draw vectors, and (ii) how do you scale the vectors?
+The answer to these two questions depends on the situation---remember,
+the goal of plotting a vector field is to visualize what is happening.
+
+Consider the vector field $\vec A:\R^2\to\R^2$ defined by $\vec A(x,y)=\mat{-y\\x}$.
+If we plot vectors every $0.5$ units and plot the vectors at the same scale
+as the domain, we get the following, hard to follow, figure.
+
+XXX Figure
+
+However, if we plot vectors every $0.5$ units but scale the vectors so they are
+$1/4$ the size they'd conventionally be, we get a much more understandable figure.
+
+XXX Figure
+
+We might even decide that the magnitude of each vector is not so important
+and totally ignore it in our plot.
+
+XXX Figure with unit vectors
+
+
+\begin{exercises}
+\end{exercises}
 
 \section{The Gradient}
 
+We already have familiarity with one class of vector fields---gradients.
+Given a differentiable function $f:\R^n\to\R$, we can always consider the
+vector field $\nabla f:\R^n\to\R^n$.  And, $\nabla f$ has some nice geometric
+properties.  For instance, $\nabla f$ always points in the direction
+of greatest change for $f$.
+
+XXX Figure surface with vector field at base
+
+The connections between $f$ and $\nabla f$ run deep.  Suppose
+for a moment that $f:\R^2\to\R$ is affine.  That is, $f(x,y)=\alpha x+\beta y+\gamma$. 
+Now, $\nabla f(x,y)=\mat{\alpha\\\beta}$ is
+constant.  If $\vec a,\vec b\in\R^2$, we can consider the change in height
+of $f$ when moving from $\vec a$ to $\vec b$.  This is,
+\[
+	f(\vec b)-f(\vec a) = \alpha b_x+\beta b_y - \alpha a_x - \beta a_y
+	=\nabla f(\vec a)\cdot (\vec b-\vec a).
+\]
+Of course this is no surprise---we first encountered
+gradients when finding affine approximations of
+functions.  Baked into the very core of the gradient is the fact that for a 
+differentiable function $h:\R^n\to\R$,
+\[
+	h(\vec b)-h(\vec a)=\text{change in }h\text{ from }\vec a\text{ to }\vec b
+	\approx \nabla h(\vec a)\cdot (\vec b-\vec a),
+\]
+so long as $\vec a$ and $\vec b$ are close together.  Now, let's apply
+some calculus reasoning.
+
+Let $h:\R^n\to\R$ be a differentiable function and let $\vec a,\vec b\in\R^n$
+be points that \emph{aren't} close to each other.  Let $\vec a=\vec x_1,\vec x_2,\ldots,\vec
+x_m=\vec b$ be a sequence of points so that $\norm{\vec x_{k+1}-\vec x_k}$ is small.
+We may think of $\vec x_i$ as a sequence of tiny steps used to get from $\vec a$ to
+$\vec b$.  Now, we have
+\[
+	h(\vec b)-h(\vec a)=\text{change in }h\text{ from }\vec a\text{ to }\vec b
+	\approx 
+	\sum \nabla h(\vec x_k)\cdot (\vec x_{k+1}-\vec x_k).
+\]
+If we define $\Delta \vec x_k=\vec x_{k+1}-\vec x_k$, we get an eerily familiar
+formula:
+\[
+	h(\vec b)-h(\vec a)
+	\approx 
+	\sum \nabla h(\vec x_k)\cdot \Delta \vec x_k.
+\]
+On the left we have the scalar quantity $h(\vec b)-h(\vec a)$ and on the right
+we have a Riemann sum approximation of the vector line integral\index{vector line integral}
+of $\nabla h$ along some path starting at $\vec a$ and ending at $\vec b$.  After
+taking a limit, this approximation becomes exact.
+
+\begin{theorem}
+	\label{THMFTC1}
+	Let $h:\R^n\to\R$ be a differentiable function and let
+	$\mathcal C\subset \R^n$ be a parameterized, bounded curve 
+	which starts at $\vec a\in\R^n$ and ends at $\vec b\in\R^n$.
+	Then,
+	\[
+		h(\vec b)-h(\vec a) = \int_{\mathcal C} \nabla h\cdot \d\vec r,
+	\]
+	where $\int_{\mathcal C} \nabla h\cdot \d\vec r$ is the vector line
+	integral of $\nabla h$ along $\mathcal C$.
+\end{theorem}
+
+Theorem \ref{THMFTC1} should remind you of the fundamental theorem of calculus,
+which states for a differentiable function $f:\R\to\R$, 
+\[
+	f(b)-f(a) = \int_a^b f'.
+\]
+In one dimension, there aren't many ways to get between two points.  In
+contrast, there are infinitely many ways to get between two points
+in higher dimensions.  Theorem \ref{THMFTC1} says that all these ways
+are equivalent, and that $\nabla h$ takes the place of $h'$.
+
+\subsection{Orientation}
+
+As we delve into the realm of vector fields, we need to take note of something
+new---orientation\index{orientation}.  In a scalar line integral of $f$ along the curve
+$\mathcal C$, we added up the ``height'' of $f$ along the curve $\mathcal C$.
+It didn't matter how we traverse $\mathcal C$, and so it
+doesn't matter how we parameterize $\mathcal C$ when computing $\int_C f$.  
+The area of the graph of $f$ above
+$\mathcal C$ depends only on $f$ and $\mathcal C$.  However, things are different for
+vector line integrals.
+
+If $\mathcal C$ connects the points $\vec a$ and $\vec b$ and we wish to compute
+the amount of work done by the force field $\vec h$ when moving from $\vec a$ to
+$\vec b$ along $\mathcal C$, not all parameterizations of $\mathcal C$ will
+do.  We must parameterize $\mathcal C$ such that we start at $\vec a$ and
+end at $\vec b$.  Thus, the vector integral $\int_{\mathcal C} \vec h\cdot \d\vec r$
+depends not only on $\vec h$ and $\mathcal C$, but also on the direction
+or \emph{orientation}\index{oriented curve} of $\mathcal C$.
+
+For curves, there are only two orientations, forwards and backwards,
+and reversing the orientation of a curve in a vector line integral just multiplies
+the result by $-1$.
+
+\begin{example}
+	XXX simple example with orientation flipped
+\end{example}
+
+
+The concept of orientation is familiar from single-variable calculus.
+After all,
+\[
+	\int_a^b f=-\int_b^a f.
+\]
+
+From now on, if it matters, we will always specify a curve with
+its orientation.  If the curve is closed, we will specify its orientation
+as \emph{clockwise} or \emph{counterclockwise}.
+
+\subsection{Conservative Vector Fields}
+
+Theorem \ref{THMFTC1} shows that gradients and vector line integrals
+interact nicely.  So nicely, in fact, that vector fields coming 
+from gradients have a special name.
+
+\begin{definition}[Conservative Vector Field \& Potential Function]
+	A vector field $\vec h:\R^n\to\R^n$ is called \emph{conservative}
+	if there is some function $f:\R^n\to\R$ so that $\nabla f=\vec h$.
+	Such an $f$ is called a \emph{potential function for $\vec h$}.
+\end{definition}
+
+We can think of conservative vector fields\index{conservative vector field}
+as those having anti-derivatives,
+called \emph{potential functions}\index{potential function}\footnote{
+In math, if $\nabla f=\vec h$, we say $f$ is a potential function for $\vec h$.
+In physics you say that $-f$ is a potential function for $\vec h$---this aligns
+more closely with a physicist's notion of \emph{potential energy}.}.  Once
+we have a potential function $f$ for a vector field $\vec h$, 
+Theorem \ref{THMFTC1} shows that we can compute vector line integrals
+of $\vec h$ by evaluating $f$ on the endpoints of our path.  An immediate consequence
+is that the integral around a closed path in a conservative vector field is
+zero.
+
+\begin{example}
+	XXX Example --- work on a hill via complicated path and sub for
+	and easy path.
+\end{example}
+
+Since conservative vector fields make vector line integrals so easy, it's useful
+to determine whether a given vector field is conservative.  The only sure-fire
+way to determine a vector field is conservative is to find a potential function.
+However, there are several heuristics for showing that a vector field is not
+conservative.
+
+\bigskip
+
+Having established that conservative vector fields are useful,
+it would be nice to be able to decide if a given vector field is
+conservative.  The only sure-fire way to do so is to produce a 
+potential function.  However, there methods we can use to quickly
+determine if a particular vector field \emph{cannot} be conservative.
+
+The \emph{screening test}\index{screening test} 
+is one such method.  Suppose that $\vec F=\mat{F_x\\F_y}$
+and that $\vec F$ is conservative.  That means $\vec F=\nabla f$
+for some potential function $f:\R^2\to\R$, and so
+\[
+	F_x = \frac{\partial f}{\partial x}\qquad\text{and}\qquad 
+	F_y=\frac{\partial f}{\partial y}.
+\]
+
+If $\vec F$ is a \emph{nice} vector field (that is, it comes from a sufficiently differentiable
+$f$), then
+\[
+	\frac{\partial F_x}{\partial y} = 
+	\frac{\partial^2 f}{\partial y\partial x} = 
+	\frac{\partial^2 f}{\partial x\partial y} = 
+	\frac{\partial F_y}{\partial x}. 
+\]
+
+This means that if $\frac{\partial F_x}{\partial y} \neq \frac{\partial F_y}{\partial x}$,
+we can conclude that $\vec F$ is \emph{not} conservative.
+
+\begin{example}
+	Is the vector field $\vec F(x,y)=\mat{x+1\\y+x^2}$ conservative?
+
+	Define $F_x(x,y)=x+1$ and $F_y(x,y)=y+x^2$ so that $\vec F  =\mat{F_x\\F_y}$.
+	Now,
+	\[
+		\frac{\partial F_x}{\partial y} = 0
+		\neq 2x = 
+		\frac{\partial F_y}{\partial x},
+	\]
+	and so $\vec F$ is not conservative.
+\end{example}
+
+It should be noted that the screening test can only prove vector fields
+are not conservative.  It cannot be used to show that they are!
+
+\begin{example}
+	Is the vector field
+	$\vec F(x,y) = \mat{\frac{-y}{x^2+y^2}\\[4pt]\frac{x}{x^2+y^2}}$ conservative?
+
+	Defining $F_x(x,y)=\frac{-y}{x^2+y^2}$ and $F_y(x,y)=\frac{x}{x^2+y^2}$
+	so that $\vec F = \mat{F_x,F_y}$, we compute
+	\[
+		\frac{\partial F_x}{\partial y} = \frac{y^2-x^2}{(x^2+y^2)^2}
+		= 
+		\frac{\partial F_y}{\partial x},
+	\]
+	and so the screening test cannot be used to conclude anything
+	about whether or not $\vec F$ is conservative.
+
+	
+	However, letting $\mathcal C$ be the circle of radius 1 centered at the
+	origin and oriented counter clockwise, we compute $\int_{\mathcal C} \vec F\cdot \d \vec r
+	=2\pi$.  If $\vec F$ were a conservative vector field, the 
+	vector line integral around any closed path would be $0$.  Thus, we conclude
+	that $\vec F$ is not conservative.
+	
+\end{example}
+
+The screening test works analogously for higher-dimensional vector fields.  One just
+needs to test all combinations of mixed partials---if any combination fails, the vector
+field is not conservative.
+
+\begin{exercises}
+\end{exercises}
+
+
 \section{Flux and Divergence}
+
+Suppose that the vector field $\vec F(x,y,z)=(4,0,0)$
+describes the velocity of water in a river of uniform density.
+You cast a $1\times 1$ square net in the river with normal
+vector $(1,0,0)$ and ask the following question: how much 
+water per unit time is flowing through the net?
+
+XXX Figure
+
+In this situation, it is easy to compute.  Let us assume
+the density of the water is $1$.  In this case, since the direction
+of flow is orthogonal to the net (because the normal vector is parallel
+to the direction of flow), we know
+\[
+	\text{mass}/\text{unit time} = (\text{net area})
+	(\text{water speed})=(1)(4)=4.
+\]
+
+If we angle the net slightly, so that it has a normal vector
+$(1,1,0)$, computing the amount of water that goes through
+the net in a time unit is still not so bad.
+\[
+	\text{mass}/\text{unit time} = (\text{perceived net area})
+	(\text{water speed}).
+\]
+Here, the \emph{perceived net area} is the area that the net appears to
+the water.  Since the net is angled at $45^\circ$ relative to the flow
+of the water, the net \emph{appears} smaller, from the perspective of the water.
+
+XXX Figure showing ``apparent'' height
+
+To the water, the net appears to have width $1$ and height $\sqrt{2}/2$, giving
+the net a perceived area of $\sqrt{2}/2$.  Now we can compute
+\[
+	\text{mass}/\text{unit time} = (\text{perceived net area})
+	(\text{water speed}) =\tfrac{\sqrt 2}{2}(4)=2\sqrt{2}.
+\]
+
+Equivalently, we could have thought about water from the perspective of the net.
+We know
+\[
+	\text{mass}/\text{unit time} = (\text{net area})
+	(\text{water speed normal to net}),
+\]
+and computing the velocity of water normal to the net can be done with a dot product.
+In particular,
+\[
+	\text{water speed normal to net}=\Proj_{\vec n}\vec v = \mat{2\\2\\0},
+\]
+where $\vec n=(1,1,0)$ is the normal vector for the net and $\vec v=(4,0,0)$
+is the velocity vector of the water.  Now
+\begin{align*}
+	\text{mass}/\text{unit time} &= (\text{net area})
+	(\text{water speed normal to net}) \\
+	&= (1)\norm*{\mat{2\\2\\0}}=2\sqrt{2},
+\end{align*}
+which is the same quantity we computed before.
+
+Measuring how much a vector field ``flows'' through a surface $\mathcal S$
+is called the \emph{flux}\index{flux}\footnote{
+The term \emph{flux} comes from \emph{fluxus},
+which means ``flow'' in Latin.
+} of the vector field through $\mathcal S$, and comes up in applications
+ranging from fluid mechanics to electro-magnetism and relativity gravity.
+
+\subsection{Computing Flux}
+
+Given constant vector fields and flat surfaces, flux is not difficult to compute.
+However, the vector fields we encounter in nature are rarely constant and
+the surfaces are rarely flat.  But, the ideas of calculus are here
+to help us!
+
+By now, we are familiar with the idea of chopping things up into little pieces,
+approximating each piece, adding them together again, and taking a limit.  Finding
+the flux of a vector field through an arbitrary surface follows this pattern.
+
+Let $\vec F:\R^3\to\R^3$ be a smooth vector field and let $\mathcal S$ be 
+a surface\footnote{ An orientable surface, to be precise.}.
+Let $\Delta A$ represent a tiny patch of the surface $\mathcal S$.  We can then say
+\[
+	\Flux_{\mathcal S} \vec F = \sum_{\Delta A} \Flux_{\Delta A} \vec F,
+\]
+where $\Flux_A \vec B$ means the flux of the vector field $\vec B$ through the
+surface $A$.  This looks a lot like a setup for a surface integral!  Let's make
+the connection exact.
+
+Let $\vec p:\R^2\to\mathcal S$ be a parameterization of the surface $\mathcal S$,
+and let $\Delta A_{(x_0,y_0)}=\vec p([x_0,x_0+\Delta x]\times [y_0,y_0+\Delta y])$
+be a tiny sector of $\mathcal S$ with ``lower-left corner'' at $\vec p(x_0,y_0)$.
+As long as $\Delta x$ and $\Delta y$ are small, $\Delta A_{(x_0,y_0)}$ will be
+small.
+
+Now, let's approximate.  Since $\Delta A_{(x_0,y_0)}$
+is small, we could approximate $\vec F$ near $\Delta A_{(x_0,y_0)}$
+by the constant vector 
+field $\vec F_{(x_0,y_0)}(x,y) = \vec F\circ \vec p(x_0,y_0)$.  Further,
+if $\Delta x$ and $\Delta y$ are small enough, we can approximate $\Delta A_{(x_0,y_0)}$
+by a tiny parallelogram coming from the 
+canonical parameterization of the tangent plane to $\mathcal S$ at $\vec p(x_0,y_0)$.
+
+Recall, given the parameterization $\vec p$,
+the canonical parameterization of the tangent plane to $\mathcal S$ at $\vec p(x_0,y_0)$
+is
+\[
+	\vec P(t,s) = t \frac{\partial \vec p}{\partial x}(x_0,y_0) + 
+	s\frac{\partial \vec p}{\partial y}(x_0,y_0)
+	+\vec p(x_0,y_0).
+\]
+Since $\vec P$ is a canonical parameterization, if $\Delta x$ and $\Delta y$
+are small, then 
+\[
+\Delta A_{(x_0,y_0)}=\vec p([x_0,x_0+\Delta x]\times [y_0,y_0+\Delta y])
+\approx \vec P([x_0,x_0+\Delta x]\times [y_0,y_0+\Delta y]).
+\]
+Further, $\vec P([x_0,x_0+\Delta x]\times [y_0,y_0+\Delta y])$ is a parallelogram
+with normal vector
+\[
+	\vec n = \frac{\partial \vec p}{\partial x}(x_0,y_0) \times
+	\frac{\partial \vec p}{\partial y}(x_0,y_0)
+\]
+and area $\norm{\vec n}$.
+
+We have developed several approximations.  Before we put them all together, let's
+give them simple names.  Fix $x_0$ and $y_0$,
+and let $\Delta A=\Delta A_{x_0,y_0}$;
+let $Q(x,y) = \vec F\circ \vec p(x_0,y_0)$ be a constant
+vector field approximating $\vec F$; and, let 
+$\Delta R=\vec P([x_0,x_0+\Delta x]\times [y_0,y_0+\Delta y])$ be a parallelogram
+approximating $\Delta A$.  We then have, so long as $\Delta x$ and $\Delta y$ are small
+\begin{align*}
+	\Delta A &\approx \Delta R\\
+	\vec F &\approx \vec Q.
+\end{align*}
+Putting this all together, 
+\begin{align*}
+	\Flux_{\Delta A}\vec F
+	\approx \Flux_{\Delta A}\vec Q 
+	\approx \Flux_{\Delta R}\vec Q
+\end{align*}
+
+Now, $\tfrac{\vec n}{\norm{\vec n}}$ is a unit normal vector to $\Delta R$,
+and so
+\[
+	\Flux_{\Delta R}\vec Q = 
+	\norm{\vec n}\tfrac{\vec n}{\norm{\vec n}}\cdot \vec Q
+	=\vec n\cdot \vec Q.
+\]
+Substituting in for $\vec n$ and $\vec Q$, we have
+\begin{equation}
+	\label{EQFLUXAPPROX}
+	\Flux_{\Delta A}\vec F
+	\approx 
+	\left(\frac{\partial \vec p}{\partial x}(x_0,y_0) \times
+	\frac{\partial \vec p}{\partial y}(x_0,y_0)\right)
+	\cdot \Big(\vec F\circ \vec p(x_0,y_0)\Big ).
+\end{equation}
+
+We worked pretty hard to get Equation \eqref{EQFLUXAPPROX}, but
+let's remind ourselves that the idea was simple.  We approximated
+a changing vector field by a constant one and a curvy shape by a flat one.
+The rest of the formula comes from exploiting the relationship between
+the cross product and the area of a parallelogram and the computation
+of the flux of a constant vector field through a flat surface.
+
+
+
+
 
 \section{Circulation and Curl}
