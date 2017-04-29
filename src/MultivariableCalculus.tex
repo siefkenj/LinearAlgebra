@@ -116,7 +116,14 @@
 	}\xspace%
 }
 
-
+% labels for source attributions
+\NewDocumentCommand{\grout}{o}{%
+	\IfNoValueTF{#1}{%
+		{\color{blue}\sffamily{G}}%
+	}{%
+		{\color{blue}\sffamily{G}}%  XXX Todo, make this href to the appropriate problem number
+	}\xspace%
+}
 
 % set up some deep enumerate environments for the CC license
 \newlist{ccEnumerate}{enumerate}{9}
