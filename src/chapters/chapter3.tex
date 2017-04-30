@@ -907,7 +907,7 @@ both $\vec l$ and $\vec c$ is constant.
 		\addplot[domain=0:360, samples=80, thick, mypink] ({cos(x)},{sin(x)});
 
 		\draw[->,blue,ultra thick] ($({cos(30)}, {sin(30)})$) -- (0,0) node[midway, above left, xshift=0cm] {$\Accel \vec c$};		
-		\draw[->,myorange,ultra thick] ($({cos(30)}, {sin(30)})$) -- ($({-sin(30)+cos(30)}, {cos(30)+sin(30)})$) node[midway, above right, xshift=0cm] {$\Vel \vec c$};		
+		\draw[->,myorange,thick] ($({cos(30)}, {sin(30)})$) -- ($({-sin(30)+cos(30)}, {cos(30)+sin(30)})$) node[midway, above right, xshift=0cm] {$\Vel \vec c$};		
 		\draw[] (-.5,1.2) node[] {$\vec c$};
 
 
@@ -935,7 +935,7 @@ both $\vec l$ and $\vec c$ is constant.
 
 		\addplot[domain=0:2, samples=2, thick, mypink] ({x^2},{x^2});
 		\draw[->,blue,ultra thick] (1,1) -- (3,3) node[midway, left, xshift=-.1cm] {$\Accel \vec l$};
-		\draw[->,myorange, ultra thick, xshift=.1cm,yshift=-.1cm] (1,1) -- (2,2) node[midway, below right, xshift=0cm] {$\Vel \vec l$};		
+		\draw[->,myorange,thick, xshift=.1cm,yshift=-.1cm] (1,1) -- (2,2) node[midway, below right, xshift=0cm] {$\Vel \vec l$};		
 
 		\draw[] (1,3) node[above left] {$\vec l$};
 
@@ -1116,7 +1116,7 @@ the velocity vectors hardly change direction at all.
 		\draw[->, thick, myorange, dashed] (bigOrigin) -- ++(DD);
 		
 		\draw[->, thick, blue] ($(bigOrigin)+(DC)$) -- ($(bigOrigin)+(DD)$) node[midway, below] {\begin{tabular}{c}small curvature\\= small change\end{tabular}};
-		\draw[->, ultra thick, blue] ($(smallOrigin)+(DA)$) -- ($(smallOrigin)+(DB)$) node[midway, right] {\begin{tabular}{c}big curvature\\= big change\end{tabular}};
+		\draw[->, thick, blue] ($(smallOrigin)+(DA)$) -- ($(smallOrigin)+(DB)$) node[midway, right] {\begin{tabular}{c}big curvature\\= big change\end{tabular}};
 		\draw[fill] (smallOrigin) circle (1pt);
 		\draw[fill] (bigOrigin) circle (1pt);
 
@@ -1133,9 +1133,48 @@ the velocity vectors hardly change direction at all.
 Curvature can be hard to calculate exactly, but it isn't so hard to eyeball.
 
 \begin{example}
-	Estimate the curvature at various points of the parabola $y=x^2$.
+	Estimate the curvature the parabola $y=x^2$ at the point $(0,0)$.
+	
+	Let $\vec p(t)=(t,t^2)$ be a parameterization of our parabola
+	and let $\vec q$ be an arc-length parameterization of our parabola
+	satisfying $\vec p(0)=\vec q(0)=(0,0)$.
+	We can check that $\vec p$ is \emph{not} an arc-length parameterization.  
+	However, $\vec p$ and $\vec q$ have a lot in common.
 
-	XXX Finish and include numerics
+	For example, if $\vec p(t)=\vec q(s)$,
+	then $\vec p'(t)$ is parallel to $\vec q'(s)$.  Further $\vec q'(s)$ is a unit
+	vector, so
+	\[
+		\vec q'(s) = \frac{\vec p'(t)}{\norm{\vec p'(t)}},
+	\]
+	provided that $\vec p$ and $\vec q$ trace the parabola in the same direction.
+
+	We will estimate the curvature at $(0,0)$
+	by first estimating $\vec q'$ at two close-by points and then using
+	those estimates to estimate $\vec q''(0)$.
+	Consider $\vec p(0)=(0,0)$ and $\vec p(0.1) = (0.1, 0.01)$.  The approximate
+	arc-length along the parabola from $\vec p(0)$ to $\vec p(0.1)$ is 
+	\[
+		\text{arc-length from }\vec p(0)\text{ to }\vec p(0.1)
+		\approx \norm{\vec p(0.1) - \vec p(0)} = \sqrt{0.0101}
+		\approx 0.1005.
+	\]
+	Thus, $\vec p(0.1)\approx \vec q(0.1005)$.  Using the fact that
+	$\vec q'$ is always a unit vector, we compute
+	\[
+		\vec q'(0) = \frac{\vec p'(0)}{\norm{\vec p'(0)}} = \mat{1\\0}
+		\qquad\text{and}\qquad
+		\vec q'(0.1005) \approx \frac{\vec p'(0.1)}{\norm{\vec p'(0.1)}}
+		\approx\mat{0.9806\\0.1961}.
+	\]
+
+	Finally, we use another numerical approximation to get
+	\[
+		\vec q''(0) \approx \frac{\vec q'(0.1005)-\vec q'(0)}{0.1005}
+		\approx \mat{-0.1932\\1.9514},
+	\]
+	and so the curvature of the parabola at $(0,0)$ is approximately
+	$\norm{\vec q''(0)}\approx 1.96$, which is quite close to the true value of $2$.
 \end{example}
 
 \begin{exercises}
@@ -1148,13 +1187,33 @@ tent has a radius of $3$ and if
 you're standing at the coordinates $(x,y)$, the height of the circus
 tent is given by $f(x,y) = 9-x^2-y^2$.
 
-XXX figure
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={25}{35},zmin=0,
+		    colormap/copper
+		    ]
+		    \addplot3 [restrict z to domain=0:9, data cs=polar, domain=30:389, y domain=0:3, blue,smooth] (x, y, 9 - y^2);
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 
 Now, suppose you want to measure the area above the ground
 and below the circus tent as you walk from $(-3,0)$ to
 $(3,0)$ in a straight line (perhaps you're trying to figure
 out how many square feet of streamers you need to form a wall in
 the circus tent).  We can compute this quantity in a familiar way.
+
+\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={25}{35},zmin=0,
+		    colormap/copper
+		    ]
+			\addplot3[variable=t,domain=-3:3,  fill=myorange, opacity=.4, samples y=0, smooth] (t, 0, 9-t^2) -- cycle;
+\addplot3[variable=t,domain=-3:3, thick, samples y=0, smooth] (t, 0, 9-t^2) -- cycle;
+ \addplot3 [restrict z to domain=0:9, data cs=polar, domain=30:389, y domain=0:3, blue,smooth] (x, y, 9 - y^2);
+	    \end{axis}
+	  \end{tikzpicture}
+\end{center}
 
 Let $\mathcal X$ be the straight-line path from $(-3,0)$ to $(0,3)$.
 Since the $y$-coordinate along this path is always $0$,
@@ -1207,8 +1266,25 @@ to think about our path and the Riemann sums that integrals come from.
 
 
 	Let $\mathcal R$ be the region below the graph of $f$ and above the curve $\mathcal D$.
+	\begin{center}
 
-	XXX figure
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={25}{35},zmin=0,
+		    colormap/copper
+		    ]
+			\addplot3[variable=t,domain=-2.12:2.12,  fill=myorange, opacity=.4, samples y=0, smooth] (t, t, 9 - 2*t^2)  node[midway, below right, black] (a) {}; -- cycle;
+		\addplot3[variable=t,domain=-2.12:2.12, thick, samples y=0, smooth] (t, t, 9-2*t^2);
+			\addplot3[variable=t,domain=-2.12:2.12, ultra thick, samples y=0, smooth, mypink] (t, t, 0) node[midway, below right, black] (d) {};
+			 \addplot3 [restrict z to domain=0:9, data cs=polar, domain=30:389, y domain=0:3, blue,smooth] (x, y, 9 - y^2);
+
+				
+				\node[fill=white, yshift=-.12cm, opacity=.8, rounded corners] at (d) {$\phantom{\mathcal D}$};
+			\node[yshift=-.12cm, mypink] at (d) {$\mathcal D$};
+			\node[yshift=-1cm, fill=white, opacity=.8, rounded corners] at (a) {\phantom{$\mathcal R$}};
+			\node[yshift=-1cm] at (a) {$\mathcal R$};
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 
 	We will find the area of $\mathcal R$ by dividing $\mathcal R$ up into tiny rectangles,
 	summing the area of these tiny rectangles, and taking a limit as the width
@@ -1218,7 +1294,30 @@ to think about our path and the Riemann sums that integrals come from.
 	$\mathcal D$ is parameterized by the function $\vec r(t) = \mat{t\\t}$ where 
 	$-\tfrac{3}{\sqrt{2}} \leq t\leq \tfrac{3}{\sqrt{2}}$.  Let's find the area
 	of the rectangle below the graph of $f$ and above the line segment from
-	$\vec r(t)$ to $\vec r(t+\Delta t)$.  At position
+	$\vec r(t)$ to $\vec r(t+\Delta t)$.  
+	
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={25}{35},xmin=-3,xmax=3,ymin=-3, ymax=3,zmin=0,
+		    colormap/copper
+		    ]
+			\addplot3[variable=t,domain=-2.12:2.12,  fill=myorange, opacity=.4, samples y=0, smooth] (t, t, 9 - 2*t^2)  node[midway, below right, black] (a) {}; -- cycle;
+				\addplot3[variable=t,domain=-2.12:2.12, thick, samples y=0, smooth] (t, t, 9-2*t^2);
+			\addplot3[variable=t,domain=-2.12:2.12, ultra thick, samples y=0, smooth, mypink] (t, t, 0) node[midway, below right, black] (d) {};
+			\addplot3[fill=mygreen] (-.2,-.2,0) node (a) {} -- (0,0,0) node (b) {}-- (0,0,8.92) node (c) {} -- (-.2,-.2,8.92) node (d) {} -- cycle;
+
+			\node[below left, yshift=-.1cm] at (a) {$\vec r(t)$};
+			\node[below right] at (b) {$\vec r(t+\Delta t)$};
+
+			\draw[fill=black] (a) circle (1.25pt);
+			\draw[fill=black] (b) circle (1.25pt);
+
+	    \end{axis}
+		\draw[<->, dashed] ([xshift=.1cm, yshift=.1cm]b.center) -- ([xshift=.1cm, yshift=-.1cm]c.center) node[midway, right] {$f\circ \vec r(t)$};
+	  \end{tikzpicture}
+	\end{center}
+	
+	At position
 	$\vec r(t)$, the heigh of $f$ is $f\circ \vec r(t) = 9-t^2-t^2=9-2t^2$.
 	And, if we move from $\vec r(t)$ to $\vec r(t+\Delta t)$, we've moved
 	by
@@ -1266,6 +1365,35 @@ and so
 	\label{EQLINEREIMANN}
 	\text{total area} \approx \sum_{t=0,\Delta t, 2\Delta t, \ldots, 1}\big(f\circ \vec r(t)\big)\norm{\vec r(t+\Delta t)-\vec r(t)}.
 \end{equation}
+
+\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[xtick=\empty,ytick=\empty,ztick=\empty,view={25}{35},xmin=-3,xmax=3,ymin=-3, ymax=3,
+		    colormap/copper
+		    ]
+    \pgfplotsinvokeforeach{-1.18,-1,...,2.55}
+    { 
+	\pgfmathsetmacro{\t}{#1}
+	\draw[fill,myorange, opacity=.4] (#1, 1 + 2*#1 - #1*#1, 9-#1*#1-#1*#1*#1*#1 + 4*#1*#1*#1 - 2*#1*#1 - 4*#1 - 1) -- (#1, 1 + 2*#1 - #1*#1,0) -- 
+(#1 + 0.18, -#1*#1 + 1.64*#1 + 1.3276, 0) -- 
+(#1 + 0.18, -#1*#1 + 1.64*#1 + 1.3276,  9-#1*#1-#1*#1*#1*#1 + 4*#1*#1*#1 - 2*#1*#1 - 4*#1 - 1) --cycle;
+\draw[thin] (#1, 1 + 2*#1 - #1*#1, 9-#1*#1-#1*#1*#1*#1 + 4*#1*#1*#1 - 2*#1*#1 - 4*#1 - 1) -- (#1, 1 + 2*#1 - #1*#1,0) -- 
+(#1 + 0.18, -#1*#1 + 1.64*#1 + 1.3276, 0) -- 
+(#1 + 0.18, -#1*#1 + 1.64*#1 + 1.3276,  9-#1*#1-#1*#1*#1*#1 + 4*#1*#1*#1 - 2*#1*#1 - 4*#1 - 1) --cycle;
+    }
+
+	\draw[fill=mygreen] (-.64, -.6896, 0) node (a) {} -- (-.64, -.6896, 8.1) node (c) {} -- (-.46, -.1316,8.1) -- (-.46, -.1316,0) node (b) {}--cycle;
+
+    \addplot3[variable=t,domain=-1.18:2.77,samples y=0, smooth,thick] (t, 1 + 2*t - t^2, 9-t^2-t^4 + 4*t^3 - 2*t^2 - 4*t - 1);
+	\addplot3[variable=t,domain=-1.18:2.77,samples y=0, smooth, thick, mypink] (t, 1 + 2*t - t^2, 0);
+
+
+	    \end{axis}
+		\draw[<->, thin, dashed] ([yshift=-.1cm]a.center) -- ([ yshift=-.1cm]b.center) node[midway, below,xshift=.8cm,yshift=-.1cm ] {$\norm{\vec r(t+\Delta t) - \vec r(t)}$};
+		\draw[<->, thin, dashed] ([xshift=-.1cm]a.center) -- ([ xshift=-.1cm,yshift=-.15cm]c.center) node[above,left,fill=white,rounded corners,opacity=.75,xshift=-.1cm ] (xx) {\phantom{$f\circ\vec r(t)$}};
+		\draw[] (xx) node {$f\circ\vec r(t)$};
+	  \end{tikzpicture}
+\end{center}
 
 Equation \eqref{EQLINEREIMANN} doesn't yet look like a Riemann sum that we could convert
 into an integral.  It's not multiplied by $\Delta t$!  But, we can fix that by multiplying by
@@ -1341,6 +1469,8 @@ Suppose that $\vec F:\R^2\to\R^2$ is a force field.  That is, if you stand at th
 $\vec x\in\R^2$, you're subjected to the force $\vec F(\vec x)$.  Now, 
 if you move from point $A$ to point $B$ along the curve $\mathcal C$, you will
 be subjected to different forces at different points along your journey.
+
+XXX Figure
 
 Let $\vec r:[0,1]\to\mathcal C$ parameterize $\mathcal C$, and recall that 
 the work done by a constant force $\vec A$ to during a displacement by $\vec D$
