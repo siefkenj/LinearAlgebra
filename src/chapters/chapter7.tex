@@ -1,0 +1,481 @@
+
+Multivariable calculus has a long history with many refinements over the years.
+Every once in a while, a mathematician will notice something new---a connection
+between various concepts in mathematics.  You may have notices that much
+of what we have done was not particular to any specific dimension, but the problems
+we solved were usually in $\R^2$ and $\R^3$.  The theoretical framework
+for work in $\R^4$ (like is often required for relativity) is set, but how
+would we actually compute a surface integral in $\R^4$?  We would need
+to find the volume form/surface element without the use of the cross product.
+
+\emph{Differential forms}\index{differential forms} are one solution to this issue.
+They recast many of the fundamental ideas, gradients, curl, divergence,
+line integrals, surface integrals, etc., in a unified framework that works
+regardless of dimension and \emph{regardless of coordinate system}.
+Because of their abstract foundation, they are not typically encountered in a
+first course on multivariable calculus, but that has more to do with culture
+than anything else.
+
+\section{Abstract Foundation for Differential Forms}
+
+Differential forms have close ties with calculus and linear algebra.
+For that reason, we will use some terms from linear algebra, including the
+abstract idea of a \emph{vector}\index{vector space}.
+
+\begin{definition}[Vector Space]
+	A set $V$, coupled with an addition and a
+	scalar multiplication is called a \emph{vector space} if
+	the following properties hold for all $\vec u,\vec v,\vec w\in V$
+	and all scalars $\alpha$ and $\beta$:
+	\begin{align*}
+		\vec u+\vec v\in V\quad&\text{and}\quad \alpha\vec u\in V\tag{Closure}\\
+		(\vec u+\vec v)+\vec w&=\vec u+(\vec v+\vec w)\tag{Associativity}\\
+		\vec u + \vec v - \vec v &= \vec u+\vec 0 = \vec u\tag{Identity}\\
+		\vec u+\vec v&=\vec v+\vec u\tag{Commutativity}\\
+		\alpha(\vec u+\vec v)&=\alpha\vec u+\alpha \vec v\tag{Distributivity}\\
+		(\alpha\beta)\vec v&=\alpha(\beta \vec v)\tag{Scalar Associativity}\\
+		(\alpha+\beta)\vec v&=\alpha\vec v+\beta \vec v\tag{Scalar Distributivity}
+	\end{align*}
+\end{definition}
+
+These properties should look familiar from Section \ref{SECVECTORPROPS}, and indeed
+$\R^n$ is a real vector space.  However there are many seemingly non-geometric
+sets that are also vector spaces.
+
+\begin{example}
+	Let $V=\Set{\text{functions from }\R\text{ to }\R}$ equipped with
+	pointwise addition and scalar multiplication.  Then $V$ is a vector space.
+
+	We won't prove every property in detail, but if we pick $f,g\in V$,
+	we need the quantities $f+g$ and $\alpha f$ to make sense and to also
+	be in $V$.  This becomes almost trivially true, thanks to the definition
+	of addition of functions.
+
+	Let $h=f+g$.  By definition $h(x) = f(x)+g(x)$, and so $h$ is
+	a function from $\R$ to $\R$.  Therefore $h\in V$.  Further
+	$q=\alpha h$ is defined by $q(x) = \alpha h(x)$, and so $q\in V$.
+	Thus, $V$ satisfies the closure property.  The rest of the properties
+	follow via similar arguments.
+\end{example}
+
+Recall that if $\vec v_1,\ldots, \vec v_n\in V$ are vectors, then 
+$\vec w=\alpha_1\vec v_1+\cdots +\alpha_n\vec v_n$ is a 
+\emph{linear combination}\index{linear combination} of the vectors $\vec v_1,\ldots \vec v_n$.
+Another way to think of a vector space is as a set on which linear combinations
+make sense.
+
+Now that we have abstract ``vectors'' (elements of a vector space), let's
+get abstract lines and planes.  These objects can be defined using
+\emph{linear functions}\index{linear transformation} which are equivalently
+called \emph{linear transformations}\footnote{ The words \emph{function},
+\emph{transformation}, and \emph{mapping} are synonymous in math.  We like
+to mix it up some times.}.
+
+\begin{definition}[Linear]
+	Let $V$ and $W$ be vector spaces and let
+	$T:V\to W$ be a function.  $T$ is called \emph{linear}
+	if for all $\vec u,v\in V$ and all scalars $\alpha$,
+	\[
+		T(\vec u+\vec v) = T(\vec u)+T(\vec v)\qquad\text{and}\qquad
+		T(\alpha \vec v) = \alpha T(\vec v).
+	\]
+\end{definition}
+If a transformation is linear, it is typical to omit parenthesis when
+passing in a single vector.  That is, instead of writing $T(\vec v)$,
+we write $T\vec v$, but we would always write $T(\vec u+\vec v)$
+with parenthesis.
+
+We have already encountered many linear functions.  For example, 
+consider $f:\R^3\to\R$ where
+$f(\vec v) = \xhat\cdot \vec v$.  Based on the properties of the dot product,
+\[
+	f(\vec u+\vec v) = \xhat\cdot (\vec u+\vec v)=
+	\xhat\cdot \vec u+\xhat \cdot \vec v = f(\vec u)+f(\vec v)
+\]
+and 
+\[
+	f(\alpha \vec v) = \xhat \cdot (\alpha \vec v) = \alpha \xhat \cdot \vec v
+	=\alpha f(\vec v).
+\]
+
+Another linear transformation that we have encountered is projection\index{projection}.
+For a fixed vector $\vec u$, let $f:\R^3\to\R^3$ be defined by 
+$f(\vec v) = \Proj_{\vec u} \vec v$.
+
+\begin{exercise}
+	Show that for a fixed $\vec u$, the function 
+	$f(\vec v) = \Proj_{\vec u} \vec v$ is linear.
+\end{exercise}
+
+Linear functions help us define lines, planes, etc. via their \emph{kernel}\index{kernel}.
+
+\begin{definition}[Kernel]
+	For a function $T:V\to W$, the \emph{kernel} (or \emph{null space}
+	if $T$ is a linear function)
+	of $T$ is defined to be 
+	\[
+		\Ker(T) = \Set{\vec v\in V\given T(\vec v) = \vec 0}.
+	\]
+\end{definition}
+
+Thinking at this level of abstraction can be challenging at first,
+but we've really been working with these ideas for a long time.
+
+For example, let $\vec n = (1,2,3)$ and let $P:\R^3\to\R$ be defined by
+$P(\vec v) = \vec n\cdot \vec v$.  We've already seen that $P$ is linear.
+What is $\Ker(P)$?  Well,
+\[
+	P\mat{x\\y\\z} = \mat{1\\2\\3}\cdot \mat{x\\y\\z} = 
+	x+2y+3z=0
+\]
+exactly when $(x,y,z)$ lies on the plane through the origin with normal vector $\vec n$.
+
+Lines can be written as kernels as well.
+
+\begin{exercise}
+	Let $\vec d=(1,1,1)$.  Find a linear transformation $L$ so that
+	$\Ker(L)$ is the line through $\vec 0$ with direction vector $\vec d$.
+	(It may help to think of a line as the intersection of two planes.)
+\end{exercise}
+
+Unfortunately, linear functions cannot hand \emph{all} of our ``flat''
+objects.  The kernel of a linear function always contains $\vec 0$, and
+so lines and planes that do not pass through the origin cannot be described
+as kernels of linear functions.  However, they can be described as kernels
+of the related \emph{affine functions}\index{affine function}.
+
+\begin{definition}[Affine Function]
+	Let $V$ and $W$ be vector spaces.  A function $A:V\to W$ is called
+	\emph{affine} if there exists some $\vec w\in W$ and some linear transformation
+	$T:V\to W$ so that
+	\[
+		A(\vec v) = T(\vec v) + \vec w
+	\]
+	for all $\vec v$.
+\end{definition}
+
+You may recall the previous definition of affine function from Section \ref{SECAFFINE}
+was defined only for functions $f:\R^n\to \R$.  We now have a fully general
+definition!
+
+\begin{exercise}
+	Write the plane with normal vector $\vec n=(1,2,3)$ and which
+	passes through the point $\vec p=(1,1,1)$ as the kernel of an 
+	affine function.
+\end{exercise}
+
+\subsection{Covectors}
+
+Now that we have formulated standard geometric objects, we will develop
+a set of tools to \emph{measure} those objects.  The first
+property we will attempt to measure is displacement.  From displacement,
+we will be able to measure area as ``displacement in two directions''
+and volume as ``displacement in three directions.''
+
+Displacement is measures with objects called \emph{covectors}\index{covector}.
+In other contexts, these objects are also known as 
+\emph{linear functionals}\index{linear functional} or \emph{dual vectors}\index{dual vector}.
+We will typically write covectors in a bold font them from vectors.
+
+\begin{definition}[Covector]
+	Given a vector space $V$, a \emph{covector} on the space $V$
+	is a linear function $\bm{\alpha}:V\to \R$.  The set of all
+	covectors on $V$ is denoted $V^*$.
+\end{definition}
+
+This definition is very abstract, but again, we've encountered covectors
+before!  Let $\bm{\alpha}:\R^3\to\R$ be defined by $\bm{\alpha}(\vec v) =\xhat \cdot \vec v$.
+We already know that $\bm{\alpha}$ is linear and that it outputs
+real numbers.  Therefore it is a covector.  However, $\bm \alpha$ also has
+geometric meaning.  It $\bm\alpha(\vec v)$ outputs the $x$-coordinate
+of $\vec v$.  We could similarly think of covectors that when given
+a vector output its $y$ or $z$ coordinates.
+
+Any function $\bm f:\R^n\to \R$ defined by $\bm f(\vec v) = \vec r\cdot \vec v$
+for some fixed $\vec r$ is a covector.  Further, we can interpret
+$\bm f$ to have geometric meaning.  The quantity $\bm f(\vec v)$ is how
+much $\vec v$ points in the direction $\vec r$.  In other words, $\bm f(\vec v)$
+is the ``$\vec r$ component'' of $\vec v$ (is anyone else thinking
+about projections?).
+
+A theorem from linear algebra shows us that this type of covector
+is all there is (in $\R^n$, at least).
+
+\begin{theorem}
+	Let $\bm\alpha:\R^n\to \R$ be a covector for $\R^n$.  Then,
+	there exists a $\vec a\in \R^n$ such that
+	\[
+		\bm\alpha (\vec v) = \vec a\cdot \vec v
+	\]
+	for all $\vec v\in\R^n$.
+\end{theorem}
+
+
+Now we know all covectors for $\R^n$ have a geometric meaning
+as measuring some component of an input vector.  The following
+theorem says that the term ``vector'' in co\emph{vector} is justified.
+
+\begin{theorem}
+	If $V$ is a vector space, then $V^*$, the set of all
+	covectors for $V$ is also a vector space.
+\end{theorem}
+\begin{proof}
+	XXX Finish
+\end{proof}
+
+We won't be doing much with the abstract vector space $V^*$, but it is
+nice to know that we can take linear combinations of covectors
+and still get a covector\footnote{ If we wanted to investigate $V^*$,
+we might start by saying, since $V^*$ is a vector space, there is
+a set $V^{**}$ of covectors for $V^*$.  Another linear algebra theorem
+says $V\subseteq V^{**}$, if you interpret ``subset'' in the right sense. }.
+
+It is, however, worth our time to consider $(\R^n)^*$.  Recall that
+in $\R^3$ we have special vectors $\xhat$, $\yhat$, and $\zhat$,
+called the standard basis for $R^3$,
+and all other vectors can be written as a linear combination of these.
+Higher dimensions also have the idea of a standard basis, and there
+is a similar concept for sets of covectors.
+
+\begin{definition}[Standard Basis]
+	The \emph{standard basis} for $\R^n$ is notated 
+	by $\vec e_1,\vec e_2,\ldots,\vec e_n$ and satisfies that 
+	every vector in $\R^n$ can be written as a linear combination of
+	$\vec e_1,\vec e_2,\ldots,\vec e_n$ and that
+	\[
+		\vec e_i\cdot \vec e_j = \begin{cases}
+			1 &\text{ if } i=j\\
+			0 &\text{ if } i\neq j
+		\end{cases}.
+	\]
+
+	The standard basis for $(\R^n)^*$ is notated
+	$\bm e^1,\bm e^2,\ldots,\bm e^n$ and satisfies that
+	every covector for $\R^n$ can be written as a linear combination of
+	$\bm e^1,\bm e^2,\ldots,\bm e^n$ and that
+	\[
+		\bm e^i(\vec e_j) = \begin{cases}
+			1 &\text{ if } i=j\\
+			0 &\text{ if } i\neq j
+		\end{cases}.
+	\]
+\end{definition}
+
+Following the convention from physics, we index covectors using superscripts
+and regular vectors using subscripts.  In plain terms, the standard basis for
+$\R^n$ is a collection of unit vectors that point along the coordinate axes\footnote{
+Technically, the standard basis \emph{defines} the coordinate axes.}, and the
+standard basis for $(\R^n)^*$ picks off the standard coordinates of input
+vectors.
+
+It's now easy to appreciate that we can take linear combinations of covectors.
+For example, let $\bm \alpha = \bm e^1+2\bm e^3$.  We can compute
+\[
+	\bm \alpha\mat{a\\b\\c} = \bm e^1\mat{a\\b\\c}
+	+2\bm e^3\mat{a\\b\\c} = a+2c = \mat{1\\0\\2}\cdot \mat{a\\b\\c},
+\]
+and so we see that $\bm\alpha$ is given by taking the dot product with
+the vector $\mat{1\\0\\2}$.  Of course, we could write $\vec e_1+2\vec e_2$
+instead of $\mat{1\\0\\2}$ and $a\vec e_1+b\vec e_2+c\vec e_3$ instead of 
+$\mat{a\\b\\c}$.  In doing so, we would be analyzing vectors in
+a \emph{coordinate free} manner.  That is, we never need to talk about
+the coordinates of a vector in order to do a computation.  One of the selling points
+of differential forms is that they allow you to do multivariable calculus
+in a coordinate free way.
+
+Stepping back for a moment, the machinery we've developed is almost comically
+tautological.  Let $\vec v\in \R^n$ and let $\bm \alpha$ be a covector.  By 
+definition,
+\begin{align*}
+	\vec v &= a_1\vec e_1+\cdots +a_n\vec e_n\\
+	\bm \alpha &= b_1\bm e^1+\cdots b_n\bm e^n,
+\end{align*}
+and it follows that
+\[
+	\bm \alpha(\vec v) = 
+	(b_1\bm e^1+\cdots b_n\bm e^n)(a_1\vec e_1+\cdots +a_n\vec e_n)
+	=b_1a_1+\cdots b_na_n = \matc{b_1\\\vdots\\b_n}\cdot \matc{a_1\\\vdots\\
+	a_n}.
+\]
+Thus, while by definition 
+\[
+\vec v=a_1\vec e_1+\cdots +a_n\vec e_n=
+\matc{a_1\\\vdots\\a_n},\]
+if we  wrote
+\[
+	\bm \alpha =b_1\bm e^1+\cdots b_n\bm e^n=
+\matc{b_1\\\vdots\\b_n},\]
+we would have gone through
+a whole lot of work to reinvent the dot product!  It will be worth it 
+though\footnote{ Some would argue that dot and cross products confuse
+vectors and covectors---that quantities like \emph{force}
+are naturally covectors, and that physics should be taught
+with covectors (instead of dot products) from the beginning.}.
+
+\section{1-forms and Line Integrals}
+
+Recall that a function $f:\R^n\to\R^n$ was called a
+vector field because to each point in $\R^n$ it assigns a
+vector in $\R^n$.  A 1-form is a type of \emph{differential 
+form}\index{differential form} that is analogous to a vector field
+except that instead of assigning to each point a vector,
+it assigns to each point a \emph{covector}.  We will also write
+1-forms using a bold font.
+
+\begin{definition}[1-form]
+	A \emph{1-form}\index{1-form} on the space $\R^n$ is a function
+	$\bm \alpha: \R^n\to (\R^n)^*$.
+\end{definition}
+We will always assume our 1-forms are \emph{smooth}---that is, every 1-form
+can be differentiated as much as we like\footnote{ We haven't defined
+what it means to differentiate a function whose codomain consists of covectors.
+The quick and dirty answer is, treat covectors as vectors and use
+the definition of differentiability for a vector field.}.
+
+
+As we've seen, covectors are used to measure vectors, and 
+vectors themselves come from displacements.  1-forms are a way
+to measure \emph{oriented curves}.  We'll explore this by
+first considering some special 1-forms on $\R^3$.
+
+\begin{definition}[Standard Basis for 1-forms]
+	The
+	\emph{standard basis for 1-forms} are the 1-forms
+	$\dd x$, $\dd y$, and $\dd z$ defined by
+	\[
+		\dd x(\vec v) = \bm e^1\qquad \dd y(\vec v)=\bm e^2\qquad
+		\dd z(\vec v) = \bm e^3
+	\]
+	for all $\vec v\in \R^3$.
+\end{definition}
+
+The names $\dd x$, $\dd y$, and $\dd z$\index{$\dd x$ $\dd y$ $\dd z$}
+are certainly evocative.  When you see
+``$\dd$,'' you should think ``displacement.''  After all
+$\dd x(\vec v)$ is the covector that measures the $x$ displacement
+of a vector.  Soon, you will
+also think ``derivative.''
+
+\subsection{Measuring Curves with 1-forms}
+
+Let $\mathcal C\subset \R^3$ be a smooth curve that starts at $\vec a=(a_x,a_y,a_z)$
+and ends at $\vec b=(b_x,b_y,b_z)$.  The 1-form $\dd x$ is meant to measure the
+displacement of $\mathcal C$ from it's starting point to its ending point.
+However, $\dd x$ cannot \emph{directly} interact with $\mathcal C$.
+Recall, $\dd x:\R^3\to (\R^3)^*$ is a function that inputs points
+and outputs covectors and covectors measure vectors.  $\mathcal C$ certainly
+has points, and if we squint our eyes, $\mathcal C$ also has vectors---tangent
+vectors!
+
+Let $\vec r:[0,1]\to\mathcal C$ be a parameterization of $\mathcal C$ defined by
+\[
+\vec r(t) = \mat{r_x(t)\\r_y(t)\\r_z(t)}
+\]
+so that $\vec r(0)=\vec a$ and $\vec r(1)=\vec b$ (that is, it is oriented 
+appropriately). Then, 
+\[\vec r'(t) =\mat{r_x'(t)\\r_y'(t)\\r_z'(t)}
+\]is a tangent vector to $\mathcal C$ at the
+point $\vec r(t)$.
+
+XXX Figure including $\dd x(r)$
+
+Now, $\dd x\circ \vec r = \bm e^1$ is the constant covector that measures
+the $x$ displacement of a vector and so $\Big[\dd x\circ \vec r(t)\Big](\vec r'(t))
+=\bm e^1(\vec r'(t))$
+is the $x$ displacement of the tangent vector to $\mathcal C$ coming
+from the parameterization $\vec r$ at the point $\vec r(t)$.   In other words,
+\[
+	\Big[\dd x\circ \vec r(t)\Big](\vec r'(t)) = r_x'(t).
+\]
+What we're after is the \emph{total} $x$ displacement along the curve $\mathcal C$.
+That is $b_x-a_x$.  But, we can get this quantity from the fundamental theorem
+of calculus!  After some reverse engineering, we see
+\[
+	b_x-a_x = \int_0^1 r_x'(t)\, \d t = \int_0^1 \Big[\dd x\circ \vec r(t)\Big](\vec r'(t))\,\d t.
+\]
+Further, this integral works out to the same value regardless of our
+choice of parameterization.  If $\vec q$ were another parameterization 
+of $\mathcal C$ starting
+at $\vec a$ and ending at $\vec b$, then 
+\[
+\int_0^1 \Big[\dd x\circ \vec q(t)\Big](\vec q'(t))\,\d t=b_x-a_x.
+\]
+Based on this observation,
+we are ready to define what it means to integrate a 1-form.
+
+\begin{definition}[Integral of a 1-form]
+	Let $\mathcal C$ be an oriented curve that starts at $\vec a$
+	and ends at $\vec b$ and let $\bm \alpha$ be a 1-form.  We define
+	the \emph{integral of $\bm \alpha$ over the curve $\mathcal C$}
+	by
+	\[
+		\int_{\mathcal C}\bm\alpha 
+		= \int_a^b \Big[\bm\alpha\circ \vec q(t)\Big](\vec q'(t))\,\d t
+	\]
+	where $\vec q:[a,b]\to\mathcal C$ is a parameterization of
+	$\mathcal C$ satisfying $\vec q(a)=\vec a$ and $\vec q(b)=\vec b$.
+\end{definition}
+
+With this definition, we have a powerful notation.  For an oriented curve $\mathcal C$,
+\[
+	\int_{\mathcal C} \dd x
+\]
+is the $x$ displacement from the start of $\mathcal C$ to the end of $\mathcal C$.
+Similarly, $\int_{\mathcal C}\dd y$ gives the $y$ displacement and $\int_{\mathcal C}\dd z$
+gives the $z$ displacement.
+
+There are many nice properties of the integral notation applied to 1-forms.
+For example, it behaves like a classical integral with respect to linear combinations.
+If $\bm\alpha$ and $\bm\beta$ are 1-forms and $t$ is a scalar, then
+\[
+	\int_{\mathcal C}(\bm \alpha + t\bm\beta) = \int_{\mathcal C} \bm\alpha 
+	+ t\int_{\mathcal C} \bm\beta.
+\]
+
+\begin{exercise}
+	Explain in words how to interpret
+	the output of $\int_{\mathcal C} (\dd x+\dd y +\dd z)$.
+\end{exercise}
+
+
+\subsection{Non-constant 1-forms}
+
+Let us seek the comfort of a one dimensional space as we explore non-constant 1-forms.
+In $\R^1$ we only have one standard basis 1-form.  Namely, $\dd x$.
+Let $f:\R^1\to\R$ be a scalar-valued function.  We will interpret
+$\R^1$ as a vector space rather than a set of scalars. Now, define
+\[
+	f\dd x (\vec v) = f(\vec v)\dd x(\vec v) = f(\vec v)\bm e^1.
+\]
+That is, $f\dd x$, when given a point, returns a scaled version of $\bm e^1$,
+which will in turn measure a scaled version of the $x$ displacement of
+a vector.  Let $\mathcal C=[a,b]$ be the oriented interval starting
+at $a$ and ending at $b$.  $\mathcal C$ is naturally parameterized
+by the function $\vec r:[a,b]\to[a,b]$ defined by $\vec r(t) = t$.
+Since $\vec r$ is the identity function, $f\circ \vec r(t)=f(t)$ and
+$\vec r'(t) = 1$.
+Thus, we may compute
+\[
+	\int_{\mathcal C} f\dd x = \int_a^b f\circ r(t) 
+	\Big[\dd x \circ \vec r(t)\Big](\vec r'(t))\,\d t
+	=\int_a^b f(t)\,\d t.
+\]
+This shows that
+$\int_{\mathcal C} f\dd x$ is the usual integral of $f$ on the interval $[a,b]$.
+
+\bigskip
+Let's move now to $\R^2$.  Let $f_x:\R^2\to\R$ and $f_y:\R^2\to\R$
+and consider the 1-form $\bm\alpha = f_x\dd x+f_y\dd y$.  Again, let
+$\mathcal C$ be an oriented curve starting at $\vec a$, ending at $\vec b$,
+and parameterized by $\vec r:[0,1]\to\mathcal C$  where
+$\vec r(t) = (r_x(t),r_y(t))$ and  $\vec r(0)=\vec a$ and
+$\vec r(1)=\vec b$.  Further, let
+
+Now,
+\[
+	\int_{\mathcal C} \bm\alpha = 
+	\int_{\mathcal C} f_x\dd x+\int_{\mathcal C} f_y\dd y
+	=\int_0^1 f_x\circ \vec r(t)
+\]
+
+\section{2-forms and Surface Integrals}

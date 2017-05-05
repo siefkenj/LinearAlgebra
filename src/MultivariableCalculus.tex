@@ -20,7 +20,7 @@
 \usepackage[hidelinks]{hyperref}   % Internal hyperlinks
 \usepackage{mathtools} % replaces amsmath
 \usepackage{etoolbox}
-\usepackage{newenviron}
+\usepackage{bbm} %lower case blackboard font
 \usepackage{amsthm, bm}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -60,6 +60,7 @@
 \declarecommand{\N}{\mathbb{N}}
 \declarecommand{\C}{\mathbb{C}}
 \declarecommand{\d}{\mathrm{d}}
+\declarecommand{\dd}{\mathbbm{d}} % exterior derivative
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\Img}{img}
 \DeclareMathOperator{\Id}{id}
@@ -77,6 +78,7 @@
 \DeclareMathOperator{\Circ}{Circ}
 \DeclareMathOperator{\Curl}{curl}
 \DeclareMathOperator{\Perp}{perp}
+\DeclareMathOperator{\Ker}{kernel}
 \DeclareMathOperator{\Arclen}{arc\,len}
 \newcommand{\Arclenfrom}[3]{\Arclen #1 \Big|_{#2}^{#3}}
 \newcommand{\proj}{\Proj}
@@ -544,6 +546,9 @@
 	\clearpage
 \chapter{Vector Fields}
 	\input{chapters/chapter6.tex}
+	\clearpage
+\chapter{Differential Forms}
+	\input{chapters/chapter7.tex}
 	\clearpage
 
 \appendix
