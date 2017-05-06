@@ -1,12 +1,19 @@
 \section{Multivariable Integrals}
 
-Fundamentally, an integral is the result of chopping a region up into tiny
-pieces, adding all the pieces up again, and taking a limit as the size of
-the tiny pieces goes to zero.  Thus far, the domain of this procedure---the
+Abstractly, the processes of integration is:
+(i) chop a region into easy to 
+approximate pieces, (ii) approximate each tiny piece, (iii) add together
+the approximations, and (iv) take a limit as the size of each piece tends to zero\footnote{
+If your approximations get better and better as the size of each piece shrinks,
+the whole process works.  This isn't the case for all objects, but conditions like
+differentiability and piecewise smooth are often sufficient.  It's annoying
+to specify exactly what is needed over and over again, so sometimes we just say
+an object is ``nice.''}.
+ Thus far, the domain of this procedure---the
 thing we chop into tiny pieces---has been a line or curve.  We will now consider
 integrating over multi-dimensional domains.
 
-Consider the motivating example of finding the area of a region in the plane.
+We will start by finding the area of a region in the plane.
 Let $\mathcal R\subseteq \R^2$ be the region below the line $y=1$ and above the
 curve $y=x^2$.  We wish to find the area of $\mathcal R$.
 
@@ -118,16 +125,16 @@ Using integral notation, we would write
 \[
 	\text{area of }\mathcal R=\int_{\mathcal R} \d A.
 \]
-Here $\d A$ represents a ``tiny area,'' the subscript $\mathcal R$ represents the region of integration,
+Here, $\d A$ represents a ``tiny area,'' the subscript $\mathcal R$ represents the region of integration,
 and the integral sign means we're adding things up.  In this case, we're finding area, so $\d A=1\d A$ is
-exactly what we're adding up.  In other situations, we'll be adding up more complicated functions.
+exactly what we're adding up.  In other situations, we'll be adding up more complicated quantities.
 
-This is all well and good, but how do we actually \emph{find} the area.  To do this, we'll
+This is all well and good, but how do we actually \emph{find} the area?  To do this, we'll
 need to convert $\int_{\mathcal R}\d A$ into a more traditional-looking integral---one that we
 know how to evaluate.
 
 Let's write down our sum more carefully.  We need to sum over all tiny rectangles that fit inside
-$\mathcal R$.  To do so, we can take a systematic approach: let's sum all the rectangles
+$\mathcal R$.  To do so, we can take a systematic approach: sum all the rectangles
 in a column first and then sum up all the columns.  The lower left corner of all 
 rectangles in a single column share a common $x$-coordinate.  Consider
 the column with lower left corner at $(x_0,y_0)$.  Counting, we see there
@@ -140,14 +147,15 @@ $2/\Delta x$ columns.  Therefore,
 That sum is really hard to parse, so we'll write it another way.
 \[
 	\text{area of }\mathcal R\approx
-	\sum_{x_0=-1,-1+\Delta x,-1+2\Delta x,\ldots,1}
+	\sum_{x_0=-1,\,-1+\Delta x,\ldots,1}
 	\quad
-	\sum_{y_0=x_0^2,x_0^2+\Delta y,x_0^2+2\Delta y,1}
+	\sum_{y_0=x_0^2,\,x_0^2+\Delta y,\ldots,1}
 	\Delta y\Delta x.
 \]
 This is still hard to read, but it's looking more like an integral.  The inner sum
 is adding up things from $y_0=x_0^2$ to $y_0=1$ and the outer sum is adding up
-things from $x_0=-1$ to $x_0=1$.  Upon taking a limit, we may rewrite this as an
+things from $x_0=-1$ to $x_0=1$.  After taking the limit
+as $\Delta x,\Delta y\to 0$, we may rewrite this as an
 integral, giving
 \begin{equation}
 	\label{EQITERATEDINT}
@@ -164,7 +172,7 @@ That is,
 	=
 	\quad \int_{x=-1}^{x=1}\left(\int_{y=x^2}^{y=1} \d y\right)\d x
 \]
-and so the integral with respect to $y$ \emph{must} be done before the integral with respect to $x$.
+and so the integral with respect to $y$ must be done \emph{before} the integral with respect to $x$.
 To be clear, $\d y$ and $\d x$ are \emph{not} being multiplied.  However, $\Delta y$ and $\Delta x$ 
 \emph{were} being multiplied in our sum expression.  What happened?  The answer is some slight of
 hand.  We can write a more complete list of steps:\footnote{ Even still, we skipped steps.
@@ -187,8 +195,10 @@ Now we can evaluate this iterated integral to conclude
 	\int_{x=-1}^{x=1}\left(\int_{y=x^2}^{y=1} \d y\right)\d x \quad=\quad
 	\tfrac{4}{3}.
 \]
-But, there was another way we could have divided up our original sum.  We could have summed
-along rows first and then summed up each row.  Using this approach, we see
+But, there was another way we could have divided up our original sum.  
+We could have summed all tiny rectangles in a single row first and then 
+added up all the row sums.
+Using this approach, we see
 \[
 	\lim_{\Delta x,\Delta y\to 0} \sum_{y_i}\sum_{x_i} \Delta x\Delta y
 	=

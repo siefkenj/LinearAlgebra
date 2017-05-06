@@ -138,7 +138,7 @@ Lines can be written as kernels as well.
 	(It may help to think of a line as the intersection of two planes.)
 \end{exercise}
 
-Unfortunately, linear functions cannot hand \emph{all} of our ``flat''
+Unfortunately, linear functions cannot describe \emph{all} ``flat''
 objects.  The kernel of a linear function always contains $\vec 0$, and
 so lines and planes that do not pass through the origin cannot be described
 as kernels of linear functions.  However, they can be described as kernels
@@ -154,8 +154,10 @@ of the related \emph{affine functions}\index{affine function}.
 	for all $\vec v$.
 \end{definition}
 
-You may recall the previous definition of affine function from Section \ref{SECAFFINE}
-was defined only for functions $f:\R^n\to \R$.  We now have a fully general
+You may recall the previously, in Section \ref{SECAFFINE},
+we only defined what it means for a function $f:\R^n\to \R$
+to be affine.
+We now have a fully general
 definition!
 
 \begin{exercise}
@@ -312,6 +314,12 @@ vectors and covectors---that quantities like \emph{force}
 are naturally covectors, and that physics should be taught
 with covectors (instead of dot products) from the beginning.}.
 
+
+\subsection{Covectors as Rulers}
+
+XXX Finish
+
+
 \section{1-forms and Line Integrals}
 
 Recall that a function $f:\R^n\to\R^n$ was called a
@@ -331,6 +339,16 @@ can be differentiated as much as we like\footnote{ We haven't defined
 what it means to differentiate a function whose codomain consists of covectors.
 The quick and dirty answer is, treat covectors as vectors and use
 the definition of differentiability for a vector field.}.
+
+Since 1-forms output covectors which themselves measure vectors, it is worth
+introducing some notation.  If $\bm \alpha$ is a 1-form, then
+$\bm \alpha(\vec v)$ is a covector.  If we wish to apply this
+covector, $\bm\alpha(\vec v)$,
+to measure the vector $\vec w$, we write $\Big[\bm\alpha(\vec v)\Big](\vec w)$.
+We'll be doing this a lot, so we have the alternative notation
+\[
+	\bm\alpha\formarg{\vec v}{\vec w}  \equiv\Big[\bm\alpha(\vec v)\Big](\vec w).
+\]
 
 
 As we've seen, covectors are used to measure vectors, and 
@@ -380,25 +398,26 @@ point $\vec r(t)$.
 XXX Figure including $\dd x(r)$
 
 Now, $\dd x\circ \vec r = \bm e^1$ is the constant covector that measures
-the $x$ displacement of a vector and so $\Big[\dd x\circ \vec r(t)\Big](\vec r'(t))
-=\bm e^1(\vec r'(t))$
+the $x$ displacement of a vector and so $\dd x \formarg{\vec r(t)}{\vec r'(t)}
+=\bm e^1\big(\vec r'(t)\big)$
 is the $x$ displacement of the tangent vector to $\mathcal C$ coming
 from the parameterization $\vec r$ at the point $\vec r(t)$.   In other words,
 \[
-	\Big[\dd x\circ \vec r(t)\Big](\vec r'(t)) = r_x'(t).
+	\dd x\formarg{\vec r(t)}{\vec r'(t)}=\bm e^1\big(\vec r'(t)\big) = r_x'(t).
 \]
 What we're after is the \emph{total} $x$ displacement along the curve $\mathcal C$.
 That is $b_x-a_x$.  But, we can get this quantity from the fundamental theorem
 of calculus!  After some reverse engineering, we see
 \[
-	b_x-a_x = \int_0^1 r_x'(t)\, \d t = \int_0^1 \Big[\dd x\circ \vec r(t)\Big](\vec r'(t))\,\d t.
+	b_x-a_x = \int_0^1 r_x'(t)\, \d t 
+	= \int_0^1 \dd x\formarg{\vec r(t)}{\vec r'(t)}\,\d t.
 \]
 Further, this integral works out to the same value regardless of our
 choice of parameterization.  If $\vec q$ were another parameterization 
 of $\mathcal C$ starting
 at $\vec a$ and ending at $\vec b$, then 
 \[
-\int_0^1 \Big[\dd x\circ \vec q(t)\Big](\vec q'(t))\,\d t=b_x-a_x.
+\int_0^1 \dd x\formarg{\vec q(t)}{\vec q'(t)}\,\d t=b_x-a_x.
 \]
 Based on this observation,
 we are ready to define what it means to integrate a 1-form.
@@ -410,6 +429,7 @@ we are ready to define what it means to integrate a 1-form.
 	by
 	\[
 		\int_{\mathcal C}\bm\alpha 
+		=\int_a^b \bm\alpha \formarg{\vec q(t)}{\vec q'(t)}\,\d t
 		= \int_a^b \Big[\bm\alpha\circ \vec q(t)\Big](\vec q'(t))\,\d t
 	\]
 	where $\vec q:[a,b]\to\mathcal C$ is a parameterization of
@@ -441,7 +461,7 @@ If $\bm\alpha$ and $\bm\beta$ are 1-forms and $t$ is a scalar, then
 \subsection{Non-constant 1-forms}
 
 Let us seek the comfort of a one dimensional space as we explore non-constant 1-forms.
-In $\R^1$ we only have one standard basis 1-form.  Namely, $\dd x$.
+In $\R^1$ we only have one standard basis 1-form: $\dd x$.
 Let $f:\R^1\to\R$ be a scalar-valued function.  We will interpret
 $\R^1$ as a vector space rather than a set of scalars. Now, define
 \[
@@ -456,8 +476,8 @@ Since $\vec r$ is the identity function, $f\circ \vec r(t)=f(t)$ and
 $\vec r'(t) = 1$.
 Thus, we may compute
 \[
-	\int_{\mathcal C} f\dd x = \int_a^b f\circ r(t) 
-	\Big[\dd x \circ \vec r(t)\Big](\vec r'(t))\,\d t
+	\int_{\mathcal C} f\dd x = \int_a^b f\circ r(t)\, \dd x\formarg{\vec r(t)}{\vec r'(t)}
+	\,\d t
 	=\int_a^b f(t)\,\d t.
 \]
 This shows that
@@ -469,13 +489,220 @@ and consider the 1-form $\bm\alpha = f_x\dd x+f_y\dd y$.  Again, let
 $\mathcal C$ be an oriented curve starting at $\vec a$, ending at $\vec b$,
 and parameterized by $\vec r:[0,1]\to\mathcal C$  where
 $\vec r(t) = (r_x(t),r_y(t))$ and  $\vec r(0)=\vec a$ and
-$\vec r(1)=\vec b$.  Further, let
+$\vec r(1)=\vec b$. 
 
 Now,
+\begin{align*}
+	\int_{\mathcal C} \bm\alpha &= 
+	\int_{\mathcal C} f_x\dd x+\int_{\mathcal C} f_y\dd y\\
+	&=\int_0^1 f_x\circ \vec r(t)\, \dd x\formarg{\vec r(t)}{\vec r'(t)}\,\d t
+	+\int_0^1 f_y\circ \vec r(t)\, \dd y\formarg{\vec r(t)}{\vec r'(t)}\,\d t\\
+	&= \int_0^1 f_x\circ \vec r(t)\, r_x'(t)\,\d t
+	+\int_0^1 f_y\circ \vec r(t)\, r_y'(t)\,\d t
+\end{align*}
+If we let $\vec F = (f_x,f_y)$, a familiar integral emerges.
 \[
-	\int_{\mathcal C} \bm\alpha = 
-	\int_{\mathcal C} f_x\dd x+\int_{\mathcal C} f_y\dd y
-	=\int_0^1 f_x\circ \vec r(t)
+	\int_{\mathcal C} \bm\alpha = \int_0^1 \vec F\circ \vec r(t) \cdot \vec r'(t)\,\d t
+	=\int_{\mathcal C} \vec F\cdot \d\vec r,
 \]
+where the right-hand side is the vector line integral of $\vec F$ along the curve
+$\mathcal C$.  So, integrals of 1-forms along curves are actually vector line
+integrals.
+
+\begin{example}
+	Let $\bm \alpha=-y\dd x+x\dd y$ and let $\mathcal C$ be the circle of
+	radius 2 centered at the origin.  Compute $\int_C \bm\alpha$.
+
+	XXX Finish
+\end{example}
 
 \section{2-forms and Surface Integrals}
+
+\subsection{The Wedge Product}
+
+
+We can think of covectors as measuring oriented line segments.  That is,
+any vector you can think of as a line segment with a start and an end.
+When the covector $\bm\alpha=a\bm e^1+b\bm e^2+c\bm e^3$ is applied to 
+a vector $\vec v$, it measures the ``$(a,b,c)$ component'' of $\vec v$.
+In other words, it measures how long $\vec v$ appears to be from the perspective
+of the vector $(a,b,c)$.  That is, $\bm\alpha(\vec v) = (a,b,c)\cdot \vec v$.
+
+We can invent a similar object that measures oriented parallelograms.
+Any pair of vectors $(\vec v,\vec w)$ can be viewed as forming an oriented
+parallelogram $\mathcal P_{\vec v,\vec w}$.  If $(\vec v,\vec w)$ come in a
+right-handed order, we say $\mathcal P_{\vec v,\vec w}$ has a positive
+orientation.  Otherwise it has a negative orientation.
+A function
+that takes in a pair of vectors and measures the oriented (signed)
+area of the parallelogram they determine is called a 2-covector.
+
+Let us take a moment to discuss the \emph{laws of area}\footnote{ We'll be
+calling them \emph{laws of volume} later on.} that should
+apply to 2-covector.  If $\bm\alpha$ is a 2-covector and $\vec v,\vec w$ are
+vectors, then
+\[
+	\bm\alpha(\vec v,\vec v) = 0,
+\]
+since the parallelogram $\mathcal P_{\vec v,\vec v}$ is degenerate\footnote{
+It isn't bad; it just has no area.}.  Scaling one of the sides should affect
+the area accordingly:
+\[
+	\bm\alpha(m\vec v,\vec w) = m\alpha(\vec v,\vec w) = \alpha(\vec v,m\vec w).
+\]
+Further, if we slide one vector parallel to the other, it shouldn't affect
+the area.  So,
+\[
+	\bm\alpha(\vec v,\vec w) = \alpha(\vec v+m\vec w,\vec w) = \alpha(\vec v,\vec w+m\vec v).
+\]
+
+Lastly, though not a direct consequence of the laws of area,
+we will require that $\bm\alpha$ is linear in each argument.
+That is, that $\bm\alpha$ is \emph{multi-linear}\index{multi-linear}.
+
+\begin{definition}[Multi-linear]
+	A function $f:\underbrace{V\times \cdots\times V}_{n}\to W$ is
+	\emph{multi-linear} if it is linear in each argument.
+	That is, for all $\vec v_1,\ldots, \vec v_n,\vec w\in V$ and 
+	all scalars $\alpha$,
+	\[
+		f(\vec v_1,\ldots,\vec v_i+\vec w,\ldots,\vec v_n)
+		=
+		f(\vec v_1,\ldots,\vec v_i,\ldots,\vec v_n) +
+		f(\vec v_1,\ldots,\vec w,\ldots,\vec v_n)
+	\]
+	and
+	\[
+		f(\vec v_1,\ldots,\alpha\vec v_i,\ldots,\vec v_n)
+		=
+		\alpha f(\vec v_1,\ldots,\vec v_i,\ldots,\vec v_n).
+	\]
+\end{definition}
+
+\begin{definition}[2-covector]
+	A \emph{2-covector} on the vector space $V$ is a multi-linear
+	function $\bm\alpha: V\times V\to \R$ that obeys the laws of area.
+\end{definition}
+
+The laws of area should look very familiar from our 
+derivation of the cross product.  And, now we can see that orientation
+is a direct consequence of multi-linearity and the fact that $\bm\alpha(\vec v,\vec v)=0$.
+Observe,
+\begin{align*}
+	0=\bm\alpha(\vec v+\vec w, \vec v+\vec w) &= 
+		\bm\alpha(\vec v, \vec v)+
+		\bm\alpha(\vec v, \vec w)+
+		\bm\alpha(\vec w, \vec v)+
+		\bm\alpha(\vec w,\vec w)\\
+		&=\bm\alpha(\vec v, \vec w)+
+		\bm\alpha(\vec w, \vec v),
+\end{align*}
+and so $\bm\alpha(\vec v, \vec w) = -\bm\alpha(\vec w, \vec v)$.  This property
+is called \emph{alternating}\index{alternating map}.
+
+We've generated a lot of theory, but let's actually see a 2-vector in action.
+
+\begin{example}
+	\label{EXTWOCOVECTOR}
+	For a pair of vectors $(\vec v,\vec w)$, let $\mathcal P_{\vec v,\vec w}$
+	be the oriented parallelogram with sides $\vec v$ and $\vec w$.
+	Let $\bm\alpha$ be the 2-covector so that $\bm\alpha(\vec v,\vec w)$
+	is the oriented area of $\mathcal P_{\vec v,\vec w}$ projected onto the
+	$xy$-plane.
+
+	XXX Figure
+
+	Let $\vec v=(v_x,v_y,v_z)$ and $\vec w=(w_x,w_y,w_z)$ be the components
+	of $\vec v$ and $\vec w$.  Using components, the projection of each
+	vector onto the $xy$-plane is given by $(v_x,v_y,0)$ and $(w_x,w_y,0)$.
+	We can compute the oriented area of this parallelogram in the $xy$-plane
+	using the cross product, which
+	results in the formula
+	\[
+		\bm\alpha(\vec v,\vec w) = v_xw_y-v_yw_x.
+	\]
+	It is left to the reader to verify that $\bm\alpha$ satisfies the area
+	laws and is multi-linear.
+\end{example}
+
+The 2-covector $\bm\alpha(\vec v,\vec w) = v_xw_y-v_yw_x$ from Example \ref{EXTWOCOVECTOR}
+is interesting because it only relies on the $x$ and $y$ components of its
+input vectors. And, the covectors $\bm e^1$ and $\bm e^2$ measure the $x$ and
+$y$ components of their input!  Thus, we could write
+\[
+	\bm\alpha(\vec v,\vec w) = \bm e^1(\vec v)\bm e^2(\vec w) - \bm e^2(\vec v)\bm{e}^1(\vec w).
+\]
+There's a beautiful symmetry to that formula---so beautiful that it is encapsulated
+in a concept called the \emph{wedge product}\index{wedge product}.
+
+\begin{definition}[Wedge Product]
+	Let $\bm \alpha$ and $\bm \beta$ be covectors.  The \emph{wedge product}
+	(also known as the \emph{exterior product}\index{exterior product})
+	is notated $\bm\alpha\wedge\bm\beta$ and is defined by
+	\[
+		\bm\alpha\wedge\bm\beta (\vec v,\vec w)
+		=\bm\alpha(\vec v)\bm\beta(\vec w) - \bm\beta(\vec v)\bm\alpha(\vec w).
+	\]
+\end{definition}
+
+\begin{theorem}
+	If $\bm \alpha$ and $\bm \beta$ be covectors then the wedge
+	product $\bm\alpha\wedge\bm\beta$ is a 2-covector.
+\end{theorem}
+\begin{proof}
+ 	XXX Finish
+\end{proof}
+
+We now see that our area-in-the-$xy$-plane 2-covector from before could
+be written as $\bm e^1\wedge \bm e^2$.  But, it gets better.
+
+\begin{theorem}
+	Every 2-covector can be represented as a linear combination
+	of vectors in the set $\Set{\bm e^i\wedge \bm e^j\given i\neq j}$.
+\end{theorem}
+
+Exploring the consequences of the definition of the wedge product, 
+we see that the wedge product is anti-symmetric:
+\[
+	\bm\alpha\wedge \bm \beta = -\bm\alpha\wedge \bm\beta.
+\]
+And, that it is multi-linear:
+\[
+	(m\bm\alpha)\wedge \bm \beta = m(\bm\alpha\wedge \bm \beta)
+	=\bm\alpha\wedge (m \bm \beta)
+\]
+\[
+	(\bm\alpha+\bm\gamma)\wedge \bm\beta = \bm\alpha\wedge\bm\beta + \bm\gamma\wedge \bm\beta
+\]
+\[
+	\bm\alpha\wedge(\bm\gamma+\bm\beta) = \bm\alpha\wedge\bm\gamma + \bm\alpha\wedge\bm\beta.
+\]
+
+Strangely, 2-covectors seem to have all the properties of their inputs.
+
+\subsection{Geometric Interpretation of 2-covectors}
+
+XXX Finish.  Some pictures about projections and oriented areas, again.
+
+\subsection{2-forms}
+
+Now that we have 2-covectors, we can define 2-forms\index{2-form} in a very similar way to
+how we defined 1-forms.
+
+\begin{definition}[2-form]
+	A \emph{2-form} on the space $\R^n$ is a function $\bm\alpha:
+	\R^n\to \Set{\text{2-covectors for }\R^n}$.
+\end{definition}
+
+Just like 2-covectors could be constructed by taking the wedge product
+of covectors, 2-forms can be constructed by taking the wedge product of
+1-forms.  2-forms in $\R^3$ also have a standard basis.
+
+\begin{definition}[Standard Basis for 2-forms]
+	The standard basis for 2-forms on $\R^3$ are the 2-forms
+	$\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
+\end{definition}
+
+
+
+
