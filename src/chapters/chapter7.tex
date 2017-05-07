@@ -661,6 +661,15 @@ be written as $\bm e^1\wedge \bm e^2$.  But, it gets better.
 	of vectors in the set $\Set{\bm e^i\wedge \bm e^j\given i\neq j}$.
 \end{theorem}
 
+Note that in general, it is not true that if $\bm\alpha$ is a 2-covector
+then $\bm\alpha$ can be written as the wedge product of two covectors\footnote{
+This \emph{does} happen to be true for 2-covectors on $\R^3$, but that's just
+a happy coincidence.}.  
+We really do need to allow linear combinations to get 
+all 2-covectors.  For example, the 2-covector $\bm e^1\wedge\bm e^2+\bm e^3\wedge
+\bm e^4$ in $\R^4$ cannot be written as the wedge product of two covectors.
+
+\bigskip
 Exploring the consequences of the definition of the wedge product, 
 we see that the wedge product is anti-symmetric:
 \[
@@ -694,15 +703,647 @@ how we defined 1-forms.
 	\R^n\to \Set{\text{2-covectors for }\R^n}$.
 \end{definition}
 
-Just like 2-covectors could be constructed by taking the wedge product
-of covectors, 2-forms can be constructed by taking the wedge product of
-1-forms.  2-forms in $\R^3$ also have a standard basis.
+Just as the wedge product of
+two covectors produces a 2-covectors, the wedge
+product of two 1-forms produces a 2-form.
+2-forms in $\R^3$ also have a standard basis.
 
 \begin{definition}[Standard Basis for 2-forms]
 	The standard basis for 2-forms on $\R^3$ are the 2-forms
 	$\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
 \end{definition}
 
+Notice the order that $\dd x$, $\dd y$, and $\dd z$ appear in the standard
+basis for 2-forms on $\R^3$.  In particular, the third basis element
+is $\dd z\wedge \dd x$ and not $\dd x\wedge \dd z$.  This has to do with 
+having a consistent
+orientation.  When we use the basis 2-forms to measure area, we'd like them
+to have the property that either 
+$\dd x\wedge \dd y(\mathcal P), \dd y\wedge \dd z(\mathcal P), \dd z\wedge \dd x(\mathcal P)\geq 0$
+or 
+$\dd x\wedge \dd y(\mathcal P), \dd y\wedge \dd z(\mathcal P), \dd z\wedge \dd x(\mathcal P)\leq 0$,
+but we never want a mix of signs.
+
+We call $\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$
+the standard basis of 2-forms for $\R^3$ because any 2-form in $\R^3$ can
+be expressed as a linear combination of 
+$\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
+
+\begin{example}
+	Let $\bm \alpha = x\dd x+3y^2\dd z$ and $\bm\beta = -\dd x+2\dd y -3\dd z$.
+	Express $\bm \alpha \wedge \bm \beta$ as a linear combination of
+	$\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
+
+	XXX Finish
+\end{example}
+
+\subsection{Integrating 2-forms}
+
+1-forms are integrated over oriented curves.  2-forms are integrated over oriented
+surfaces, and the definition of the integral of a 2-form
+is nearly identical to that of a 1-form---cumbersome notation and all.
+
+Recall, 2-forms are functions that input pairs of points and output 2-covectors.
+In turn, the 2-covectors input pairs of vectors and output scalars.  If
+$\bm \alpha$ is a 2-form, we will define
+\[
+	\bm\alpha\formarg{\vec x_1,\vec x_2}{\vec v,\vec w}\equiv
+	\Big[\bm\alpha(\vec x_1,\vec x_2)\Big](\vec v,\vec w)
+\]
+for points $\vec x_1,\vec x_2$ and vectors $\vec v,\vec w$.
+
+\begin{definition}[integral of a 2-form]
+	Let $\mathcal S$ be an oriented surface. The integral of
+	the 2-form $\bm\alpha$ over $\mathcal S$ is defined to be
+	\[
+		\int_{\mathcal S} \bm\alpha 
+		=\int_a^b\int _c^d \bm\alpha
+		\formarg{\vec p(t,s)}{\tfrac{\partial \vec p}{\partial x}(t,s),
+		\tfrac{\partial\vec p}{\partial y}(t,s)}\,\d s \d t,
+	\]
+	where $\vec p:[a,b]\times [c,d]\to\mathcal S$ in an 
+	orientation-preserving parameterization of $\mathcal S$.
+\end{definition}
+
+The integral of a 2-form over a surface $\mathcal S$
+doesn't depend on your choice of how you parameterize $\mathcal S$.
+
+\begin{example}
+	\label{EXTWOFORMINT}
+	Let $\mathcal S$ be the region in the $xy$-plane below 
+	the curve $y=1$ and above the curve $y=x^2$ oriented upward.
+	Compute $\int_{\mathcal S} \dd x\wedge \dd y$.
+
+	First, we need to parameterize this region.  Let 
+	$\vec p:[-1,1]\times[0,1]\to\mathcal S$ by
+	\[
+		\mat{a\\b}\mapsto \mat{a\\ (1-b)a^2+b}.
+	\]
+
+	To convince ourselves that $\vec p$ actually is a parameterization,
+	let's graph some curves $\vec p(t,b)$ while $b$ is held constant and
+	$\vec p(a,s)$ where $a$ is held constant.
+
+	XXX Figure of parameterization
+
+	Computing, 
+	\[
+	\frac{\partial \vec p}{\partial x} (a,b) = \mat{1\\ 2(1-b)a} \qquad
+	\frac{\partial \vec p}{\partial y} (a,b) = \mat{0\\ 1-a^2}.
+	\]
+	From the definition of $\dd x\wedge \dd y$,
+	\[
+		\dd x\wedge \dd y\formarg{\vec x,\vec y}{\vec u,\vec v}
+		=\bm e^1\wedge \bm e^2(\vec u,\vec v)
+		= \bm e^1(\vec u)\bm e^2(\vec v) - \bm e^1(\vec v)\bm e^2(\vec u),
+	\]
+	and so
+	\begin{align*}
+	\dd x\wedge \dd y\formarg{\vec p(a,b)}{\tfrac{\partial \vec p}{\partial x}(a,b),
+		\tfrac{\partial\vec p}{\partial y}(a,b)}
+		&=(1)(1-a^2) - (0)(2(1-b)a^2)\\ &= 1-a^2.
+	\end{align*}
+	Thus, 
+	\[
+		\int_{\mathcal S} \dd x\wedge \dd y = \int_{-1}^1\int_0^1
+		1-t^2\,\d s\d t = \tfrac{4}{3},
+	\]
+	which is the area of $\mathcal S$.
+\end{example}
+
+You should notice some similarities between integrating a 2-form and surface
+integrals.  When computing surface integrals, once we had a parameterization
+of a surface, we exploited the canonical
+parameterization of the tangent plane at a point on the surface to find
+a volume form (surface area element).  That's actually what happened in
+Example \ref{EXTWOFORMINT}.  Let $\vec p(a,b)=(a, (1-b)a^2+b)$ be the parameterization
+from Example \ref{EXTWOFORMINT}.  Then, the canonical
+parameterization of the tangent plane to $\mathcal S$ at the point $(a,b)$ is
+\[
+	\vec L_{\vec p}(t,s) = t\frac{\partial \vec p}{\partial x}(a,b)+
+		s\frac{\partial\vec p}{\partial y}(a,b) + \vec p(a,b).
+\]
+If we compute the area of $\vec L_{\vec p}([a,a+\Delta a]\times [b,b+\Delta b])$,
+we find
+\[
+	\text{area of }\vec L_{\vec p}([a,a+\Delta a]\times [b,b+\Delta b])
+	= (1-a^2)\Delta a\Delta b,
+\]
+and so the volume form associated with this parameterization would be \[\d V(t,s) 
+= (1-t^2)\d t\d s.\]
+This is not a coincidence.  The word \emph{form} in the term ``volume form''
+is the same as in the term ``2-form.''
+
+The techniques used in Example \ref{EXTWOFORMINT} will work in any dimension
+to integrate a 2-form over any surface, whether situated in the $xy$-plane or not.
+
+Let $\mathcal R$ be a surface in the $xy$-plane.
+The integral $\int_{\mathcal S}\dd x\wedge\dd y$ gives the 
+signed area of $\mathcal R$.  We can compute this integral using the techniques
+from Example \ref{EXTWOFORMINT}, but in general, it's very hard to come up
+with parameterizations for strange surfaces.  If all we wanted to do was find
+the signed area of $\mathcal R$, we could just do a double integral
+with clever bounds of integration.  It turns out that this is the same 
+integrating with respect to identity parameterization on a $\mathcal R$-shaped
+domain instead of a rectangularly-shaped one.  You can integrate 2-forms in this
+way too.
+
+\begin{example}
+	Let $\mathcal S$ be the region below the curve $y=1$ and above the
+	curve $y=x^2$.  Compute $\int_{\mathcal S} \dd x\wedge \dd y$.
+
+	Let $\vec p:\mathcal S\to\mathcal S$ be the identity parameterization
+	given by $\vec p(a,b)=(a,b)$.  Now,
+	\[
+	\frac{\partial \vec p}{\partial x} (a,b) = \mat{1\\ 0}=\xhat \qquad
+	\frac{\partial \vec p}{\partial y} (a,b) = \mat{0\\ 1}=\yhat.
+	\]
+	A little computation shows that $\dd x\wedge \dd y\formarg{\vec p(a,b)}{
+	\tfrac{\partial \vec p}{\partial x} (a,b), \tfrac{\partial \vec p}{\partial y} (a,b)}
+	= 1$.  Since we can explicitly define $\mathcal S$ as
+	\[
+		\mathcal S = \Set{(x,y)\given -1\leq x\leq 1\text{ and }x^2\leq y\leq 1},
+	\]
+	we may write
+	\[
+		\int_{\mathcal S} \dd x\wedge \dd y = \int_{-1}^1 \int_{x^2}^1
+		1\,\d s\d t = \tfrac{4}{3}.
+	\]
+\end{example}
+
+\subsection{Non-constant 2-forms}
+
+Just like integrating $\dd x$ over a curve $\mathcal C$
+gave the change in $x$-coordinate from the start to the end of $\mathcal C$,
+Integrating the 2-form $\dd x\wedge \dd y$ over the surface $\mathcal S$ will
+give the signed area of $\mathcal S$ projected onto the $xy$-plane.
+Further, the integral of a non-constant 1-form $\bm \alpha$ over a curve $\mathcal C$
+was equivalent to a vector line integral.  Analogously, the integral
+of a non-constant 2-form $\bm\beta$ over a surface $\mathcal S$ turns out
+to be a flux integral.
+
+\begin{theorem}
+	\label{THMFLUXINT}
+	Let $\mathcal S\subset \R^3$ be an oriented surface in $\R^3$ and
+	let $\vec F=(f_x,f_y,f_z)$ be a vector field in $\R^3$.  Then
+	\[
+		\Flux_{\mathcal S} \vec F
+		=\int_{\mathcal S} f_x\dd y\wedge \dd z+f_y \dd z\wedge \dd x
+		+f_z \dd x\wedge \dd y.
+	\]
+\end{theorem}
+
+The proof of Theorem \ref{THMFLUXINT} amounts to careful bookkeeping, but it
+reveals an interesting fact.  There is a correspondence between
+$a \dd y\wedge \dd z+b\dd z\wedge \dd x+c\dd x\wedge \dd y$
+and the vector $(a,b,c)$.  That is,
+\begin{alignat*}{2}
+	\dd y&\wedge \dd z\quad\text{ acts like } \quad&&\xhat \\
+	\dd z&\wedge \dd x\quad\text{ acts like } \quad&&\yhat \\
+	\dd x&\wedge \dd y\quad\text{ acts like } \quad&&\zhat 
+\end{alignat*}
+at least when thinking about flux integrals.  We will explore this
+connection further when discussing the \emph{Hodge dual}\index{Hodge dual}
+operator.
+
+\section{Higher-order Forms}
+
+We will start by defining $n$-covectors after a minor expansion
+of the laws of area.  A $3$-covector is an object that measures
+volume, a $4$-covector measures volume in $\R^4$, etc. and so
+an $n$-covector must input $n$ vectors and return a scalar.  Further,
+every pair of those vectors must satisfy the laws of area.  We call this extension
+of the laws of area to collections of $n$ vectors the \emph{laws of volume}\index{laws
+of volume}.  The laws of volume together with multi-linearity provide a sufficient
+basis to define $n$-covectors\index{$n$-covector}.
+
+\begin{definition}[$n$-covector]
+	Let $V$ be a vector space.
+	A function $\bm\alpha:\underbrace{V\times \cdots \times V}_{n}
+	\to \R$ is called an \emph{$n$-covector} if it multi-linear
+	and obeys the laws
+	of volume. 
+\end{definition}
+
+With the wedge product, we can create $n$-covectors (and in turn
+$n$-forms).  Let $\bm\alpha$ and $\bm \beta$ be covectors and recall
+\begin{align*}
+	\bm\alpha\wedge \bm\beta (\vec u,\vec v) &= \bm\alpha(\vec u)\bm\beta(\vec v)
+	-\bm\beta(\vec u)\bm\alpha(\vec v).
+\end{align*}
+If $\bm\gamma$ is another covector, we will recursively define the 3-covector
+$\bm\alpha \wedge \bm \beta\wedge\bm\gamma$ by
+\[
+	\bm\alpha \wedge \bm \beta\wedge\bm\gamma(\vec u,\vec v,\vec w)
+	=  \bm\alpha(\vec u)\big(\bm\beta\wedge \bm\gamma (\vec v,\vec w)\big)
+	- \bm\beta(\vec u)\big(\bm\alpha\wedge \bm\gamma (\vec v,\vec w)\big)
+	+ \bm\gamma(\vec u)\big(\bm\alpha\wedge \bm\beta (\vec v,\vec w)\big).
+\]
+More succinctly, we might write
+$
+	\bm\alpha \wedge \bm \beta\wedge\bm\gamma
+	=  \bm\alpha\cdot \bm\beta\wedge \bm\gamma
+	- \bm\beta\cdot \bm\alpha\wedge \bm\gamma
+	+ \bm\gamma\cdot \bm\alpha\wedge \bm\beta
+$ where ``\,$\cdot$\,'' means multiplication, not a dot product\footnote{
+You might recognize this formula as related to the cofactors expansion
+of the determinant of a matrix.
+}.  Generalizing this, we can define the wedge product of any number
+of covectors.
+
+\begin{definition}[Wedge Product]
+	Let $\bm\alpha^1,\ldots, \bm\alpha^n$ be covectors.  Then the
+	$n$-covector $\bm\alpha^1\wedge\cdots \wedge \bm\alpha^n$ is defined by
+	the recursive formula
+	\[
+		\bm\alpha^1\wedge\cdots \wedge \bm\alpha^n
+		=\sum_{i=1}^n (-1)^{i+1} \bm\alpha^i\cdot (\bm\alpha^1\wedge \cdots \wedge 
+		\bm\alpha^{i-1}\wedge \bm\alpha^{i+1}\wedge \cdots \wedge \bm\alpha^n).
+	\]
+\end{definition}
+This definition merely says: to find $\bm\alpha^1\wedge\cdots \wedge \bm\alpha^n$,
+take each $\bm\alpha^i$ out, one by one; multiply $\bm\alpha^i$ by the wedge
+product of the remaining terms in order; sum the result together with a $+$
+if $i$ is odd and a $-$ if $i$ is even.
+
+It can be cumbersome to evaluate an $n$-covector directly from the definition.
+Fortunately the theories of linear algebra provide
+efficient ways to evaluate an $n$-fold
+wedge product.  We won't go through them here, but we will explore
+some consequences of the definition.
+
+First off, one must verify that $\bm\alpha^1\wedge\cdots \wedge \bm\alpha^n$
+follows the laws of volume.  A direct consequence is that the wedge
+product of any number of covectors is \emph{alternating}\index{alternating}.
+That is,
+\[
+\bm\alpha^1\wedge \cdots \wedge 
+		\bm\alpha^{i}\wedge \bm\alpha^{i+1}\wedge \cdots \wedge \bm\alpha^n
+=
+-\bm\alpha^1\wedge \cdots \wedge
+		\bm\alpha^{i+1}\wedge \bm\alpha^{i}\wedge \cdots \wedge \bm\alpha^n.
+\]
+In other words, switching adjacent pairs in a wedge product negates the product---this
+generalizes anti-symmetry for 2-covectors.  By using the alternating
+property of the wedge product, we can rearrange large wedge products.  We
+can now show if the expression $\bm\beta\wedge\bm\beta$
+ever occurs in a wedge product, the wedge product must be zero\footnote{
+Move $\bm\beta\wedge\bm\beta$ to the back of the wedge product.  Eventually
+Eventually you'll end up with $\sum a_i\bm\beta\wedge\bm\beta$ and since
+$\bm\beta\wedge\bm\beta = 0$, the whole sum is zero.}, and, by extension,
+if two $\bm\beta$'s ever occur in a wedge product, the product must be zero.
+
+\subsection{$n$-forms}
+We define $n$-forms just like we defined 1-forms and 2-forms.  Further,
+we define integration of $n$-forms.
+
+\begin{definition}[$n$-form]
+	An $n$-form on the space $\R^n$ is a function $\bm\alpha:\R^n
+	\to\Set{\text{$n$-covectors for }\R^n}$.
+\end{definition}
+\begin{definition}[Integration of $n$-forms]
+	Let $\mathcal R$ be an $n$-dimensional oriented region
+	and let $\bm\alpha$ be an $n$-form.  We define
+	\[
+		\int_{\mathcal R} \bm\alpha = \int_{a_1}^{b_1}\cdots
+		\int_{a_n}^{b_n} \bm\alpha\formarg{
+		\vec p(\vec t)}{
+			\tfrac{\partial \vec p}{\partial x_1}(\vec t),
+			\ldots,
+			\tfrac{\partial \vec p}{\partial x_n}(\vec t)
+		} \,\d t_n\cdots \d t_1
+	\]
+	where $\vec p:[a_1,b_1]\times\cdots\times[a_n,b_n]\to\mathcal R$
+	is an orientation-preserving parameterization of $\R$ and
+	$\vec t=(t_1,\ldots, t_n)$.
+\end{definition}
+
+\subsection{3-forms}
+
+Of particular interest to us are 3-forms.  3-forms measure oriented volume,
+and in three dimensions, there's only one ``direction'' a volume can point.
+This is reflected in the fact that the standard basis for 3-forms consists of
+one element.
+
+\begin{definition}[Standard Basis for 3-forms]
+	The standard basis for 3-forms on $\R^3$ is 
+	$\dd x\wedge \dd y\wedge \dd z$.
+\end{definition}
+
+Because every 3-form on $\R^3$ is
+a multiple of $\dd x\wedge \dd y\wedge \dd z$, integrals of 3-forms in $\R^3$
+are particularly easy.  In fact, if $\mathcal R\subseteq \R^3$ is an oriented region,
+\[
+	\int_{\mathcal R} \dd x\wedge \dd y\wedge \dd z
+\]
+is just the oriented volume of $\mathcal R$.
+
+\section{The Exterior Derivative}
+
+In calculus, we use the symbol ``$\d$'' to notate both the variable of integration
+as well as differentiation.  This notation helps us remember the relationship 
+between integrals and derivatives---if we integrate a derivative we get back
+to (basically) the same thing.  So far, our use of ``$\dd$'' seems to coincide
+with traditional integral notation, but it also means something in terms
+of derivatives.  Namely, ``$\dd$'' is the symbol for the \emph{exterior derivative}\index{exterior derivative}.
+
+Before we define the exterior derivative, we need one bit of notation.
+\begin{definition}
+	For a point $\vec x=(x_1,\ldots,x_n)\in \R^n$, vectors
+	$\vec v_1,\ldots,\vec v_n\in\R^n$ 
+	and scalars $t_1,\ldots, t_n\in \R$, define 
+	$B_{\formarg{\vec x}{\vec v_1,\ldots, \vec v_n}}(t_1,\ldots, t_n)$ 
+	to be the oriented parallelotope with based at $\vec x$ with
+	sides $t_1\vec v_1, t_2\vec v_2, \ldots, t_n\vec v_n$.
+\end{definition}
+
+So as not to get bogged down with the intricacies of orientation, let's go
+through some examples.  If $\vec x\in \R^1$, then $B_{\formarg{\vec x}{\xhat}}(t)$ is a line
+segment of length $t$ oriented left to right if $t>0$ and right to left if $t<0$.
+If $\vec x\in \R^2$, then $B_{\formarg{\vec x}{\xhat,\yhat}}(a,b)$ 
+is a rectangle with side lengths
+$a$ and $b$ oriented upwards (i.e., in a right-handed way) if $a,b>0$.  Similarly,
+if $\vec x\in\R^3$, then $B_{\formarg{\vec x}{\xhat,\yhat,\zhat}}(a,b,c)$ 
+is a box with side lengths $a$,$b$,
+and $c$ oriented in a right-handed way (assuming $a,b,c>0$), whereas 
+$B_{\formarg{\vec x}{\yhat,\xhat,\zhat}}(a,b,c)$ is a box with side lengths $a,b,c$
+oriented in a left-handed way (assuming $a,b,c>0$).
+
+$B$ should be a familiar object and can be used to tile $n$-dimensional space.
+For example, if we use the shorthand $B_{\vec x} = B_{\formarg{\vec x}{\xhat,\yhat}}(1,1)$,
+then
+$B_{(0,0)}$, $B_{(1,0)}$, $B_{(0,1)}$,
+and $B_{(1,1)}$ perfectly fills out a $2\times 2$ square in $\R^2$.
+
+XXX Figure
+
+The fact that $B$ is oriented is also very important.  If $B$ is
+oriented, then $\partial B$, the boundary of $B$, is also oriented.
+If we consider the partition of 
+$B_{\formarg{\vec 0}{\xhat,\yhat}}(2,2)=[0,2]\times[0,2]$ by 
+$B_{(0,0)}$, $B_{(1,0)}$, $B_{(0,1)}$,
+and $B_{(1,1)}$, we see that
+\[
+	B_{\formarg{\vec 0}{\xhat,\yhat}}(2,2)
+	=B_{(0,0)}\cup B_{(1,0)}\cup B_{(0,1)}\cup B_{(1,1)}
+\]
+and that
+\[
+	\partial B_{\formarg{\vec 0}{\xhat,\yhat}}(2,2)=\partial B_{(0,0)}\cup \partial B_{(1,0)}\cup \partial B_{(0,1)}\cup \partial B_{(1,1)},
+\]
+provided we interpret the union of two overlapping and oppositely-oriented sets as empty.
+
+XXX Figure showing boundary cancellation
+
+This picture should is just like the one we used when deriving the divergence theorem
+and Stokes's theorem.
 
 
+Now, we can define the \emph{exterior derivative}\index{exterior derivative}.
+\begin{definition}[Exterior Derivative]
+	The \emph{exterior derivative}, notated $\dd$, is a map that
+	takes $n$-forms to $(n+1)$-forms.  If $\bm\alpha$ is an $n$-form,
+	then
+	\[
+		\dd \bm\alpha\formarg{\vec x}{\vec v_1,\ldots,\vec v_{n+1}}
+		=\lim_{t_1,\ldots,t_{n+1}\to 0}
+		\frac{1}{t_1t_2\cdots t_{n+1}}\int_{\partial B} \bm \alpha
+	\]
+	where $B = B_{\formarg{\vec x}{\vec v_1,\ldots,\vec v_{n+1}}}(t_1,\ldots, t_{n+1})$.
+\end{definition}
 
+A quick sanity check shows that since $B = B_{\formarg{\vec x}{\vec v_1,\ldots,\vec v_{n+1}}}(t_1,\ldots, t_{n+1})$
+is an $n+1$ dimensional object, $\partial B$ is an $n$-dimensional object over which an $n$-form $\bm\alpha$ could be
+integrated.  One must still prove that the result of $\dd\bm\alpha$ is an $(n+1)$-form
+in that $\dd \bm\alpha(\vec x)$ outputs an honest $(n+1)$-covector (multi-linear
+and obeying the laws of volume).  Showing this relies on smoothness of $\bm\alpha$
+as an $n$-form, which is beyond the scope of this book\footnote{
+Though thinking in high-dimensions and covectors can be hard, the
+idea is familiar---at every point there needs to exist a co-tangent plane!}.
+
+\subsection{The Exterior Derivative on 0-forms}
+
+We haven't yet defined 0-forms, but we've already been using them.  Since
+an $n$-covector inputs $n$ vectors and outputs a scalar, by extension,
+a $0$-covector must input zero vectors and return a scalar.  A 0-form\index{0-form}
+must input a point and output a 0-covector, which can be represented by
+a scalar.  Therefore, we can think of scalar fields as 0-forms.
+
+Now, 0-forms are to be integrated over oriented zero dimensional objects.
+These are just points with a positive or negative orientation.  There's really not
+much choice when defining the integral over a point.  Thus, if $\bm\alpha$
+is a 0-form, 
+\[
+	\int_{\vec x}\bm\alpha = \bm\alpha(\vec x)
+\]
+if $\vec x$ is oriented positively and 
+\[
+	\int_{\vec x}\bm\alpha = -\bm\alpha(\vec x)
+\]
+if $\vec x$ is oriented negatively\footnote{
+I hear you complaining---something doesn't smell right!  $\bm\alpha(\vec x)$
+should be a 0-covector which you can identify with a scalar but isn't
+truly a scalar.  Further, we never had to add ``$-$'' signs to the 
+\emph{outside} of the integral for other $n$-forms.  What gives?
+
+We'll, it turns out, a $0$-covector should really be a function
+that inputs no vectors \emph{and} and orientation, and returns a scalar.  This is 
+true for $n$-covectors in general.  However, for
+$n>0$, we could always deduce orientation from how we ordered the input-vectors.  No
+input vectors means we have to specify the orientation manually.  If it
+makes you feel better, write $\bm\alpha\formarg{\vec x}{+}$ and $\bm\alpha\formarg{\vec x}{-}$
+when using $0$-forms.
+}.  Further, integrals should be additive
+over disjoint domains, so
+\[
+	\int_{\Set{\vec x_1,\ldots,\vec x_n}} \bm\alpha = \bm\alpha(\vec x_1)
+	+ \cdots+\bm\alpha(\vec x_n).
+\]
+
+Finally, we're ready for action.  Let $\bm\alpha$ be a 0-form, and let's compute
+$\dd \bm\alpha$.  By definition
+\[
+	\dd \bm\alpha\formarg{\vec x}{\vec v}
+	= \lim_{t\to 0} \frac{1}{t} \int_{\partial B} \bm\alpha
+\]
+where $B=B_{\formarg{\vec x}{\vec v}}(t)$.  But, $B$ is just a line segment
+and so $\partial B$ consist of two points: $\vec x+t\vec v$ oriented positively,
+and $\vec x$ oriented negatively.
+
+XXX Figure
+
+Thus,
+\[
+	\dd \bm\alpha\formarg{\vec x}{\vec v}
+	= \lim_{t\to 0} \frac{\bm\alpha(\vec x+t\vec v) - \bm\alpha(\vec x)}{t},
+\]
+which is just the definition of the directional derivative of $\bm\alpha$ at $\vec x$
+in the direction $\vec v$.  Further, $\dd \bm\alpha$ is a 1-form, which
+means to each point it assigns a covector.  We know that if $\bm\beta$ is a covector,
+$\bm\beta(\vec v) = \vec \beta \cdot \vec v$ for some vector $\vec \beta$.
+But, if we recall, the gradient of a function was exactly defined to be the
+vector that when dot producted with a direction gave the directional derivative.
+Thus,
+\[
+	\dd \bm\alpha\formarg{\vec x}{\vec v} = \nabla \bm\alpha(\vec x)\cdot \vec v,
+\]
+and we'd be justified in writing ``$\dd \bm\alpha(\vec x) \approx \nabla \bm\alpha(\vec x)$.''
+
+\subsection{The Exterior Derivative on 1-forms}
+We're on a roll with 0-forms.  The exterior derivative replaces the need
+for the gradient operator.  What does it do for 1-forms?  Well,
+let $\bm\alpha$ be a 1-form.  Then, $\dd \bm\alpha$ inputs a point and outputs
+a 2-covector and is defined by 
+\[
+	\dd \bm\alpha\formarg{\vec x}{\vec u,\vec v}
+	= \lim_{\Delta a,\Delta b\to 0} \frac{1}{\Delta a\Delta b} \int_{\partial B} \bm\alpha
+\]
+where $B=B_{\formarg{\vec x}{\vec u,\vec v}}(\Delta a,\Delta b)$. We're using $\Delta a$
+and $\Delta b$ on purpose because $\partial B$ is the oriented perimeter of a parallelogram.
+
+XXX Figure
+
+This limit looks exactly like the limit used to compute curl.  In fact,
+if we refer back to the definition of the $\vec w$-component of the curl
+of a vector field, the definitions align flawlessly.  Let $\vec F=(f_x,f_y,f_z)$
+and consider the corresponding 1-form $\bm\alpha = f_x\dd x+f_y\dd y+f_z\dd z$.
+Then,
+\begin{align*}
+	\Curl_{\xhat} \vec F(\vec x) &= \dd \bm\alpha\formarg{\vec x}{\yhat,\zhat}\\
+	\Curl_{\yhat} \vec F(\vec x) &= \dd \bm\alpha\formarg{\vec x}{\zhat,\xhat}\\
+	\Curl_{\zhat} \vec F(\vec x) &= \dd \bm\alpha\formarg{\vec x}{\xhat,\yhat}.
+\end{align*}
+Note the order we had to list $\xhat$, $\yhat$, $\zhat$ in to ensure $\dd\bm\alpha$
+matched the curl.  We've seen this order before---in the standard basis for 2-forms
+on $\R^3$.  Since we know we can find the curl of a vector field on $\R^2$ in
+any direction using just the $\xhat$, $\yhat$, and $\zhat$ components, we'd be
+justified in writing ``$\dd \bm\alpha(\vec x) \approx \nabla \times \bm\alpha(\vec x)$''
+when $\bm\alpha$ is a 1-form on three-dimensional space\footnote{
+Can you begin to see why curl could not be a ``vector'' in $\R^4$?  The standard basis
+for 2-forms in $\R^4$ has six elements.  Therefore, you would need to know the
+curl in six directions to describe the component of curl in an arbitrary direction.
+}.
+
+\subsection{The Exterior Derivative on 2-forms}
+Can this luck streak keep going?  Let $\bm\alpha$ is a 2-form.  We know
+\[
+	\dd \bm\alpha\formarg{\vec x}{\vec u,\vec v,\vec w}
+	= \lim_{\Delta a,\Delta b,\Delta c\to 0} \frac{1}{\Delta a\Delta b\Delta c} \int_{\partial B} \bm\alpha
+\]
+where $B=B_{\formarg{\vec x}{\vec u,\vec v,\vec w}}(\Delta a,\Delta b,\Delta c)$.
+Sure enough, this is exactly the limit of the flux through a little box as the size of the
+box goes to zero.  After some careful analysis, if $\bm\alpha$ is a 2-form on $\R^3$,
+we might write ``$\dd \bm\alpha(\vec x) \approx \nabla \cdot \bm\alpha(\vec x)$,''
+and so the exterior derivative captures divergence, curl, and gradient in a single
+definition.
+
+\subsection{Practical Computing with $\dd$}
+
+We've seen that $\dd$ can replace gradient, curl, and divergence in $\R^3$
+and without changing any definitions, we can also bring these concepts to $\R^n$.
+But, using limits to compute derivatives can be cumbersome---especially when
+we know derivative rules from single-variable calculus.
+
+The exterior derivative comes with its own set of rules.
+
+\begin{definition}[Exterior Derivative Rules]
+	The exterior derivative, $\dd$, obeys the following rules.
+	\begin{enumerate}
+		\item If $f(a,b,c,\ldots)$ is a 0-form, then
+		\[
+			\dd f = \tfrac{\partial f}{\partial a} \dd a+
+			\tfrac{\partial f}{\partial b} \dd b + 
+			\tfrac{\partial f}{\partial c} \dd c + \cdots.
+		\]
+		\item If $\bm\alpha$ is an $n$-form, then
+		\[
+			\dd(\dd \bm\alpha) = 0.
+		\]
+		\item If $\bm\alpha$ is an $n$-form and $\bm\beta$
+		is an $m$-form, then $\dd$ obeys the following product
+		rule:
+		\[
+			\dd(\bm\alpha\wedge \bm\beta)= 
+			(\dd \bm\alpha)\wedge \bm\beta + (-1)^n \bm\alpha\wedge (\dd \bm\beta).
+		\]
+	\end{enumerate}
+\end{definition}
+
+The exterior derivative rules could actually be taken as axioms---the exterior
+derivative is the \emph{only} non-trivial operator that satisfies all
+the rules\footnote{
+Many textbooks forgo limits and define the exterior derivative axiomatically.
+This makes the exterior derivative simpler in some respects, but it also
+makes it harder to see how it connects to physical concepts like work
+and curl.}.  With the exterior derivative rules in hand, we're ready for action.
+
+\begin{example}
+	Compute $\dd f$ where $f(x,y,z) = xy-z$ is a 0-form.
+
+	XXX Finish
+\end{example}
+\begin{example}
+	Compute $\dd \bm f$ where $\bm f(x,y,z) = -y\dd x+x\dd y +\dd z$ is a 1-form.
+
+	XXX Finish
+\end{example}
+\begin{example}
+	Compute $\dd \bm g$ where $\bm g(x,y,z) = 2yx\dd y\wedge \dd z
+	+ 4\dd z\wedge \dd x+z^2\dd x\wedge \dd y$ is a 2-form.
+
+	XXX Finish
+\end{example}
+
+\subsection{Changing Coordinates}
+
+Differential forms make doing integrals in other coordinate systems
+almost trivial---it computes the volume form automatically.
+
+Polar coordinates are related to rectangular coordinates by the equations
+\[
+	x=r\cos\theta \qquad\text{and}\qquad y=r\sin\theta.
+\]
+Suppose $\mathcal S\subset \R^2$ is a region in the $xy$-plane.  If we wish to find
+the area of $\mathcal S$, we need only to compute
+\[
+	\int_{\mathcal S} \dd x\wedge \dd y.
+\]
+However, using the exterior derivative, we see
+\begin{alignat*}{2}
+	\dd x &= \dd (r\cos\theta) &&= \cos\theta \dd r - r\sin\theta \dd \theta\\
+	\dd y &= \dd (r\sin\theta) &&= \sin\theta \dd r + r\cos\theta \dd \theta.
+\end{alignat*}
+Therefore, 
+\begin{align*}
+	\dd x\wedge \dd y &= (\cos\theta \dd r - r\sin\theta \dd \theta)\wedge 
+		(\sin\theta \dd r + r\cos\theta \dd \theta)\\
+	&= \cos\theta\sin\theta \dd r\wedge \dd r + r\cos^2\theta \dd r\wedge \dd \theta
+	-r\sin^2\theta \dd \theta \wedge \dd r + r^2\cos\theta\sin\theta \dd \theta\wedge \dd \theta\\
+	&=r\cos^2\theta \dd r\wedge \dd \theta-r\sin^2\theta \dd \theta \wedge \dd r\\
+	&= r\cos^2\theta \dd r\wedge \dd \theta + r\sin^2\theta \dd r \wedge \dd \theta\\
+	&= r\dd r\wedge \dd \theta,
+\end{align*}
+because $\dd r\wedge \dd r$ and $\dd\theta\wedge \dd\theta$ are 0 and $\dd r\wedge 
+\dd\theta = -\dd \theta \wedge \dd r$.  We conclude that
+\[
+	\int_{\mathcal S} \dd x\wedge \dd y = \int_{\mathcal S} r\dd r\wedge \dd \theta,
+\]
+and have just used differential forms to find the volume form for polar 
+coordinates\footnote{
+Notice that the terms that got thrown away because $\dd r\wedge \dd r=\dd\theta\wedge \dd\theta=0$
+were very similar to the terms that go thrown away from the pre-volume form when
+we used a limit process.
+}.  Further, if we instead wanted to integrate a function $f:\mathcal S\to \R$
+over $\mathcal S$, 
+we could do the exact same thing since
+\[
+	\int_{\mathcal S} f\dd x\wedge \dd y = \int_{\mathcal S} fr\dd x\wedge \dd y.
+\]
+As long as we can determine what the value of $f$ is at a point in polar coordinates, 
+we can compute the integral with ease.
+
+\begin{example}
+	XXX Poloar coordinates example.
+\end{example}
+
+\section{The Hodge Dual}
