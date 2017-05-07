@@ -1347,3 +1347,377 @@ we can compute the integral with ease.
 \end{example}
 
 \section{The Hodge Dual}
+
+There is a certain symmetry to $n$-covectors and $n$-forms.  We haven't delved
+deeply into the linear algebra reasoning behind it, but (at least for $\R^3$)
+the standard basis for $n$-covectors and $n$-forms always consisted of a linear
+combinations of the wedge product of $n$ covectors/1-forms.  This is true in
+general.
+
+\begin{theorem}
+	\label{THMSTDBASIS}
+	Let $B^1=\Set{\bm e^1,\ldots, \bm e^n}$ be the standard basis of covectors
+	for $\R^n$ and let \[B^k=\Set{\bm\alpha\given \bm\alpha\text{ is the wedge
+	product of $k$ items from }B_1}.\]  Then, every $k$-covector can be expressed
+	as a linear combination of $k$-covectors from $B^k$.
+\end{theorem}
+Theorem \ref{THMSTDBASIS} applies equally well to $k$-forms and has an immediate consequence.
+
+For the time being, assume we are always taking about $k$-covectors on $\R^n$.
+Since $\bm \alpha\wedge \bm\alpha=0$ if $\bm\alpha$ is a covector\footnote{
+Remember, this may not be true for $n$-covectors with $n>1$, and certainly isn't true
+for $0$-covectors.
+}, every non-zero element in $B^k$ must be a wedge product of $k$ \emph{different}
+covectors from $B^1$.  Further, if $\bm\alpha,\bm\beta\in B^k$ are wedge products of
+the same $k$ covectors from $B^1$, by applying the alternating
+property, we know either $\bm\alpha=\bm\beta$ or $\bm\alpha=-\bm\beta$, and so
+$\bm\beta$ is a linear combination of $\bm\alpha$.   This means, to create all
+$k$-covectors as linear combinations, all we really need a set consisting of one wedge
+product for each distinct set $k$ covectors from $B^1$.
+
+Given $n$ items, $\binom{n}{k}=\frac{n!}{k!(n-k)!}$ is the number of ways to choose\index{choose}\index{binomial coefficient}
+$k$ things from a set of $n$ things with no repeats provided $0\leq k\leq n$.  The
+number $\binom{n}{k}$ is called a \emph{binomial coefficient}\footnote{
+Note that since $0!=1$, we have $\binom{n}{0} = 1$, like it should.  There's only
+one way to choose nothing.
+}.  If $k<0$ or $k>n$, there are no ways to pick $k$ items from a set
+of size $n$ without repeats.  We will extend notation to say that $\binom{n}{k}=0$ if
+$k<0$ or $k>n$.
+
+This alone is significant.  Our argument now says that if $k>n$, every
+$k$-covector can be represented as a linear combination of $k$-covectors
+from a set of size $\binom{n}{k}=0$.  In other words, every $k$-covector for $k>n$
+is trivial.
+
+\begin{definition}[Basis \& Dimension]
+	Let $V$ be a vector space.
+	A set $B\subseteq V$ is called a \emph{basis} for $V$
+	if (i) every element of $V$ can be represented as a linear combination
+	of elements in $B$ and (ii) if any element is removed from $B$, property (i)
+	fails.
+
+	The \emph{dimension} of $V$, notated $\Dim(V)$, is the size of a basis for
+	$V$.
+\end{definition}
+You can think of a basis for $V$ as a minimal set of vectors for which every element
+in $V$ can be written as a linear combination.  Every element in a basis is essential,
+since removing any element means you can no longer write everything in $V$ as a 
+linear combination.
+
+Our argument about the number of essential elements in $B^k$ along with the language
+of dimension allows us to state the following theorem.
+
+\begin{theorem}
+	\label{THMDIMOFCOK}
+	Let $\Lambda^k\R^n$ be the set of all $k$-covectors on $\R^n$.
+	The dimension of $\Lambda^k\R^n$ is $\binom{n}{k}$.
+\end{theorem}
+Again, Theorem \ref{THMDIMOFCOK} applies equally well to $k$-forms.
+
+Let's be concrete for a moment and consider $k$-forms on $\R^3$.  Theorem \ref{THMDIMOFCOK}
+says that the dimension of the set 0-forms should be $1$, the dimension of the
+set of 1-forms should be $3$, the dimension of the set of 2-forms should be $3$,
+the dimension of the set of 3-forms should be $1$, and the dimension of the set
+of all higher forms should be $0$.  This is reflected in the standard bases we've 
+already introduced.
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+	&Standard Basis & Dimension\\
+	\hline
+	0-forms & the function $f(x,y,z)=1$ & $1$\\
+	1-forms & $\dd x$, $\dd y$, $\dd z$ & 3\\
+	2-forms & $\dd x\wedge \dd y$, $\dd y\wedge \dd z$, $\dd z\wedge \dd x$ & 3\\
+	3-forms & $\dd x\wedge \dd y\wedge \dd z$ & 1
+	\end{tabular}
+\end{center}
+
+Now we can directly see the symmetry.  The dimension of the set
+of $k$-forms is $\binom{n}{k}$ which is equal to the dimension of the
+set of $(n-k)$-forms\footnote{
+	$\binom{n}{k} = \frac{n!}{k!(n-k)!} - \frac{n!}{(n-k)!k!} = \binom{n}{n-k}$
+}. In particular, the dimension of the set of 0-covectors is $1$ and the dimension
+of the set of $n$-covectors is $1$.
+
+\subsection{The Hodge Star Operator}
+
+A $k$-covector (or $k$-form) on $\R^n$ is a linear combination of the
+wedge product of $k$ covectors.  An $n$-covector (or $n$-form) is a linear
+combination of the wedge product of $n$ covectors.  Since we have a basis
+of $n$ covectors, every $n$-covector is a multiple of this element.  Namely,
+every $n$-covector on $\R^n$ is a multiple of $\bm e^1\wedge \cdots \wedge \bm e^n$
+and every $k$-covector could be thought as ``missing'' some items in its wedge
+product, to top it up to be an $n$-covector.  The \emph{Hodge star operator}\index{Hodge star}\index{Hodge dual}
+sends a $k$-covector to its missing half.
+
+\begin{definition}[Hodge Star Operator]
+	Let $\Lambda^k\R^n$ be the set of $k$-covectors on $\R^n$.
+	The \emph{Hodge star operator} (or \emph{Hodge dual operator}),
+	denoted ``$\star$'' is defined on $\Lambda^k\R^n$ as follows.
+	Let $\bm\alpha\in \Lambda^k\R^n$ be represented as
+	$\bm\alpha = \sum t_i \bm b^i$ where $\bm b^i$ are standard basis
+	elements for $\Lambda^k\R^n$.  Then $\star \bm\alpha$ is defined
+	to be the $(n-k)$-covector so that
+	\[
+		\bm\alpha\wedge \star\bm\alpha = \left(\sum t_i^2\right)\bm\omega
+	\]
+	where $\bm\omega = \bm e^1\wedge \cdots\wedge \bm e^n$.  We call $\star\bm\alpha$
+	the \emph{Hodge dual} of $\bm\alpha$.
+\end{definition}
+
+The Hodge dual of a $k$-covector $\bm\alpha$ is a kind of compliment that fills
+it out to be a full $n$-covector.  But why the $\sum t_i^2$ terms?  We'll, that should
+make you think of norms!
+
+Recall that if a vector $\vec v = \sum t_i \vec e_i$ where $\vec e_i$ are the standard
+basis vectors for $\R^n$, then
+\[
+	\vec v\cdot \vec v = \norm{\vec v}^2 = \sum t_i^2.
+\]
+In the same way, if $\bm\alpha$ is a $k$-covector, we can think of $\bm\alpha\wedge \star
+\bm\alpha$ as $\norm{\bm\alpha}^2$.  If we spent some time to make this rigorous,
+we would see the same $\sum t_i^2$ for $\norm{\bm\alpha}^2$  as we do for $\norm{\vec v}^2$.
+
+We will now start working with differential forms.
+\begin{example}
+	Compute $\star \dd x$ and $\star (\dd y\wedge \dd z)$ on $\R^3$.
+
+	Since $\dd x$ is a 1-form on $\R^3$, we know $\star \dd x$ must be a
+	2-form.  Further, $\dd x=1\dd x$ is already written in terms of the standard
+	basis.  Therefore, $\star \dd x$ satisfies
+	\[
+		\dd x\wedge \star \dd x = \dd x\wedge \dd y\wedge \dd z,
+	\]
+	and so $\star \dd x = \dd y\wedge \dd z$.
+
+	Similarly, $\star (\dd y\wedge \dd z)$ is a 1-form so that
+	\[
+		(\dd y\wedge \dd z)\wedge \star (\dd y\wedge \dd z) =\dd x\wedge \dd y\wedge \dd z.
+	\]
+	We conclude that $\star (\dd y\wedge \dd z) = \dd x$ since
+	\[
+		\dd y\wedge \dd z\wedge \dd x = -\dd y\wedge \dd x\wedge \dd z = \dd x\wedge \dd y\wedge \dd z.
+	\]
+\end{example}
+As in the example, it turns out applying ``$\star$'' twice always brings you back to the
+same form.
+
+\begin{theorem}
+	If $\bm\alpha$ is a $k$-form, then $\star \star \bm\alpha = \bm\alpha$.
+\end{theorem}
+This is the reason we call ``$\star$'' a \emph{dual} operator\footnote{
+Covectors are also called dual vectors for a similar reason.
+}.
+
+Since $\R^2$ and $\R^3$ are so important, we will make a table of basis forms and
+their Hodge duals.
+\begin{center}
+	\begin{tabular}{c|c}
+	Form & Hodge Dual ($\R^2$)\\
+	\hline
+	$1$ & $\dd x\wedge \dd y$\\
+	$\dd x$ & $\dd y$\\
+	$\dd y$ & $-\dd x$
+	\end{tabular}
+\end{center}
+\begin{center}
+	\begin{tabular}{c|c}
+	Form & Hodge Dual ($\R^3$)\\
+	\hline
+	$1$ & $\dd x\wedge \dd y\wedge \dd z$\\
+	$\dd x$ & $\dd y\wedge \dd z$\\
+	$\dd y$ & $\dd z\wedge \dd x$\\
+	$\dd z$ & $\dd x\wedge \dd y$
+	\end{tabular}
+\end{center}
+
+\begin{exercise}
+	Verify that corresponding elements in the table are indeed Hodge duals.
+\end{exercise}
+
+\subsection{The Hodge Dual and Vector Fields}
+With the Hodge dual in hand, we can start nailing down some relationships.
+
+Notice that 1-forms directly correspond to vector fields since covectors directly
+correspond to vectors.  We make this correspondence explicit with an operator.
+\begin{definition}[Transpose]
+	If $\bm\alpha = \sum t_i\bm e^i$ is a covector, then the \emph{transpose}
+	of $\bm\alpha$, denoted $\Trans \bm\alpha$, is the vector
+	\[
+		\Trans \bm\alpha = \sum t_i \vec e_i.
+	\]
+	If $\vec \alpha=\sum t_i\vec e_i$ is a vector, then the \emph{transpose}
+	of $\vec \alpha$, denoted $\Transu\vec \alpha$, is the covector
+	\[
+		\Transu \vec\alpha = \sum t_i \bm e^i.
+	\]
+\end{definition}
+If you're familiar with the transpose operator from linear algebra, this is
+the very same one\footnote{
+	If all true vectors are column vectors, then covectors must be row vectors
+	and $\bm\alpha(\vec v)$ is just $\bm\alpha\vec v$ where $\bm\alpha$ is a row
+	matrix and $\vec v$ is a column matrix.
+}.  You might think of it as transposing superscripts into subscripts (since we use
+superscripts for covectors and subscripts for vectors).
+
+The transpose is a little like the Hodge dual since $\bm\alpha(\Trans \bm\alpha ) =
+\sum t_i^2 = \norm{\Trans \bm\alpha}^2$ and $\Transu\vec \alpha(\vec \alpha) = \sum t_i^2=\norm{\vec \alpha}^2$.
+
+The transpose directly extends to 1-forms and vector fields.  
+If $\bm\alpha$ is a 1-form, then $\Trans\bm\alpha$ is a vector field and if $\vec F$
+is a vector field, $\Transu \vec F$ is a 1-form.  Further note that $\Transu\Trans \bm\alpha = \bm\alpha$
+and $\Trans\Transu\vec\alpha=\vec \alpha$.
+
+It's time to recast some familiar operations in terms of differential forms and the Hodge dual.
+\begin{center}
+	\begin{tabular}{c|c|c}
+	Operation & Notation & Equivalency\\
+	\hline
+	&&\\[-11pt]
+	Cross Product & $\vec u\times \vec v$ & $\Trans \star \big(\!\Transu\vec u\wedge \Transu\vec v \big)$\rule{0pt}{10pt}\\[3pt]
+	Gradient & $\nabla f$ & $\Trans \dd (\Transu f)$ \\[3pt]
+	Curl & $\nabla \times \vec F$ & $\Trans \star \dd (\Transu \vec F)$\\[3pt]
+	Divergence & $\nabla \cdot \vec F$ & $\Trans \star \dd (\star \Transu \vec F)$
+	\end{tabular}
+\end{center}
+Or, if we use bold face for corresponding covectors and forgo some pedanticness,
+we have a simplified table.
+\begin{center}
+	\begin{tabular}{c|c|c}
+	Operation & Notation & Equivalency\\
+	\hline
+	&&\\[-11pt]
+	Cross Product & $\vec u\times \vec v$ & $\star \big(\bm u\wedge \bm v \big)$\rule{0pt}{10pt}\\[3pt]
+	Gradient & $\nabla f$ & $ \dd \bm f$\\[3pt]
+	Curl & $\nabla \times \vec F$ & $\star \dd \bm F$\\[3pt]
+	Divergence & $\nabla \cdot \vec F$ & $\star \dd \star \bm F$
+	\end{tabular}
+\end{center}
+
+Although using ``$\star$'' and ``$\dd$'' we can recover the exact formulations of multivariable
+calculus using vector fields, by now there is a strong argument for using differential
+forms from the beginning.  Somehow, the fact that covectors and $2$-covectors are duals
+of each other in $\R^3$ allows us to get away with calling curl a \emph{vector} rather
+than a $2$-covector.  Further, the cross product of two vectors in $\R^3$ is another vector.
+We can take the wedge product in any dimensional space, but only in $\R^3$ is $\star(\bm u\wedge \bm v)$
+a covector.  The strongest argument yet for formulating multivariable calculus in terms of differential
+forms comes from the generalized Stokes's theorem.
+
+\section{Stokes's Theorem}
+We've now reached the centerpiece of differential forms---the generalized Stokes's theorem\index{Stokes's theorem}.
+And, its statement couldn't be easier.
+
+\begin{theorem}[Generalized Stokes's Theorem]
+	Let $\bm\alpha$ be a $k$-form and let $\mathcal R$ be an oriented
+	$k$-dimensional region.  Then,
+	\[
+		\int_{\mathcal R} \dd \bm\alpha = \int_{\partial R} \bm\alpha.
+	\]
+\end{theorem}
+
+This theorem is equivalent to the fundamental theorem of calculus for 0-forms,
+Stokes's curl theorem for 1-forms, and the divergence theorem for 2-forms.  It also
+generalizes to all dimensions, and the proof is easy!  We've already seen the main ideas
+of the proof.
+\begin{enumerate}
+	\item Partition $\mathcal R$ by oriented polytopes.  Then, shared faces have opposite
+orientations and so cancel.  All that is left are contributions from the boundary.
+	\item The definition of $\dd \bm\alpha$ is exactly taking the limit of $\int_B\bm\alpha$
+		over smaller and smaller polytopes.  Since these are the same polytopes
+		in our partition of $\mathcal R$, we get a $\dd \bm\alpha$ on the left
+		and a $\partial \mathcal R$ on the right.
+\end{enumerate}
+The only hard part of the proof is bookkeeping---making sure the orientation of adjacent
+sides really to cancel---and exchanging a limit and a sum---this requires some assumptions
+about the differentiability of $\bm\alpha$ and the smoothness of $\partial \mathcal R$.
+
+\section{de Rham Cohomology}
+
+Recall that a vector field $\vec F$ is called \emph{conservative} if
+there is a scalar filed $f$ so that $\nabla f=\vec F$.  Further, if $\vec F$ is
+conservative, then $\nabla \times \vec F=0$---this was called the screening test.
+However, it may be that $\vec F$ is not conservative but even still
+$\nabla \times \vec F=0$.  Poincar\'e's lemma states that if $\nabla \times \vec F=0$
+on the interior of a ball (equivalently, the interior of a box), then $\vec F$ is conservative.
+In other words, if you want a non-conservative vector field to satisfy $\nabla \times\vec F=0$,
+you have to make the domain strange.  For example, 
+\[
+	\vec F(x,y,z) = \frac{1}{x^2+y^2}\mat{-y\\x\\0}
+\]
+has zero curl, but the $z$-axis must be excluded from the domain.  The key insight here
+is that the difference between a conservative and a closed vector field only shows
+up when the domain has certain topologies\footnote{ A topology describes how a set is
+connected.  A plane and the surface of a doughnut are both two dimensional objects, but they have
+very different topologies.}.  Using differential forms, we get a supped up topology-recognizing
+machine called \emph{cohomology}\index{cohomology}.
+
+Before we begin, we need some definitions.
+\begin{definition}[Closed \& Exact]
+	An $n$-form $\bm\alpha$ is called \emph{exact} if there is an
+	$(n-1)$-form $\bm\beta$ so that $\bm\alpha=\dd \bm\beta$.  An $n$-form
+	$\bm\alpha$ is called \emph{closed} if $\dd \bm\alpha=0$.
+\end{definition}
+\emph{Exact} is the differential forms term for a conservative vector field.
+
+We can use Stokes's theorem to prove that every exact form is closed.
+\begin{theorem}
+	Every exact differential form is closed.  That is, $\dd (\dd \bm\alpha)=0$
+	for all differential forms $\bm\alpha$.
+\end{theorem}
+\begin{proof}
+	The proof uses Stokes's theorem and topology.  Let $\mathcal R$
+	be an oriented region and notice that $\partial (\partial \mathcal R)$ is
+	empty---a boundary has no boundary\footnote{
+		To formally prove this, we would need to appeal to the definition
+		of boundary.  Since $\partial \mathcal R\subseteq \mathcal R$, 
+		we know any point $\vec x\in\partial \partial \mathcal R$ is also in $\mathcal R$.
+		But, the tangent space to $\mathcal R$ is either $n$-dimension (at points on
+		$\mathcal R$'s interior) or $n-1$-dimensional when restricted to $\partial \mathcal R$.
+		There's just no room for an $n-2$-dimensional tangent space to fit, so $\vec x\notin\mathcal R$.
+		We conclude $\partial\partial \mathcal R$ is empty.
+	}.
+	From Stokes's theorem we know
+	\[
+		\int_{\mathcal R}\dd \dd \bm\alpha
+		=
+		\int_{\partial \mathcal R}\dd \bm\alpha
+		=
+		\int_{\partial (\partial \mathcal R)}\bm\alpha
+		=0
+	\]
+	since an integral over an empty set is zero.  Any form that integrates to zero over
+	all regions must be zero\footnote{ This conclusion requires $\dd \dd\bm\alpha$
+	to be continuous, and so $\bm\alpha$ needs to be twice differentiable.}.
+\end{proof}
+
+\begin{definition}[Exterior Power]
+	Let $\mathcal M$ be a domain (more specifically a \emph{manifold}).
+	The set $\Lambda^k(\mathcal M)$ is the set of all $k$-forms on $\mathcal M$
+	and is called the \emph{$k$th exterior power of $\mathcal M$}\index{exterior power}.
+\end{definition}
+
+Using our new notation, we can say things like $\dd:\Lambda^k(\mathcal M)\to \Lambda^{k+1}(\mathcal M)$.
+Further, since $\dd\dd \bm\alpha=0$, we know exact forms are in the kernel of $\dd$.
+This allows us to write what (in the abstract algebra) is called an \emph{exact} sequence.
+If $\mathcal M$ is $n$-dimensional, then we have the following exact sequence.
+\[
+	\Lambda^0(\mathcal M) \xrightarrow{\dd}
+	\Lambda^1(\mathcal M)\xrightarrow{\dd} \cdots 
+	\xrightarrow{\dd} 
+	\Lambda^{n-1}(\mathcal M)\xrightarrow{\dd}  
+	\Lambda^{n}(\mathcal M)\xrightarrow{\dd}  0
+\]
+This notation means that the map $\dd$ moves objects from a space on the left
+to a space on the right \emph{and} the range of $\dd$ is always contained in the
+kernel of $\dd$.  In other words, a chain is called \emph{exact} if two
+steps down the chain guarantees you become zero.
+
+If we take $\mathcal M=\R^3$ then we have the explicit exact chain
+\[
+	\Lambda^0(\R^3) \xrightarrow{\dd}
+	\Lambda^1(\R^3)\xrightarrow{\dd} 
+	\Lambda^{2}(\R^3)\xrightarrow{\dd}  
+	\Lambda^{3}(\R^3)\xrightarrow{\dd}  0.
+\]
+Further, by Poincar\'e's lemma, the range of $\dd$ is exactly the kernel of the next $\dd$.
+This says that 
