@@ -1,18 +1,26 @@
 
 Multivariable calculus has a long history with many refinements over the years.
-Every once in a while, a mathematician will notice something new---a connection
-between various concepts in mathematics.  You may have notices that much
-of what we have done was not particular to any specific dimension, but the problems
-we solved were usually in $\R^2$ and $\R^3$.  The theoretical framework
-for work in $\R^4$ (like is often required for relativity) is set, but how
-would we actually compute a surface integral in $\R^4$?  We would need
-to find the volume form/surface element without the use of the cross product.
+Every once in a while, a mathematician will notice a connection
+that wasn't explicit before.  You may have noticed that many of the
+definitions we used were not particular to any specific dimension, but the problems
+we solved were usually in $\R^2$ and $\R^3$.  Sometimes we relied
+on the cross product, which requires us to
+work in $\R^3$.  
+Subjects like \emph{General Relativity} study
+calculus in $\R^4$ (or higher dimensions), but how, for example,
+would we compute a surface integral in $\R^4$?  We would need
+to find a volume form/surface element without the use of the cross product in a dimension
+where our geometric intuition is diminished, to say the least.
 
 \emph{Differential forms}\index{differential forms} are one solution to this issue.
-They recast many of the fundamental ideas, gradients, curl, divergence,
-line integrals, surface integrals, etc., in a unified framework that works
+They recast many of the fundamental ideas---gradients, curl, divergence,
+line integrals, surface integrals, etc.---in a unified framework that is consistent
 regardless of dimension and \emph{regardless of coordinate system}.
-Because of their abstract foundation, they are not typically encountered in a
+Because of their abstract foundation and newness\footnote{ 
+The foundation for differential forms was laid out Hermann Grassmann
+in 1847, and it wasn't until Albert Einstein needed a new kind
+of mathematics to describe relativity that differential forms
+started gaining in popularity.}, differential forms they are not typically encountered in a
 first course on multivariable calculus, but that has more to do with culture
 than anything else.
 
@@ -39,12 +47,12 @@ abstract idea of a \emph{vector}\index{vector space}.
 \end{definition}
 
 These properties should look familiar from Section \ref{SECVECTORPROPS}, and indeed
-$\R^n$ is a real vector space.  However there are many seemingly non-geometric
+$\R^n$ is a vector space.  However there are many seemingly non-geometric
 sets that are also vector spaces.
 
 \begin{example}
 	Let $V=\Set{\text{functions from }\R\text{ to }\R}$ equipped with
-	pointwise addition and scalar multiplication.  Then $V$ is a vector space.
+	pointwise addition and scalar multiplication.  Then, $V$ is a vector space.
 
 	We won't prove every property in detail, but if we pick $f,g\in V$,
 	we need the quantities $f+g$ and $\alpha f$ to make sense and to also
@@ -57,13 +65,13 @@ sets that are also vector spaces.
 	Thus, $V$ satisfies the closure property.  The rest of the properties
 	follow via similar arguments.
 \end{example}
-
 Recall that if $\vec v_1,\ldots, \vec v_n\in V$ are vectors, then 
 $\vec w=\alpha_1\vec v_1+\cdots +\alpha_n\vec v_n$ is a 
 \emph{linear combination}\index{linear combination} of the vectors $\vec v_1,\ldots \vec v_n$.
 Another way to think of a vector space is as a set on which linear combinations
 make sense.
 
+\bigskip
 Now that we have abstract ``vectors'' (elements of a vector space), let's
 get abstract lines and planes.  These objects can be defined using
 \emph{linear functions}\index{linear transformation} which are equivalently
@@ -74,16 +82,16 @@ to mix it up some times.}.
 \begin{definition}[Linear]
 	Let $V$ and $W$ be vector spaces and let
 	$T:V\to W$ be a function.  $T$ is called \emph{linear}
-	if for all $\vec u,v\in V$ and all scalars $\alpha$,
+	if for all $\vec u,\vec v\in V$ and all scalars $\alpha$,
 	\[
 		T(\vec u+\vec v) = T(\vec u)+T(\vec v)\qquad\text{and}\qquad
 		T(\alpha \vec v) = \alpha T(\vec v).
 	\]
 \end{definition}
-If a transformation is linear, it is typical to omit parenthesis when
+If a transformation is linear, it is typical to omit parentheses when
 passing in a single vector.  That is, instead of writing $T(\vec v)$,
 we write $T\vec v$, but we would always write $T(\vec u+\vec v)$
-with parenthesis.
+with parentheses.
 
 We have already encountered many linear functions.  For example, 
 consider $f:\R^3\to\R$ where
@@ -154,7 +162,7 @@ of the related \emph{affine functions}\index{affine function}.
 	for all $\vec v$.
 \end{definition}
 
-You may recall the previously, in Section \ref{SECAFFINE},
+You may recall previously, in Section \ref{SECAFFINE},
 we only defined what it means for a function $f:\R^n\to \R$
 to be affine.
 We now have a fully general
