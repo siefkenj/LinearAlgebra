@@ -1693,7 +1693,7 @@ We can use Stokes's theorem to prove that every exact form is closed.
 \begin{definition}[Exterior Power]
 	Let $\mathcal M$ be a domain (more specifically a \emph{manifold}).
 	The set $\Lambda^k(\mathcal M)$ is the set of all $k$-forms on $\mathcal M$
-	and is called the \emph{$k$th exterior power of $\mathcal M$}\index{exterior power}.
+	and is called the \emph{$k$\textsuperscript{th} exterior power of $\mathcal M$}\index{exterior power}.
 \end{definition}
 
 Using our new notation, we can say things like $\dd:\Lambda^k(\mathcal M)\to \Lambda^{k+1}(\mathcal M)$.
@@ -1720,4 +1720,49 @@ If we take $\mathcal M=\R^3$ then we have the explicit exact chain
 	\Lambda^{3}(\R^3)\xrightarrow{\dd}  0.
 \]
 Further, by Poincar\'e's lemma, the range of $\dd$ is exactly the kernel of the next $\dd$.
-This says that 
+This sets our baseline.  Now, consider the space $H=\R^3\backslash\Set{\alpha\xhat\given\alpha\in\R}$
+consisting of $\R^3$ without the $z$-axis.  We have a very similar chain.
+\[
+	\Lambda^0  (H) \xrightarrow{\dd}
+	\Lambda^1  (H)\xrightarrow{\dd} 
+	\Lambda^{2}(H)\xrightarrow{\dd}  
+	\Lambda^{3}(H)\xrightarrow{\dd}  0
+\]
+Except, this time the range of $\dd$ applied to 0-forms does not equal the kernel
+of $\dd$ applied to 1-forms.  This is because there are now covector fields
+that circulate around the $z$-axis but still have ``zero curl.''  We won't prove it, but
+the image of 1-forms under $\dd$, in this case, is kernel of $\dd$ applied to 2-forms.
+This somehow means that some interesting curves fit into $H$, but no interesting surfaces.
+The interesting curves are those that circle around the $z$-axis!
+
+We could play this game again.  Let $S=\R^3\backslash\Set{\vec 0}$.  Now we have
+a chain
+\[
+	\Lambda^0  (S) \xrightarrow{\dd}
+	\Lambda^1  (S)\xrightarrow{\dd} 
+	\Lambda^{2}(S)\xrightarrow{\dd}  
+	\Lambda^{3}(S)\xrightarrow{\dd}  0.
+\]
+In this chain the image of $\dd$ applied to 0-forms is the kernel of $\dd$ applied to 1-forms.
+However, the image of $\dd$ applied to 1-forms is \emph{not} the kernel of $\dd$ applied to
+2-forms.  Fox example, consider
+\[
+	\vec F(x,y,z) = \frac{1}{(x^2+y^2+z^2)^{3/2}}\mat{x\\y\\z},
+\]
+which you may recognize as related the force due to gravity of a point-mass centered
+at the origin acting on a particle at position $(x,y,z)$.  $\nabla \cdot \vec F=0$,
+but $\vec F$ cannot be the curl of any vector field. Thus, $\bm f=\star \Transu\vec F$ is a
+2-form in the kernel of $\dd$ but not the image of any 1-form under $\dd$.  This would be very
+hard to show directly from equations, but easy to show with Stokes's theorem.  After all,
+$\dd \bm f=0$ is an easy computation\footnote{
+	If you've ever done the computation to show that gravity acting on a sphere is
+	equivalent to gravity acting on a point-mass at the center of the sphere, then
+	you've done this computation.  
+}, but the integral of $\bm f$ around a sphere centered at
+the origin and oriented outwards is clearly positive---all vectors coming from $\vec F$ point
+radially and symmetrically outwards!
+
+Based on these observations,
+we conclude that $S$ cannot contain any loops that are more interesting than those in $\R^3$, but
+it can contain surfaces that are more interesting.  What are the interesting surfaces?  The ones
+that enclose the origin!
