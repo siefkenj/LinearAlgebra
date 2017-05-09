@@ -176,16 +176,18 @@ definition!
 
 \subsection{Covectors}
 
-Now that we have formulated standard geometric objects, we will develop
-a set of tools to \emph{measure} those objects.  The first
-property we will attempt to measure is displacement.  From displacement,
+We will now develop
+a set of tools to \emph{measure} geometric objects.  The first
+property we will attempt to measure is displacement.  Using
+displacement,
 we will be able to measure area as ``displacement in two directions''
 and volume as ``displacement in three directions.''
 
 Displacement is measures with objects called \emph{covectors}\index{covector}.
 In other contexts, these objects are also known as 
 \emph{linear functionals}\index{linear functional} or \emph{dual vectors}\index{dual vector}.
-We will typically write covectors in a bold font them from vectors.
+We will typically write covectors in a \textbf{bold} font to  distinguish 
+them from vectors.
 
 \begin{definition}[Covector]
 	Given a vector space $V$, a \emph{covector} on the space $V$
@@ -198,15 +200,17 @@ before!  Let $\bm{\alpha}:\R^3\to\R$ be defined by $\bm{\alpha}(\vec v) =\xhat \
 We already know that $\bm{\alpha}$ is linear and that it outputs
 real numbers.  Therefore it is a covector.  However, $\bm \alpha$ also has
 geometric meaning.  It $\bm\alpha(\vec v)$ outputs the $x$-coordinate
-of $\vec v$.  We could similarly think of covectors that when given
-a vector output its $y$ or $z$ coordinates.
+of $\vec v$.  We could similarly come up with covectors that output the $y$ or $z$ coordinates
+of their input.
 
 Any function $\bm f:\R^n\to \R$ defined by $\bm f(\vec v) = \vec r\cdot \vec v$
 for some fixed $\vec r$ is a covector.  Further, we can interpret
 $\bm f$ to have geometric meaning.  The quantity $\bm f(\vec v)$ is how
-much $\vec v$ points in the direction $\vec r$.  In other words, $\bm f(\vec v)$
+much $\vec v$ points in the direction $\vec r$, scaled by $\norm{\vec r}$.  
+In other words, $\bm f(\vec v)$
 is the ``$\vec r$ component'' of $\vec v$ (is anyone else thinking
-about projections?).
+about projections?) which is ``the length of $\vec v$ measured by a ruler
+with ticks determined by $\vec r$.''
 
 A theorem from linear algebra shows us that this type of covector
 is all there is (in $\R^n$, at least).
@@ -227,7 +231,7 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
 
 \begin{theorem}
 	If $V$ is a vector space, then $V^*$, the set of all
-	covectors for $V$ is also a vector space.
+	covectors for $V$, is also a vector space.
 \end{theorem}
 \begin{proof}
 	XXX Finish
@@ -242,14 +246,14 @@ says $V\subseteq V^{**}$, if you interpret ``subset'' in the right sense. }.
 
 It is, however, worth our time to consider $(\R^n)^*$.  Recall that
 in $\R^3$ we have special vectors $\xhat$, $\yhat$, and $\zhat$,
-called the standard basis for $R^3$,
+called the standard basis for $\R^3$,
 and all other vectors can be written as a linear combination of these.
-Higher dimensions also have the idea of a standard basis, and there
-is a similar concept for sets of covectors.
+Higher dimensions also have standard bases, as do the corresponding
+spaces of covectors.
 
 \begin{definition}[Standard Basis]
 	The \emph{standard basis} for $\R^n$ is notated 
-	by $\vec e_1,\vec e_2,\ldots,\vec e_n$ and satisfies that 
+	$\vec e_1,\vec e_2,\ldots,\vec e_n$. It satisfies that 
 	every vector in $\R^n$ can be written as a linear combination of
 	$\vec e_1,\vec e_2,\ldots,\vec e_n$ and that
 	\[
@@ -260,7 +264,7 @@ is a similar concept for sets of covectors.
 	\]
 
 	The standard basis for $(\R^n)^*$ is notated
-	$\bm e^1,\bm e^2,\ldots,\bm e^n$ and satisfies that
+	$\bm e^1,\bm e^2,\ldots,\bm e^n$. It satisfies that
 	every covector for $\R^n$ can be written as a linear combination of
 	$\bm e^1,\bm e^2,\ldots,\bm e^n$ and that
 	\[
@@ -285,22 +289,22 @@ For example, let $\bm \alpha = \bm e^1+2\bm e^3$.  We can compute
 	+2\bm e^3\mat{a\\b\\c} = a+2c = \mat{1\\0\\2}\cdot \mat{a\\b\\c},
 \]
 and so we see that $\bm\alpha$ is given by taking the dot product with
-the vector $\mat{1\\0\\2}$.  Of course, we could write $\vec e_1+2\vec e_2$
+the vector $\mat{1\\0\\2}$.  Of course, we could write $\vec e_1+2\vec e_3$
 instead of $\mat{1\\0\\2}$ and $a\vec e_1+b\vec e_2+c\vec e_3$ instead of 
 $\mat{a\\b\\c}$.  In doing so, we would be analyzing vectors in
-a \emph{coordinate free} manner.  That is, we never need to talk about
+a \emph{coordinate free} manner.  That is, we would never need to talk about
 the coordinates of a vector in order to do a computation.  One of the selling points
 of differential forms is that they allow you to do multivariable calculus
 in a coordinate free way.
 
 Stepping back for a moment, the machinery we've developed is almost comically
-tautological.  Let $\vec v\in \R^n$ and let $\bm \alpha$ be a covector.  By 
+tautological.  Let $\vec v\in \R^n$ and let $\bm \alpha$ be a covector for $\R^n$.  By 
 definition,
 \begin{align*}
 	\vec v &= a_1\vec e_1+\cdots +a_n\vec e_n\\
-	\bm \alpha &= b_1\bm e^1+\cdots b_n\bm e^n,
+	\bm \alpha &= b_1\bm e^1+\cdots b_n\bm e^n.
 \end{align*}
-and it follows that
+It follows that
 \[
 	\bm \alpha(\vec v) = 
 	(b_1\bm e^1+\cdots b_n\bm e^n)(a_1\vec e_1+\cdots +a_n\vec e_n)
@@ -330,13 +334,13 @@ XXX Finish
 
 \section{1-forms and Line Integrals}
 
-Recall that a function $f:\R^n\to\R^n$ was called a
+Recall that a function $f:\R^n\to\R^n$ is called a
 vector field because to each point in $\R^n$ it assigns a
 vector in $\R^n$.  A 1-form is a type of \emph{differential 
 form}\index{differential form} that is analogous to a vector field
 except that instead of assigning to each point a vector,
 it assigns to each point a \emph{covector}.  We will also write
-1-forms using a bold font.
+1-forms using a \textbf{bold} font.
 
 \begin{definition}[1-form]
 	A \emph{1-form}\index{1-form} on the space $\R^n$ is a function
@@ -348,8 +352,10 @@ what it means to differentiate a function whose codomain consists of covectors.
 The quick and dirty answer is, treat covectors as vectors and use
 the definition of differentiability for a vector field.}.
 
-Since 1-forms output covectors which themselves measure vectors, it is worth
-introducing some notation.  If $\bm \alpha$ is a 1-form, then
+1-forms output covectors which themselves measure vectors.
+Thus in order to get a number from a 1-form, there is a chain
+of function applications.  We will introduce some notation to make this
+tolerable.  If $\bm \alpha$ is a 1-form, then
 $\bm \alpha(\vec v)$ is a covector.  If we wish to apply this
 covector, $\bm\alpha(\vec v)$,
 to measure the vector $\vec w$, we write $\Big[\bm\alpha(\vec v)\Big](\vec w)$.
@@ -359,14 +365,13 @@ We'll be doing this a lot, so we have the alternative notation
 \]
 
 
-As we've seen, covectors are used to measure vectors, and 
-vectors themselves come from displacements.  1-forms are a way
-to measure \emph{oriented curves}.  We'll explore this by
+As we've seen, covectors are used to measure oriented line
+segments (vectors).  1-forms measure \emph{oriented curves}.  We'll explore this by
 first considering some special 1-forms on $\R^3$.
 
 \begin{definition}[Standard Basis for 1-forms]
 	The
-	\emph{standard basis for 1-forms} are the 1-forms
+	\emph{standard basis for 1-forms on $\R^3$} are the 1-forms
 	$\dd x$, $\dd y$, and $\dd z$ defined by
 	\[
 		\dd x(\vec v) = \bm e^1\qquad \dd y(\vec v)=\bm e^2\qquad
@@ -408,14 +413,13 @@ XXX Figure including $\dd x(r)$
 Now, $\dd x\circ \vec r = \bm e^1$ is the constant covector that measures
 the $x$ displacement of a vector and so $\dd x \formarg{\vec r(t)}{\vec r'(t)}
 =\bm e^1\big(\vec r'(t)\big)$
-is the $x$ displacement of the tangent vector to $\mathcal C$ coming
-from the parameterization $\vec r$ at the point $\vec r(t)$.   In other words,
+is the $x$ displacement of $\vec r'(t)$.   In other words,
 \[
 	\dd x\formarg{\vec r(t)}{\vec r'(t)}=\bm e^1\big(\vec r'(t)\big) = r_x'(t).
 \]
-What we're after is the \emph{total} $x$ displacement along the curve $\mathcal C$.
-That is $b_x-a_x$.  But, we can get this quantity from the fundamental theorem
-of calculus!  After some reverse engineering, we see
+What we're after is  $b_x-a_x$, the \emph{total} $x$ displacement along the curve $\mathcal C$.
+We  can get this quantity from the fundamental theorem
+of calculus.  After some reverse engineering, we see
 \[
 	b_x-a_x = \int_0^1 r_x'(t)\, \d t 
 	= \int_0^1 \dd x\formarg{\vec r(t)}{\vec r'(t)}\,\d t.
@@ -452,8 +456,8 @@ is the $x$ displacement from the start of $\mathcal C$ to the end of $\mathcal C
 Similarly, $\int_{\mathcal C}\dd y$ gives the $y$ displacement and $\int_{\mathcal C}\dd z$
 gives the $z$ displacement.
 
-There are many nice properties of the integral notation applied to 1-forms.
-For example, it behaves like a classical integral with respect to linear combinations.
+The integral notation for 1-forms
+behaves like a classical integral with respect to linear combinations.
 If $\bm\alpha$ and $\bm\beta$ are 1-forms and $t$ is a scalar, then
 \[
 	\int_{\mathcal C}(\bm \alpha + t\bm\beta) = \int_{\mathcal C} \bm\alpha 
