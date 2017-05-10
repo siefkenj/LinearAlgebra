@@ -455,8 +455,7 @@ With this definition, we have a powerful notation.  For an oriented curve $\math
 is the $x$ displacement from the start of $\mathcal C$ to the end of $\mathcal C$.
 Similarly, $\int_{\mathcal C}\dd y$ gives the $y$ displacement and $\int_{\mathcal C}\dd z$
 gives the $z$ displacement.
-
-The integral notation for 1-forms
+Further, the integral notation for 1-forms
 behaves like a classical integral with respect to linear combinations.
 If $\bm\alpha$ and $\bm\beta$ are 1-forms and $t$ is a scalar, then
 \[
@@ -473,14 +472,14 @@ If $\bm\alpha$ and $\bm\beta$ are 1-forms and $t$ is a scalar, then
 \subsection{Non-constant 1-forms}
 
 Let us seek the comfort of a one dimensional space as we explore non-constant 1-forms.
-In $\R^1$ we only have one standard basis 1-form: $\dd x$.
+In $\R^1$, we only have one standard basis 1-form: $\dd x$.
 Let $f:\R^1\to\R$ be a scalar-valued function.  We will interpret
 $\R^1$ as a vector space rather than a set of scalars. Now, define
 \[
 	f\dd x (\vec v) = f(\vec v)\dd x(\vec v) = f(\vec v)\bm e^1.
 \]
 That is, $f\dd x$, when given a point, returns a scaled version of $\bm e^1$,
-which will in turn measure a scaled version of the $x$ displacement of
+which will in turn measure a scaled version of the $x$ coordinate of
 a vector.  Let $\mathcal C=[a,b]$ be the oriented interval starting
 at $a$ and ending at $b$.  $\mathcal C$ is naturally parameterized
 by the function $\vec r:[a,b]\to[a,b]$ defined by $\vec r(t) = t$.
@@ -496,7 +495,7 @@ This shows that
 $\int_{\mathcal C} f\dd x$ is the usual integral of $f$ on the interval $[a,b]$.
 
 \bigskip
-Let's move now to $\R^2$.  Let $f_x:\R^2\to\R$ and $f_y:\R^2\to\R$
+Moving to $\R^2$, let $f_x:\R^2\to\R$ and $f_y:\R^2\to\R$
 and consider the 1-form $\bm\alpha = f_x\dd x+f_y\dd y$.  Again, let
 $\mathcal C$ be an oriented curve starting at $\vec a$, ending at $\vec b$,
 and parameterized by $\vec r:[0,1]\to\mathcal C$  where
@@ -538,13 +537,13 @@ any vector you can think of as a line segment with a start and an end.
 When the covector $\bm\alpha=a\bm e^1+b\bm e^2+c\bm e^3$ is applied to 
 a vector $\vec v$, it measures the ``$(a,b,c)$ component'' of $\vec v$.
 In other words, it measures how long $\vec v$ appears to be from the perspective
-of the vector $(a,b,c)$.  That is, $\bm\alpha(\vec v) = (a,b,c)\cdot \vec v$.
+of the vector $(a,b,c)$.
 
 We can invent a similar object that measures oriented parallelograms.
 Any pair of vectors $(\vec v,\vec w)$ can be viewed as forming an oriented
 parallelogram $\mathcal P_{\vec v,\vec w}$.  If $(\vec v,\vec w)$ come in a
 right-handed order, we say $\mathcal P_{\vec v,\vec w}$ has a positive
-orientation.  Otherwise it has a negative orientation.
+orientation.  Otherwise, it has a negative orientation.
 A function
 that takes in a pair of vectors and measures the oriented (signed)
 area of the parallelogram they determine is called a 2-covector.
@@ -557,7 +556,7 @@ vectors, then
 	\bm\alpha(\vec v,\vec v) = 0,
 \]
 since the parallelogram $\mathcal P_{\vec v,\vec v}$ is degenerate\footnote{
-It isn't bad; it just has no area.}.  Scaling one of the sides should affect
+This isn't a comment about the parallelogram's moral character; it just has no area.}.  Scaling one of the sides should affect
 the area accordingly:
 \[
 	\bm\alpha(m\vec v,\vec w) = m\alpha(\vec v,\vec w) = \alpha(\vec v,m\vec w).
@@ -612,15 +611,15 @@ Observe,
 and so $\bm\alpha(\vec v, \vec w) = -\bm\alpha(\vec w, \vec v)$.  This property
 is called \emph{alternating}\index{alternating map}.
 
-We've generated a lot of theory, but let's actually see a 2-vector in action.
+We've generated a lot of theory. Let's see an actual 2-vector in action.
 
 \begin{example}
 	\label{EXTWOCOVECTOR}
 	For a pair of vectors $(\vec v,\vec w)$, let $\mathcal P_{\vec v,\vec w}$
 	be the oriented parallelogram with sides $\vec v$ and $\vec w$.
-	Let $\bm\alpha$ be the 2-covector so that $\bm\alpha(\vec v,\vec w)$
+	Define $\bm\alpha$ to be the function such that $\bm\alpha(\vec v,\vec w)$
 	is the oriented area of $\mathcal P_{\vec v,\vec w}$ projected onto the
-	$xy$-plane.
+	$xy$-plane.  Show that $\bm\alpha$ is a 2-covector.
 
 	XXX Figure
 
@@ -673,13 +672,13 @@ be written as $\bm e^1\wedge \bm e^2$.  But, it gets better.
 	of vectors in the set $\Set{\bm e^i\wedge \bm e^j\given i\neq j}$.
 \end{theorem}
 
-Note that in general, it is not true that if $\bm\alpha$ is a 2-covector
+In general, it is not true that if $\bm\alpha$ is a 2-covector
 then $\bm\alpha$ can be written as the wedge product of two covectors\footnote{
 This \emph{does} happen to be true for 2-covectors on $\R^3$, but that's just
 a happy coincidence.}.  
 We really do need to allow linear combinations to get 
 all 2-covectors.  For example, the 2-covector $\bm e^1\wedge\bm e^2+\bm e^3\wedge
-\bm e^4$ in $\R^4$ cannot be written as the wedge product of two covectors.
+\bm e^4$ for $\R^4$ cannot be written as the wedge product of two covectors.
 
 \bigskip
 Exploring the consequences of the definition of the wedge product, 
@@ -699,7 +698,6 @@ And, that it is multi-linear:
 	\bm\alpha\wedge(\bm\gamma+\bm\beta) = \bm\alpha\wedge\bm\gamma + \bm\alpha\wedge\bm\beta.
 \]
 
-Strangely, 2-covectors seem to have all the properties of their inputs.
 
 \subsection{Geometric Interpretation of 2-covectors}
 
@@ -707,8 +705,7 @@ XXX Finish.  Some pictures about projections and oriented areas, again.
 
 \subsection{2-forms}
 
-Now that we have 2-covectors, we can define 2-forms\index{2-form} in a very similar way to
-how we defined 1-forms.
+Now that we have 2-covectors, we can define 2-forms\index{2-form}.
 
 \begin{definition}[2-form]
 	A \emph{2-form} on the space $\R^n$ is a function $\bm\alpha:
@@ -716,7 +713,7 @@ how we defined 1-forms.
 \end{definition}
 
 Just as the wedge product of
-two covectors produces a 2-covectors, the wedge
+two covectors produces a 2-covector, the wedge
 product of two 1-forms produces a 2-form.
 2-forms in $\R^3$ also have a standard basis.
 
@@ -725,16 +722,13 @@ product of two 1-forms produces a 2-form.
 	$\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
 \end{definition}
 
-Notice the order that $\dd x$, $\dd y$, and $\dd z$ appear in the standard
-basis for 2-forms on $\R^3$.  In particular, the third basis element
+Notice the order of $\dd x$, $\dd y$, and $\dd z$.  In particular, the third basis element
 is $\dd z\wedge \dd x$ and not $\dd x\wedge \dd z$.  This has to do with 
-having a consistent
-orientation.  When we use the basis 2-forms to measure area, we'd like them
-to have the property that either 
+orientation.  When we use the basis 2-forms to measure area, we'd that either all of
 $\dd x\wedge \dd y(\mathcal P), \dd y\wedge \dd z(\mathcal P), \dd z\wedge \dd x(\mathcal P)\geq 0$
-or 
-$\dd x\wedge \dd y(\mathcal P), \dd y\wedge \dd z(\mathcal P), \dd z\wedge \dd x(\mathcal P)\leq 0$,
-but we never want a mix of signs.
+or all of
+$\dd x\wedge \dd y(\mathcal P), \dd y\wedge \dd z(\mathcal P), \dd z\wedge \dd x(\mathcal P)\leq 0$.
+We never want a mix of signs.
 
 We call $\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$
 the standard basis of 2-forms for $\R^3$ because any 2-form in $\R^3$ can
@@ -755,14 +749,14 @@ $\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
 surfaces, and the definition of the integral of a 2-form
 is nearly identical to that of a 1-form---cumbersome notation and all.
 
-Recall, 2-forms are functions that input pairs of points and output 2-covectors.
-In turn, the 2-covectors input pairs of vectors and output scalars.  If
+Recall, a 2-form inputs a point and outputs a 2-covector.
+In turn, the 2-covector inputs a pairs of vectors and outputs a scalar.  If
 $\bm \alpha$ is a 2-form, we will define
 \[
-	\bm\alpha\formarg{\vec x_1,\vec x_2}{\vec v,\vec w}\equiv
-	\Big[\bm\alpha(\vec x_1,\vec x_2)\Big](\vec v,\vec w)
+	\bm\alpha\formarg{\vec x}{\vec v,\vec w}\equiv
+	\Big[\bm\alpha(\vec x)\Big](\vec v,\vec w)
 \]
-for points $\vec x_1,\vec x_2$ and vectors $\vec v,\vec w$.
+for vectors $\vec v,\vec w$ and point $\vec x$.
 
 \begin{definition}[integral of a 2-form]
 	Let $\mathcal S$ be an oriented surface. The integral of
@@ -793,7 +787,7 @@ doesn't depend on your choice of how you parameterize $\mathcal S$.
 	\]
 
 	To convince ourselves that $\vec p$ actually is a parameterization,
-	let's graph some curves $\vec p(t,b)$ while $b$ is held constant and
+	let's graph some curves $\vec p(t,b)$ where $b$ is held constant and
 	$\vec p(a,s)$ where $a$ is held constant.
 
 	XXX Figure of parameterization
@@ -805,7 +799,7 @@ doesn't depend on your choice of how you parameterize $\mathcal S$.
 	\]
 	From the definition of $\dd x\wedge \dd y$,
 	\[
-		\dd x\wedge \dd y\formarg{\vec x,\vec y}{\vec u,\vec v}
+		\dd x\wedge \dd y\formarg{\vec x}{\vec u,\vec v}
 		=\bm e^1\wedge \bm e^2(\vec u,\vec v)
 		= \bm e^1(\vec u)\bm e^2(\vec v) - \bm e^1(\vec v)\bm e^2(\vec u),
 	\]
@@ -848,23 +842,16 @@ is the same as in the term ``2-form.''
 
 The techniques used in Example \ref{EXTWOFORMINT} will work in any dimension
 to integrate a 2-form over any surface, whether situated in the $xy$-plane or not.
-
-Let $\mathcal R$ be a surface in the $xy$-plane.
-The integral $\int_{\mathcal S}\dd x\wedge\dd y$ gives the 
-signed area of $\mathcal R$.  We can compute this integral using the techniques
-from Example \ref{EXTWOFORMINT}, but in general, it's very hard to come up
-with parameterizations for strange surfaces.  If all we wanted to do was find
-the signed area of $\mathcal R$, we could just do a double integral
-with clever bounds of integration.  It turns out that this is the same 
-integrating with respect to identity parameterization on a $\mathcal R$-shaped
-domain instead of a rectangularly-shaped one.  You can integrate 2-forms in this
-way too.
+However, it can be hard to come up
+with parameterizations for strange surfaces---especially with rectangular domains.
+Fortunately, by adjusting the bounds of integration, you can all the domain
+of your parameterization to be any reasonable subset of $\R^2$.
 
 \begin{example}
-	Let $\mathcal S$ be the region below the curve $y=1$ and above the
-	curve $y=x^2$.  Compute $\int_{\mathcal S} \dd x\wedge \dd y$.
+	Let $\mathcal R$ be the region below the curve $y=1$ and above the
+	curve $y=x^2$.  Compute $\int_{\mathcal R} \dd x\wedge \dd y$.
 
-	Let $\vec p:\mathcal S\to\mathcal S$ be the identity parameterization
+	Let $\vec p:\mathcal R\to\mathcal R$ be the identity parameterization
 	given by $\vec p(a,b)=(a,b)$.  Now,
 	\[
 	\frac{\partial \vec p}{\partial x} (a,b) = \mat{1\\ 0}=\xhat \qquad
@@ -872,13 +859,13 @@ way too.
 	\]
 	A little computation shows that $\dd x\wedge \dd y\formarg{\vec p(a,b)}{
 	\tfrac{\partial \vec p}{\partial x} (a,b), \tfrac{\partial \vec p}{\partial y} (a,b)}
-	= 1$.  Since we can explicitly define $\mathcal S$ as
+	= 1$.  Since we can explicitly define $\mathcal R$ as
 	\[
-		\mathcal S = \Set{(x,y)\given -1\leq x\leq 1\text{ and }x^2\leq y\leq 1},
+		\mathcal R = \Set{(x,y)\given -1\leq x\leq 1\text{ and }x^2\leq y\leq 1},
 	\]
 	we may write
 	\[
-		\int_{\mathcal S} \dd x\wedge \dd y = \int_{-1}^1 \int_{x^2}^1
+		\int_{\mathcal R} \dd x\wedge \dd y = \int_{-1}^1 \int_{x^2}^1
 		1\,\d s\d t = \tfrac{4}{3}.
 	\]
 \end{example}
@@ -887,11 +874,11 @@ way too.
 
 Just like integrating $\dd x$ over a curve $\mathcal C$
 gave the change in $x$-coordinate from the start to the end of $\mathcal C$,
-Integrating the 2-form $\dd x\wedge \dd y$ over the surface $\mathcal S$ will
+integrating the 2-form $\dd x\wedge \dd y$ over the surface $\mathcal S$ will
 give the signed area of $\mathcal S$ projected onto the $xy$-plane.
-Further, the integral of a non-constant 1-form $\bm \alpha$ over a curve $\mathcal C$
-was equivalent to a vector line integral.  Analogously, the integral
-of a non-constant 2-form $\bm\beta$ over a surface $\mathcal S$ turns out
+The integral of a non-constant 1-form over a curve
+is equivalent to a vector line integral.  Analogously, the integral
+of a non-constant 2-form over a surface turns out
 to be a flux integral.
 
 \begin{theorem}
@@ -915,14 +902,14 @@ and the vector $(a,b,c)$.  That is,
 	\dd x&\wedge \dd y\quad\text{ acts like } \quad&&\zhat 
 \end{alignat*}
 at least when thinking about flux integrals.  We will explore this
-connection further when discussing the \emph{Hodge dual}\index{Hodge dual}
-operator.
+connection further when discussing the \emph{Hodge dual}\index{Hodge dual
+operator}.
 
 \section{Higher-order Forms}
 
-We will start by defining $n$-covectors after a minor expansion
+We will start by defining $n$-covectors after a minor extension
 of the laws of area.  A $3$-covector is an object that measures
-volume, a $4$-covector measures volume in $\R^4$, etc. and so
+volume, a $4$-covector measures four-dimensional volume, etc. and so
 an $n$-covector must input $n$ vectors and return a scalar.  Further,
 every pair of those vectors must satisfy the laws of area.  We call this extension
 of the laws of area to collections of $n$ vectors the \emph{laws of volume}\index{laws
@@ -995,19 +982,17 @@ That is,
 -\bm\alpha^1\wedge \cdots \wedge
 		\bm\alpha^{i+1}\wedge \bm\alpha^{i}\wedge \cdots \wedge \bm\alpha^n.
 \]
-In other words, switching adjacent pairs in a wedge product negates the product---this
-generalizes anti-symmetry for 2-covectors.  By using the alternating
-property of the wedge product, we can rearrange large wedge products.  We
-can now show if the expression $\bm\beta\wedge\bm\beta$
-ever occurs in a wedge product, the wedge product must be zero\footnote{
-Move $\bm\beta\wedge\bm\beta$ to the back of the wedge product.  Eventually
-Eventually you'll end up with $\sum a_i\bm\beta\wedge\bm\beta$ and since
-$\bm\beta\wedge\bm\beta = 0$, the whole sum is zero.}, and, by extension,
-if two $\bm\beta$'s ever occur in a wedge product, the product must be zero.
+In other words, switching adjacent pairs in a wedge product negates the product.  
+By using the alternating
+property of the wedge product, we can rearrange large wedge products.   
+The laws of volume state if the expression $\bm\beta\wedge\bm\beta$
+ever occurs in a wedge product, the wedge product must be zero.
+Therefore, if two $\bm\beta$'s ever occur in a wedge product, the product must be zero\footnote{
+Move the $\bm\beta$'s to the back---if there are two or more you'll see a $\bm\beta\wedge\bm\beta$.}.
 
 \subsection{$n$-forms}
-We define $n$-forms just like we defined 1-forms and 2-forms.  Further,
-we define integration of $n$-forms.
+We define $n$-forms and integration of $n$-forms\index{$n$-form}
+analogously to 1-forms and 2-forms.
 
 \begin{definition}[$n$-form]
 	An $n$-form on the space $\R^n$ is a function $\bm\alpha:\R^n
@@ -1026,7 +1011,7 @@ we define integration of $n$-forms.
 		} \,\d t_n\cdots \d t_1
 	\]
 	where $\vec p:[a_1,b_1]\times\cdots\times[a_n,b_n]\to\mathcal R$
-	is an orientation-preserving parameterization of $\R$ and
+	is an orientation-preserving parameterization of $\mathcal R$ and
 	$\vec t=(t_1,\ldots, t_n)$.
 \end{definition}
 
@@ -1034,8 +1019,8 @@ we define integration of $n$-forms.
 
 Of particular interest to us are 3-forms.  3-forms measure oriented volume,
 and in three dimensions, there's only one ``direction'' a volume can point.
-This is reflected in the fact that the standard basis for 3-forms consists of
-one element.
+This is reflected in the fact that all 3-forms on $\R^n$ are multiples of
+a single element.
 
 \begin{definition}[Standard Basis for 3-forms]
 	The standard basis for 3-forms on $\R^3$ is 
