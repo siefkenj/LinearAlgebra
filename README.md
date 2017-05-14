@@ -17,7 +17,7 @@ Alternatively, if you have `arara` installed you can run
     arara MultivariableCalculus
 
 
-_Multivarialbe Calculus_ relies heavily on the `tikz` and `pgfplots` 
+_Multivariable Calculus_ relies heavily on the `tikz` and `pgfplots` 
 package for LaTeX, so make sure you have it installed.
 
 ##Exercises
