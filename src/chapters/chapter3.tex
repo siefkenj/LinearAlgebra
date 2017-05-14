@@ -1470,7 +1470,50 @@ $\vec x\in\R^2$, you're subjected to the force $\vec F(\vec x)$.  Now,
 if you move from point $A$ to point $B$ along the curve $\mathcal C$, you will
 be subjected to different forces at different points along your journey.
 
-XXX Figure
+
+\begin{center}
+	\begin{tikzpicture}
+		\draw (0,2.5) node (plot1) {};
+		
+		\draw[thick, mypink] (1,4) -- (4.5,1.5);
+		\draw[blue, -stealth] (1,4) -- +(.2,-.6) node[midway, left, black] {$\vec F(A)$};
+		\draw[blue, -stealth] (4.5,1.5) -- +(.2,.6) node[midway, right, black] {$\vec F(B)$};
+
+		\foreach \x in {1.5, 2, ..., 4} {
+			\draw[blue, -stealth] (\x,33/7-5*\x/7) -- +(.2, -33/35+13*\x/35 ) ;
+		} 
+
+		\draw[fill] (1,4) circle (1.5pt) node[above left] {$A$};
+		\draw[fill] (4.5,1.5) circle (1.5pt) node[below left] {$B$};
+
+
+
+		\begin{axis}[
+			name=plot2,
+		    at=(plot1.west),anchor=east,yshift=0cm,
+			view={0}{90},
+			domain=0:5,
+			width=7cm,
+			axis equal image,
+			hide axis
+		]
+
+\addplot3[blue, ultra thin, quiver={u={1}, v={(x-y)}, scale arrows=0.12}, -stealth,samples=20] {0};
+
+		%\addplot[domain=0:2, samples=2, thick, mypink] ({x^2},{x^2});
+		%\draw[->,blue,ultra thick] (1,1) -- (3,3) node[midway, left, xshift=-.1cm] {$\Accel \vec l$};
+		%\draw[->,myorange,thick, xshift=.1cm,yshift=-.1cm] (1,1) -- (2,2) node[midway, below right, xshift=0cm] {$\Vel \vec l$};		
+
+		\draw[thick, mypink] (1,4) -- (4.5,1.5);
+		\draw[] (1,4) node[above left,fill=white,rounded corners,opacity=.75 ] {\phantom{$A$}};
+		\draw[fill] (1,4) circle (1.5pt) node[above left] {$A$};
+		\draw[] (4.5,1.5) node[below left,fill=white,rounded corners,opacity=.75 ] {\phantom{$A$}};
+		\draw[fill] (4.5,1.5) circle (1.5pt) node[below left] {$B$};
+
+		\end{axis}
+		\draw[] (plot2.north) node[above] {$\vec F$};
+	\end{tikzpicture}
+\end{center}
 
 Let $\vec r:[0,1]\to\mathcal C$ parameterize $\mathcal C$, and recall that 
 the work done by a constant force $\vec A$ to during a displacement by $\vec D$
@@ -1654,8 +1697,60 @@ to one in $\R^2$.
 	that $\vec p([t,t+\Delta t]\times[s,s+\Delta s])$ has area $\Delta t\Delta s$.
 
 	Graphing, we see that the corners of $\vec p([t,t+\Delta t]\times[s,s+\Delta s])$ are at
+	$(\tfrac{s+t}{\sqrt{2}}, \tfrac{-s+t}{\sqrt{2}})$,
+	$(\tfrac{s+t+\Delta t}{\sqrt{2}}, \tfrac{-s+t + \Delta t}{\sqrt{2}})$,
+	$(\tfrac{s+\Delta s+t+\Delta t}{\sqrt{2}}, \tfrac{-s-\Delta s+t+\Delta t}{\sqrt{2}})$, and
+	$(\tfrac{s+\Delta s+t}{\sqrt{2}}, \tfrac{-s-\Delta s+t}{\sqrt{2}})$.
 
-	XXX Finish
+	\begin{center}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\coordinate (D) at ($(B)-(A)$);
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-2,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={},
+			ylabel={},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+			\coordinate (a) at (1.06,-.35);
+			\coordinate (b) at (2.47,1.06);
+			\coordinate (c) at (3.89, -.35);
+			\coordinate (d) at (2.47, -1.76);
+
+			\draw[fill=blue, opacity=0.05]  (a) -- (b) -- (c) -- (d) -- cycle;
+			\draw[black]  (a) -- (b) -- (c) -- (d) -- cycle;
+
+			\draw (a) node[left] {$\vec p(t,s)$};
+			\draw (b) node[above] {$\vec p(t+\Delta t,s)$};
+
+			\draw (d) node[below] {$\vec p(t,s+\Delta s)$};
+
+
+	
+
+		\end{axis}
+		\draw (c) node[right] {$\vec p(t+\Delta t,s+\Delta s)$};
+	\end{tikzpicture}
+	\end{center}
+
+	From this, we verify that the quadrilateral $\vec p([t,t+\Delta t]\times[s,s+\Delta s])$ has area $\Delta t\Delta s$.
 \end{example}
 
 \begin{example}
@@ -1862,6 +1957,46 @@ have nice descriptions in polar coordinates.
 	Graph the function whose equation is given in polar coordinates by $r=\sin\theta$.
 
 	XXX Finish
+
+
+	\begin{center}
+
+	\begin{tikzpicture}[scale=2]
+
+		% Draw the lines at multiples of pi/12
+		\foreach \ang in {0,...,31} {
+		  \draw [lightgray] (0,0) -- (\ang * 180 / 16:1.5);
+		}
+
+
+		% Add the labels at multiples of pi/4
+		\foreach \ang/\lab/\dir in {
+		  0/0/right,
+		  1/{\pi/4}/{above right},
+		  2/{\pi/2}/above,
+		  3/{3\pi/4}/{above left},
+		  4/{\pi}/left,
+		  5/{5\pi/4}/{below left},
+		  7/{7\pi/4}/{below right},
+		  6/{3\pi/2}/below} {
+		 \draw (0,0) -- (\ang * 180 / 4:1.5);
+		  \node [fill=white] at (\ang * 180 / 4:1.5) [\dir] {\scriptsize $\lab$};
+		}
+
+		% Concentric circles and radius labels
+		\foreach \s in {.25,.5,..., 1.25} {
+		  %\draw [lightgray] (0,0) circle (\s + 0.5);
+		  \draw[lightgray] (0,0) circle (\s);
+		  \node [fill=white] at (\s, 0) [below] {\scriptsize $\s$};
+		}
+
+		% The double-lined circle around the whole diagram
+		\draw [style=double] (0,0) circle (1.5);
+
+		\draw [thick,color=mypink,domain=0:2*pi,samples=20,smooth] plot (xy polar cs:angle=\x r,radius= {sin(\x r)});
+		\node [fill=white, rounded corners] at (.4,1.15) {$r=\sin\theta$};
+	\end{tikzpicture}
+	\end{center}
 \end{example}
 
 \subsection{Multiple Perspectives on Coordinate Systems}
@@ -1923,11 +2058,134 @@ For example, recall $\vec p$ from earlier defined by $\vec p(r,\theta)=(r\cos\th
 $\vec p$ converts from polar coordinates to rectangular coordinates, but will also interpret it as
 mapping the $r\theta$-plane to the $xy$-plane.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
 
-While the graph of $r=2\theta$ is a line in the $r\theta$-plane, it is a spiral in the $xy$-plane.
 
-XXX Figure
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-0,xmax=3,
+		    ymin=-0,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$r$},
+			ylabel={$\theta$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\draw[fill=blue,opacity=0.05] (1,1) rectangle (2,3);	
+
+	
+
+		\end{axis}
+
+		\draw[] (2.5,3.5) node[above right] {Region in $r\theta$-plane};
+		\path[thick] (3.5,3.5) edge[bend left, ->] node[] {} (1.5,1.8);
+
+
+		\begin{axis}[
+			%at=(plot1.east),
+			at={(7.5,0)},
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=2,
+		    ymin=-0.4,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\draw[fill=blue,opacity=0.05] (30:1) -- (30:2) arc (30:90:2) -- (90:1) arc (90:30:1) node (pp) {};	
+	
+		\end{axis}	
+		\draw[] (2.5+7.5,3.5) node[above right,xshift=-1cm] {Region in $xy$-plane};
+		\path[thick] (3.5+7.5,3.5) edge[bend left, ->] node[] {} (.75+7.5,1.25);
+
+	\end{tikzpicture}
+\end{center}
+
+While the graph of $r=\theta$ is a line in the $r\theta$-plane, it is a spiral in the $xy$-plane.
+
+\begin{center}
+	\begin{tikzpicture}
+
+
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-0,xmax=3,
+		    ymin=-0,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$r$},
+			ylabel={$\theta$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+			\addplot[mypink, thick] {x};
+		\end{axis}
+
+		\begin{axis}[
+			%at=(plot1.east),
+			at={(7.5,0)},
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-2,xmax=2.2,
+		    ymin=-2,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\addplot[mypink, thick, domain=0:3, samples=100,smooth] ({x*cos(deg(x)*5)},{x*sin(deg(x)*5)});
+	
+		\end{axis}	
+
+	\end{tikzpicture}
+\end{center}
 
 Despite this discussion, expect coordinate systems to occasionally be confusing.  Still,
 their usefulness in applications outweighs the inconvenience of being confused.  We will examine
@@ -1942,9 +2200,53 @@ Recall that $\R^3$ can be described as $\R^2\times\R$.  That is, any point in $\
 as a point in $\R^2$ coupled with a ``$z$-height.''  Cylindrical coordinates are obtained by
 writing points in $\R^2$ in polar coordinates and then adding a $z$ component.
 
-XXX Figure
+\begin{center}
+	\tdplotsetmaincoords{60}{110}
 
-It's related to rectangular coordinates by the formulas
+	\pgfmathsetmacro{\rvec}{.8}
+	\pgfmathsetmacro{\thetavec}{30}
+	\pgfmathsetmacro{\phivec}{60}
+
+	%start tikz picture, and use the tdplot_main_coords style to implement the display 
+	%coordinate transformation provided by 3dplot
+	\begin{tikzpicture}[scale=5,tdplot_main_coords]
+
+	%set up some coordinates 
+	%-----------------------
+	\coordinate (O) at (0,0,0);
+
+	%determine a coordinate (P) using (r,\theta,\phi) coordinates.  This command
+	%also determines (Pxy), (Pxz), and (Pyz): the xy-, xz-, and yz-projections
+	%of the point (P).
+	%syntax: \tdplotsetcoord{Coordinate name without parentheses}{r}{\theta}{\phi}
+	\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+
+	%draw figure contents
+	%--------------------
+
+	%draw the main coordinate system axes
+	\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+	\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+	\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+	%draw a vector from origin to point (P) 
+	\draw[-latex,color=mypink, thick] (O) -- (P);
+
+	%draw projection on xy plane, and a connecting line
+	\draw[dashed, color=lightgray, ->] (O) -- (Pxy) node[right, black] {$r$};
+	\draw[dashed, color=lightgray,->] (Pxy) -- (P) node[midway, above right, black,yshift=.2cm] {$z$};
+
+	%draw the angle \phi, and label it
+	%syntax: \tdplotdrawarc[coordinate frame, draw options]{center point}{r}{angle}{label options}{label}
+	\tdplotdrawarc{(O)}{0.2}{0}{\phivec}{anchor=north}{$\theta$};
+	\tdplotdrawarc[dashed,lightgray]{(O)}{0.4}{0}{360}{anchor=north}{};
+
+	\draw[fill=black] (P) circle (.4pt) node[right] {$(r,\theta, z)$};
+
+	\end{tikzpicture}
+\end{center}
+
+They are related to rectangular coordinates by the formulas
 \[
 	x=r\cos\theta\qquad
 	y=r\sin\theta\qquad
@@ -1961,7 +2263,26 @@ obtain an infinite family of concentric cylinders.  We can treat
 the case $a = 0$ (the $z$-axis) as a degenerate cylinder of
 radius 0.
 
-XXX Figure
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper,
+		    %width=12cm,
+		    %scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    ]
+		    \addplot3[surf, 
+		    z buffer=sort,samples=20,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=-2:3]
+			({2*cos(u)}, {2*sin(u)}, {v});
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 \begin{example}$\theta = \alpha$ describes a \emph{half
@@ -1969,7 +2290,56 @@ plane} making angle $\alpha$ with the positive $xz$-plane.
 In this half plane, $r$ can assume any non-negative
 value and $z$ can assume any value.
 
-XXX Figure
+	\begin{center}
+		\tdplotsetmaincoords{60}{110}
+
+		\pgfmathsetmacro{\rvec}{.5}
+		\pgfmathsetmacro{\thetavec}{30}
+		\pgfmathsetmacro{\phivec}{60}
+
+		%start tikz picture, and use the tdplot_main_coords style to implement the display 
+		%coordinate transformation provided by 3dplot
+		\begin{tikzpicture}[scale=3,tdplot_main_coords]
+
+		%set up some coordinates 
+		%-----------------------
+		\coordinate (O) at (0,0,0);
+
+		%determine a coordinate (P) using (r,\theta,\phi) coordinates.  This command
+		%also determines (Pxy), (Pxz), and (Pyz): the xy-, xz-, and yz-projections
+		%of the point (P).
+		%syntax: \tdplotsetcoord{Coordinate name without parentheses}{r}{\theta}{\phi}
+		\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+		\tdplotsetcoord{A}{.9}{0}{60}
+		\tdplotsetcoord{D}{.64}{180}{60}
+		\tdplotsetcoord{B}{1.35}{45}{60}
+		\tdplotsetcoord{C}{1.17}{125}{60}
+
+		%draw figure contents
+		%--------------------
+
+		%draw the main coordinate system axes
+		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+		%draw a vector from origin to point (P) 
+
+		\draw[fill=myorange, opacity=.4] (A) -- (B) -- (C) -- (D) --cycle;
+
+		%draw projection on xy plane, and a connecting line
+		\draw[dashed, color=lightgray] (O) -- (Bxy);
+
+
+		%draw the angle \phi, and label it
+		%syntax: \tdplotdrawarc[coordinate frame, draw options]{center point}{r}{angle}{label options}{label}
+		\tdplotdrawarc{(O)}{0.2}{0}{\phivec}{anchor=north}{$\alpha$};
+
+
+		\draw[fill=black] (P) node[right] {$\theta=\alpha$};
+
+		\end{tikzpicture}
+	\end{center}
 \end{example}
 \begin{example}  $z = mr$  describes an (infinite)
   cone centered
@@ -1979,7 +2349,7 @@ the origin and extends to infinity.  This ray makes angle
 $\arctan m$ with the $z$-axis, and if we let $\theta$
 vary, the ray rotates around the $z$-axis generating the
 cone.  Note also that if $m > 0$, the angle with the $z$-axis
-is acute and the cone lies above the $x,y$-plane.  If
+is acute and the cone lies above the $xy$-plane.  If
 $m < 0$, the angle is obtuse, and the cone lies below the
 $xy$-plane.  The case $m = 0$ yields the $x,y$-plane
 ($z = 0$) which may be considered a special `cone'.
@@ -1987,7 +2357,26 @@ $xy$-plane.  The case $m = 0$ yields the $x,y$-plane
 Note that in rectangular coordinates,  $z = mr$ becomes
 $z = m\sqrt{x^2 + y^2}$.
 
-XXX Figure
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper,
+		    %width=12cm,
+		    %scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    ]
+		    \addplot3[surf, 
+		    z buffer=sort,samples=20,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=0:3]
+			({2*v*cos(u)}, {2*v*sin(u)}, {v});
+	    \end{axis}
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 \begin{example}  $r^2 + z^2 = a^2$ describes a sphere
@@ -2024,10 +2413,69 @@ denotes the \emph{longitudinal angle}\index{longitudinal angle},
 and is the same as the $\theta$ from cylindrical coordinates.
 Again, we assume $\theta\in[0,2\pi)$.
 
-XXX Figure of spherical coords
+\begin{center}
+	\tdplotsetmaincoords{60}{110}
+
+	\pgfmathsetmacro{\rvec}{.8}
+	\pgfmathsetmacro{\thetavec}{30}
+	\pgfmathsetmacro{\phivec}{60}
+
+	%start tikz picture, and use the tdplot_main_coords style to implement the display 
+	%coordinate transformation provided by 3dplot
+	\begin{tikzpicture}[scale=5,tdplot_main_coords]
+
+	%set up some coordinates 
+	%-----------------------
+	\coordinate (O) at (0,0,0);
+
+	%determine a coordinate (P) using (r,\theta,\phi) coordinates.  This command
+	%also determines (Pxy), (Pxz), and (Pyz): the xy-, xz-, and yz-projections
+	%of the point (P).
+	%syntax: \tdplotsetcoord{Coordinate name without parentheses}{r}{\theta}{\phi}
+	\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+
+	%draw figure contents
+	%--------------------
+
+	%draw the main coordinate system axes
+	\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+	\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+	\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+	%draw a vector from origin to point (P) 
+	\draw[-latex,color=mypink, thick] (O) -- (P);
+
+
+
+
+	%draw the angle \phi, and label it
+	%syntax: \tdplotdrawarc[coordinate frame, draw options]{center point}{r}{angle}{label options}{label}
+	\tdplotdrawarc{(O)}{0.2}{0}{\phivec}{anchor=north}{$\theta$};
+
+	%set the rotated coordinate system so the x'-y' plane lies within the
+	%"theta plane" of the main coordinate system
+	%syntax: \tdplotsetthetaplanecoords{\phi}
+	\tdplotsetthetaplanecoords{\phivec}
+
+	%draw theta arc and label, using rotated coordinate system
+	\tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{0.5}{0}{\thetavec}{anchor=south west}{$\phi$}
+
+	%draw some dashed arcs, demonstrating direct arc drawing
+	\draw[dashed,tdplot_rotated_coords,] (\rvec,0,0) arc (0:90:\rvec) node (RHO) {};
+	\draw[dashed] (\rvec,0,0) arc (0:90:\rvec);
+
+	%draw projection on xy plane, and a connecting line
+	\draw[dashed, color=lightgray]  (Pxy) -- (P);
+	\draw[dashed, color=lightgray]  (O) -- (RHO);
+
+	\draw[fill=black] (P) circle (.4pt) node[right] {$(\rho,\theta, \phi)$};
+\draw (RHO) node[below right] {$\rho$};
+
+	\end{tikzpicture}
+\end{center}
 
 Note the reason we restrict $\phi$ to the interval $[0,\pi]$ (rather than
-$[0,2\pi)$. Fix $\rho$
+$[0,2\pi]$). Fix $\rho$
 and $\theta$.   If $\phi = 0$,
 the point is on the positive $z$-axis, and, as $\phi$ increases,
 the point swings down toward the negative $z$-axis. However, it stays
@@ -2038,8 +2486,6 @@ allow $\phi$ to increase further, the point swings into the
 Such points can be obtained just as well by swinging down from
 the positive $z$-axis in the opposite half plane determined by
 $\theta + \pi$.
-
-XXX Figure
 
 The following relationships hold between spherical coordinates,
 cylindrical coordinates, and rectangular coordinates. 
@@ -2097,7 +2543,67 @@ radius and center.  If we then let $\theta$ vary, the effect is
 to rotate the semi-circle about the $z$-axis and generate the
 sphere
 
-XXX Figure
+	\begin{center}
+		\tdplotsetmaincoords{60}{110}
+
+		\pgfmathsetmacro{\rvec}{.8}
+		\pgfmathsetmacro{\thetavec}{30}
+		\pgfmathsetmacro{\phivec}{60}
+
+		%start tikz picture, and use the tdplot_main_coords style to implement the display 
+		%coordinate transformation provided by 3dplot
+		\begin{tikzpicture}[scale=3,tdplot_main_coords]
+
+		%set up some coordinates 
+		%-----------------------
+		\coordinate (O) at (0,0,0);
+
+		%determine a coordinate (P) using (r,\theta,\phi) coordinates.  This command
+		%also determines (Pxy), (Pxz), and (Pyz): the xy-, xz-, and yz-projections
+		%of the point (P).
+		%syntax: \tdplotsetcoord{Coordinate name without parentheses}{r}{\theta}{\phi}
+		\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+
+		%draw figure contents
+		%--------------------
+
+		%draw the main coordinate system axes
+		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+		%draw the angle \phi, and label it
+		%syntax: \tdplotdrawarc[coordinate frame, draw options]{center point}{r}{angle}{label options}{label}
+		\tdplotdrawarc{(O)}{0.2}{0}{\phivec}{anchor=north}{$\theta$};
+
+		%set the rotated coordinate system so the x'-y' plane lies within the
+		%"theta plane" of the main coordinate system
+		%syntax: \tdplotsetthetaplanecoords{\phi}
+		\tdplotsetthetaplanecoords{\phivec}
+		
+		%draw theta arc and label, using rotated coordinate system
+		%\tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{0.5}{0}{\thetavec}{anchor=south west}{$\phi$}
+		
+		\draw[tdplot_rotated_coords] (0,0,0) arc (0:-90:-.4) node (X) {};
+		\draw[tdplot_rotated_coords, mypink, ultra thick] (0,0,0) arc (0:360:-.4);
+
+
+		%draw projection on xy plane, and a connecting line
+		\draw[dashed, color=lightgray]  (Pxy) -- (X);
+		\draw[dashed, color=lightgray]  (O) -- (Pxy);
+
+		\tdplotsetthetaplanecoords{30}
+		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\tdplotsetthetaplanecoords{90}
+		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\tdplotsetthetaplanecoords{120}
+		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\tdplotsetthetaplanecoords{150}
+		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\tdplotsetthetaplanecoords{180}
+		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\end{tikzpicture}
+	\end{center}
 \end{example}
 
 If we fix $\rho = a$, we obtain a sphere of radius $a$.
@@ -2116,7 +2622,59 @@ measured in degrees east or west of the Greenwich Meridian.
 That corresponds in our case to the positive and negative
 directions from the 0-meridian.  
 
-XXX Figure
+\begin{center}
+	\pgfplotsset{compat=1.9}
+	%\usetikzlibrary{arrows.meta}
+
+	\begin{tikzpicture}
+	\def\tilt{45}
+	\def\azimuth{30}
+	\begin{axis}[%
+	axis equal,
+	width=14cm,
+	height=14cm,
+	hide axis,
+	enlargelimits=0.3,
+	view/h=\tilt,
+	view/v=\azimuth,
+	scale uniformly strategy=units only,
+	colormap={bluewhite}{color=(blue) color=(white)},   
+	]
+	\coordinate (X) at (axis cs: 1,0,0);
+	\coordinate (-X) at (axis cs: -1,0,0);
+	\coordinate (Y) at (axis cs: 0,1,0);
+	\coordinate (-Y) at (axis cs: 0,-1,0);
+	\coordinate (Z) at (axis cs: 0,0,1);
+	\coordinate (-Z) at (axis cs: 0,0,-1);
+	\filldraw[ball color=white,draw=none] (axis cs: 0,0,0) circle (2.47cm);
+	    \pgfplotsinvokeforeach {-80,-60,...,80}{
+		\pgfplotsextra{ 
+		    \pgfmathsetmacro\sinVis{sin(#1)/cos(#1)*sin(30)/cos(30)}
+		    % angle of "visibility"
+		    \pgfmathsetmacro\angVis{asin(min(1,max(\sinVis,-1)))}
+		    \coordinate (X) at (axis cs: {cos(#1)},0,{sin(#1)});
+		    \draw [densely dashed, lightgray] (X) arc (0:360:{100*cos(#1)});
+		} }
+
+
+	\foreach \a in {0}
+	{ \pgfmathsetmacro{\Bound}{-60*cos(\a+45)}
+	    \addplot3[domain=\Bound:90, samples=45,samples y=0, mypink, ultra thick] ({cos(\a)*cos(x)},{sin(\a)*cos(x)},{sin(x)});
+	    \addplot3[domain=-90:\Bound, samples=45,samples y=0, densely dashed, mypink, ultra thick] ({cos(\a)*cos(x)},{sin(\a)*cos(x)},{sin(x)});
+	}
+
+	\foreach \a in {180}
+	{ \pgfmathsetmacro{\Bound}{-60*cos(\a+45)}
+	    \addplot3[domain=\Bound:90, samples=45,samples y=0] ({cos(\a)*cos(x)},{sin(\a)*cos(x)},{sin(x)});
+	    \addplot3[domain=-90:\Bound, samples=45,samples y=0, densely dashed] ({cos(\a)*cos(x)},{sin(\a)*cos(x)},{sin(x)});
+	}
+
+	\draw (4.1cm,2cm) node {0-meridian};
+
+	\end{axis}  
+	\end{tikzpicture}  
+\end{center}
+
 
 For $\phi = $ constant, we obtain the circle which is the
 intersection of the cone for that $\phi$ with the sphere.
@@ -2134,7 +2692,6 @@ The unique point with $\phi = 0$ is called the
 \emph{north pole}, that with $\phi = \pi$ is called the
 \emph{south pole}, and at the  poles $\theta$ is not well defined.
 
-XXX Figure
 
 \subsection{Coordinate Systems from Parameterizations}
 We've looked at several important coordinate systems for $\R^2$ and $\R^3$,
