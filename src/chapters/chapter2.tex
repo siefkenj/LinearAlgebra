@@ -160,26 +160,6 @@ points\footnote{ Mathematically, we say there is an \emph{isomorphism} between
 vectors and points.}.  As such, \emph{we will treat vectors and points
 as interchangeable}.
 
-\begin{exercises}
-	\begin{problist}
-		\prob   Find the displacement vector
-		from the point $P(7, 2, 9)$ to the point $Q(-2, 1, 4)$
-		in the form $a\xhat + b\yhat + c\zhat$.
-		\begin{solution}
-			$-9\xhat-1\yhat-5\zhat$
-		\end{solution}
-		\prob[\openstax]   For the following exercises, consider points $P(-1,3)$, $Q(1,5)$, and $R(-3,7)$.
-			Determine the requested vectors and express each of them i. in component form
-			and ii. by using the standard unit vectors.
-			\begin{enumerate}
-				\item $\overrightarrow{PQ}$
-				\item $\overrightarrow{PR}$
-				\item $\overrightarrow{QP}$
-				\item $\overrightarrow{RP}$
-			\end{enumerate}
-	\end{problist}
-
-\end{exercises}
 
 \section{Vector Arithmetic}
 \label{SECVECTORPROPS}
@@ -338,6 +318,35 @@ has length $\abs{k}$.  Further, we can always turn a vector into a unit vector.
 		\frac{1}{\norm{\vec v}}\norm{\vec v}=1.
 	\]
 \end{example}
+
+\begin{exercises}
+    \begin{problist}
+        \prob   Find the displacement vector
+        from the point $P(7, 2, 9)$ to the point $Q(-2, 1, 4)$
+        in the form $a\xhat + b\yhat + c\zhat$.
+        \begin{solution}
+            $-9\xhat-1\yhat-5\zhat$
+        \end{solution}
+
+        \prob[\openstax]   For the following exercises, consider points $P(-1,3)$, $Q(1,5)$, and $R(-3,7)$.
+        Determine the requested vectors and express each of them i. in component form
+        and ii. by using the standard unit vectors.
+        \begin{enumerate}
+            \item $\overrightarrow{PQ}$
+            \item $\overrightarrow{PR}$
+            \item $\overrightarrow{QP}$
+            \item $\overrightarrow{RP}$
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $\overrightarrow{PQ} = (2,2) = 2\xhat + 2\yhat$.
+                \item   $\overrightarrow{PR} = (-2, 4) = -2\xhat + 4\yhat$.
+                \item   $\overrightarrow{QP} = (-2,-2) = -2\xhat - 2\yhat$.
+                \item   $\overrightarrow{RP} = (2, -4) = 2\xhat - 4\yhat$.
+            \end{enumerate}
+        \end{solution}
+    \end{problist}
+\end{exercises}
 
 
 \section{Coordinates}
@@ -1181,17 +1190,41 @@ compute a projection without computing cosine of anything!
 
 		\prob   Use the dot product to determine if the points $P(3,1,2)$, $Q(-1,0,2)$, and
 			$R(11, 3, 2)$ are collinear.
+            \begin{solution}
+                $P$, $Q$ and $R$ are collinear if and only if the angle between $\overrightarrow{PQ}$
+                and $\overrightarrow{QR}$ is $180^\circ$.  But $\overrightarrow{PQ}=(-4,-1,0)$ and
+                $\overrightarrow{QR} = (12,3,0)$. So $\overrightarrow{PQ}\cdot \overrightarrow{QR} = -51
+                = \norm{\overrightarrow{PQ}}\,\norm{\overrightarrow{QR}} \cos \theta = 51\cos \theta$,
+                which implies that $\cos \theta=-1$ and so $\theta=180^\circ$ and the points are
+                collinear.
+            \end{solution}
 
-		\prob[\openstax]	For the following exercises, the vectors $\vec{u}$ and $\vec{v}$ are given. Find
-			the projection $\vec{w} = \Proj_{\vec{u}}\vec{v}$ of vector $\vec{v}$ onto
-			vector $\vec{u}$. Express your answer in component form.
+        \prob[\openstax]	For the following exercises, the vectors $\vec{u}$ and $\vec{v}$ are given.
+        Find the projection $\vec{w} = \Proj_{\vec{u}}\vec{v}$ of vector $\vec{v}$ onto vector
+        $\vec{u}$. Express your answer in component form.
 			\begin{enumerate}
 				\item	$\vec{u} = 5\xhat + 2\yhat$, $\vec{v} = 2\xhat + 3\yhat$.
 				\item	$\vec{u} = (−4, 7)$, $\vec{v} = (3, 5)$
 				\item	$\vec{u} = 3\xhat + 2\zhat$, $\vec{v} = 2\yhat + 4\zhat$
 				\item	$\vec{u} = (4, 4, 0)$, $\vec{v} = (0, 4, 1)$
 			\end{enumerate}
-		\prob[\openstax]	Consider the vectors $\vec{u} = 4\xhat − 3\yhat$ and $\vec{v} = 3\xhat + 2\yhat$
+            \begin{solution}
+                Generally, the projection of $\vec{v}$ onto $\vec{u}$ is given by
+                \[ 
+                    \Proj_{\vec{u}}\vec{v} = \frac{\vec{u} \cdot \vec{v}}{\vec{u} \cdot \vec{u}}
+                    \vec{u}.
+                \]
+                Thus, using this formula, we can compute the following.
+                \begin{enumerate}
+                    \item   $\vec{w} = [16/29] \, (5\xhat + 2\yhat)$.
+                    \item   $\vec{w} = [23/65] \, (-4,7)$.
+                    \item   $\vec{w} = [8/13] \, (3\xhat + 2\zhat)$.
+                    \item   $\vec{w} = [1/2] \, (4,4,0)$.
+                \end{enumerate}
+            \end{solution}
+
+        \prob[\openstax]	Consider the vectors $\vec{u} = 4\xhat - 3\yhat$ and $\vec{v} = 3\xhat +
+        2\yhat$
 			\begin{enumerate}
 				\item	Find the components of vector $\vec{w} = \Proj_{\vec{u}}\vec{v}$
 					that represents the projection of $\vec{v}$ onto $\vec{u}$.
@@ -1201,6 +1234,25 @@ compute a projection without computing cosine of anything!
 					$\vec{u}$ and $\vec{q}$ is a vector orthogonal to the direction
 					of $\vec{u}$.
 			\end{enumerate}
+            \begin{solution}
+                \begin{enumerate}
+                    \item   $\vec{w} = [\vec{u} \cdot \vec{v} / \vec{u} \cdot \vec{u}] \, \vec{u}$.
+                        Therefore, we find that $\vec{w} = [6/25] \, (4,-3)$, which is to say that the
+                        first component of $\vec{w}$ is $24/25$ and the second component of $\vec{w}$ is
+                        $-18/25$.
+                    \item   Begin by noting that $\vec{w} = \Proj_{\vec{u}}\vec{v}$. Since $\vec{w}$
+                        points in the same direction as $\vec{u}$, then it follows that $\vec{q}$ must
+                        be orthogonal to $\vec{w}$, which is to say that $\vec{q} = \Perp_{\vec{u}}
+                        \vec{v} = \vec{v} - \Proj_{\vec{u}} \vec{v}$. Then clearly $\vec{v} = \vec{w} +
+                        \vec{q} = \Proj_{\vec{u}}\vec{v} + \vec{v} - \Proj_{\vec{u}}\vec{v}$.
+                        Computation of $\vec{w}$ and $\vec{q}$ gives that
+                        \[
+                            \vec{w} = \left( \frac{24}{25}, \frac{-18}{25} \right) \quad \vec{q} =
+                            \left( \frac{51}{25}, \frac{68}{25} \right)  
+                        \]
+                \end{enumerate}
+            \end{solution}
+
 		\prob[\openstax]	Consider the vectors $\vec{u} = 2\xhat + 4\yhat$ and $\vec{v} = 4\xhat + 2\zhat$
 			\begin{enumerate}
 				\item	Find the components of vector $\vec{w} = \Proj_{\vec{u}}\vec{v}$
@@ -1211,6 +1263,19 @@ compute a projection without computing cosine of anything!
 					$\vec{u}$ and $\vec{q}$ is a vector orthogonal to the direction
 					of $\vec{u}$.
 			\end{enumerate}
+            \begin{solution}
+                \begin{enumerate}
+                    \item   $\vec{w} = [2/5] \, (2,4,0)$, which is to say that the first component of
+                        $\vec{w}$ is $4/5$, the second component of $\vec{w}$ is $8/5$, and the last
+                        component of $\vec{w}$ is $0$.
+                    \item   Computing $\vec{w} = \Proj_{\vec{u}}\vec{v}$ and $\vec{q} = \vec{v} -
+                        \Proj_{\vec{u}}\vec{v}$ gives
+                        \[
+                            \vec{w} = \left( \frac{4}{5}, \frac{8}{5}, 0 \right) \quad
+                            \vec{q} = \left( \frac{16}{5}, -\frac{8}{5}, 2 \right)
+                        \]
+                \end{enumerate}
+            \end{solution}
 	\end{problist}
 \end{exercises}
 
@@ -2037,4 +2102,114 @@ plane $(2\vec n)\cdot(\vec x-\vec p)=0$.
 
 
 \begin{exercises}
+    \begin{problist}
+        \prob   Give, in vector form, an equation for the line that
+        \begin{enumerate}
+            \item   passes through $(0, 0, 0)$ and is parallel to $\vec{v} = 3\xhat +4\yhat + 5\zhat$,
+            \item   passes through $(1, 2, 3)$ and $(4, -1, 2)$,
+            \item   passes through $(1, 1)$ and is orthogonal to $\vec{v} = (3, 1)$,
+            \item   passes through $(9, -2, 3)$ and $(1, 2, 3)$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $r(t) = 3t\xhat + 4t\yhat + 5t\zhat$
+                \item   $r(t) = (1+3t)\xhat + (2-3t)\yhat + (3-t)\zhat$
+                \item   $r(t) = (1-t)\xhat + (1+3t)\yhat$
+                \item   $r(t) = (1+8t)\xhat + (2-4t)\yhat + 3\zhat$.
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Determine if the lines with the following vector equations intersect:
+        \[
+            \vec{p}(t) = \mat{1\\-1\\2} + t\mat{2\\1\\1} \quad
+            \vec{r}(t) = \mat{0\\1\\1} + t\mat{1\\0\\-1}.
+        \]
+        \begin{solution}
+            The lines intersect if they have at least one common point between them. Therefore, if we
+            can find $t, s \in \R$ so that $p(t) = r(s)$, then the lines will intersect. Thus if $p(t) =
+            r(s)$ then
+            \[
+                \mat{1\\-1\\2} + t\mat{2\\1\\1} = \mat{0\\1\\1} + s\mat{1\\0\\-1}.  
+            \]
+            Therefore, we want to find $t, s \in \R$ so that
+            \[
+                \mat{1\\-2\\1} = s\mat{1\\0\\-1} - t\mat{2\\1\\1}.
+            \]
+            In particular, it must be true that $-t = -2$, which says that $t = 2$. Thus, by
+            substitution
+            \[
+                \mat{5\\0\\3} = s\mat{1\\0\\-1}.  
+            \]
+            There are no selections of $s \in \R$ for which this is true, which says that there is no
+            pair $t,s \in \R$ so that $p(t) = r(s)$. Therefore the lines do not intersect.
+        \end{solution}
+
+        \prob   Find an equation for the plane with the given normal vector and containing the given
+        point:
+        \begin{enumerate}
+            \item   $\vec{n} = (2, -1, 3)$, $P(1, 2, 0)$
+            \item   $\vec{n} = (1, 0, 3)$, $P(2, 4, 5)$
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $2(x-1) - (y-2) + 3z = 0$.
+                \item   $(x-2) + 3(z-5) = 0$.
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Write an equation for the plane that
+        \begin{enumerate}
+            \item   passes through $(1, 4, 3)$ and is orthogonal to the line with equation $\vec{r}(t) =
+                (1 + t, 2 + 4t, t)$,
+            \item   passes through the origin and is parallel to the plane with equation $3x + 4y - 5z =
+                -1$,
+            \item   passes through $(0, 0, 0)$, $(1, -2, 8)$, and $(-2, -1, 3)$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $x + 4y + z = 20$
+                \item   $3x + 4y -5z = 0$
+                \item   $2x - 19y -5z = 0$.           
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Find a vector (parametric) equation for the line of intersection of the planes with
+        equations $2x + 3y - z = 1$ and $x - y - z = 0$.
+        \begin{solution}
+            $\vec{r}(t) = (1-4t, t, 1-5t)$ is one solution.
+        \end{solution}
+
+        \prob   Find the angle between the normals to the following planes:
+        \begin{enumerate}
+            \item   the planes with equations $x + 2y -z = 2$ and $2x - y + 3z = 1$,
+            \item   the plane with equation $2x+3y-5z=0$ and the plane containing the points $(1,3,-2)$,
+                $(5,1,3)$, and $(1,0,1)$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $\theta = \cos^{-1}\left(\frac{-3}{2\sqrt{21}}\right)$
+                \item   $\theta = \cos^{-1}\left(\frac{14}{\sqrt{38}\,\sqrt{41}}\right)$
+            \end{enumerate}
+        \end{solution}
+
+        \prob[\grout]    Two of these points are on the same side of the plane $3x+2y-2z=0$. Which two
+        are they? $P(10,3,2)$, $Q(-2,5,3)$, $R(-2,5,1)$.
+        \begin{solution}
+            The normal vector $\vec{n} = (3,2,-2)$ points towards one side of the plane. If any point
+            lies on this side of the plane, then it will form an angle with the normal vector that is
+            less than $90^{\circ}$. If any point lies on the opposite side of the plane, then it will
+            form an angle with the normal vector that is larger than $90^{\circ}$. So we should
+            calculate the angles each of $P,Q$ and $R$ make with $\vec{n}$ using the dot-product.
+            \begin{enumerate}
+                \item   Considering $P$, we find that $\theta = \cos^{-1} \left(\frac{32}{\sqrt{113}\,
+                    \sqrt{17}}\right) < 90^{\circ}$.
+                \item   Considering $Q$, we find that $\theta = \cos^{-1}
+                    \left(\frac{-2}{\sqrt{38}\,\sqrt{17}}\right) > 90^{\circ}$.
+                \item   Considering $R$, we find that $\theta = \cos^{-1}
+                    \left(\frac{2}{\sqrt{30}\,\sqrt{17}}\right) < 90^{\circ}$.
+            \end{enumerate}
+            Since $P$ and $R$ both make angles with $\vec{n}$ that are larger than $90^{\circ}$, they
+            must lie on the same side of the plane.
+        \end{solution}
+    \end{problist}
 \end{exercises}
