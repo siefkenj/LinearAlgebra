@@ -1754,10 +1754,20 @@ to one in $\R^2$.
 \end{example}
 
 \begin{example}
-	Find an isometric parameterization the cylinder with radius one and height one centered at
+	Find an isometric parameterization the cylinder, $\mathcal C$, with radius one and height one centered at
 	the origin in $\R^3$ and oriented with height along the $z$-axis.
 
-	XXX Finish
+	If we cut this infinite cylinder vertically, we could unwrap it into
+	a rectangle of width $2\pi$ and infinite height.  Further, this procedure would
+	change no lengths or areas.  So, we would expect to be able to find an isometric
+	parameterization $\vec p:[0,2\pi]\times\R\to\mathcal C$.
+
+	Since we know $t\mapsto (\cos t,\sin t)$ arc-length parameterizes a circle, we guess
+	\[
+		\vec p(a,b) = \matc{\cos a\\\sin a\\b}.
+	\]
+	If we can verify that the speed of $\vec p$ with respect to $a$ and $b$ is 1 and that
+	it preserves area, we're done.  We leave this as an exercise to the reader.
 \end{example}
 
 Isometric parameterizations are really neat, and as we'll see in the future, if we have an isometric
@@ -1956,11 +1966,13 @@ have nice descriptions in polar coordinates.
 \begin{example}
 	Graph the function whose equation is given in polar coordinates by $r=\sin\theta$.
 
-	XXX Finish
-
+	First off, at $\theta=0$ and $\theta=\pi$, we see that $r=0$.  Further,
+	$r$ achives a maximum of $1$ at $\theta=\pi/2$.  Plotting these points, $(0,0)=(0,\pi)$
+	is the origin, and the point $(1,\pi/2)$ is the same as $(0,1)$ in rectangular coordinates.
+	If we continue plotting easy-to-compute $(r,\theta)$ pairs, we see that the graph
+	is a circle of radius $1/2$.
 
 	\begin{center}
-
 	\begin{tikzpicture}[scale=2]
 
 		% Draw the lines at multiples of pi/12
@@ -2697,10 +2709,10 @@ The unique point with $\phi = 0$ is called the
 We've looked at several important coordinate systems for $\R^2$ and $\R^3$,
 but any parameterization of $\R^2$ or $\R^3$ gives rise to a coordinate system.
 
-Consider $\vec p:\R^2\to\R^2$ given by $\vec p(a,b)=(a+b,a-b)$.  
+Consider $\vec p:\R^2\to\R^2$ given by $\vec p(a,b)=(a-b,a+b)$.  
 
 \begin{exercise}
-	Show that $\vec p:\R^2\to\R^2$ given by $\vec p(a,b)=(a+b,a-b)$ is
+	Show that $\vec p:\R^2\to\R^2$ given by $\vec p(a,b)=(a-b,a+b)$ is
 	a parameterization.  That is, that it is a continuous 
 	one-to-one and onto function.
 \end{exercise}
@@ -2709,19 +2721,88 @@ Geometrically, we can view $\vec p$ as taking the plane, rotating it by $45^\cir
 and then
 stretching it uniformly in all directions by a factor of $\sqrt{2}$.
 
-XXX Figure
-
 Alternatively, we can imagine that $\vec p$ describes how to take points described
 in ``$ab$-coordinates'' and rewrite them in rectangular coordinates.  Call this new coordinate
 system $\mathcal A$. We then get that
 $\mathcal A$ coordinates relate to rectangular coordinates by
 \[
-	x=a+b\qquad\text{and}\qquad y=a-b.
+	x=a-b\qquad\text{and}\qquad y=a+b.
 \]
 Drawing the lines $a=0$ and $b=0$ we see that $\mathcal A$ coordinates are very similar to
 rectangular coordinates but with rotated and scaled axes.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$a$},
+			ylabel={$b$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\foreach \i in {-1,...,5} {
+		\addplot[color=myorange, dashed, thick, domain=-3:5] ({\i},{x});
+		\addplot[color=blue, dashed, thick, domain=-3:6] ({x},{\i});
+%		\addplot[color=blue, dashed] ({1}{x});
+}
+		\draw[fill] (2,-1) circle (1.5pt) node (A) {};
+		\end{axis}
+
+
+
+		\path[thick] (3.5,3.5) node[above] {$(a,b)=(2,-1)$} edge[bend left, ->] node[] {} (A);
+
+
+		\begin{axis}[
+			%at=(plot1.east),
+			at={(7.5,0)},
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1.4,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\foreach \i in {-5,...,5} {
+		\addplot[color=myorange, dashed, thick, domain=-3:5] ({\i-x},{x+\i});
+		\addplot[color=blue, dashed, thick, domain=-3:6] ({x-\i},{\i+x});
+}
+
+		\draw[fill] (3,1) circle (1.5pt) node (B) {};	
+		\end{axis}	
+
+		\path[thick] (3.5+7.5,3.5) node[above] {$(x,y)=\vec p(2,-1)$} edge[bend left, ->] node[] {} (B);
+
+	\end{tikzpicture}
+\end{center}
 
 There might be good reason to use $\mathcal A$ coordinates, depending on your application.
 For example, suppose you were working on a construction project and you are using rectangular
@@ -2746,7 +2827,6 @@ or that $\R^3$ is parameterized by spherical coordinates\footnote{
 	Rest assured, after enough mistakes, one learns where one needs to tread carefully
 	and where one can be more lax.
 }.
-
 
 \begin{exercises}
 \end{exercises}
