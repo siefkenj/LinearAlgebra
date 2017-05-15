@@ -896,21 +896,21 @@ The proof of Theorem \ref{THMFLUXINT} amounts to careful bookkeeping, but it
 reveals an interesting fact.  There is a correspondence between
 $a \dd y\wedge \dd z+b\dd z\wedge \dd x+c\dd x\wedge \dd y$
 and the vector $(a,b,c)$.  That is,
-\begin{alignat*}{2}
-	\dd y&\wedge \dd z\quad\text{ acts like } \quad&&\xhat \\
-	\dd z&\wedge \dd x\quad\text{ acts like } \quad&&\yhat \\
-	\dd x&\wedge \dd y\quad\text{ acts like } \quad&&\zhat 
+\begin{alignat*}{4}
+	\dd y&\wedge &&\dd z\quad&&\text{ acts like } \quad&&\xhat \\
+	\dd z&\wedge &&\dd x\quad&&\text{ acts like } \quad&&\yhat \\
+	\dd x&\wedge &&\dd y\quad&&\text{ acts like } \quad&&\zhat 
 \end{alignat*}
 at least when thinking about flux integrals.  We will explore this
-connection further when discussing the \emph{Hodge dual}\index{Hodge dual
+connection further when we discuss the \emph{Hodge dual}\index{Hodge dual
 operator}.
 
 \section{Higher-order Forms}
 
 We will start by defining $n$-covectors after a minor extension
 of the laws of area.  A $3$-covector is an object that measures
-volume, a $4$-covector measures four-dimensional volume, etc. and so
-an $n$-covector must input $n$ vectors and return a scalar.  Further,
+volume, a $4$-covector measures four-dimensional volume, and so on.
+An $n$-covector must input $n$ vectors and return a scalar.  Further,
 every pair of those vectors must satisfy the laws of area.  We call this extension
 of the laws of area to collections of $n$ vectors the \emph{laws of volume}\index{laws
 of volume}.  The laws of volume together with multi-linearity provide a sufficient
@@ -919,7 +919,7 @@ basis to define $n$-covectors\index{$n$-covector}.
 \begin{definition}[$n$-covector]
 	Let $V$ be a vector space.
 	A function $\bm\alpha:\underbrace{V\times \cdots \times V}_{n}
-	\to \R$ is called an \emph{$n$-covector} if it multi-linear
+	\to \R$ is called an \emph{$n$-covector} if it is multi-linear
 	and obeys the laws
 	of volume. 
 \end{definition}
@@ -961,12 +961,12 @@ of covectors.
 	\]
 \end{definition}
 This definition merely says: to find $\bm\alpha^1\wedge\cdots \wedge \bm\alpha^n$,
-take each $\bm\alpha^i$ out, one by one; multiply $\bm\alpha^i$ by the wedge
+take each $\bm\alpha^i$ out one by one; multiply $\bm\alpha^i$ by the wedge
 product of the remaining terms in order; sum the result together with a $+$
 if $i$ is odd and a $-$ if $i$ is even.
 
 It can be cumbersome to evaluate an $n$-covector directly from the definition.
-Fortunately the theories of linear algebra provide
+Fortunately, linear algebra provides
 efficient ways to evaluate an $n$-fold
 wedge product.  We won't go through them here, but we will explore
 some consequences of the definition.
@@ -987,7 +987,8 @@ By using the alternating
 property of the wedge product, we can rearrange large wedge products.   
 The laws of volume state if the expression $\bm\beta\wedge\bm\beta$
 ever occurs in a wedge product, the wedge product must be zero.
-Therefore, if two $\bm\beta$'s ever occur in a wedge product, the product must be zero\footnote{
+By using the alternating
+property, we conclude that if two $\bm\beta$'s ever occur in a wedge product, the product must be zero\footnote{
 Move the $\bm\beta$'s to the back---if there are two or more you'll see a $\bm\beta\wedge\bm\beta$.}.
 
 \subsection{$n$-forms}
