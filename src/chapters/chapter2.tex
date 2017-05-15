@@ -523,10 +523,9 @@ pictures, we have a notion of a right-handed three-dimensional coordinate
 system given by the \emph{right-hand rule}.
 
 \begin{center}
-	\usetikzlibrary{patterns,decorations.pathreplacing}
-	\hspace{-3.5cm}
 	\begin{tikzpicture}
 		\begin{axis}[
+			name=plot0,
 		    anchor=origin,
 		    scale mode=scale uniformly,
 			scale=2,
@@ -550,15 +549,15 @@ system given by the \emph{right-hand rule}.
 		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
 		]
 
+
 		\end{axis}
-		\draw[] (.2,2) node[right,myorange!60!black] {Right Handed};
-	\end{tikzpicture}
-	\hspace{-2cm}
-	\begin{tikzpicture}
+
 		\begin{axis}[
-		    anchor=origin,
+		    name=plot1,
+			at=(plot0.right of south east),
 		    scale mode=scale uniformly,
 			scale=2,
+			xshift=-1cm,
 		    x dir=reverse,
 		    y dir=reverse,
 		    %disabledatascaling,
@@ -580,14 +579,10 @@ system given by the \emph{right-hand rule}.
 		    zlabel style={at={(ticklabel* cs:1)},anchor=south},
 		    ylabel style={at={(ticklabel* cs:0)},anchor=east}
 		]
-
 		\end{axis}
-		\draw[] (.2,2) node[right,myorange!60!black] {Right Handed};
-	\end{tikzpicture}
-	\hspace{-1cm}
-	\begin{tikzpicture}
 		\begin{axis}[
-		    anchor=origin,
+		    name=plot2,
+			at=(plot1.right of south east),
 		    scale mode=scale uniformly,
 			scale=2,
 		    x dir=reverse,
@@ -610,11 +605,14 @@ system given by the \emph{right-hand rule}.
 		    zlabel style={at={(ticklabel* cs:1)},anchor=south},
 		    ylabel style={at={(ticklabel* cs:1)},anchor=west}
 		]
-
 		\end{axis}
-		\draw[] (.2,2) node[right,mypink] {Left Handed};
+
+
+
+		\draw[] (plot0.north) node[yshift=-1cm,myorange!60!black] {Right Handed};
+		\draw[] (plot1.north) node[yshift=-1cm,myorange!60!black] {Right Handed};
+		\draw[] (plot2.north) node[yshift=-1cm,mypink!80!black] {Left Handed};
 	\end{tikzpicture}
-	\hspace{-6cm}
 \end{center}
 \begin{center}
 \definecolor{ce5d4b1}{RGB}{229,212,177}
@@ -623,7 +621,6 @@ system given by the \emph{right-hand rule}.
 \definecolor{c2828ff}{RGB}{40,40,255}
 \definecolor{ce12828}{RGB}{225,40,40}
 
-\vspace{-2cm}
 \begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-1.000000, xscale=1.000000, inner sep=0pt, outer sep=0pt]
 \path[draw=black,fill=ce5d4b1,line width=1.109pt] (197.7203,128.5199) ..
   controls (187.5579,127.1341) and (171.3905,117.8956) .. (169.0809,116.5099) ..

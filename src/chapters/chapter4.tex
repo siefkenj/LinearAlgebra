@@ -821,10 +821,11 @@ in the following problems.
 
 \section{Rates of Change and the Directional Derivative}
 	
-For a function $f:\R\to\R$ of one variable, we have the idea of
+For a function $f:\R\to\R$ of one variable, we can talk about
 the \emph{rate of change} of $f$.  We might ask, ``rate of change with
 respect to what?''  For a function of one variable, this question has an obvious
-answer---the rate of change with respect to the only thing that varies!
+answer---the rate of change with respect to the only thing that varies, i.e., the function's
+input!
 If $g:\R^n\to\R$ is a multi-variable function, the question of ``what is the rate of change
 of $g$?'' has a less obvious answer.  After all, there are multiple variables and
 infinitely many directions in the domain.
@@ -833,12 +834,44 @@ Consider the function $g:\R^2\to\R$ where $g(x,y)=(x-2)^2+y^2$.  Let $\vec u$ be
 vector.  Now, starting at $(0,0)$, we might ask approximately how much $g$ changes
 when we move $\alpha$ units away from $(0,0)$ in the direction $\vec u$.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+
+	    \begin{axis}[grid=major,view={-30}{15},zmin=0,
+		    colormap/copper
+		    ]
+      \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=.5] {(x-2)^2+y^2};
+		    %\addplot3 [restrict z to domain=0:9, data cs=polar, domain=30:389, y domain=0:3, blue,smooth] (x, y, 9 - y^2);
+		\pgfmathsetmacro{\d}{-50}
+		\pgfmathsetmacro{\xx}{cos(\d)}
+		\pgfmathsetmacro{\yy}{sin(\d)}
+
+		\def\xcoord(#1){(#1)*cos(\d)}
+		\def\ycoord(#1){(#1)*sin(\d)}
+		\def\zcoord(#1){(\xcoord{#1}-2)^2+(\ycoord{#1})^2}
+
+		\pgfmathsetmacro{\zz}{(cos(\d)-2)^2+sin(\d)^2}
+		\draw[->, mypink, thick] (0,0,0) -- ({cos(\d)},{sin(\d)},0) node[midway, below] {$\alpha\vec u$};
+
+		\addplot3[domain=-2:3.85, samples y=1, white] ({x*cos(\d)},{x*sin(\d)},{(x*cos(\d)-2)^2+(x*sin(\d))^2});
+
+
+
+		\draw[densely dashed, thick] (0,0,0) -- (0,0,4) node[] (A) {};
+		\draw[densely dashed, thick] (\xx,\yy,0) -- (\xx,\yy, {(\xx - 2)^2+(\yy)^2}) node[] (B) {};
+%		\draw[->, mypink, thick] (0,0,0) -- ({cos(\d)},{sin(\d)},\zz);
+	    \end{axis}
+		\draw (-1,0) node {$g(\vec 0)$} edge[bend left, ->, white, ultra thick] node[] {} (A) edge[bend left, ->,black] node[] {} (A);
+		\draw (3,-1) node {$g(\alpha\vec u)$} edge[bend right, ->, white, ultra thick] node[] {} ([xshift=.5pt, yshift=-1.5pt]B) edge[bend right, ->] node[] {} (B);
+
+	  \end{tikzpicture}
+\end{center}
 
 Since $\vec u$ is a unit vector, the displacement in the domain is $\alpha\vec u$, and so the
 exact change in $g$ from $\vec 0$ to $\alpha\vec u$ is $g(\alpha\vec u)-g(\vec 0)$.  The approximate
 \emph{rate} of change\index{rate of change} is then $\frac{g(\alpha\vec u)-g(\vec 0)}{\alpha}$.  Taking
-a limit as $\alpha\to 0$ will give us an instantaneous rate of change---one worth name.
+a limit as $\alpha\to 0$ will give us an instantaneous rate of change---one worth naming.
 
 \begin{definition}[Rate of change with respect to distance]
 	For a function $f:\R^n\to\R$, the \emph{rate of change with respect to distance} of $f$
