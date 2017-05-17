@@ -725,12 +725,65 @@ into \emph{annular sectors}.
 			]
 			\end{axis}
 
-		\draw ([xshift=.4cm]plot0.east) node[above right] {Annular sector} edge[bend right, ->] (39.375:2.25);
+		\draw ([xshift=.4cm]plot0.east) node[above right] (A) {Annular sector} edge[bend right, ->] (39.375:2.25);
+
+	\begin{scope}[xshift=7cm]
+		\begin{scope}
+			\clip (-.5,-.5) rectangle (3,3);
+			% Draw the lines at multiples of pi/12
+			\foreach \ang in {0,...,31} {
+			  \draw[gray!10] (0,0) -- (\ang * 180 / 16:4.3);
+			}
+			
+			% Concentric circles and radius labels
+			\foreach \s in {0, .5,..., 4} {
+			  \draw[gray!10] (0,0) circle (\s);
+			}
+
+			\foreach \ang in {3,4} {
+			  \draw[densely dashed,myorange] (0,0) -- (\ang * 180 / 16:4.3);
+			}
+			\foreach \s in {2, 2.5} {
+			  \draw[densely dashed,mypink] (0,0) circle (\s);
+			}
+		\end{scope}
+
+		\draw[<->] (61.875:2) -- (61.875:2.5) node[midway,above left,yshift=-.1cm] {$\Delta r$};
+		
+		\draw[<->] (33.75:3.25) arc (33.75:45:3.25) node[midway, above right] {$\Delta \theta$};
+		
+		\draw (-11.25:2) node[below,mypink] {$r=r_0$};
+		\draw (27:3.5) node[right, xshift=-.4cm,myorange] {$\theta=\theta_0$};
+		
+		\draw[fill opacity=0.05, fill=blue] (33.75:2) -- (33.75:2.5) arc (33.75:45:2.5) -- (45:2) arc (45:33.75:2);
+		
+				\begin{axis}[
+				    anchor=origin,
+					name=plot0,
+				    set layers=standard,
+				    disabledatascaling,
+				    xmin=-.25,xmax=1.5,
+				    ymin=-.25,ymax=1.5,
+				    x=2cm,y=2cm,
+				    grid=both,
+				    grid style={line width=.1pt, draw=gray!10},
+				    %major grid style={line width=.2pt,draw=gray!50},
+				    axis lines=middle,
+				    minor tick num=0, grid=none,
+				    enlargelimits={abs=0.1},
+				    axis line style={latex-latex},
+				    ticklabel style={font=\tiny,fill=white},
+					xticklabels={,,},
+					yticklabels={,,},
+				    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+				    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+				]
+				\end{axis}
+
+	\end{scope}
 
 	\end{tikzpicture}
 \end{center}
-
-XXX Figure comparing rectangular chopping and annular sector chopping.
 
 When we compute the exact area of the annular sector between the curves
 $\theta=\theta_0$, $\theta=\theta_0+\Delta\theta$, $r=r_0$, and $r=r_0+\Delta r$, 
