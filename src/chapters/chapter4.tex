@@ -155,7 +155,7 @@ Chapter 10 is a good reference for this material.
 	    \begin{axis}[grid=major,view={20}{20},z buffer=sort,
 		    %shader=faceted interp,
 		    %patch type=biquadratic,
-		    colormap/hot,
+		    colormap/viridis,
 		    %width=12cm,
 		    %scale mode=scale uniformly,
 		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
@@ -165,7 +165,7 @@ Chapter 10 is a good reference for this material.
 		    restrict z to domain=0:5
 		    ]
 		    %\addplot3[surf, domain=-4:4, samples=30]{1/(x*x+y*y)};
-		    \addplot3[surf, 
+		    \addplot3[surf, point meta min=-1,
 		    z buffer=sort,samples=20, samples y=35,
 			variable=\u, variable y=\v,
 			domain=-180:180, y domain=.2:4]
@@ -1002,10 +1002,79 @@ $\mathcal S$ by the $xy$-plane, by composing $\vec p$ and $\vec r_x$, we will ge
 of a curve on $\mathcal S$.  That is, $\vec c=\vec p\circ \vec r_x$ parameterizes the curve
 on the surface $\mathcal S$ that when viewed from above looks like the line $y=a_y$.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={-50}{25},zmin=0,
+		    colormap/copper,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\addplot3[domain=-1:5, samples y=1, mypink, thick] ({x},{0},{0});
+		\addplot3[domain=-3:3, samples y=1, mygreen, thick] ({0},{x},{0});
+
+        \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=1] {-(x-2)^2-y^2+20};
+
+		\addplot3[domain=-1:5, samples y=1, mypink, thick] ({x},{0},{-(x-2)^2-0^2+20}) node[midway, above right] {$\vec p\circ \vec r_y$};
+		\addplot3[domain=-3:3, samples y=1, mygreen, thick] ({0},{x},{-(0-2)^2-x^2+20}) node[at start, right, mygreen!80!black] {$\vec p\circ \vec r_x$};
+
+		\draw[fill] (0,0,16) circle (1.5pt) node (A) {} node[right] {$\vec a$};
+
+	    \end{axis}
+
+	    \begin{axis}[grid=major,view={270}{90},zmin=0,
+		    colormap/copper,
+			name=plot1,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			at=(plot0.right of south east),
+			xshift=.2cm
+		    ]
+
+		\addplot3[domain=-1:5, samples y=1, mypink, thick] ({x},{0},{0});
+		\addplot3[domain=-3:3, samples y=1, mygreen, thick] ({0},{x},{0});
+
+        \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=1] {-(x-2)^2-y^2+20};
+
+		\addplot3[domain=-1:5, samples y=1, mypink, thick] ({x},{0},{-(x-2)^2-0^2+20}) node[midway, above right] {$\vec p\circ \vec r_y$};
+		\addplot3[domain=-3:3, samples y=1, mygreen, thick] ({0},{x},{-(0-2)^2-x^2+20}) node[near start, above, mygreen!50!white] {$\vec p\circ \vec r_x$};
+
+		\draw[fill] (0,0,16) circle (1.5pt) node (A) {} node[right] {$\vec a$};
+
+	    \end{axis}
+		\draw (plot1.north) node[above] {Top view};
+		\draw (plot0.north) node[above] {Perspective view};
+
+	  \end{tikzpicture}
+\end{center}
 
 Further, $\vec c(0)=(a_x,a_y,f(a_x,a_y))=\vec a$.  Thus, if we want a tangent
 vector to $\mathcal S$ at $\vec a$, all we need to do is compute $\vec c\,'(0)$.
+
+\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={-50}{25},zmin=0,
+		    colormap/copper,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\addplot3[domain=-1:5, samples y=1, mypink, thick] ({x},{0},{0});
+		\addplot3[domain=-3:3, samples y=1, mygreen, thick] ({0},{x},{0});
+
+        \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=1] {-(x-2)^2-y^2+20};
+
+		\addplot3[domain=-1:5, samples y=1, mypink, thick] ({x},{0},{-(x-2)^2-0^2+20}) node[midway, above right] {$\vec p\circ \vec r_y$};
+		\addplot3[domain=-3:3, samples y=1, mygreen, thick] ({0},{x},{-(0-2)^2-x^2+20}) node[at start, right, mygreen!80!black] {$\vec p\circ \vec r_x$};
+
+		\draw[fill] (0,0,16) circle (1.5pt) node (A) {};
+
+		\draw[->,thick] (0,0,16) -- (0,-2,16) node[at end,right]{$(\vec p\circ \vec r_x)'(0)$};
+		\draw[->,thick, black] (0,0,16) -- (2,0,24)  node[midway, left,yshift=.2cm]{$(\vec p\circ \vec r_y)'(0)$};
+	    \end{axis}
+	  \end{tikzpicture}
+\end{center}
 
 Computing,
 \[
@@ -1280,7 +1349,49 @@ whose graph is the tangent line to $y=f(x)$ at the point $(a,f(a))$.  A linear a
 is equivalently called a \emph{first-order approximation}\footnote{ This phrasing comes from
 language used in Taylor approximations.}.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+		\begin{axis}[scale=.7,
+			%at={(7.5,0)},
+		    %anchor=origin,
+		    disabledatascaling,
+		    xmin=-4,xmax=4,
+		    ymin=-4,ymax=4,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    axis line style={latex-latex},
+			enlargelimits=.05,
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+
+		\addplot[mypink,thick,smooth] (x,{(x+2)^2/4-3});
+		\addplot[myorange, thick] (x,{27*x/20-849/400});
+
+		\coordinate (A) at (3,3);
+		\coordinate (B) at (3,2);
+		\coordinate (C) at (7/10,-471/400);
+		\coordinate (D) at (3,-2);
+
+		\end{axis}	
+
+		\draw (A) node[left,xshift=-.1cm] {$y=f(x)$};
+		\draw (B) node[xshift=.1cm,right] {First-order approximation};
+		\draw (D) node[right] {Point of tangency} edge[bend right, ->] ([xshift=.1cm]C) node {};
+		%\path[thick] (7.5,3.5) node[above] {Corresponding curves} edge[bend left, ->] node[] {} (B) edge[bend right, ->] (A);
+
+	\end{tikzpicture}
+\end{center}
 
 Further, $L$ always takes the form $L(x)=\alpha(x-a)+c$.  In fact, if $f'$ exists,
 we can be more
@@ -1443,7 +1554,26 @@ we see that $D_{\vec a}f(\vec u)$ is maximized when $\theta=0$.  In other words,
 of $f$ occurs in the direction of the gradient of $f$}.  Thus, the gradient may be interpreted
 as pointing in the direction of greatest change.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={-50}{25},zmin=0,
+		    colormap/copper,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+\addplot3 [blue, domain=-1:5, y domain=-3:3, quiver={u={-2*x+4}, v={-2*y}, scale arrows=0.14, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};
+		\begin{scope}[opacity=.5]
+        \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=1] {-(x-2)^2-y^2+20};
+		\end{scope}
+
+
+
+	    \end{axis}
+\draw (plot0.south) node[below right] {$\nabla f$};
+	  \end{tikzpicture}
+\end{center}
 
 Continuing this further, if $D_{\vec a}f(\vec u)=0$ then one of two things 
 must occur.  Either $\nabla f(\vec a)=\vec 0$ or $\theta=90^{\circ}$.  Therefore,
@@ -1454,7 +1584,34 @@ We have another word for paths on which a function doesn't change--level curves.
 If we plot level curves for a function, the gradient of the function must always be
 orthogonal to the level curves.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={270}{90},zmin=0,
+		    colormap/copper,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+
+		\begin{scope}[opacity=.5]
+        \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=1] {-(x-2)^2-y^2+20};
+		\end{scope}
+
+\addplot3 [blue, domain=-1:5, y domain=-3:3, quiver={u={-2*x+4}, v={-2*y}, scale arrows=0.14, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};
+
+		\foreach \z in {1,1.414,sqrt(3)} {
+        		\addplot3[domain=-\z:\z, samples y=1, mygreen, thick, samples=200, smooth] ({sqrt(\z*\z-x^2)+2},{x},{0});
+		}
+		\pgfplotsinvokeforeach {1,...,20} {
+		\draw[thick, mypink] (2,0,0) ellipse[x radius=sqrt(#1), y radius=sqrt(#1)];
+		}
+
+
+	    \end{axis}
+\draw (plot0.south) node[below right] {$\nabla f$};
+	  \end{tikzpicture}
+\end{center}
 
 
 \begin{exercises}
@@ -1515,7 +1672,26 @@ differences from the single variable case.
 	 \lim_{(x,y)\to (1,2)} x^2 + 2y^2 = 9.
 	\]
 
-	XXX Figure
+	The heat-map below assigns a color to each output of $f$.
+	\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={0}{90},zmin=0,
+		    colormap/viridis, colorbar,
+%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+
+		\begin{scope}[opacity=1]
+        \addplot3[surf, domain=-2:3, shader=interp, opacity=1,samples=60,
+			point meta max=20] {(x^2+2*y^2)};
+		\end{scope}
+
+	    \end{axis}
+\draw (plot0.north) node[above] {$f(x,y)=x^2+2y^2$};
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 In Example \ref{EXCONTLIMIT}, the limit was determined simply by evaluating the
@@ -1557,7 +1733,27 @@ variables.
 	of $\theta$, the function is constant, so the level curves consist
 	of rays emanating from the origin, as indicated.  On any such
 	ray, the graph is at some constant height $z$ with $z$ taking on
-	\emph{every value} between $-1$ and $+1$.
+	\emph{every value} between $-1$ and $+1$.  This is illustrated by
+	lines of constant brightness in the heat-map below.
+
+	\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={0}{90},zmin=0,
+		    colormap/viridis, colorbar,
+%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+
+		\begin{scope}[opacity=1]
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1,samples=80] {(x^2-y^2)/(x^2+y^2)};
+		\end{scope}
+
+	    \end{axis}
+\draw (plot0.north) node[above] {$f(x,y)=\frac{x^2-y^2}{x^2+y^2}$};
+	  \end{tikzpicture}
+	\end{center}
 \end{example}
 
 In general, the statement
@@ -1787,7 +1983,15 @@ $x_i=x_j$, we further simplify our notation and write
 \begin{example}
 	Compute $\frac{\partial^2 f}{\partial x\partial y}(x,y)$ where $f(x,y)=e^{x-2xy}$.
 
-	XXX Finish
+	First, by holding $y$ constant, we compute
+	\[
+		g(x,y) = \frac{\partial f}{\partial y}(x,y) = -2xe^{x-2xy}.
+	\]
+	Now,
+	\[
+		\frac{\partial^2 f}{\partial x\partial y}(x,y)
+		= \frac{\partial g}{\partial x}(x,y) = 2(2xy-x-1)e^{x-2xy}.
+	\]
 \end{example}
 
 Strictly speaking, $\frac{\partial^2 f}{\partial x_j\partial x_i}(\vec a)$ means take a derivative
@@ -1806,12 +2010,11 @@ always equal.
 Clairaut's Theorem will apply to most functions we encounter, but
 some fairly reasonable looking functions can fail.
 
-\begin{example}
-	Consider $f(x,y)=\begin{cases} \frac{xy(x^2-y^2)}{x^2+y^2} &\text{ if } (x,y)\neq (0,0)\\
-	0 &\text{ if }(x,y)=(0,0)\end{cases}$.
-
-	XXX Example where mixed partials aren't equal
-\end{example}
+\begin{exercise}
+	Let $f(x,y)=\begin{cases} \frac{xy(x^2-y^2)}{x^2+y^2} &\text{ if } (x,y)\neq (0,0)\\
+	0 &\text{ if }(x,y)=(0,0)\end{cases}$.  Show that $\frac{\partial^2 f}{\partial x\partial y}(0,0)\neq 
+	\frac{\partial^2 f}{\partial y\partial x}(0,0)$ by using the definition of partial derivative.
+\end{exercise}
 
 Higher order partial derivatives are interesting in their own right,
 but the following theorem makes them useful for finding Taylor approximations.
@@ -1837,7 +2040,33 @@ nightmare, so we won't prove it here.  Theorem \ref{THMPOLYNOMIALPARIALS} also
 simplifies the task of finding a Taylor approximation (provided we know one already exists).
 
 \begin{example}
-	XXX Finish
+	\label{EXTDEGREE2}
+	Find the degree-2 Taylor approximation of $f(x,y)=\frac{1}{1+x^2+y^2}$ at
+	$(0,0)$.
+
+	Since $f$ is a rational polynomial, $f$ has a Taylor approximation
+	of every degree at every point in its domain.  Further, $\nabla f(0,0)=(0,0)$,
+	and so there are no first-degree terms needed in our degree-2 approximation.
+	Our approximation therefore takes the form of
+	\[
+		g(x,y) = A+Bx^2+Cxy+Dy^2.
+	\]
+
+	Since $g(0,0)=f(0,0)=1$, we know $A=1$.  Now, 
+	\[
+		\frac{\partial^2 f}{\partial x^2}(0,0) = \frac{6x^2-2y^2-2}{(x^2+y^2+1)^3}\Bigg|_{(x,y)=(0,0)} = -2,
+	\]
+	\[
+		\frac{\partial^2 f}{\partial y^2}(0,0) = \frac{6y^2-2x^2-2}{(x^2+y^2+1)^3}\Bigg|_{(x,y)=(0,0)} = -2,
+	\]
+	and
+	\[
+		\frac{\partial^2 f}{\partial x\partial y}(0,0) = \frac{8xy}{(x^2+y^2+1)^3}\Bigg|_{(x,y)=(0,0)} = 0,
+	\]
+	which means $B=D=-2$ and $C=0$.  Thus
+	\[
+		g(x,y) = 1 - 2x^2-2y^2.
+	\]
 \end{example}
 
 \subsection{Uses of Polynomial Approximations}
@@ -1936,7 +2165,23 @@ a multivariable function, the procedure is similar.
 Let's consider an example.  Let $f:\R^2\to\R$ be defined by $f(x,y)=4-x^2-y^2$.
 This example is nice because we already know where the maximum occurs!
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}	   
+	 \begin{axis}[grid=major,view={-50}{25},
+		    colormap/copper,
+			name=plot0
+		    ]
+
+
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1] {4-x^2-y^2};
+
+
+
+		\draw[fill] (0,0,4) circle (1.5pt) node[right] (A) {Global maximum};
+
+	    \end{axis}
+	  \end{tikzpicture}
+\end{center}
 
 A global maximum of $4$ for $f$ occurs at $(0,0)$.  Now, suppose $\vec p:\R\to\R^2$, given
 by
@@ -1947,7 +2192,55 @@ is the parameterization of a line passing through $(0,0)$.  Since $4$ is a globa
 maximum of $f$ achieved at $(0,0)$ and $\vec p$ passes through $(0,0)$, the function
 $f\circ \vec p$ must attain a global maximum of $4$ exactly when $\vec p(t)=\vec 0$.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}	   
+	 \begin{axis}[grid=major,view={-50}{25},zmin=-4,
+		    colormap/copper,
+%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\addplot3[domain=-2:2, samples y=1, mypink, thick, densely dashed] ({0},{x},{-4});
+
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {4-x^2-y^2};
+
+
+		\addplot3[domain=-2:2, samples y=1, mypink, thick] ({0},{x},{4-x^2}) node[near start, right, mypink, xshift=.1cm] {};
+	    \end{axis}
+
+		\begin{axis}[
+			at=(plot0.right of south east),
+			%at={(7.5,0)},
+		    %anchor=origin,
+		    disabledatascaling,
+		    xmin=-4.3,xmax=4.3,
+		    ymin=-4.3,ymax=4.3,
+		    x=.7cm,y=.5cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    axis line style={latex-latex},
+			%xticklabels={,,},
+			%yticklabels={,,},
+			xlabel={$t$},
+			ylabel={$z$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+
+
+
+		\addplot[domain=-4:4, samples=20, samples y=1, smooth,thick, mypink] (x, 4-x^2);
+		\draw (1.7,2) node (A){};
+
+		\end{axis}	
+
+		\draw (A) node[right] {$z=f\circ \vec p(t)$};
+	  \end{tikzpicture}
+\end{center}
 
 Since $f\circ \vec p:\R\to\R$ is a function of one variable, all of its maximums
 must occur at either a critical point or a boundary point of the domain.  Since
@@ -1958,7 +2251,7 @@ of $f\circ \vec p$ must occur when
 	(f\circ\vec p)'(t)=0.
 \end{equation}
 If both $f$ and $\vec p$ were single-variable functions, we could
-apply the chain rule to Equation \eqref{EQCOMPDERIV}.  Unfortunately they
+apply the chain rule to Equation \eqref{EQCOMPDERIV}.  Unfortunately, they
 are not.  So, before we continue, let's see if we can figure out a multivariable
 chain rule.
 
@@ -2093,7 +2386,44 @@ you have a local max or min at $\vec a$, then you have $\nabla f(\vec a)=\vec 0$
 This is just like the single-variable first derivative test.  If $g:\R\to\R$ and $g'(a)=0$,
 it need not be the case that $g$ has a local max or min at $a$.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}	   
+
+		\begin{axis}[
+			%at=(plot0.right of south east),
+			%at={(7.5,0)},
+		    %anchor=origin,
+		    disabledatascaling,
+		    xmin=-4.3,xmax=4.3,
+		    ymin=-4.3,ymax=4.6,
+		    x=.7cm,y=.3cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    axis line style={latex-latex},
+			%xticklabels={,,},
+			%yticklabels={,,},
+			xlabel={$t$},
+			ylabel={$z$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+
+
+
+		\addplot[domain=-4:4, samples=20, samples y=1, smooth,thick, mypink] (x, x^3/5);
+		\draw (0,0) node (A){};
+		\draw (-2,2) node (B) {};
+
+
+		\end{axis}	
+
+		\draw (B) node[left] {Stationary point} edge[bend left, ->] (A);
+	  \end{tikzpicture}
+\end{center}
 
 \begin{definition}[Critical Point]
 	For a function $f:\R^n\to\R$, the point $\vec a\in\R^n$ is called
@@ -2111,11 +2441,116 @@ XXX Figure
 \end{example}
 
 \begin{example}
-	XXX Finish (Find Local Max)
+	Let $f:\R^2\to\R$ be given by $f(x,y)=4-x^2-y^2$.  Find all local extrema of
+	$f$.
+
+	Since $f$ is differentiable everywhere, local extrema must occur at critical
+	points.  Computing $\nabla f(x,y)=(-2x,-2y)=(0,0)$ exactly when $(x,y)=(0,0)$.
+	Thus, our only guess for a local extreme is $(0,0)$.
+
+	\begin{center}
+		
+		\begin{tikzpicture}
+
+
+		 \begin{axis}[grid=major,view={60}{25},xmin=-2,xmax=2,ymin=-2,ymax=2,
+			    colormap/viridis,  %ytick=\empty,xtick=\empty,
+	%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+				name=plot0
+			    ]
+
+	\addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {4-x^2-y^2};
+
+
+
+
+		    \end{axis}
+
+
+
+
+		 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+	xshift=.5cm,
+			    colormap/viridis,
+	%axis lines = none,
+	%ytick=\empty,xtick=\empty,
+	%ticks=none,
+	%enlargelimits=.05,
+	%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+				name=plot2,
+				at=(plot0.right of south east),		
+			    ]
+
+		%\addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {(x-2)^2+(y-3)^2};
+
+
+	\addplot3 [myorange, domain=-2:2,  quiver={u={-x}, v={-y}, scale arrows=0.24, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};		
+
+
+
+
+		    \end{axis}
+
+
+			\draw (plot2.north) node[above, yshift=.2cm] {$\nabla f $};
+			\draw (plot0.north) node[above, yshift=.2cm] {$z= f(x,y) $};
+		  \end{tikzpicture}
+	\end{center}
+
+	Graphing $\nabla f$, we see that around $(0,0)$, $\nabla f$ points
+	towards $(0,0)$.  That means $f$ is increasing towards $(0,0)$, and so
+	$(0,0)$ must be a local maximum.
 \end{example}
 
 \begin{example}
-	XXX Finish Find (Local saddle point)
+	Let $f:\R^2\to\R$ be given by $f(x,y)=4-x^2+y^3$.  Find all local extrema of
+	$f$.
+
+	Since $f$ is differentiable everywhere, local extrema must occur at critical
+	points.  Computing $\nabla f(x,y)=(-2x,3y^2)=(0,0)$ exactly when $(x,y)=(0,0)$.
+	Thus, our only guess for a local extreme is $(0,0)$.
+
+	\begin{center}
+
+	\begin{tikzpicture}
+
+
+	 \begin{axis}[grid=major,view={60}{25},xmin=-2,xmax=2,ymin=-2,ymax=2,
+		    colormap/viridis,  %ytick=\empty,xtick=\empty,
+%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+\addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {4-x^2+y^3};
+
+
+
+
+	    \end{axis}
+
+
+
+
+	 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+xshift=.5cm,
+		    colormap/viridis,
+			name=plot2,
+			at=(plot0.right of south east),		
+		    ]
+
+		\addplot3 [myorange, domain=-2:2,  quiver={u={-2*x}, v={3*abs(y)}, scale arrows=0.1, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};
+
+	    \end{axis}
+
+
+		\draw (plot2.north) node[above, yshift=.2cm] {$\nabla f$};
+		\draw (plot0.north) node[above, yshift=.2cm] {$z= f(x,y)$};
+	  \end{tikzpicture}
+	\end{center}
+
+	Graphing $\nabla f$, we see that $\nabla f(0,t)$ points towards $(0,0)$
+	when $t<0$ and away from $(0,0)$ when $t>0$.  Thus, $f$ cannot have a local
+	extreme at $(0,0)$.
 \end{example}
 
 
@@ -2135,13 +2570,61 @@ the single-variable case.
 
 Now, imagine $f:\R^n\to\R$ has a local maximum at $\vec a$.  Let $\vec u$
 be a unit vector and let $\ell$ be the line with direction $\vec u$
-passing through $\vec a$.  Then, $\ell$ has a parameterization $\vec p(t)=a+t\vec u$.
+passing through $\vec a$.  Then, $\ell$ has a parameterization $\vec p(t)=\vec a+t\vec u$.
 The function $f\circ p$ can be thought of as the restriction of $f$ to $\ell$.
 Since $f$ has a local max at $\vec a$, we know $f\circ \vec p$ has a local max at $0$
 (since $\vec p(0)=\vec a$), and we would expect $f\circ \vec p$ to be a concave-down
 function.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}	   
+	 \begin{axis}[grid=major,view={-50}{25},zmin=-4,
+		    colormap/copper,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\addplot3[domain=-2:2, samples y=1, mypink, thick, densely dashed] ({0},{x},{-4});
+
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {4-x^2-y^2};
+
+
+		\addplot3[domain=-2:2, samples y=1, mypink, thick] ({0},{x},{4-x^2}) node[near start, right, mypink, xshift=.1cm] {};
+	    \end{axis}
+
+		\begin{axis}[
+			at=(plot0.right of south east),
+			%at={(7.5,0)},
+		    %anchor=origin,
+		    disabledatascaling,
+		    xmin=-4.3,xmax=4.3,
+		    ymin=-4.3,ymax=4.6,
+		    x=.7cm,y=.5cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			yticklabels={,,},
+			xlabel={$t$},
+			ylabel={$z$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+
+
+
+		\addplot[domain=-4:4, samples=20, samples y=1, smooth,thick, mypink] (x, 4-x^2);
+		\draw (1.7,2) node (A){};
+
+		\end{axis}	
+
+		\draw (A) node[right] {$z=f\circ \vec p(t)$};
+	  \end{tikzpicture}
+\end{center}
 
 Thus, we expect $(f\circ \vec p)''(0) < 0$.  We call $(f\circ \vec p)''(0)$ a
 \emph{second order directional derivative in the direction $\vec u$}.  This inspires
@@ -2173,19 +2656,60 @@ things can happen in higher dimensions.  Consider the following examples.
 \begin{example}
 	$f(x,y)=x^2+y^2$
 
-	XXX Finish
+	After a quick computation, we see that $f$ has its only critical
+	point at $(x,y)=(0,0)$.  Let $\vec v=(a,b)$ and let $\vec p(t) = t\vec v+\vec 0$
+	be a parameterized line with direction vector $\vec v$ through $\vec 0$.
+
+	Now,
+	\[
+		f\circ \vec p(t) = (at)^2+(bt)^2=(a^2+b^2)t^2
+	\]
+	and so
+	\[
+		(f\circ \vec p)''(0) = a^2+b^2 > 0
+	\]
+	for all $(a,b)\neq(0,0)$.  Thus this function is concave up in every
+	direction and so $(0,0)$ is a local minimum.
 \end{example}
 
 \begin{example}
 	$f(x,y)=x^2-y^2$
 
-	XXX Finish
+	$f(x,y)=x^2+y^2$
+
+	After a quick computation, we see that $f$ has its only critical
+	point at $(x,y)=(0,0)$.  Let $\vec v=(a,b)$ and let $\vec p(t) = t\vec v+\vec 0$
+	be a parameterized line with direction vector $\vec v$ through $\vec 0$.
+
+	Now,
+	\[
+		f\circ \vec p(t) = (at)^2-(bt)^2=(a^2-b^2)t^2
+	\]
+	and so
+	\[
+		(f\circ \vec p)''(0) = a^2-b^2.
+	\]
+	If $a>b$, then $(f\circ \vec p)''(0)>0$ and if $a<b$, then 
+	$(f\circ \vec p)''(0)<0$.  Since $f$ is concave up in some directions
+	and concave down in others, the critical point $(0,0)$ is not a local extreme.
 \end{example}
 
 \begin{example}
 	$f(x,y)=x^3+y^3$
 
-	XXX Finish
+	After a quick computation, we see that $f$ has its only critical
+	point at $(x,y)=(0,0)$.  Let $\vec v=(a,b)$ and let $\vec p(t) = t\vec v+\vec 0$
+	be a parameterized line with direction vector $\vec v$ through $\vec 0$.
+
+	Now,
+	\[
+		f\circ \vec p(t) = (at)^3+(bt)^3=(a^3+b^3)t^3
+	\]
+	and so
+	\[
+		(f\circ \vec p)''(0) = (a^3+b^3)(0) = 0.
+	\]
+	Thus, the second derivative test is inconclusive.
 \end{example}
 
 For complicated functions, using the multivariable second-derivative test
@@ -2198,14 +2722,31 @@ minimum, local maximum, or neither.
 \begin{example}
 	$f(x,y)=\frac{1}{1+x^2+y^2}$
 
-	XXX Finish
+	After a quick computation, we see that $f$ has its only critical
+	point at $(x,y)=(0,0)$.  
+	In example \ref{EXTDEGREE2}, we computed that
+	$g(x,y)=1-2x^2-2y^2$ is the degree-2 approximation of $f$ at $(0,0)$.  Since
+	degree-2 approximations encode all information about first and second derivatives,
+	we may study the concavity of $g$ at $(0,0)$ to understand the concavity of $f$ at $(0,0)$.
+
+	Let $\vec v=(a,b)$ and let $\vec p(t) = t\vec v+\vec 0$
+	be a parameterized line with direction vector $\vec v$ through $\vec 0$.  Now,
+	\[
+		g\circ \vec p(t) = 1-2(at)^2-2(bt)^2=1-2(a^3+b^3)t^2
+	\]
+	and so
+	\[
+		(g\circ \vec p)''(0) = -2(a^2+b^2) < 0
+	\]
+	for all $(a,b)\neq (0,0)$.  Therefore $f$ is concave down in every direction
+	making $(0,0)$ a local maximum.
 \end{example}
 
 
 \subsection{Lagrange Multipliers}
 
 We've just explored how to find local minimums and maximums on an unconstrained domain,
-but what if we wish to restrict the domain.  
+but what if we wish to restrict the domain?
 
 \begin{example}
 	\label{EXMESSYMIN}
@@ -2224,6 +2765,78 @@ but what if we wish to restrict the domain.
 		f\circ \vec r(t) = (\cos t-2)^2+(\sin t-3)^2&=\cos^2t+\sin^2t-6\sin t-4\cos t+13\\
 		&= -6\sin t-4\cos t+14.
 	\end{align*}
+
+	\begin{center}
+
+\definecolorseries{test}{rgb}{grad}[rgb]{0,0,1}{0,1,0}
+\resetcolorseries[360]{test}
+
+	\begin{tikzpicture}
+
+
+	 \begin{axis}[grid=major,view={80}{25},zmin=-4,
+		    colormap/copper,
+%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		
+	\addplot3[domain=-180:179, samples y=1, mypink, thick, smooth, densely dashed] ({cos(x)},{sin(x)},{-4}) node[near start, right, mypink, xshift=.1cm] {};
+
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {(x-2)^2+(y-3)^2};
+
+
+		\addplot3[domain=0:360, samples y=1, mypink, thick, smooth] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+
+		\pgfplotsinvokeforeach {0,15,...,350} {
+			\draw[fill={test!![#1]}, draw=none] ({cos(#1)}, {sin(#1)}, {(cos(#1)-2)^2+(sin(#1)-3)^2}) circle (1.5pt);
+		}
+
+		\draw (-.56, -.84 , 21.211) node (M1) {};
+	    \end{axis}
+
+		\begin{axis}[
+			at=(plot0.right of south east),
+			xshift=.5cm,
+			colormap/hsv,
+			%at={(7.5,0)},
+		    %anchor=origin,
+		    disabledatascaling,
+		    xmin=0,xmax=2*pi,
+		    ymin=6,ymax=22,
+		    x=.7cm,y=.3cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    axis line style={latex-latex},
+			xticklabels={,,},
+			%yticklabels={,,},
+			xlabel={$t$},
+			ylabel={$z$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+
+
+
+		\addplot[domain=0:{2*pi}, samples=20, samples y=1, smooth,thick, mypink] (x, {-6*sin(deg(x))-4*cos(deg(x))+14});
+		\draw (4.124, 21.211) node (M2) {};
+		\pgfplotsinvokeforeach {0,15,...,350} {
+
+			\draw[fill={test!![#1]}, draw=none] (#1/360*2*pi, {-6*sin(#1)-4*cos(#1)+14}) circle (1.5pt);
+		}
+		\draw (1.8,20) node (A){};
+		\end{axis}	
+
+		\draw (A) node[] {$z=f\circ \vec p(t)$};
+
+		\draw (plot0.north) node[above] {Corresponding extrema} edge[bend right, ->] (M1) edge[bend left, ->] (M2);
+	  \end{tikzpicture}
+	\end{center}
+
 	Since this is a single-variable differentiable function, we need only find the places
 	where $(f\circ \vec r)'(t)=0$.  In other words, we need to solve
 	\[
@@ -2237,8 +2850,8 @@ but what if we wish to restrict the domain.
 	\tfrac{3}{\sqrt{13}})$.
 \end{example}
 
-Example \ref{EXMESSYMIN} involved complicated, but doable, trigonometry.  But, we can make our lives
-much easier by thinking geometrically for a while.
+Example \ref{EXMESSYMIN} involved complicated, but doable, trigonometry.  We can make our lives
+easier by thinking geometrically.
 
 Let $f:\R^n\to \R$ and suppose $\mathcal R$ is a region whose boundary is parameterized by
 $\vec r:\R\to\R^n$.  To find the extrema of $f\big|_{\mathcal R}$, we first check for
@@ -2256,14 +2869,129 @@ to the boundary of $\mathcal R$.  We now have that
 \]
 whenever $\vec r(t)$ is at a local minimum or local maximum along the boundary.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+
+	 \begin{axis}[grid=major,view={80}{25},zmin=0,
+		    colormap/viridis,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		
+	\addplot3[domain=-180:179, samples y=1, mypink, thick, smooth, densely dashed] ({cos(x)},{sin(x)},{0}) node[near start, right, mypink, xshift=.1cm] {};
+
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {(x-2)^2+(y-3)^2};
+
+
+		\addplot3[domain=0:360, samples y=1, mypink, thick, smooth] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+
+
+
+		\draw (-.56, -.84 , 21.211) node (M1) {};
+	    \end{axis}
+
+	 \begin{axis}[grid=major,view={80}{25},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+xshift=.5cm,
+		    colormap/copper,
+%enlargelimits=.05,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot2,
+			at=(plot0.right of south east),		
+		    ]
+
+		
+	\addplot3[domain=-180:179, samples y=1, mypink, thick, smooth, densely dashed] ({cos(x)},{sin(x)},{0}) node[near start, right, mypink, xshift=.1cm] {};
+
+		\draw ({cos(deg(4.12))}, {sin(deg(4.12))}, {(cos(deg(4.12))-2)^2+(sin(deg(4.12))-3)^2}) node (A) {}; % circle (1.5pt);
+		\draw ({cos(deg(4.2+pi))}, {sin(deg(4.2+pi))}, {(cos(deg(4.2+pi))-2)^2+(sin(deg(4.2+pi))-3)^2}) node (B) {}; % circle (1.5pt);
+
+		\pgfplotsinvokeforeach {0, 30, ..., 350} {
+			%\draw[->] ({cos(#1)}, {sin(#1)}, {(cos(#1)-2)^2+(sin(#1)-3)^2}) --  ({cos(#1) + sin(#1)}, {sin(#1)-cos(#1)}, {(cos(#1)-2)^2+(sin(#1)-3)^2 - (-2*(cos(#1)-2)*sin(#1)+3*(sin(#1)-3)*cos(#1))});
+			\draw[myorange,->] ({cos(#1)}, {sin(#1)}, {0}) --  ({cos(#1) + sin(#1)}, {sin(#1)-cos(#1)}, {0});
+		}
+		\draw (-.56, -.84 , 21.211) node (M1) {};
+
+		\addplot3[domain=0:360, samples y=1, mypink, thick, smooth] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+	    \end{axis}
+
+
+		\draw (plot2.north) node[above] {$\nabla f(\vec r(t))\cdot \vec T_{\vec r(t)}=0$} edge[bend right, ->] (A) edge[bend left, ->] (B);
+	  \end{tikzpicture}
+\end{center}
 
 We're going to generalize slightly more.  Suppose $\vec T:\R^n\to\R^n$ is a function
 such that if $\vec a$ is on the boundary of $\mathcal R$, we
 have $\vec T(\vec a)$ is a tangent vector to the boundary of $\mathcal R$.  We won't care
 about how $\vec T(\vec a)$ is defined if $\vec a$ is not on the boundary of $\mathcal R$.
 
-XXX Figure of such a function
+\begin{center}
+
+	\begin{tikzpicture}
+
+
+	 \begin{axis}[grid=major,view={80}{25},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,
+		    colormap/viridis,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		
+	\addplot3[domain=-180:179, samples y=1, mypink, thick, smooth, densely dashed] ({cos(x)},{sin(x)},{0}) node[near start, right, mypink, xshift=.1cm] {};
+
+\addplot3 [myorange, domain=-2:2,  quiver={u={-1*sign(y)*sqrt(abs(y))}, v={sign(x)*sqrt(abs(x))}, scale arrows=0.24, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};
+
+
+
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {(x-2)^2+(y-3)^2};
+
+
+
+
+		\foreach \h in {2.9, 4.9, ..., 40} {
+			\pgfmathsetmacro\start{270 - acos(1/sqrt(\h)) - 1}
+		\addplot3[domain=\start:270, samples y=1, white, thin, smooth, samples=150, restrict y to domain=-2:2, restrict x to domain=-2:2] ({(sqrt(\h)*cos(x)+2)},{(sqrt(\h)*sin(x)+3)},{\h});
+	}
+
+		\addplot3[domain=0:360, samples y=1, mypink, thick, smooth] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+
+	    \end{axis}
+
+	 \begin{axis}[grid=major,view={90}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+xshift=.5cm,
+		    colormap/viridis,
+%enlargelimits=.05,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot2,
+			at=(plot0.right of south east),		
+		    ]
+
+        \addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {(x-2)^2+(y-3)^2};
+
+
+
+
+		\foreach \h in {2.9, 4.9, ..., 40} {
+			\pgfmathsetmacro\start{270 - acos(1/sqrt(\h))}
+		\addplot3[domain=\start:270, samples y=1, white, thin, smooth] ({(sqrt(\h)*cos(x)+2)},{(sqrt(\h)*sin(x)+3)},{\h});
+	}
+
+\addplot3 [myorange, domain=-2:2,  quiver={u={-1*sign(y)*sqrt(abs(y))}, v={sign(x)*sqrt(abs(x))}, scale arrows=0.24, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};		
+
+		\draw ({cos(deg(4.12))}, {sin(deg(4.12))}, {(cos(deg(4.12))-2)^2+(sin(deg(4.12))-3)^2}) node (A) {}; % circle (1.5pt);
+		\draw ({cos(deg(4.2+pi))}, {sin(deg(4.2+pi))}, {(cos(deg(4.2+pi))-2)^2+(sin(deg(4.2+pi))-3)^2}) node (B) {}; % circle (1.5pt);
+
+
+		\addplot3[domain=0:360, samples y=1, mypink, thick, smooth] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+
+	    \end{axis}
+
+
+		\draw (plot2.north) node[above, yshift=.2cm] {$\nabla f(\vec a)\cdot \vec T(\vec a)=0$} edge[bend right, ->,black,thick] (A) edge[bend left, ->,thick] (B);
+	  \end{tikzpicture}
+\end{center}
+
 
 Now, if $f\big|_{\mathcal R}$ has a local extreme at some point $\vec a$ on the
 boundary of $\mathcal R$, we know
@@ -2316,6 +3044,82 @@ we must have that both $\nabla h$ and $\nabla f$ are normal vectors for the tang
 to $\mathcal C$ at the local extreme.  Thus, $\nabla f$ and $\nabla h$ are parallel and so
 either $\nabla f=0$ or $\nabla h=0$ or $\nabla f=\lambda \nabla h$ for some $\lambda\neq 0$.  This
 observation leads to the method of \emph{Lagrange Multipliers}.
+
+
+\begin{center}
+
+	\begin{tikzpicture}
+
+
+	 \begin{axis}[grid=major,view={90}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,
+		    colormap/viridis,ytick=\empty,xtick=\empty,
+%xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+
+		\foreach \h in {2.9, 4.9, ..., 40} {
+		\pgfmathsetmacro\start{270 - acos(1/sqrt(\h))-1 - mod(\h,4)*5}
+		\addplot3[domain=\start:270, samples y=1, myorange, thin, smooth] ({(sqrt(\h)*cos(x)+2)},{(sqrt(\h)*sin(x)+3)},{\h});
+\addplot3[domain=\start:270, samples=15, samples y=1, myorange, thin, smooth,quiver={u={2*x-4}, v={2*y-6}, scale arrows=0.025, every arrow/.append style={-stealth}}] ({(sqrt(\h)*cos(x)+2)},{(sqrt(\h)*sin(x)+3)},{\h});
+	}
+
+%\addplot3 [myorange, domain=-2:2,  quiver={u={-1*sign(y)*sqrt(abs(y))}, v={sign(x)*sqrt(abs(x))}, scale arrows=0.24, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};		
+
+
+		\draw ({cos(deg(4.12))}, {sin(deg(4.12))}, {(cos(deg(4.12))-2)^2+(sin(deg(4.12))-3)^2}) node (A) {}; % circle (1.5pt);
+		\draw ({cos(deg(4.2+pi))}, {sin(deg(4.2+pi))}, {(cos(deg(4.2+pi))-2)^2+(sin(deg(4.2+pi))-3)^2}) node (B) {}; % circle (1.5pt);
+
+		\draw (-.56, -.84 , 21.211) node (M1) {};
+
+		\addplot3[domain=0:360, samples y=1, mypink, thick, smooth] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+		\addplot3[domain=0:360, samples y=1, mypink,quiver={u={-y}, v={x}, scale arrows=0.5, every arrow/.append style={-stealth}}] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+
+	    \end{axis}
+
+
+		\draw (plot0.north) node[above, yshift=.2cm] {{\color{myorange}$\nabla f$} orthogonal to {\color{mypink}$\vec T$}} edge[bend right, ->,black] (A) edge[bend left, ->] (B);
+
+	 \begin{axis}[grid=major,view={90}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+xshift=.5cm,
+		    colormap/viridis,
+%axis lines = none,
+ytick=\empty,xtick=\empty,
+ticks=none,
+%enlargelimits=.05,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot2,
+			at=(plot0.right of south east),		
+		    ]
+
+        %\addplot3[surf, domain=-2:2, shader=interp, opacity=1, samples=20] {(x-2)^2+(y-3)^2};
+
+
+
+
+		\foreach \h in {2.9, 4.9, ..., 40} {
+		\pgfmathsetmacro\start{270 - acos(1/sqrt(\h))-1 - mod(\h,4)*5}
+		\addplot3[domain=\start:270, samples y=1, myorange, thin, smooth] ({(sqrt(\h)*cos(x)+2)},{(sqrt(\h)*sin(x)+3)},{\h});
+\addplot3[domain=\start:270, samples=15, samples y=1, myorange, thin, smooth,quiver={u={2*x-4}, v={2*y-6}, scale arrows=0.025, every arrow/.append style={-stealth}}] ({(sqrt(\h)*cos(x)+2)},{(sqrt(\h)*sin(x)+3)},{\h});
+	}
+
+%\addplot3 [myorange, domain=-2:2,  quiver={u={-1*sign(y)*sqrt(abs(y))}, v={sign(x)*sqrt(abs(x))}, scale arrows=0.24, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};		
+
+
+		\draw ({cos(deg(4.12))}, {sin(deg(4.12))}, {(cos(deg(4.12))-2)^2+(sin(deg(4.12))-3)^2}) node (A) {}; % circle (1.5pt);
+		\draw ({cos(deg(4.2+pi))}, {sin(deg(4.2+pi))}, {(cos(deg(4.2+pi))-2)^2+(sin(deg(4.2+pi))-3)^2}) node (B) {}; % circle (1.5pt);
+
+		\draw (-.56, -.84 , 21.211) node (M1) {};
+
+		\addplot3[domain=0:360, samples y=1, mypink, thick, smooth] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+		\addplot3[domain=0:360, samples y=1, mypink,quiver={u={x}, v={y}, scale arrows=0.25, every arrow/.append style={-stealth}}] ({cos(x)},{sin(x)},{(cos(x)-2)^2+(sin(x)-3)^2});
+
+	    \end{axis}
+
+
+		\draw (plot2.north) node[above, yshift=.2cm] {{\color{myorange}$\nabla f$} parallel to {\color{mypink}$\nabla g$}} edge[bend right, ->,black] (A) edge[bend left, ->] (B);
+	  \end{tikzpicture}
+\end{center}
 
 \begin{example}
 	Let $f(x,y)=(x-2)^2+(y-3)^2$

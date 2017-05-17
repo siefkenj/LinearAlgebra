@@ -215,7 +215,61 @@ $x$ is fixed and we let $y$ vary between bounds (which may depend on the fixed $
 When we integrate with respect to $x$ first, the situation is reversed.  Geometrically,
 it's easy to see why our bounds change.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+		\begin{axis}[
+			name=plot0,
+			anchor=origin,
+		    xmin=-1,xmax=1,
+		    ymin=0,ymax=1,
+		    x=2cm,y=2cm,
+		    grid=none,
+			hide axis,
+		]
+
+
+		\addplot[domain=-1:1, smooth, draw=black, fill opacity=0.05, fill=blue] (x,x^2) -- cycle;
+
+		\draw[fill=mypink,draw=none] (-.7,.49) node (A) {} rectangle (.7,.51) node (B) {};
+		\draw (-.7,-.2) node (A1) {};
+		\draw(.7,-.2) node (B1) {};
+
+		\draw (-1,1) node (C) {} (-1,0) node (C2) {};
+
+
+
+		\end{axis}
+
+		\draw[densely dashed] (A) -- (A1) (B) -- (B1);
+		\draw[decoration={brace, mirror, raise=0cm}, decorate, thick] (A1) -- (B1) node[midway, below] {$-\sqrt{y}\leq x \leq \sqrt{y}$};
+		\draw[decoration={brace, mirror, raise=0.1cm}, decorate, thick] (C) -- (C2) node[midway, left, xshift=-.2cm] {$0\leq y \leq 1$};
+
+		\begin{axis}[
+			name=plot1,
+			xshift=1cm,
+			at=(plot0.right of south east),
+		    xmin=-1,xmax=1,
+		    ymin=0,ymax=1,
+		    x=2cm,y=2cm,
+		    grid=none,
+			hide axis,
+		]
+
+		\addplot[domain=-1:1, smooth, draw=black, fill opacity=0.05, fill=blue] (x,x^2) -- cycle;
+
+		\draw[fill=mypink,draw=none] (.3,.09) node (A) {} rectangle (.32,1) node (B) {};
+		\draw (1.2,.09) node (A1) {};
+		\draw(1.2,1) node (B1) {};
+
+		\draw (-1,0) node (C) {} (1,0) node (C2) {};
+		\end{axis}
+
+		\draw[densely dashed] (A) -- (A1) (B) -- (B1);
+		\draw[decoration={brace, mirror, raise=0cm}, decorate, thick] (A1) -- (B1) node[midway, right,xshift=.1cm] {$x^2\leq y \leq 1$};
+		\draw[decoration={brace, mirror, raise=0.41cm}, decorate, thick] (C) -- (C2) node[midway, below, yshift=-.41cm] {$-1\leq x \leq 1$};
+	\end{tikzpicture}
+\end{center}
 
 However, there's also an algebraic argument for why our bounds change.
 Suppose $(x,y)\in\mathcal R$.  Then $-1\leq x\leq 1$ and $x^2\leq y\leq 1$.  These were the
@@ -529,7 +583,7 @@ iterated integral.
 		\coordinate (C) at (.6,.58);
 		\coordinate (D) at (1.2,.57);
 
-		\draw[fill=gray,draw=none] (0,.57) rectangle (.6,.6);
+		\draw[fill=myorange,draw=none] (0,.57) rectangle (.6,.6);
 		\end{axis}
 
 
@@ -629,6 +683,52 @@ that the area of each sector was $\Delta x\Delta y$, and so we had the formula
 For polar coordinates\index{polar coordinates}, 
 the natural way to chop up $\mathcal D$ is not into rectangles, but
 into \emph{annular sectors}.
+
+\begin{center}
+	\begin{tikzpicture}[>=latex]
+
+	\begin{scope}
+		\clip (-.5,-.5) rectangle (3,3);
+		% Draw the lines at multiples of pi/12
+		\foreach \ang in {0,...,31} {
+		  \draw[gray!10] (0,0) -- (\ang * 180 / 16:4.3);
+		}
+		
+		% Concentric circles and radius labels
+		\foreach \s in {0, .5,..., 4} {
+		  \draw[gray!10] (0,0) circle (\s);
+		}
+	\end{scope}
+
+	\draw[fill opacity=0.05, fill=blue] (33.75:2) -- (33.75:2.5) arc (33.75:45:2.5) -- (45:2) arc (45:33.75:2);
+
+			\begin{axis}[
+			    anchor=origin,
+				name=plot0,
+			    set layers=standard,
+			    disabledatascaling,
+			    xmin=-.25,xmax=1.5,
+			    ymin=-.25,ymax=1.5,
+			    x=2cm,y=2cm,
+			    grid=both,
+			    grid style={line width=.1pt, draw=gray!10},
+			    %major grid style={line width=.2pt,draw=gray!50},
+			    axis lines=middle,
+			    minor tick num=0, grid=none,
+			    enlargelimits={abs=0.1},
+			    axis line style={latex-latex},
+			    ticklabel style={font=\tiny,fill=white},
+				xticklabels={,,},
+				yticklabels={,,},
+			    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+			    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+			]
+			\end{axis}
+
+		\draw ([xshift=.4cm]plot0.east) node[above right] {Annular sector} edge[bend right, ->] (39.375:2.25);
+
+	\end{tikzpicture}
+\end{center}
 
 XXX Figure comparing rectangular chopping and annular sector chopping.
 
