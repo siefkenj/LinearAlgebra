@@ -62,7 +62,24 @@ graphs won't be hard.
 If we think of $\vec F:\R^2\to\R^2$ as attaching a vector to each point in
 $\R^2$, we might graph $\vec F$ by drawing vectors at each point in $\R^2$.
 
-XXX Figure
+\begin{center}
+\begin{tikzpicture}[>=latex]
+	 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+		    colormap/viridis,
+			name=plot2,
+		    axis lines=middle,enlargelimits={abs=0.2},
+		    ]
+
+		\foreach \xx in {-2, -1.5,...,2} {
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+		}
+
+		\addplot3 [myorange, domain=-2:2,  quiver={u={-2*x}, v={3*abs(y)}, scale arrows=0.1, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+	    \end{axis}
+\end{tikzpicture}
+\end{center}
 
 This type of plot is called a \emph{quiver plot}\index{quiver plot},
 and it will be the main way we visualize vector fields.
@@ -70,7 +87,24 @@ and it will be the main way we visualize vector fields.
 \begin{example}
 	Graph the vector field $\vec F:\R^2\to\R^2$ defined by $\vec F(x,y)=\mat{x\\y}$.
 
-	XXX Finish
+	\begin{center}
+		\begin{tikzpicture}[>=latex]
+			 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+				    colormap/viridis,
+					name=plot2,
+				    axis lines=middle,enlargelimits={abs=0.2},
+				    ]
+
+				\foreach \xx in {-2, -1.5,...,2} {
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+				}
+
+				\addplot3 [myorange, domain=-2:2,  quiver={u={x}, v={y}, scale arrows=0.1, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+			    \end{axis}
+		\end{tikzpicture}
+	\end{center}
 \end{example}
 
 When making a quiver plot, there are two things to consider: (i) how
@@ -82,17 +116,71 @@ Consider the vector field $\vec A:\R^2\to\R^2$ defined by $\vec A(x,y)=\mat{-y\\
 If we plot vectors every $0.5$ units and plot the vectors at the same scale
 as the domain, we get the following, hard to follow, figure.
 
-XXX Figure
+\begin{center}
+\begin{tikzpicture}[>=latex]
+	 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+		    colormap/viridis,
+			name=plot0,
+		    axis lines=middle,enlargelimits={abs=0.2},
+		    ]
+
+		\foreach \xx in {-2, -1.5,...,2} {
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+		}
+
+		\addplot3 [myorange, domain=-2:2,  quiver={u={-y}, v={x}, scale arrows=1, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+	    \end{axis}
+
+	 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+		    colormap/viridis,
+			name=plot2,
+		    axis lines=middle,enlargelimits={abs=0.2},
+			at=(plot0.right of south east), xshift=.5cm
+		    ]
+
+		\foreach \xx in {-2, -1.5,...,2} {
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+		}
+
+		\addplot3 [myorange, domain=-2:2,  quiver={u={-y}, v={x}, scale arrows=.25, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+	    \end{axis}
+
+		\draw (plot0.north) node[above] {1:1 scaling};
+		\draw (plot2.north) node[above] {1:4 scaling};
+\end{tikzpicture}
+\end{center}
 
 However, if we plot vectors every $0.5$ units but scale the vectors so they are
 $1/4$ the size they'd conventionally be, we get a much more understandable figure.
 
-XXX Figure
-
 We might even decide that the magnitude of each vector is not so important
 and totally ignore it in our plot.
 
-XXX Figure with unit vectors
+\begin{center}
+\begin{tikzpicture}[>=latex]
+
+	 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+		    colormap/viridis,
+			name=plot0,
+		    axis lines=middle,enlargelimits={abs=0.2},
+		    ]
+
+		\foreach \xx in {-2, -1.5,...,2} {
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+			\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+		}
+
+		\addplot3 [myorange, domain=-2:2,  quiver={u={-y/sqrt(x^2+y^2)}, v={x/sqrt(x^2+y^2)}, scale arrows=.3, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+	    \end{axis}
+
+\end{tikzpicture}
+\end{center}
+
 
 
 \begin{exercises}
@@ -106,7 +194,52 @@ vector field $\nabla f:\R^n\to\R^n$.  And, $\nabla f$ has some nice geometric
 properties.  For instance, $\nabla f$ always points in the direction
 of greatest change for $f$.
 
-XXX Figure surface with vector field at base
+\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={-50}{25},zmin=0,
+		    colormap/viridis,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+\addplot3 [mypink, domain=-1:5, y domain=-3:3, quiver={u={-2*x+4}, v={-2*y}, scale arrows=0.14, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};
+		\begin{scope}[opacity=.7]
+        \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=1] {-(x-2)^2-y^2+20};
+		\end{scope}
+
+		\pgfplotsinvokeforeach {1,3,...,20} {
+		\draw[thick, white, densely dashed, thin] (2,0,{20-#1}) ellipse[x radius=sqrt(#1), y radius=sqrt(#1)];
+		}
+
+
+
+	    \end{axis}
+
+	    \begin{axis}[grid=major,view={270}{90},zmin=0,
+		    colormap/viridis,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot2, at=(plot0.right of south east), xshift=.5cm
+		    ]
+
+
+        \addplot3[surf, domain=-1:5, y domain=-3:3, shader=interp, opacity=1] {-(x-2)^2-y^2+20};
+
+
+
+
+%		\foreach \z in {1,1.414,sqrt(3)} {
+ %       		\addplot3[domain=-\z:\z, samples y=1, mygreen, thick, samples=200, smooth] ({sqrt(\z*\z-x^2)+2},{x},{0});
+%		}
+		\pgfplotsinvokeforeach {1,3,...,20} {
+		\draw[thick, white, densely dashed, thin] (2,0,0) ellipse[x radius=sqrt(#1), y radius=sqrt(#1)];
+		}
+
+	\addplot3 [mypink, domain=-1:5, y domain=-3:3, quiver={u={-2*x+4}, v={-2*y}, scale arrows=0.14, every arrow/.append style={-stealth}}, samples=10] (x,y,0) node[above] (A) {};
+
+	    \end{axis}
+	  \end{tikzpicture}
+\end{center}
 
 The connections between $f$ and $\nabla f$ run deep.  Suppose
 for a moment that $f:\R^2\to\R$ is affine.  That is, $f(x,y)=\alpha x+\beta y+\gamma$. 
@@ -197,7 +330,34 @@ and reversing the orientation of a curve in a vector line integral just multipli
 the result by $-1$.
 
 \begin{example}
-	XXX simple example with orientation flipped
+	Let $\vec F(x,y)=x+2y$, $A=(0,0)$, $B=(0,1)$, and consider the 
+	directed line
+	segment $\mathcal L$ which starts at $A$ and ends at $B$ and the line
+	segment $\mathcal L'$ which starts at $B$ and ends at $A$.  Compute
+	$\int_{\mathcal L}\vec F\cdot \d \vec r$ and $\int_{\mathcal L'}\vec F\cdot \d \vec r$.
+
+	We will start with $\int_{\mathcal L}\vec F\cdot \d \vec r$.  We can
+	parameterize $\mathcal L$ with the function $\vec r:[0,1]\to\mathcal L$ where
+	\[
+		\vec r(t) = \mat{t\\0}.
+	\]
+	Now,
+	\[
+		\int_{\mathcal L}\vec F\cdot \d \vec r = \int_0^1 \vec F\circ\vec r(t)\cdot
+		\vec r'(t)\,\d t = 1.
+	\]
+
+	Computing $\int_{\mathcal L'}\vec F\cdot \d \vec r$ is similar.  $\mathcal L'$
+	is parameterized by the function $\vec q:[0,1]\to\mathcal L'$ where
+	\[
+		\vec q(t) = \matc{1-t\\0}.
+	\]
+	Notice that $\vec q' = -\vec r'$.  This is where our sign change comes from.
+	Computing,
+	\[
+		\int_{\mathcal L}\vec F\cdot \d \vec r = \int_0^1 \vec F\circ\vec q(t)\cdot
+		\vec q'(t)\,\d t = -1.
+	\]
 \end{example}
 
 
@@ -236,8 +396,61 @@ is that the integral around a closed path in a conservative vector field is
 zero.
 
 \begin{example}
-	XXX Example --- work on a hill via complicated path and sub for
-	and easy path.
+	Let $\vec F(x,y)=(x^2+2xy,x^2+2y)$ and let $\mathcal C\subset\R^2$ be the
+	segment of the graph of $y^2=xe^x$ from $(0,0)$ to $(4e^4,2e^2)$.  Compute $\int_{\mathcal C}\vec F\cdot \d \vec r$.
+
+	The path $\mathcal C$ has a yucky formula, and parameterizing it might be challenging.
+	However, if $\vec F$ is conservative, we can apply Theorem \ref{THMFTC1}
+	to make integration quick.  That rests on being able to find a potential function, $f$,
+	for $\vec F$.
+
+	We shall find a function $f$ as follows.
+	If $\nabla f = \vec F$, then using components
+	\begin{align*}
+	   \frac{\partial f}{\partial x} &= F_1(x,y) = x^2 + 2xy, \\
+	   \frac{\partial f}{\partial y} &= F_2(x,y) = x^2 + 2y.
+	\end{align*}
+	Integrate the first equation with respect to $x$ to obtain
+	\[
+	  f(x,y) = \frac 13 x^3 + x^2y + C(y).
+	\]
+	Note that the indefinite integral as usual involves an arbitrary
+	constant, but since this was a ``partial integration'' keeping $y$
+	constant, this constant can in fact depend on $y$.   Now differentiate
+	with respect to $y$ to obtain
+	\[
+	\frac{\partial f}{\partial y} = x^2 + C'(y).
+	\]
+	Comparing this with the previous expression for $\dfrac{\partial f}
+	{\partial y}$ yields
+	\[
+	  x^2 + C'(y) = x^2  + 2y\qquad\text{or}\qquad C'(y) = 2y
+	\]
+	from which we conclude $C(y) = y^2 + E$, where $E$ is a constant 
+	independent of both $x$ and $y$.  Hence,
+	\[
+	f(x,y) = \frac 13 x^3 + x^2y + y^2 + E
+	\]
+	is the most general function which will work.  If we
+	just want one such function, we can take $E = 0$, for example.
+	Checking that this works yields
+	\begin{align*}
+	\frac{\partial f}{\partial x} &= x^2 + 2xy \\
+	\frac{\partial f}{\partial y} &= x^2 + 2y 
+	\end{align*}
+	as required.
+
+	It is very important to check the answer since you could easily
+	make a mistake in integrating.  It might even be true that the
+	field is not even conservative, but through an error, you have convinced
+	yourself that you have found a function $f$ with the right
+	properties.
+
+	Now, 
+	\[
+		\int_{\mathcal C}\vec F\cdot \d \vec r
+		= f(4e^4,2e^2) - f(0,0) = \tfrac{64}{3}e^{12}+32e^{10}+4e^4.
+	\]
 \end{example}
 
 Since conservative vector fields make vector line integrals so easy, it's useful
@@ -331,7 +544,28 @@ You cast a $1\times 1$ square net in the river with normal
 vector $(1,0,0)$ and ask the following question: how much 
 water per unit time is flowing through the net?
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={15}{25},xmin=-1.5,xmax=1,ymin=-.5,ymax=1.5,zmin=-.5,zmax=1.5,
+		    colormap/viridis,
+		    scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\pgfplotsinvokeforeach {-1,-.5,...,2} {
+			\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0}, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
+		}
+
+%		\draw[fill=myorange, fill opacity=.5] (0,0,0) -- (0,1,0) -- ({-sqrt(2)/2},1,{sqrt(2)/2}) -- ({-sqrt(2)/2},0,{sqrt(2)/2}) -- cycle;
+		\draw[fill=myorange, fill opacity=.5] (0,0,0) -- (0,1,0) -- (0,1,1) -- (0,0,1) -- cycle;
+
+	    \end{axis}
+
+
+	  \end{tikzpicture}
+\end{center}
 
 In this situation, it is easy to compute.  Let us assume
 the density of the water is $1$.  In this case, since the direction
@@ -353,7 +587,58 @@ Here, the \emph{perceived net area} is the area that the net appears to
 the water.  Since the net is angled at $45^\circ$ relative to the flow
 of the water, the net \emph{appears} smaller, from the perspective of the water.
 
-XXX Figure showing ``apparent'' height
+\begin{center}
+	\begin{tikzpicture}
+
+	    \begin{axis}[grid=major,view={15}{25},xmin=-1.5,xmax=1,ymin=-.5,ymax=1.5,zmin=-.5,zmax=1.5,
+		    colormap/viridis,
+		    scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\pgfplotsinvokeforeach {-1,-.5,...,2} {
+			\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0}, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
+		}
+
+		\draw[fill=myorange, fill opacity=.5] (0,0,0) -- (0,1,0) -- ({-sqrt(2)/2},1,{sqrt(2)/2}) -- ({-sqrt(2)/2},0,{sqrt(2)/2}) -- cycle;
+%		\draw[fill=myorange, fill opacity=.5] (0,0,0) -- (0,1,0) -- (0,1,1) -- (0,0,1) -- cycle;
+
+	    \end{axis}
+	    \begin{axis}[grid=major,view={90}{0},xmin=-1.5,xmax=1,ymin=-.5,ymax=1.5,zmin=-.5,zmax=1.5,
+		    colormap/viridis,
+		    scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot1, width=7cm,
+			at=(plot0.right of south east), xshift=.5cm
+		    ]
+
+		\pgfplotsinvokeforeach {-1,-.5,...,2} {
+			\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0}, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
+		}
+
+		\draw[fill=myorange, fill opacity=.5] (0,0,0) -- (0,1,0) -- ({-sqrt(2)/2},1,{sqrt(2)/2}) -- ({-sqrt(2)/2},0,{sqrt(2)/2}) -- cycle;
+
+	    \end{axis}
+	    \begin{axis}[grid=major,view={0}{0},xmin=-1.5,xmax=1,ymin=-.5,ymax=1.5,zmin=-.5,zmax=1.5,
+		    colormap/viridis,
+		    scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot2, width=7cm,
+			at=(plot1.right of south east), xshift=.5cm
+		    ]
+
+		\pgfplotsinvokeforeach {-1,-.5,...,2} {
+			\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0}, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
+		}
+
+		\draw[fill=myorange, fill opacity=.5,  ultra thick] (0,0,0) -- (0,1,0) -- ({-sqrt(2)/2},1,{sqrt(2)/2}) -- ({-sqrt(2)/2},0,{sqrt(2)/2}) -- cycle;
+	    \end{axis}
+
+	\draw (plot1.north) node[above] {Front view};
+	\draw (plot2.north) node[above] {Side view};
+	  \end{tikzpicture}
+\end{center}
 
 To the water, the net appears to have width $1$ and height $\sqrt{2}/2$, giving
 the net a perceived area of $\sqrt{2}/2$.  Now we can compute
@@ -505,7 +790,28 @@ Of course, $\int_{\mathcal S}\cdot\ \d x\d y$ is actually a double integral
 over the domain of the parameterization $\vec p$ of $\mathcal S$.
 
 \begin{example}
-	XXX flux computation example
+	Let $\vec F(x,y,z)=(x,y,z)$ and let $\mathcal C$ be the outward-oriented cylinder of radius 1,
+	height 4, and base centered on he $xy$-plane.  Compute $\Flux_{\mathcal C}\vec F$.
+
+	We can parameterize $\mathcal C$ using cylindrical coordinates.  Namely,
+	$\vec r:[0,2\pi]\times[0,4]\to\mathcal C$ given by
+	\[
+		\vec r(a,b) = \matc{\cos a\\\sin a\\ b}
+	\]
+	is a parameterization.
+
+	Computing,
+	\[
+		\frac{\partial \vec r}{\partial x}(a,b) \times
+		\frac{\partial \vec r}{\partial y}(a,b) = \matc{\cos a\\\sin a\\ 0},
+	\]
+	which points outwards on $\mathcal C$.  Thus, $\vec r$ is an \emph{orientation-preserving}
+	parameterization.  Moving ahead, since $\vec F\circ \vec r(a,b) = (\cos a,\sin a, b)$, 
+	we compute
+	\[
+		\Flux_{\mathcal C}\vec F = \int_{a=0}^{a=2\pi}\int_{b=0}^{b=4} \matc{\cos a\\\sin a\\ 0}\cdot
+		\matc{\cos a\\\sin a\\ b}\d a\d b = 8\pi.
+	\]
 \end{example}
 
 \subsection{Flux and Surface Orientation}
@@ -520,8 +826,6 @@ The relationship between an upward or downward orientation for
 the $xy$-plane is pretty clear, as is the relationship between a sphere
 oriented outward or inward, but for more complicated surfaces, orientation\index{orientation}
 an orientation can be harder to specify, or might not even exist!
-
-XXX Figure upward/downard normal for plane, inward/outward normal for sphere.
 
 \begin{definition}[Consistent Orientation]
 	A surface $\mathcal S$ is endowed with a \emph{consistent orientation}
@@ -548,7 +852,82 @@ and $\vec n_2$ be the unit normal vector to $\mathcal S$ at $s_2$.  The vector $
 can be continuously transported to $\vec n_2$ if it can be ``slid'' from $s_1$ to $s_2$ while
 staying normal to the surface, and, after it has ``slid'' it is identical to $\vec n_2$.
 
-XXX Figure sliding vectors on cylinder
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{colormap/gray}
+	    \begin{axis}[grid=major,view={15}{25}, %xmin=-1, xmax=1, ymin=-1, ymax=1,
+		    colormap/viridis,mesh/interior colormap name=gray,
+		    scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		%\pgfplotsinvokeforeach {-1,-.5,...,2} {
+		%	\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0 }, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
+		%}
+
+		    \addplot3[surf,
+	    shader     = interp,
+		point meta={cos(u)},
+		    samples=20, samples y=3,
+			variable=\u, variable y=\v,
+			domain=190:-170, y domain=0:2]
+			({cos(u)}, {sin(u)}, {v});
+
+		\def\aa{-2}
+		\def\ab{-90}
+		
+		\coordinate (A) at ({cos(\aa)}, {sin(\aa)}, .5);
+		\coordinate (B) at ({2*cos(\aa)}, {2*sin(\aa)}, .5);
+		\coordinate (C) at ({cos(\ab)}, {sin(\ab)}, 1.5);
+		\coordinate (D) at ({2*cos(\ab)}, {2*sin(\ab)}, 1.5);
+
+
+		\draw[->, myorange, thick] (A) -- (B);
+		\draw[->, myorange, thick] (C) -- (D);
+
+	    \end{axis}
+	    \begin{axis}[grid=major,view={15}{25}, %xmin=-1, xmax=1, ymin=-1, ymax=1,
+		    colormap/viridis,mesh/interior colormap name=gray,
+		    scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot1,
+		at=(plot0.right of south east)
+		    ]
+
+		%\pgfplotsinvokeforeach {-1,-.5,...,2} {
+		%	\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0 }, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
+		%}
+
+		    \addplot3[surf,
+	    shader     = interp,
+		point meta={cos(u)},
+		    samples=20, samples y=3,
+			variable=\u, variable y=\v,
+			domain=190:-170, y domain=0:2]
+			({cos(u)}, {sin(u)}, {v});
+
+		\def\aa{-2}
+		\def\ab{-90}
+		
+		\coordinate (A) at ({cos(\aa)}, {sin(\aa)}, .5);
+		\coordinate (B) at ({2*cos(\aa)}, {2*sin(\aa)}, .5);
+		\coordinate (C) at ({cos(\ab)}, {sin(\ab)}, 1.5);
+		\coordinate (D) at ({2*cos(\ab)}, {2*sin(\ab)}, 1.5);
+
+		\addplot3 [mypink,densely dashed, domain=\aa:\ab, samples y=1, quiver={u={x/sqrt(x^2+y^2)}, v={y/sqrt(x^2+y^2)}, w={0 }, scale arrows=0.7, every arrow/.append style={-stealth}}, samples=8] ({cos(x)}, {sin(x)},.5);
+\addplot3 [mypink,densely dashed, domain=.5:1.5, samples y=1, quiver={u={x/sqrt(x^2+y^2)}, v={y/sqrt(x^2+y^2)}, w={0 }, scale arrows=0.7, every arrow/.append style={-stealth}}, samples=6] ({cos(\ab)}, {sin(\ab)},x);
+
+		\draw[->, myorange, thick] (A) -- (B);
+		\draw[->, myorange, thick] (C) -- (D);
+
+	    \end{axis}
+
+		\draw (plot0.north) node[above] {Two compatible normals};
+		\draw (plot1.north) node[above] {Continuous transport of normals};
+
+	  \end{tikzpicture}
+\end{center}
 
 If a surface admits a consistent orientation, we call it \emph{orientable}\index{orientable surface}.
 We will exclusively deal with orientable surfaces, and, for an orientable surface,
@@ -559,7 +938,15 @@ to specify an orientation, all you need to do is specify a normal vector at a si
 	a normal vector $\vec n=(0,0,-1)$ at the point $(0,0,1)$.  Find a unit normal
 	vector to $\mathcal H$ at $(\sqrt{2}/2,\sqrt{2}/2,0)$ consistent with this choice.
 
-	XXX Finish
+	$\mathcal H$ can be defined as the part of the level surface $f(x,y,z)=x^2+y^2+z^2=1$
+	that lies above the $xy$-plane.  As such, $\nabla f(x,y,z)=(2x,2y,2z)$ is always a normal
+	vector to $\mathcal H$.  However, $\nabla f(0,0,1) = (0,0,2)$, which points in the opposite
+	direction of $\vec n$.  Therefore $-\nabla f$ is consistent with $\vec n$, giving us a 
+	consistent normal vector at $(\sqrt{2}/2,\sqrt{2}/2,0)$ of $(-\sqrt{2},-\sqrt{2},0)$.
+
+	Alternatively, we can notice that $\vec n$ points ``inward.''  Thus, to be consistent with $\vec n$,
+	every other normal vector on $\mathcal H$ must point inward.  At $(\sqrt{2}/2,\sqrt{2}/2,0)$,
+	the vector $(-\sqrt{2},-\sqrt{2},0)$ points inward.
 \end{example}
 
 It is mathematically interesting to consider the fact that there exist \emph{non}-orientable

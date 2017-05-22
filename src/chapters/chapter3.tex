@@ -2287,7 +2287,7 @@ radius 0.
 		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
 		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
 		    ]
-		    \addplot3[surf, 
+		    \addplot3[surf, colormap/viridis,
 		    z buffer=sort,samples=20,
 			variable=\u, variable y=\v,
 			domain=-180:180, y domain=-2:3]
@@ -2605,15 +2605,15 @@ sphere
 		\draw[dashed, color=lightgray]  (O) -- (Pxy);
 
 		\tdplotsetthetaplanecoords{30}
-		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\draw[tdplot_rotated_coords, myorange, ultra thin] (0,0,0) arc (0:360:-.4);
 		\tdplotsetthetaplanecoords{90}
-		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\draw[tdplot_rotated_coords, myorange, ultra thin] (0,0,0) arc (0:360:-.4);
 		\tdplotsetthetaplanecoords{120}
-		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\draw[tdplot_rotated_coords, myorange, ultra thin] (0,0,0) arc (0:360:-.4);
 		\tdplotsetthetaplanecoords{150}
-		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\draw[tdplot_rotated_coords, myorange, ultra thin] (0,0,0) arc (0:360:-.4);
 		\tdplotsetthetaplanecoords{180}
-		\draw[tdplot_rotated_coords, mypink, ultra thin] (0,0,0) arc (0:360:-.4);
+		\draw[tdplot_rotated_coords, myorange, ultra thin] (0,0,0) arc (0:360:-.4);
 		\end{tikzpicture}
 	\end{center}
 \end{example}

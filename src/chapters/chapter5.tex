@@ -851,7 +851,7 @@ our sum to figure out which parts are negligible.
 		\Big)f(r,\theta)
 \]
 \[
-	\phantom{XXXXXXXX}=\sum_{\theta}\sum_{r} r\Delta r\Delta \theta f(r,\theta)
+	\phantom{MMMMMMMM}=\sum_{\theta}\sum_{r} r\Delta r\Delta \theta f(r,\theta)
 	+ 
 		\sum_{\theta}\sum_{r} \tfrac{1}{2}(\Delta r)^2\Delta \theta f(r,\theta)
 \]
@@ -982,8 +982,68 @@ will use the language of differential geometry.
 	coordinates.  Further, we already computed the pre-volume form for polar
 	coordinates.  Namely, $\Delta V(r,\theta) = r\Delta r\Delta \theta+\tfrac{1}{2}(\Delta r)^2\Delta \theta$.
 
-	XXX Figure
+	\begin{center}
+		\begin{tikzpicture}[>=latex]
 
+
+		\begin{scope}[xshift=0cm]
+			\begin{scope}
+				\clip (-.5,-.5) rectangle (3,3);
+				% Draw the lines at multiples of pi/12
+				\foreach \ang in {0,...,31} {
+				  \draw[gray!10] (0,0) -- (\ang * 180 / 16:4.3);
+				}
+				
+				% Concentric circles and radius labels
+				\foreach \s in {0, .5,..., 4} {
+				  \draw[gray!10] (0,0) circle (\s);
+				}
+
+				\foreach \ang in {3,4} {
+				  \draw[densely dashed,myorange] (0,0) -- (\ang * 180 / 16:4.3);
+				}
+				\foreach \s in {2, 2.5} {
+				  \draw[densely dashed,mypink] (0,0) circle (\s);
+				}
+			\end{scope}
+
+			\draw[<->] (61.875:2) -- (61.875:2.5) node[midway,above left,yshift=-.1cm] {$\Delta r$};
+			
+			\draw[<->] (33.75:3.25) arc (33.75:45:3.25) node[midway, above right] {$\Delta \theta$};
+			
+			\draw (-11.25:2) node[below,mypink] {$r=r_0$};
+			\draw (27:3.5) node[right, xshift=-.4cm,myorange] {$\theta=\theta_0$};
+			
+			\draw[fill opacity=0.05, fill=blue] (33.75:2) -- (33.75:2.5) arc (33.75:45:2.5) -- (45:2) arc (45:33.75:2);
+			
+					\begin{axis}[
+					    anchor=origin,
+						name=plot0,
+					    set layers=standard,
+					    disabledatascaling,
+					    xmin=-.25,xmax=1.5,
+					    ymin=-.25,ymax=1.5,
+					    x=2cm,y=2cm,
+					    grid=both,
+					    grid style={line width=.1pt, draw=gray!10},
+					    %major grid style={line width=.2pt,draw=gray!50},
+					    axis lines=middle,
+					    minor tick num=0, grid=none,
+					    enlargelimits={abs=0.1},
+					    axis line style={latex-latex},
+					    ticklabel style={font=\tiny,fill=white},
+						xticklabels={,,},
+						yticklabels={,,},
+					    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+					    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+					]
+					\end{axis}
+
+			\draw ([xshift=1.4cm]plot0.east) node[above right] (A) {$\text{area}=\Delta V(r_0,\theta_0)$} edge[bend left, ->] (39.375:2.25);
+		\end{scope}
+
+		\end{tikzpicture}
+	\end{center}
 
 	To compute the volume form for polar coordinates, we need to find a function $V$ so that
 	\begin{align*}
@@ -1200,7 +1260,9 @@ and then at the point $\vec p(\alpha,\beta)$, area gets changed by $V_{\vec q}\c
 Change in area is multiplicative, so
 \begin{equation}
 	\label{EQVOLFORMCHAINRULE}
-	V_{\vec s}(\alpha,\beta) = V_{\vec p}(\alpha,\beta)\Big(V_{\vec q}\circ \vec p(\alpha,\beta)\Big).
+	V_{\vec s}(\alpha,\beta)=
+V_{\vec q\circ\vec p}(\alpha,\beta)
+	= V_{\vec p}(\alpha,\beta)\Big(V_{\vec q}\circ \vec p(\alpha,\beta)\Big).
 \end{equation}
 Does that look a little like the chain rule?
 
@@ -1245,7 +1307,26 @@ where volumes and areas are allowed to be \emph{signed}.}.
 %Enough whimsy.  
 Let's use the chain rule for volume forms to solve a problem.
 \begin{example}
-	XXX Finish.  Maybe an isometric rotation and a stretching of some sort?
+	Consider the parameterizations $\vec p:\R^2\to\R^2$ and $\vec q:\R^2\to\R^2$ given
+	by
+	\[
+		\vec p(a,b) = \matc{2 a\\b}\qquad\text{and}\qquad \vec q(a,b) =\mat{-b\\a},
+	\]
+	and let $\vec r=\vec q\circ \vec p$. Compute the volume form for $\vec p$.
+
+	We could find a formula for $\vec r$ and then compute the volume form from first
+	principles, but since $\vec r$ is a composition of easy-to-understand parameterizations,
+	let's use the chain rule for volume forms instead.
+
+	First, since $\vec p$ stretches everything in the $\xhat$ direction
+	by a factor of $2$, we know $V_{\vec p}=2$.  Secondly, since $\vec q$
+	rotates everything counter-clockwise by $90^\circ$, we know it doesn't
+	change volume at all, and so $V_{\vec q}=1$.  Therefore
+	\[
+		V_{\vec r}(a,b)=V_{\vec q\circ \vec p}(a,b) = V_{\vec p}(a,b)V_{\vec q}\circ \vec p(a,b) = (1)(2) = 2.
+	\]
+	This result makes sense---if we stretch in the $\xhat$ direction by a factor of $2$ and then
+	rotate counter clockwise, volume should change by a factor of $2$.
 \end{example}
 
 \begin{exercises}
@@ -1278,7 +1359,48 @@ with equality after we take a limit as the sector size tends towards zero.
 	\theta]\times[\phi_0,\phi_0+\Delta\phi]\big)\subseteq\mathcal S$ will be a tiny sector
 	of $\mathcal S$.
 
-	XXX Figure
+	\begin{center}
+\begin{tikzpicture}[>=latex]
+
+	    \begin{axis}[grid=major,view={60}{40},xmin=-1.,xmax=1.,ymin=-1., ymax=1., zmin=-1.,zmax=1.,
+			name=plot0,
+			%z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper,
+		    width=15cm,
+		    scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    ]
+		    \addplot3[surf, shader/interp,
+		    z buffer=sort,samples=40, samples y=20,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=0:180]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)});
+
+		    \addplot3[surf, colormap/viridis, shader/interp,
+		    z buffer=sort,samples=8, samples y=8,
+			variable=\u, variable y=\v,
+			domain=41.5:60, y domain=0:19]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)}) node[midway] (A) {};
+
+			\foreach \v in {0,19} {
+				\addplot3[domain=0:180, samples y=1, white, densely dashed, smooth, variable=\u] ({sin(u)*cos(\v)},{sin(u)*sin(\v)}, {cos(u)});
+			}
+			\foreach \u in {41.5,60} {
+				\addplot3[domain=0:360, samples y=1, white, densely dashed, smooth, variable=\v] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+
+	    \end{axis}
+
+		\draw (plot0.east) node[above right, yshift=.2cm, xshift=1cm] {Sector} edge[bend right, ->,black,thick] (A);
+
+
+\end{tikzpicture}
+	\end{center}
 
 	The exact area of this sector turns out to be $\big(\cos\phi_0-\cos(\phi_0+\Delta\phi)\big)\Delta\theta$.
 	The total surface area of $\mathcal S$ is $4\pi$ and so we have
@@ -1373,7 +1495,62 @@ as $t$ varies and $a$ is held constant.  This gives us a tangent vector of
 	\frac{\d}{\d t} \vec p(a,t)\Big|_{t=b} = \frac{\partial \vec p}{\partial b}(a,b).
 \]
 
-XXX Figure
+\begin{center}
+\begin{tikzpicture}[>=latex]
+
+	    \begin{axis}[grid=major,view={60}{40},xmin=-1.,xmax=1.,ymin=-1., ymax=1., zmin=-1.,zmax=1.,
+			name=plot0,
+			%z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper,
+		    width=15cm,
+		    scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    ]
+		    \addplot3[surf, shader/interp,
+		    z buffer=sort,samples=40, samples y=20,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=0:180]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)});
+
+		    %\addplot3[surf, colormap/viridis, shader/interp,
+		    %z buffer=sort,samples=8, samples y=8,
+			%variable=\u, variable y=\v,
+			%domain=41.5:60, y domain=0:19]
+			%({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)}) node[midway] (A) {};
+
+			\foreach \v in {0} {
+				\addplot3[domain=0:180, samples y=1, white, densely dashed, smooth, variable=\u] ({sin(u)*cos(\v)},{sin(u)*sin(\v)}, {cos(u)});
+			}
+			\foreach \u in {60} {
+				\addplot3[domain=0:360, samples y=1, white, densely dashed, smooth, variable=\v] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+
+			\def\uu{60}
+			\def\vv{0}
+			\def\dd{.8}
+
+			\coordinate (C) at ({sin(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)}, {cos(\uu)});
+			\coordinate (D) at ({sin(\uu)*cos(\vv) - \dd*cos(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)-\dd*cos(\uu)*sin(\vv)}, {cos(\uu)+\dd*sin(\uu)});
+			\coordinate (E) at ({sin(\uu)*cos(\vv)-\dd*sin(\uu)*sin(\vv)},{sin(\uu)*sin(\vv)+\dd*sin(\uu)*cos(\vv)}, {cos(\uu)});
+
+
+			\draw[->,thick,mygreen] (C) -- (D) node[left, black] {$\tfrac{\partial \vec p}{\partial a}(a,b)$};
+			\draw[->,thick,mypink] (C) -- (E);
+			\draw[draw=none,fill=black] (C) circle (1.5pt) node[below left,yshift=-.1cm] {$\vec p(a,b)$};
+
+	    \end{axis}
+
+		\draw (E) node[right, black] {$\tfrac{\partial \vec p}{\partial b}(a,b)$};
+
+		%\draw (plot0.east) node[above right, yshift=.2cm, xshift=1cm] {Sector} edge[bend right, ->,black,thick] (A);
+
+\end{tikzpicture}
+\end{center}
 
 For all reasonable parameterizations, $\frac{\partial \vec p}{\partial a}(a,b)$ and $\frac{\partial \vec p}{\partial b}(a,b)$
 will point in different directions, and so we may represent $\mathcal P_{\vec s}$ in vector form as
@@ -1412,7 +1589,118 @@ That is, the area of the tiny sector in $\mathcal S$ close to the point $\vec p(
 is approximately equal to the area of the corresponding
 tiny sector on the tangent plane to $\mathcal S$ at the point $\vec p(a,b)$.
 
-XXX Figure
+\begin{center}
+\begin{tikzpicture}[>=latex]
+
+	    \begin{axis}[grid=major,view={40}{40},xmin=-1.,xmax=1.,ymin=-1., ymax=1., zmin=-1.,zmax=1.,
+			name=plot0,
+			%z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper,
+		    width=17cm,
+		    scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    ]
+		    \addplot3[surf, shader/interp,
+		    z buffer=sort,samples=40, samples y=20,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=0:180]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)});
+
+		    \addplot3[surf, colormap/viridis, shader/interp,
+		    z buffer=sort,samples=8, samples y=8,
+			variable=\u, variable y=\v,
+			domain=41.5:60, y domain=0:19]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)}) node[midway] (A) {};
+
+			\foreach \v in {0} {
+				\addplot3[domain=0:180, samples y=1, white, densely dashed, smooth, variable=\u] ({sin(u)*cos(\v)},{sin(u)*sin(\v)}, {cos(u)});
+			}
+			\foreach \u in {60} {
+				\addplot3[domain=0:360, samples y=1, white, densely dashed, smooth, variable=\v] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+
+			\def\uu{60}
+			\def\vv{0}
+			\def\dd{.8}
+			\def\ddd{.33}
+
+			\coordinate (C) at ({sin(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)}, {cos(\uu)});
+			\coordinate (D) at ({sin(\uu)*cos(\vv) - \dd*cos(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)-\dd*cos(\uu)*sin(\vv)}, {cos(\uu)+\dd*sin(\uu)});
+			\coordinate (E) at ({sin(\uu)*cos(\vv)-\dd*sin(\uu)*sin(\vv)},{sin(\uu)*sin(\vv)+\dd*sin(\uu)*cos(\vv)}, {cos(\uu)});
+
+
+			%\coordinate (C2) at ({sin(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)}, {cos(\uu)});
+			\coordinate (D2) at ({sin(\uu)*cos(\vv) - \ddd*cos(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)-\ddd*cos(\uu)*sin(\vv)}, {cos(\uu)+\ddd*sin(\uu)});
+			\coordinate (E2) at ({sin(\uu)*cos(\vv)-\ddd*sin(\uu)*sin(\vv)},{sin(\uu)*sin(\vv)+\ddd*sin(\uu)*cos(\vv)}, {cos(\uu)});
+			\coordinate (F2) at ({sin(\uu)*cos(\vv)-\ddd*sin(\uu)*sin(\vv)  - \ddd*cos(\uu)*cos(\vv)   },{sin(\uu)*sin(\vv)+\ddd*sin(\uu)*cos(\vv)   -\ddd*cos(\uu)*sin(\vv)}, {cos(\uu)   +\ddd*sin(\uu)});
+
+			\draw[draw=none, fill=blue, fill opacity=0.3] (C) -- (D2) -- (F2) -- (E2) -- cycle;
+
+			\draw[->,thick,mygreen] (C) -- (D) node[left, black] {$\tfrac{\partial \vec p}{\partial a}(a,b)$};
+			\draw[->,thick,mypink] (C) -- (E);
+			\draw[draw=none,fill=black] (C) circle (1.5pt) node[below left,yshift=-.1cm] {$\vec p(a,b) = L_{\vec p}(a,b)$};
+
+	    \end{axis}
+
+		\draw (E) node[right, black] {$\tfrac{\partial \vec p}{\partial b}(a,b)$};
+
+
+
+	    \begin{axis}[grid=major,view={40}{40},xmin=-1.,xmax=1.,ymin=-1., ymax=1., zmin=-1.,zmax=1.,
+			name=plot1,
+			at=(plot0.right of south east),
+			xshift=1cm,
+			%z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/copper,
+		    width=17cm,
+		    scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    ]
+		    \addplot3[surf, shader/interp,
+		    z buffer=sort,samples=40, samples y=20,
+			variable=\u, variable y=\v,
+			domain=-180:180, y domain=0:180]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)});
+
+		    \addplot3[surf, colormap/viridis, shader/interp,
+		    z buffer=sort,samples=8, samples y=8,
+			variable=\u, variable y=\v,
+			domain=41.5:60, y domain=0:19]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)}) node[midway] (AA) {};
+
+			\foreach \v in {0} {
+				\addplot3[domain=0:180, samples y=1, white, densely dashed, smooth, variable=\u] ({sin(u)*cos(\v)},{sin(u)*sin(\v)}, {cos(u)});
+			}
+			\foreach \u in {60} {
+				\addplot3[domain=0:360, samples y=1, white, densely dashed, smooth, variable=\v] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+
+			\def\uu{60}
+			\def\vv{0}
+			\def\dd{.8}
+			\def\ddd{.33}
+
+			\coordinate (C) at ({sin(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)}, {cos(\uu)});
+			\draw[draw=none,fill=black] (C) circle (1.5pt) node[below left,yshift=-.1cm] {$\vec p(a,b)$};
+
+	    \end{axis}
+
+
+		\draw (plot0.north) node[above right, yshift=0cm, xshift=1cm] {Approximate sector} edge[bend left, ->,black,thick] (A);
+		\draw (plot1.north) node[above right, yshift=0cm, xshift=1cm] {Exact sector} edge[bend left, ->,black,thick] (AA);
+
+\end{tikzpicture}
+\end{center}
 
 In fact, if $\vec p$ is differentiable, we have
 \[
