@@ -1002,12 +1002,39 @@ one does not have the cross product, so an appeal to basic principles may be nee
 flux.
 
 \begin{example}
-	Let $\mathcal B$ be the boundary of $[0,1]\times[0,1]$
-	oriented outward and let $\vec F(x,y)=(x^2,-y^2)$.  Compute the flux of $\vec F$
-	through $\mathcal B$.
+	Let $\mathcal A$ be the boundary of $[0,1]\times[0,1]$
+	oriented outward and let $\vec F(x,y)=(x^2,y^2)$.  Compute the flux of $\vec F$
+	through $\mathcal A$.
 
-	XXX Finish
-	
+	$\mathcal A$ consists of four line segments which we will call $\mathcal L$, $\mathcal R$,
+	$\mathcal T$, and $\mathcal B$ for left, right, top, and bottom.  Notice that
+	\[
+		\vec l(t) = \mat{t\\0}\qquad
+		\vec r(t) = \matc{1+t\\0}\qquad
+		\vec t(t) = \matc{0\\1+t}\qquad
+		\vec b(t) = \mat{0\\t}\qquad
+	\]
+	parameterize $\mathcal L$, $\mathcal R$,$\mathcal T$, and $\mathcal B$ with respect to
+	arc-length.  Since $\mathcal L$, $\mathcal R$,$\mathcal T$, and $\mathcal B$ are line segments,
+	their normal vectors don't change.  Therefore,
+	\begin{align*}
+		\Flux_{\mathcal L}\vec F &= \int_{\mathcal L}\vec F\cdot (-\xhat)
+		=\int_0^1 \vec F\circ \vec l(t)\cdot (-\xhat)\,\d t = -\tfrac{1}{3}
+		\\
+		\Flux_{\mathcal R}\vec F &= \int_{\mathcal R}\vec F\cdot \xhat
+		=\int_0^1 \vec F\circ \vec r(t)\cdot \xhat\,\d t = \tfrac{7}{3}
+	\\
+		\Flux_{\mathcal T}\vec F &= \int_{\mathcal T}\vec F\cdot \yhat
+		=\int_0^1 \vec F\circ \vec t(t)\cdot \yhat\,\d t = \tfrac{7}{3}
+	\\
+		\Flux_{\mathcal B}\vec F &= \int_{\mathcal B}\vec F\cdot (-\yhat)
+		=\int_0^1 \vec F\circ \vec b(t)\cdot (-\yhat)\,\d t = -\tfrac{1}{3},
+	\end{align*}
+	and so
+	\[
+		\Flux_{\mathcal A}\vec F = \Flux_{\mathcal L}\vec F + \Flux_{\mathcal R}\vec F
+		+\Flux_{\mathcal T}\vec F+\Flux_{\mathcal B}\vec F = 4.
+	\]
 \end{example}
 
 
@@ -1036,7 +1063,7 @@ where a vector field is diverging or converging.
 	\[
 		\nabla \cdot \vec F(x,y,z) = \lim_{\Delta x,\Delta y,\Delta z\to 0}
 		\frac{\text{flux of }\vec F\text{ through }R_{\Delta x,\Delta y,\Delta z}(x,y,z)}
-		{\text{area of }
+		{\text{volume of }
 		R_{\Delta x,\Delta y,\Delta z}(x,y,z)}.
 	\]
 \end{definition}
@@ -1047,14 +1074,110 @@ of that vector field.  Divergence in dimensions other than three is defined simi
 \begin{example}
 	Find the divergence of $\vec F(x,y,z)=(x,y,z)$ at the origin.
 
-	XXX Finish
+	We need to compute the flux of $\vec F$ through $R_{\Delta x,\Delta y,\Delta z} = R_{\Delta x,\Delta y,\Delta z}(0,0,0)$,
+	which is a cube with six sides.  Let $\mathcal L$ and $\mathcal R$ stand for the left and
+	right sides of $R_{\Delta x,\Delta y, \Delta z}$, respectively.
+	That is, for $\mathcal L$, $x=0$ and for $\mathcal R$, $x=\Delta x$.  Computing, we see
+	\[
+		\Flux_{\mathcal L}\vec F = 0\qquad\text{and}
+		\qquad \Flux_{\mathcal R} = \Delta x\Delta y\Delta z.
+	\]
+	Let $\mathcal T$, $\mathcal B$, $\mathcal F$, $\mathcal K$ stand for the top, bottom, front,
+	and back of $R_{\Delta x,\Delta y,\Delta z}$.  We similarly compute
+	\[
+		\Flux_{\mathcal T}\vec F = \Delta x\Delta y\Delta z\qquad\text{and}
+		\qquad \Flux_{\mathcal B} = 0
+	\]
+	and
+	\[
+		\Flux_{\mathcal F}\vec F = 0\qquad\text{and}
+		\qquad \Flux_{\mathcal K} = \Delta x\Delta y\Delta z.
+	\]
+	We now determine the total flux through $R_{\Delta x,\Delta y, \Delta z}$ to be
+	\[
+		\Flux_{R_{\Delta x,\Delta y, \Delta z}}\vec F = 3\Delta x\Delta y\Delta z,
+	\]
+	and so
+	\[
+		\nabla \cdot \vec F(0,0,0) = \lim_{\Delta x,\Delta y,\Delta z\to 0}\frac{\Flux_{R_{\Delta x,\Delta y, \Delta z}}\vec F}{\Delta x\Delta y\Delta z} = 3.
+	\]
 \end{example}
 
 \begin{example}
 	Estimate regions where the divergence is positive, negative, or zero
 	for the following vector field plots.
 
-	XXX Finish
+	\begin{center}
+		\begin{tikzpicture}[>=latex]
+			 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+				    colormap/viridis,
+					width=6cm,
+					name=plot0,
+				    axis lines=middle,enlargelimits={abs=0.2},
+				    ]
+
+				\foreach \xx in {-2, -1.5,...,2} {
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+				}
+
+				\addplot3 [myorange, domain=-2:2,  quiver={u={-x}, v={-y}, scale arrows=.25, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+			    \end{axis}
+
+			 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+				    colormap/viridis,
+					name=plot2,
+					width=6cm,
+				    axis lines=middle,enlargelimits={abs=0.2},
+					at=(plot0.right of south east), xshift=.5cm
+				    ]
+
+				\foreach \xx in {-2, -1.5,...,2} {
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+				}
+
+				\addplot3 [myorange, domain=-2:2,  quiver={u={x-1}, v={y}, scale arrows=.25, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+			    \end{axis}
+			 \begin{axis}[grid=major,view={0}{90},zmin=0,xmin=-2,xmax=2,ymin=-2,ymax=2,zmax=45,
+				    colormap/viridis,
+					name=plot3,
+					width=6cm,
+				    axis lines=middle,enlargelimits={abs=0.2},
+					at=(plot2.right of south east), xshift=.5cm
+				    ]
+
+				\foreach \xx in {-2, -1.5,...,2} {
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({\xx},{x},{0});
+					\addplot3[samples y=1,line width=.5pt, draw=gray!10] ({x},{\xx},{0});
+				}
+				\addplot3 [myorange, domain=-2:2,  quiver={u={x^2}, v={y^2}, scale arrows=.1, every arrow/.append style={-stealth}}, samples=9] (x,y,0) node[above] (A) {};
+
+
+			    \end{axis}
+
+				\draw (plot0.north) node[above] {$\vec F(x,y)=(-x,-y)$};
+				\draw (plot2.north) node[above] {$\vec G(x,y)=(x-1,y)$};
+				\draw (plot3.north) node[above] {$\vec H(x,y)=(x^2,y^2)$};
+		\end{tikzpicture}
+	\end{center}
+
+	Consider $\vec F$.  From the picture, it looks like any box drawn will have
+	more arrows entering than leaving, so we estimate $\nabla \cdot \vec F < 0$.
+
+	Consider $\vec G$.  From the picture, it looks like any box drawn will have more arrows
+	leaving than entering, so we estimate $\nabla \cdot \vec G > 0$.
+
+	Consider $\vec H$.  From the picture, it looks like a box contained
+	in the first quadrant ($x,y>0$) will have more arrows leaving than entering and
+	a box contained in the third quadrant ($x,y<0$) will have more arrows entering than
+	leaving.  Therefore we estimate $\nabla \cdot \vec H(x,y)>0$ if $x,y>0$ and $\nabla \cdot \vec H(x,y)<0$
+	if $x,y<0$.  The second and fourth quadrants are much harder to eyeball---we'd best rely on calculations.
+
+	Explicit calculations show that $\nabla \cdot \vec H(x,y)>0$ if $x+y>0$, $\nabla \cdot \vec H(x,y)=0$ if $x+y=0$,
+	and $\nabla \cdot \vec H(x,y)<0$ if $x+y<0$.
 \end{example}
 
 The notation $\nabla \cdot \vec F$ comes from physics and is a handy pneumonic
@@ -1065,33 +1188,54 @@ makes sense, we need to work in some generality.
 To keep the number of variables down, we will explore divergence in $\R^2$ for the moment.
 Let $\vec F:\R^2\to\R^2$ a be a vector field defined by
 $\vec F(x,y)=\mat{f_x(x,y)\\f_y(x,y)}$ and consider $R_{\Delta x,\Delta y}(x_0,y_0)$.
-$R_{\Delta x,\Delta y}(x_0,y_0)$ has four sides, which we will label $L,R,T,B$.
+$R_{\Delta x,\Delta y}(x_0,y_0)$ has four outward-oriented sides, which we will label $\mathcal L,\mathcal R,\mathcal T,\mathcal B$.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[>=latex, scale=2]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[mypink,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.5,below] {$\mathcal B$}  node[pos=.7,above] (V1) {};
+	\draw[draw=none] (B) -- (C) node[pos=.5,right] {$\mathcal R$}  node[pos=.7,left] (V2) {};
+	\draw[draw=none] (C) -- (D) node[pos=.5,above] {$\mathcal T$}  node[pos=.7,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.5,left] {$\mathcal L$} node[pos=.7,right] (V4) {};
+
+	\def\dd{.5}
+	\draw[->, myorange, thick] (V1) -- +(0,-\dd);
+	\draw[->, myorange, thick] (V2) -- +(\dd, 0);
+	\draw[->, myorange, thick] (V3) -- +(0,\dd);
+	\draw[->, myorange, thick] (V4) -- +(-\dd,0);
+	\draw (.5,.5) node {$R_{\Delta x,\Delta y}$};
+	\end{tikzpicture}
+\end{center}
 
 We will compute the approximate flux through these sides separately.  Consider 
 $L=\{x_0\}\times[y_0,y_0+\Delta y]$ oriented to the left.  If $\Delta y$ is small,
-$\vec F$ (along $L$) can be reasonably approximated by the constant vector
+$\vec F$ (along $\mathcal L$) can be reasonably approximated by the constant vector
 $\vec F(x_0,y_0)$  Therefore,
 \[
-	\Flux_{L}\vec F \approx \Delta y \mat{-1\\0}\cdot \vec F(x_0,y_0) = -\Delta y f_x(x_0,y_0).
+	\Flux_{\mathcal L}\vec F \approx \Delta y \mat{-1\\0}\cdot \vec F(x_0,y_0) = -\Delta y f_x(x_0,y_0).
 \]
 Similarly, near $R=\{x_0+\Delta x\}\times [y_0,y_0+\Delta y]$, $\vec F$ can be approximated
 by $\vec F(x_0+\Delta x,y_0)$.  Since $R$ is oriented to the right, we have
 \[
-	\Flux_{R}\vec F \approx \Delta y \mat{1\\0}\cdot \vec F(x_0,y_0) = \Delta y f_x(x_0+\Delta x,y_0).
+	\Flux_{\mathcal R}\vec F \approx \Delta y \mat{1\\0}\cdot \vec F(x_0,y_0) = \Delta y f_x(x_0+\Delta x,y_0).
 \]
 Continuing the process, we compute
 \[
-	\Flux_{B}\vec F \approx -\Delta x\mat{0\\1}\cdot \vec F(x_0,y_0) = -\Delta x f_y(x_0,y_0),
+	\Flux_{\mathcal B}\vec F \approx -\Delta x\mat{0\\1}\cdot \vec F(x_0,y_0) = -\Delta x f_y(x_0,y_0),
 \]
 and
 \[
-	\Flux_{T}\vec F \approx \Delta x\mat{0\\1}\cdot \vec F(x_0,y_0+\Delta y) = \Delta x f_y(x_0,y_0+\Delta y).
+	\Flux_{\mathcal T}\vec F \approx \Delta x\mat{0\\1}\cdot \vec F(x_0,y_0+\Delta y) = \Delta x f_y(x_0,y_0+\Delta y).
 \]
 We're now ready to approximate the divergence of $\vec F$ at $(x_0,y_0)$.
 \begin{align*}
-	\nabla \cdot \vec F &\approx \frac{\Flux_R\vec F + \Flux_L\vec F + \Flux_T\vec F + \Flux_B\vec F}{\Delta x\Delta y}\\
+	\nabla \cdot \vec F &\approx \frac{\Flux_{\mathcal R}\vec F + \Flux_{\mathcal L}\vec F + \Flux_{\mathcal T}\vec F + \Flux_{\mathcal B}\vec F}{\Delta x\Delta y}\\
 		&= \frac{\Delta y\Big( f_x(x_0+\Delta x,y_0) - f_x(x_0,y_0)\Big)
 		+\Delta x\Big( f_y(x_0,y_0+\Delta y) - f_y(x_0,y_0)\Big)}{\Delta x\Delta y}\\
 		& = \frac{f_x(x_0+\Delta x,y_0) - f_x(x_0,y_0)}{\Delta x} + 
@@ -1171,7 +1315,31 @@ of a region is tricky business.  Fortunately, your intuition will take you quite
 For example, the boundary of a disk is a circle, the boundary of a filled in cube
 is the surface of that cube and the boundary of an interval consists of its endpoints.
 
-XXX Figure
+\begin{center}
+
+	\begin{tikzpicture}[>=latex, scale=1]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\def\d{.5}
+
+		\draw[mypink,fill opacity=0.05,thick, fill=blue] (0,0) circle (1) node[blue, fill opacity=1] {$\mathcal R$};
+		\foreach \t in {0,30, ..., 360} {
+			\draw[thick, mypink, ->] ({cos(\t)}, {sin(\t)}) -- +({\d*cos(\t)}, {\d*sin(\t)});
+		}
+		\draw (1,0) node[above right, mypink, yshift=.1cm] {$\partial \mathcal R$};
+
+
+		\draw[thick, blue] (2,-1) -- (4,1) node[midway, below right] {$\mathcal L$};
+		\draw[fill=mypink, draw=none] (2,-1) circle (1pt) ;
+		\draw[mypink, thick, ->] (2,-1) -- +(-\d,-\d) node[near start, below right] {$\partial \mathcal L$};
+		\draw[fill=mypink, draw=none] (4,1) circle (1pt) ;
+		\draw[mypink, thick, ->] (4,1) -- +(\d,\d) node[near start, below right] {$\partial \mathcal L$};
+
+	\end{tikzpicture}
+\end{center}
 
 It's important to note that boundaries can be empty.  For example, the boundary
 of a single point is empty.  The boundary of a circle is also empty (it has no ``ends'').
@@ -1189,8 +1357,8 @@ We can now precisely state the \emph{divergence theorem}\index{divergence theore
 	\]
 \end{theorem}
 
-The divergence theorem holds in all dimensions, but it is sometimes
-stated in $\R^3$ strictly in terms of integrals as
+The divergence theorem holds in all dimensions, and it is sometimes
+stated in $\R^3$ as
 \[
 	\iint_{\partial R} \vec F\cdot \hat n \d V_{\partial R}
 	=\iiint_R \nabla \cdot \vec F \d V_{R}
@@ -1199,10 +1367,26 @@ where $\hat n$ is a unit normal vector to $\partial R$, and $\d V_{\partial R}$
 and $\d V_R$ are the volume forms for $\partial R$ and $R$, respectively.
 
 \begin{example}
-	Verify the divergence theorem for the vector field $\vec F$=...
-	on the region $R=...$
+	Verify the divergence theorem for the vector field $\vec F(x,y)=(2x,y)$
+	on the region $\mathcal R=\Set{(x,y)\given x^2+y^2\leq 1}$.
 
-	XXX Finish
+	First note that $\mathcal R$ is a disk of radius 1 centered at $\vec 0$
+	and that $\partial \mathcal R$ can be parameterized by $\vec r(t) = (\cos t,\sin t)$,
+	which happens to be an arc-length parameterization.  Therefore,
+	\[
+		\Flux_{\partial \mathcal R} \vec F = \int_0^{2\pi} F\circ \vec r(t)\cdot \hat n(t)\,\d t,
+	\]
+	where $\hat n(t) = (\cos t,\sin t)$ is the outward pointing unit normal vector to $\partial \mathcal R$
+	at $\vec r(t)$.  Thus,
+	\[
+		\Flux_{\partial \mathcal R} \vec F = \int_0^{2\pi} \mat{2\cos t\\\sin t}\cdot \mat{\cos t\\\sin t}\d t
+		=3\pi.
+	\]
+
+	On the other hand, $\nabla \cdot \vec F(x,y) = 3$ is constant, and so
+	\[
+		\int_{\mathcal R} \nabla \cdot \vec F = (3)(\text{area of }\mathcal R) = 3\pi.
+	\]
 \end{example}
 
 \bigskip
@@ -1214,7 +1398,48 @@ the essential idea is simple and beautiful.
 Let $\vec F$ be a vector field, and 
 consider two adjacent squares, $A$ and $B$, both oriented outwards.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[>=latex, scale=2]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[mypink,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.7,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.7,left] (V2) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.7,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.7,right] (V4) {};
+
+	\def\dd{.5}
+	\draw[->, mypink, thick] (V1) -- +(0,-\dd);
+	\draw[->, mypink, thick] (V2) -- +(\dd, 0);
+	\draw[->, mypink, thick] (V3) -- +(0,\dd);
+	\draw[->, mypink, thick] (V4) -- +(-\dd,0);
+	\draw (.5,.5) node {$A$};
+
+		\coordinate (A) at (1.02,0);
+		\coordinate (B) at (2.02,0);
+		\coordinate (C) at (2.02,1);
+		\coordinate (D) at (1.02,1);
+
+		\draw[myorange,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.7,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.7,left] (V2) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.7,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.7,right] (V4) {};
+
+	\def\dd{.5}
+	\draw[->, myorange, thick] (V1) -- +(0,-\dd);
+	\draw[->, myorange, thick] (V2) -- +(\dd, 0);
+	\draw[->, myorange, thick] (V3) -- +(0,\dd);
+	\draw[->, myorange, thick] (V4) -- +(-\dd,0);
+	\draw (1.5,.5) node {$B$};
+
+	\end{tikzpicture}
+\end{center}
 
 Let $R=A\cup B$ be the rectangular region formed by joining $A$ and $B$.  Now,
 \[
@@ -1229,7 +1454,72 @@ we chop $X$ into tiny squares each called $\Delta X$, we see that
 because, again, flux through any interior edges cancels out.  But, this means
 the only flux that actually contributes is the flux along the boundary.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[x=2cm,y=2cm]
+
+	\begin{scope}[	spy using outlines={circle, lens={scale=4}, size=3cm, connect spies}]
+			\coordinate (A) at (.3,.15*4);
+			\coordinate (B) at (.4,.15*5);
+			\fill[myorange,opacity=.5] (A) rectangle (B);
+
+
+			\begin{axis}[
+			    anchor=origin,
+			    set layers=standard,
+			    disabledatascaling,
+			    xmin=-1,xmax=1,
+			    ymin=0,ymax=1,
+			    x=2cm,y=2cm,
+			    grid=both,
+			    grid style={line width=.1pt, draw=gray!10},
+			    %major grid style={line width=.2pt,draw=gray!50},
+			    axis lines=middle,
+			    minor tick num=0,
+			    enlargelimits={abs=0.4},
+			    axis line style={latex-latex},
+			    ticklabel style={font=\tiny,fill=white},
+			    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+			    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+			]
+
+			\addplot[name path=f,no marks,mypink,thick,domain=-1:1, samples=25, draw=none] ({x},{x*x});
+			\addplot[no marks,mypink,thick,domain=-2:2, samples=25,smooth] ({x},{x*x});
+			\addplot[name path=g, no marks,green!50!black,thick,domain=-3:3, samples=2] ({x},{1});
+			\addplot [thick, color=blue, fill=blue, fill opacity=0.05] fill between [of=f and g, split];
+
+			\end{axis}
+				\foreach \x in {-1,-.9,...,1} {
+					\draw ($(\x,1)$) -- ($(\x,\x*\x)$);
+				}
+				\foreach \y in {0,.15,...,1} {
+					\draw ({-\y^.5,\y}) -- ({\y^.5,\y});
+				}
+
+
+			\spy [blue] on ($.5*(A)+.5*(B)$)
+		     in node (a) at (3,1);
+
+
+	\end{scope}
+		\coordinate (L) at ($(a.center) - (.2,.3)$);
+	\coordinate (R) at ($(a.center) - (-.2,.3)$);
+	\coordinate (T) at ($(a.center) + (.2,.3)$);
+	\coordinate (G) at ($(a.center) + (-.2,.3)$);
+
+	\def\d{.15}
+			\draw[myorange, thick, ->] ($.5*(R) + .5*(T)$) -- +(\d,0);
+		\draw[mypink, thick, ->] ($.5*(R) + .5*(T)$) -- +(-\d,0);
+			\draw[myorange, thick, ->] ($.5*(R) + .5*(L)$) -- +(0,-\d);
+		\draw[mypink, thick, ->] ($.5*(R) + .5*(L)$) -- +(0,\d);
+		
+			\draw[myorange, thick, ->] ($.5*(G) + .5*(L)$) -- +(-\d,0);
+		\draw[mypink, thick, ->] ($.5*(G) + .5*(L)$) -- +(\d,0);
+
+			\draw[myorange, thick, ->] ($.5*(G) + .5*(T)$) -- +(0,\d);
+		\draw[mypink, thick, ->] ($.5*(G) + .5*(T)$) -- +(0,-\d);
+		
+	\end{tikzpicture}
+\end{center}
 
 Of course, we were considering $\Flux_{\partial X}\vec F$ to begin with,
 so only the boundary should matter.  However, as the area of $\Delta X$ gets very tiny,
@@ -1270,9 +1560,15 @@ If it makes a loop and continues in the opposite direction to how $C$ is
 oriented, $\Circ_C \vec F$ is negative.
 
 \begin{example}
-	Find the circulation of ...
+	Find the circulation of $\vec F(x,y) = (-y, 2x)$ around $\mathcal C$, the circle
+	of radius $1$ centered at $\vec 0$ and oriented counter clockwise.
 
-	XXX Finish
+	Notice that $\vec r(t) = (\cos t,\sin t)$ parameterizes $\mathcal C$ in the
+	correct direction.  Thus,
+	\[
+		\Circ_{\mathcal C}\vec F = \int_0^{2\pi}\vec F\circ \vec r(t) \cdot \vec r'(t)\,\d t
+		=\int_0^{2\pi} \mat{-\sin t\\2\cos t}\cdot \mat{-\sin t\\\cos t}\d t = 3\pi.
+	\]
 \end{example}
 
 Just like the divergence of a vector field is the amount of flux per unit area,
@@ -1325,7 +1621,22 @@ and
 $R^{\zhat}_{\Delta a,\Delta b}(x,y,z)$ are workable rectangles\footnote{ Pun intended.}.
 
 \begin{example}
-	XXX Finish
+	Find the $z$-component of the curl of $\vec F(x,y,z) = (-y, 2x, 0)$ at the origin.
+	
+	Let $R_{\Delta x,\Delta y}=R^{\zhat}_{\Delta x,\Delta y}(0,0,0)$. (Recall that $R_{\Delta x,\Delta y}$
+	is the perimeter of the rectangle in the $xy$-plane that is aligned with the axes, has lower-left-corner
+	at $(0,0,0)$ and is oriented counter clockwise.)  We can compute the circulation around $R_{\Delta x,\Delta y}$
+	by computing the vector line integral along each edge of $R_{\Delta x,\Delta y}$.
+
+	After computing, we see
+	\[
+		\Circ_{R_{\Delta x,\Delta y}}\vec F = 0 + \Delta x\Delta y+ 2\Delta x\Delta y+0 = 3\Delta x\Delta y,
+	\]
+	and so
+	\[
+		\Curl_{\zhat}\vec F(0,0,0) = \lim_{\Delta x,\Delta y\to 0} \frac{\Circ_{R_{\Delta x,\Delta y}}\vec F}
+		{\Delta x\Delta y} = 3.
+	\]
 \end{example}
 
 Again, like divergence, the $\nabla \times \vec F$ notation serves as a pneumonic
@@ -1364,9 +1675,13 @@ from Section \ref{SECSCREENING}.  We already know that passing the screening tes
 is necessary but not sufficient for showing a vector field is conservative.
 
 \begin{example}
-	Show that ... is closed by not conservative
+	Show that $\vec F(x,y,z) = \frac{1}{x^2+y^2}\mat{-y\\x\\0}$ is closed by not conservative.
 
-	XXX Finish
+	A quick computation shows $\nabla \times \vec F = \vec 0$ at all points in the domain.  However,
+	if we graph this vector field, we see it circulates around the $z$-axis.  Thus, line integral
+	around a closed path encircling the $z$-axis will be non-zero.  Since there is a closed path
+	around which we have a non-zero vector line integral, $\vec F$ cannot be the gradient of any function
+	and so it isn't conservative.
 \end{example}
 
 However, there are times when closed does imply conservative.  In particular,
@@ -1381,10 +1696,24 @@ being closed on that region implies that it's conservative.
 \end{theorem}
 
 \begin{example}
-	XXX show that the region from the previous example cannot
-	be deformed into a ball.
+	Consider again $\vec F(x,y,z) = \frac{1}{x^2+y^2}\mat{-y\\x\\0}$ and let $D$
+	be the domain of $\vec F$ which is equal to $\R^3$ take away the $z$-axis.  On $D$, 
+	$\nabla \times \vec F=\vec 0$, but $\vec F$ is not conservative.
+
+	Let $f(x,y,z) = \arctan \frac{y}{x}$ and let $H$ be the domain of $f$.  $H$ consists of
+	$\R^3$ take away the $yz$-plane.  Computing, we see
+	\[
+		\nabla f(x,y,z) = \frac{1}{x^2+y^2}\mat{-y\\x\\0},
+	\]
+	and so $\vec F$ is conservative when restricted to $H$.  In particular, the vector line
+	integral of $\vec F$ around any closed loop in $H$ must be zero.  This doesn't contradict
+	our previous finding---since $H$ is missing the $yz$-plane, it is impossible for a loop
+	contained in $H$ to encircle the $z$-axis.
+
+	Let $R\subset D$ be a region that can be deformed into a ball.  Necessarily, no closed loop in
+	$R$ can encircle the $z$-axis.  Further, by the Poincar\'e lemma, we know the vector line
+	integral around any closed loop in $R$ must be zero.
 \end{example}
-xx
 
 \subsection{Curl in Other Dimensions}
 
@@ -1392,7 +1721,7 @@ The concept of circulation is defined for vector fields of any dimension.
 Therefore, we can define the analog of curl in any dimension.  However,
 in other dimensions, curl looks a little different than in three dimensions.
 
-For example, if $\vec F:\R^\to\R^2$, then the curl of $\vec F$ takes the form
+For example, if $\vec F:\R^2\to\R^2$, then the curl of $\vec F$ takes the form
 of a scalar.  Why?  Well, if we specify the normal vector of a plane in
 $\R^2$, there aren't that many choices.  We can either specify the normal 
 vector to be ``up,'' giving the plane a counter-clockwise orientation, or
@@ -1400,7 +1729,17 @@ we can specify it to be ``down,'' giving it a clockwise orientation.  Therefore,
 there is only one \emph{component} to the curl of a vector field in $\R^2$.
 
 \begin{example}
-	XXX Example of curl of vector field in $\R^2$
+	Compute the curl of $\vec F(x,y) = (-y,2x)$.
+
+	We could use the definition of curl to compute $\nabla \times \vec F$, but let
+	us instead leverage our knowledge of the curl of three dimensional vector fields.
+
+	Let $\vec G(x,y,z) = (-y, 2x, 0)$ and notice that $\nabla \times \vec F$ should be the
+	$\zhat$ component of $\nabla \times \vec G$.  Computing,
+	\[
+		\nabla \times \vec G(x,y,z) = \mat{0\\0\\3},
+	\]
+	and so $\nabla \times \vec F=3$, which is a \emph{scalar} quantity.
 \end{example}
 
 If, $G:\R^4\to\R^4$, things are even stranger.  To specify the orientation
@@ -1421,7 +1760,50 @@ Let $A$ and $B$ be the perimeter of two adjacent squares oriented counter-clockw
 and let $R$ be the perimeter of the rectangle containing $A$ and $B$ oriented 
 counter-clockwise.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[>=latex, scale=2]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[mypink,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw[->, mypink, thick] (V1) -- +(\dd, 0);
+	\draw[->, mypink, thick] (V2) -- +(0, \dd);
+	\draw[->, mypink, thick] (V3) -- +(-\dd, 0);
+	\draw[->, mypink, thick] (V4) -- +(0, -\dd);
+
+
+		\coordinate (A) at (1.02,0);
+		\coordinate (B) at (2.02,0);
+		\coordinate (C) at (2.02,1);
+		\coordinate (D) at (1.02,1);
+
+		\draw[myorange,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {};
+
+	\def\dd{.5}
+	\draw[->, myorange, thick] (V1) -- +(\dd,0);
+	\draw[->, myorange, thick] (V2) -- +(0, \dd);
+	\draw[->, myorange, thick] (V3) -- +(-\dd, 0);
+	\draw[->, myorange, thick] (V4) -- +(0,-\dd);
+	
+	\draw (1,1) node[above, yshift=.4cm] {Cancellation} edge[bend left, ->] (X)edge[bend left, ->] (Y);
+	\draw (.5,.5) node {$A$};
+	\draw (1.5,.5) node {$B$};
+	\end{tikzpicture}
+\end{center}
 
 We see that because the shared edge between $A$ and $B$ is oriented in opposite
 directions, the contribution to circulation along that edge cancels.  Thus, for a vector
@@ -1436,7 +1818,7 @@ we need to sort out the issue of \emph{orientation} again.
 
 For a volume $V$ in $\R^3$ or an area $A$ in $\R^2$, the orientation
 of $\partial V$ and $\partial A$ is ``outward.''  However, what if we have
-a surface $S$ in $\R^3$.  If $S$ is a surface, then $\partial S$ is
+a surface $S$ in $\R^3$?  If $S$ is a surface, then $\partial S$ is
 a curve, and there is no ``outward'' for a curve in $\R^3$.  There is
 however a forward and a backwards.  We will define the orientation
 of $\partial S$ according to the right-hand rule.
@@ -1447,8 +1829,65 @@ holds.  Let $s\in\partial S$ and let $\vec t$ be the tangent vector to $\partial
 aligned with $\partial S$'s orientation; let $\vec n$ be a normal vector to $S$ aligned
 with its orientation; then, $\vec t\times \vec n$ points ``away'' from the boundary.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[>=latex]
+			\pgfplotsset{colormap/gray}
 
+
+		    \begin{axis}[grid=major,view={40}{40},xmin=-1.,xmax=1.,ymin=-1., ymax=1., zmin=-1.,zmax=1.1,
+				name=plot0,
+				hide axis,
+				%z buffer=sort,
+			    %shader=faceted interp,
+			    %patch type=biquadratic,
+			    colormap/viridis,
+			    width=17cm,
+			    scale mode=scale uniformly,
+			    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+			    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+			    unbounded coords=jump,
+			    ]
+			    \addplot3[surf, shader/interp,
+			    z buffer=sort,samples=40, samples y=20,
+				variable=\u, variable y=\v,
+				domain=60:300, y domain=0:180]
+				({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)});
+
+			\foreach \w in {0, 30, ..., 330} {
+				\foreach \u in {60} {
+					\addplot3[domain=\w:\w+30, samples y=1, black, smooth, variable=\v, <-, thick] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+				}
+	}
+
+
+				\def\uu{60}
+				\def\vv{0}
+				\def\dd{.8}
+				\def\ddd{.33}
+
+				\coordinate (C) at ({sin(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)}, {cos(\uu)});
+				\coordinate (D) at ({sin(\uu)*cos(\vv) - \dd*cos(\uu)*cos(\vv)},{sin(\uu)*sin(\vv)-\dd*cos(\uu)*sin(\vv)}, {cos(\uu)+\dd*sin(\uu)});
+				\coordinate (E) at ({sin(\uu)*cos(\vv) +\dd*sin(\uu)*sin(\vv)},{sin(\uu)*sin(\vv)-\dd*sin(\uu)*cos(\vv)}, {cos(\uu)});
+				\coordinate (F) at ({2*sin(\uu)*cos(\vv)},{2*sin(\uu)*sin(\vv)}, {2*cos(\uu)});
+
+
+				\draw[->,thick,white] (C) -- (D) node[left, black] {$\vec t\times \vec n$};
+				\draw[->,thick,mypink] (C) -- (E);
+				\draw[->,thick,blue] (C) -- (F);
+				\draw[draw=none,fill=black] (C) circle (1.5pt) node[below right] {};
+
+		    \end{axis}
+
+			\draw (E) node[below right, black] {$\vec t$};
+			\draw (F) node[below right, black] {$\vec n$};
+
+
+
+
+
+	\end{tikzpicture}
+\end{center}
 
 Now we are ready explore the analog of the divergence theorem, Stokes's theorem\index{Stokes's 
 theorem}.
@@ -1459,7 +1898,117 @@ we chop $X$ into tiny squares each called $\Delta X$, we see that
 \]
 because circulation along any interior edges cancels out.
 
-XXX Figure
+\begin{center}
+\begin{tikzpicture}[>=latex]
+		\pgfplotsset{colormap/gray}
+
+
+	    \begin{axis}[grid=major,view={40}{40},xmin=-1.,xmax=1.,ymin=-1., ymax=1., zmin=-1.,zmax=1.1,
+			name=plot0,
+			hide axis,
+			%z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/viridis,
+		    width=17cm,
+		    scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    ]
+		    \addplot3[surf, shader/interp,
+		    z buffer=sort,samples=25, samples y=17,
+			variable=\u, variable y=\v,
+			domain=60:300, y domain=0:180]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)});
+
+
+		\def\vshift{2}
+
+		\foreach \w in {0, 30, ..., 330} {
+
+			\foreach \u in {60} {
+					\addplot3[domain=\u:\u+50, samples y=1,myorange, thick, smooth, variable=\v, samples=4] ({sin(v)*cos(\w+\vshift/2)},{sin(v)*sin(\w+\vshift/2)}, {cos(v)});
+			}
+			\foreach \u in {0, 18.5, 33, 50} {
+					\addplot3[domain=\w:\w+30, samples y=1, myorange, thick, smooth, variable=\v, -, thick, samples=4] ({sin(\u+60)*cos(v)},{sin(\u+60)*sin(v)}, {cos(\u+60)});
+			}
+
+		}
+		\coordinate (A) at ({sin(100)*cos(-45)},{sin(100)*sin(-45)}, {cos(100)});
+	    \end{axis}
+
+	    \begin{axis}[grid=major,view={40}{40},xmin=-1.,xmax=1.,ymin=-1., ymax=1., zmin=-1.,zmax=1.1,
+			name=plot1,
+			hide axis,
+			at=(plot0.right of south east),
+			%z buffer=sort,
+		    %shader=faceted interp,
+		    %patch type=biquadratic,
+		    colormap/viridis,
+		    width=17cm,
+		    scale mode=scale uniformly,
+		    %zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+		    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+		    %xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+		    unbounded coords=jump,
+		    ]
+		    \addplot3[surf, shader/interp,
+		    z buffer=sort,samples=25, samples y=17,
+			variable=\u, variable y=\v,
+			domain=60:300, y domain=0:180]
+			({sin(u)*cos(v)},{sin(u)*sin(v)}, {cos(u)});
+
+
+		\def\vshift{2}
+
+		\foreach \w in {0, 30, ..., 330} {
+
+			\foreach \u in {60} {
+					\addplot3[domain=\u:\u+50, samples y=1,myorange, thick, smooth, variable=\v, samples=5] ({sin(v)*cos(\w+\vshift/2)},{sin(v)*sin(\w+\vshift/2)}, {cos(v)});
+			}
+			\foreach \u in {18.5, 33, 50} {
+					\addplot3[domain=\w:\w+30, samples y=1, myorange, thick, smooth, variable=\v, -, thick, samples=5] ({sin(\u+60)*cos(v)},{sin(\u+60)*sin(v)}, {cos(\u+60)});
+			}
+
+			\foreach \u in {60} {
+				\addplot3[domain=\w+\vshift:\w+30, samples y=1, black, smooth, variable=\v, <-, thick, samples=5] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+			\foreach \u in {79.5} {
+				\addplot3[domain=\w+\vshift:\w+30, samples y=1, smooth, variable=\v, <-, white, samples=5] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+			\foreach \u in {92} {
+				\addplot3[domain=\w+\vshift:\w+30, samples y=1, smooth, variable=\v, ->, white, samples=5] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+			\foreach \u in {78, 109} {
+				\addplot3[domain=\w+\vshift:\w+30, samples y=1, smooth, variable=\v, ->, black, samples=5] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+			\foreach \u in {94.5} {
+				\addplot3[domain=\w+\vshift:\w+30, samples y=1, smooth, variable=\v, <-, black, samples=5] ({sin(\u)*cos(v)},{sin(\u)*sin(v)}, {cos(\u)});
+			}
+			\foreach \u in {60} {
+					\addplot3[domain=\u:\u+18, samples y=1, black, smooth, variable=\v, ->, samples=5] ({sin(v)*cos(\w+\vshift)},{sin(v)*sin(\w+\vshift)}, {cos(v)});
+					\addplot3[domain=\u:\u+18, samples y=1, black, smooth, variable=\v, <-, samples=5] ({sin(v)*cos(\w)},{sin(v)*sin(\w)}, {cos(v)});
+
+					\addplot3[domain=\u+19:\u+32, samples y=1, white, smooth, variable=\v, ->, samples=5] ({sin(v)*cos(\w+\vshift)},{sin(v)*sin(\w+\vshift)}, {cos(v)});
+					\addplot3[domain=\u+19:\u+32, samples y=1, white, smooth, variable=\v, <-, samples=5] ({sin(v)*cos(\w)},{sin(v)*sin(\w)}, {cos(v)});
+						
+					\addplot3[domain=\u+34:\u+48, samples y=1, black, smooth, variable=\v, ->, samples=5] ({sin(v)*cos(\w+\vshift)},{sin(v)*sin(\w+\vshift)}, {cos(v)});
+					\addplot3[domain=\u+34:\u+48, samples y=1, black, smooth, variable=\v, <-, samples=5] ({sin(v)*cos(\w)},{sin(v)*sin(\w)}, {cos(v)});
+			}
+		}
+
+
+		\coordinate (B) at ({sin(100)*cos(-45)},{sin(100)*sin(-45)}, {cos(100)});
+
+	    \end{axis}
+
+		\draw (plot0.south) node[below, yshift=1cm] {$\Delta X$} edge[bend left, ->,densely dashed] (A);
+		\draw (plot1.south) node[below, yshift=1cm] {Oriented $\partial \Delta X$} edge[bend left, ->,densely dashed] (B);
+
+\end{tikzpicture}
+\end{center}
 
 However, as the area of $\Delta X$ gets very tiny,
 \[
