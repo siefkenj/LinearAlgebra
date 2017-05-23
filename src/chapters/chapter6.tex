@@ -854,17 +854,13 @@ staying normal to the surface, and, after it has ``slid'' it is identical to $\v
 
 \begin{center}
 	\begin{tikzpicture}
-		\pgfplotsset{colormap/gray}
 	    \begin{axis}[grid=major,view={15}{25}, %xmin=-1, xmax=1, ymin=-1, ymax=1,
-		    colormap/viridis,mesh/interior colormap name=gray,
+		    colormap/viridis,
 		    scale mode=scale uniformly,
 xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
 			name=plot0
 		    ]
 
-		%\pgfplotsinvokeforeach {-1,-.5,...,2} {
-		%	\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0 }, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
-		%}
 
 		    \addplot3[surf,
 	    shader     = interp,
@@ -888,16 +884,13 @@ xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
 
 	    \end{axis}
 	    \begin{axis}[grid=major,view={15}{25}, %xmin=-1, xmax=1, ymin=-1, ymax=1,
-		    colormap/viridis,mesh/interior colormap name=gray,
+		    colormap/viridis,
 		    scale mode=scale uniformly,
 xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
 			name=plot1,
 		at=(plot0.right of south east)
 		    ]
 
-		%\pgfplotsinvokeforeach {-1,-.5,...,2} {
-		%	\addplot3 [mypink, domain=-1.5:1, y domain=-1:2, quiver={u={1}, v={0}, w={0 }, scale arrows=0.2, every arrow/.append style={-stealth}}, samples=6] (x,y,#1);
-		%}
 
 		    \addplot3[surf,
 	    shader     = interp,
