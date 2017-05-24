@@ -329,7 +329,148 @@ with covectors (instead of dot products) from the beginning.}.
 
 \subsection{Covectors as Rulers}
 
-XXX Finish
+A covector measures a particular component of a vector (maybe scaled), and
+so we could think of them as rulers.  For example, consider the covector
+$\bm\alpha = \bm e^1+\bm e^2$.  The set of vectors that $\bm\alpha$ measures
+to be zero is exactly the set $M_0=\Set{(x,y)\given x+y=0}$.  The set of vectors
+$\bm\alpha$ measures to be $1$ is exactly the set $M_1=\Set{(x,y)\given x+y=1}$ and so on.
+
+If we graph $M_0$, $M_1$, etc., we see that $\bm\alpha$ is laying out a ``ruler'' on $\R^2$.
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=3,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			%xticklabels={,,},
+			%yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\pgfplotsinvokeforeach{-2,...,5} {
+		\addplot[color=myorange, dashed, thick, domain=-3:5] ({x},{#1-x});
+		\coordinate (A#1) at ({#1-1.5}, -1.5);
+
+}
+
+		\end{axis}
+
+		\draw (A1) node[below] {$M_{-2}$};
+		\draw (A2) node[below] {$M_{-1}$};
+		\draw (A3) node[below] {$M_{0}$};
+		\draw (A4) node[below] {$M_{1}$};
+		\draw (A5) node[below] {$M_{2}$};
+	\end{tikzpicture}
+\end{center}
+
+If we draw a vector $\vec v\in \R^2$, we can measure it with respect to $\bm\alpha$ by
+looking at how many ruler marks it crosses.  For example, $\vec v=(2,1)$ lands at $M_3$, the
+third ruler mark, so $\bm\alpha(\vec v) = 3$.
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=3,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			%xticklabels={,,},
+			%yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\pgfplotsinvokeforeach{-2,...,5} {
+		\addplot[color=myorange, dashed, thick, domain=-3:5] ({x},{#1-x});
+		\coordinate (A#1) at ({#1-1.5}, -1.5);
+
+}
+
+		\draw[->, thick, mypink] (0,0) -- (2,1);
+
+		\end{axis}
+
+		\draw (A1) node[below] {$M_{-2}$};
+		\draw (A2) node[below] {$M_{-1}$};
+		\draw (A3) node[below] {$M_{0}$};
+		\draw (A4) node[below] {$M_{1}$};
+		\draw (A5) node[below] {$M_{2}$};
+	\end{tikzpicture}
+\end{center}
+
+Of course, the ruler lines for $\bm\alpha$ are all parallel, so $\bm\alpha$ can
+only measure ``one dimension'' of a vector.  For example, $\vec w=(4,-1)\neq \vec v$ and
+$\norm{\vec v}\neq \norm{\vec w}$, but they lie on the same ruler line, and so
+$\bm\alpha(\vec v) = \bm\alpha(\vec w)$.
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=4,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			%xticklabels={,,},
+			%yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\pgfplotsinvokeforeach{-2,...,6} {
+		\addplot[color=myorange, dashed, thick, domain=-3:5] ({x},{#1-x});
+		\coordinate (A#1) at ({#1-1.5}, -1.5);
+
+}
+
+		\draw[->, thick, mypink] (0,0) -- (2,1);
+		\draw[->, thick, mygreen] (0,0) -- (4,-1);
+
+		\end{axis}
+
+		\draw (A1) node[below] {$M_{-2}$};
+		\draw (A2) node[below] {$M_{-1}$};
+		\draw (A3) node[below] {$M_{0}$};
+		\draw (A4) node[below] {$M_{1}$};
+		\draw (A5) node[below] {$M_{2}$};
+		\draw (A6) node[below] {$M_{3}$};
+	\end{tikzpicture}
+\end{center}
 
 
 \section{1-forms and Line Integrals}
@@ -408,7 +549,75 @@ appropriately). Then,
 \]is a tangent vector to $\mathcal C$ at the
 point $\vec r(t)$.
 
-XXX Figure including $\dd x(r)$
+\begin{center}
+	\begin{tikzpicture}[
+    tangent/.style={
+        decoration={
+            markings,% switch on markings
+            mark=
+                at position #1
+                with
+                {
+                    \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,0pt);
+                    \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (1,0pt);
+                    \coordinate (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,1);
+                }
+        },
+        postaction=decorate
+    },
+    use tangent/.style={
+        shift=(tangent point-#1),
+        x=(tangent unit vector-#1),
+        y=(tangent orthogonal unit vector-#1)
+    },
+    use tangent/.default=1
+]
+		\begin{axis}[
+			name=plot1,
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=4,
+		    ymin=-1,ymax=2,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+			%xticklabels={,,},
+			%yticklabels={,,},
+			xlabel={$x$},
+			ylabel={$y$},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south}
+		]
+
+	\pgfplotsinvokeforeach{-2,...,6} {
+		\addplot[color=myorange, densely dashed, thick, domain=-3:5] ({#1},{x});
+}
+	\pgfplotsinvokeforeach{-1.5,...,6} {
+		\addplot[color=myorange, dotted, thin, domain=-3:5] ({#1},{x});
+}
+
+
+		
+
+		\end{axis}
+
+       %\draw[thick, red, fill=red!30] (3,-1) .. (2,0) .. (0,0.93) .. (-0.93,0) .. (0,-0.93) .. (2,0) .. (3,1);
+
+		\draw[tangent=.0, tangent=.2, tangent=.4, tangent=.6, tangent=.8,tangent=.99,mypink, thick] (.5,.5) to[curve through={(2,0) .. (1.7,1)}] (4,2);
+		\foreach \i in {1, ..., 6} {
+			\draw[use tangent=\i, -stealth, blue] (0,0) -- (.7,0);
+		}
+		\draw[draw=none, fill=black] (.5,.5) circle (1.5pt) node[right] {$\vec a$};
+		\draw[draw=none, fill=black] (4,2) circle (1.5pt) node[right] {$\vec b$};
+		\draw[draw=none, fill=black] (1,2.5) node[above, myorange] {$\d x$ ruler};
+
+	\end{tikzpicture}
+\end{center}
 
 Now, $\dd x\circ \vec r = \bm e^1$ is the constant covector that measures
 the $x$ displacement of a vector and so $\dd x \formarg{\vec r(t)}{\vec r'(t)}
@@ -522,9 +731,20 @@ integrals.
 
 \begin{example}
 	Let $\bm \alpha=-y\dd x+x\dd y$ and let $\mathcal C$ be the circle of
-	radius 2 centered at the origin.  Compute $\int_C \bm\alpha$.
+	radius 2 centered at the origin oriented counter-clockwise.  Compute $\int_C \bm\alpha$.
 
-	XXX Finish
+	We can parameterize $\mathcal C$ by $\vec r(t) = (2\cos t,2\sin t)$.  Pre-computing,
+	$\vec r'(t) = (-2\sin t,2\cos t)$ and so,
+	\begin{align*}
+		\bm\alpha\formarg{\vec r(t)}{\vec r'(t)} &= -2\sin t\, \dd x\formarg{\vec r(t)}{\vec r'(t)}
+		+2\cos t\,\dd y\formarg{\vec r(t)}{\vec r'(t)}\\
+		&= 4\sin^2 t+4\cos^2 t\\
+		&= 4.
+	\end{align*}
+	Thus,
+	\[
+		\int_C \bm\alpha = \int_0^{2\pi} 4 \,\d t = 8\pi.
+	\]
 \end{example}
 
 \section{2-forms and Surface Integrals}
@@ -621,7 +841,38 @@ We've generated a lot of theory. Let's see an actual 2-vector in action.
 	is the oriented area of $\mathcal P_{\vec v,\vec w}$ projected onto the
 	$xy$-plane.  Show that $\bm\alpha$ is a 2-covector.
 
-	XXX Figure
+	\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={15}{25}, xmin=-1, xmax=6, ymin=-1, ymax=4,zmin=0,
+		    colormap/viridis,
+		    scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\addplot3[draw=none]  (0,0,0);
+
+		\coordinate (O) at (0,0,0);
+		\coordinate (A) at (1,2,1);
+		\coordinate (B) at (4,0,3);
+		\coordinate (C) at (3,-2,2);
+
+		\draw[fill opacity = 0.05, fill=blue] (O) -- (A) -- (B) -- (C) --cycle;
+		\draw[fill opacity=0.1, fill=mygreen] (0,0,0) -- (1,2,0) -- (4,0,0) -- (3,-2,0) --cycle;
+		\draw[fill=black, draw=none](0,0,0) circle (1.5pt);
+		\draw[->,thick, myorange] (0,0,0) -- (1,2,1);
+		\draw[->,thick, myorange] (0,0,0) -- (3,-2,2);
+
+		\draw[densely dashed] (1,2,0) -- (A) (4,0,0) -- (B) (3,-2,0) -- (C);
+		\coordinate (X) at (3,0,0);
+		%\draw (0,0,0) -- (1,-2,-4);
+
+	    \end{axis}
+
+	\draw (plot0.south) node[below] {Projected area} edge[bend right, ->] (X);
+
+	  \end{tikzpicture}
+	\end{center}
 
 	Let $\vec v=(v_x,v_y,v_z)$ and $\vec w=(w_x,w_y,w_z)$ be the components
 	of $\vec v$ and $\vec w$.  Using components, the projection of each
@@ -700,8 +951,54 @@ And, that it is multi-linear:
 
 
 \subsection{Geometric Interpretation of 2-covectors}
+Like covectors measure components of the length of a vector,
+2-covectors measure components of the area of a parallelogram determined by pairs of vectors.
+In particular, in $\R^3$, the standard basis covectors $\bm e^1\wedge \bm e^2$, $\bm e^2\wedge \bm e^3$,
+and $\bm e^3\wedge \bm e^1$ measure the oriented area of a parallelogram projected onto the $xy$, $yz$,
+and $xz$ planes.
 
-XXX Finish.  Some pictures about projections and oriented areas, again.
+\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[grid=major,view={10}{25}, xmin=-1, xmax=6, ymin=-2.5, ymax=2.5,zmin=-1, zmax=4,
+		    colormap/viridis,
+		    %scale mode=scale uniformly,
+xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+			name=plot0
+		    ]
+
+		\addplot3[draw=none]  (0,0,0);
+
+		\coordinate (O) at (0,0,0);
+		\coordinate (A) at (1,2,1);
+		\coordinate (B) at (4,0,3);
+		\coordinate (C) at (3,-2,2);
+
+
+		\draw[fill opacity=0.1, fill=mygreen] (0,0,-1) -- (1,2,-1) -- (4,0,-1) -- (3,-2,-1) --cycle;
+		\draw[fill opacity=0.1, fill=mypink] (0,2.5,0) -- (1,2.5,1) -- (4,2.5,3) -- (3,2.5,2) --cycle;
+		\draw[fill opacity=0.1, fill=myorange] (-1,0,0) -- (-1,2,1) -- (-1,0,3) -- (-1,-2,2) --cycle;
+		\draw[fill opacity = 0.05, fill=blue] (O) -- (A) -- (B) -- (C) --cycle;
+		\draw[fill=black, draw=none](0,0,0) circle (1.5pt);
+		\draw[->,thick, myorange] (0,0,0) -- (1,2,1);
+		\draw[->,thick, myorange] (0,0,0) -- (3,-2,2);
+
+		\coordinate (X) at (2,0,-1);
+		\coordinate (Y) at (-1,0,1.5);
+		\coordinate (Z) at (2,2.5,1.5);
+
+	    \end{axis}
+
+		\draw (plot0.south) node[below, yshift=-.5cm] {area $\bm e^1\wedge \bm e^2$ measures} edge[bend right, ->] (X);
+		\draw (plot0.north) node[below, yshift=1cm] {area $\bm e^3\wedge \bm e^1$ measures} edge[bend right, ->] (Z);
+		\draw (plot0.west) node[left, yshift=1cm] {area $\bm e^2\wedge \bm e^3$ measures} edge[bend right, ->] (Y);
+	  \end{tikzpicture}
+\end{center}
+
+In general, a 2-covector may be a linear combination of basis 2-covectors.  This combination may be complicated
+and not correspond to measuring area projected onto any one plane.  However, as a happy coincidence of $\R^3$,
+every 2-covector in $\R^3$ is equivalent to measuring the signed area of a parallelogram projected
+onto some plane and then (possibly) scaling the result\footnote{ This coincidence of $\R^3$ is the same
+coincidence that allows the cross product to exist.}.
 
 \subsection{2-forms}
 
@@ -740,7 +1037,16 @@ $\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
 	Express $\bm \alpha \wedge \bm \beta$ as a linear combination of
 	$\dd x\wedge \dd y$, $\dd y\wedge \dd z$, and $\dd z \wedge \dd x$.
 
-	XXX Finish
+	Computing,
+	\begin{align*}
+		\bm\alpha\wedge\bm\beta &= (x\dd x+3y^2\dd z)\wedge(-\dd x+2\dd y -3\dd z) \\
+		&= -x\dd x\wedge \dd x + 2x\dd x\wedge \dd y -3x \dd x\wedge \dd z \\
+		&\phantom{=-}-3y^2\dd z\wedge \dd x
+			+6y^2\dd z\wedge \dd y -9y^2\dd z\wedge \dd z \\
+		&=2x\dd x\wedge \dd y -3x \dd x\wedge \dd z -3y^2\dd z\wedge \dd x
+			+6y^2\dd z\wedge \dd y\\
+		&= 2d\dd x\wedge\dd y -6y^2\dd y\wedge \dd z + 3(x-y^2)\dd z\wedge \dd z.
+	\end{align*}
 \end{example}
 
 \subsection{Integrating 2-forms}
@@ -790,7 +1096,45 @@ doesn't depend on your choice of how you parameterize $\mathcal S$.
 	let's graph some curves $\vec p(t,b)$ where $b$ is held constant and
 	$\vec p(a,s)$ where $a$ is held constant.
 
-	XXX Figure of parameterization
+	\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+		    anchor=origin,
+		    set layers=standard,
+		    disabledatascaling,
+		    xmin=-1,xmax=1,
+		    ymin=-0,ymax=1,
+		    x=2.5cm,y=2.5cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.2},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+	    	\addplot[name path=f,no marks,mypink,thick,domain=-1:1, samples=25, draw=none] ({x},{x*x});
+	    	\addplot[no marks,mypink,thick,domain=-2:2, samples=25,smooth] ({x},{x*x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-3:3, samples=2] ({x},{1});
+		\addplot [thick, color=blue, fill=blue, fill opacity=0.25] fill between [of=f and g, split];
+
+		\foreach \i in {0,.1,...,1} {
+			\addplot[domain=-1:1, white] ({x},{(1-\i)*x^2+\i});
+		}
+		\foreach \i in {-1,-.8,...,1} {
+			\addplot[domain=0:1, white] ({\i},{(1-x)*(\i)^2+x});
+		}
+
+	    	\addplot[no marks,mypink,thick,domain=-2:2, samples=25,smooth] ({x},{x*x});
+	    	\addplot[name path=g, no marks,green!50!black,thick,domain=-3:3, samples=2] ({x},{1});
+
+		\end{axis}
+	\end{tikzpicture}
+	\end{center}
 
 	Computing, 
 	\[
@@ -1073,7 +1417,84 @@ then
 $B_{(0,0)}$, $B_{(1,0)}$, $B_{(0,1)}$,
 and $B_{(1,1)}$ perfectly fills out a $2\times 2$ square in $\R^2$.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[>=latex, scale=2]
+
+	\def\mycolor{mypink}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick, fill=\mycolor] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw (.5,.5) node {$B_{(0,0)}$};
+
+\begin{scope}[shift={(1.02,0)}]
+	\def\mycolor{myorange}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick, fill=\mycolor] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw (.5,.5) node {$B_{(1,0)}$};
+
+\end{scope}
+\begin{scope}[shift={(1.02,1.02)}]
+	\def\mycolor{mypink}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick, fill=\mycolor] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw (.5,.5) node {$B_{(1,1)}$};
+\end{scope}
+\begin{scope}[shift={(0,1.02)}]
+	\def\mycolor{myorange}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick, fill=\mycolor] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw (.5,.5) node {$B_{(0,1)}$};
+\end{scope}
+
+	\end{tikzpicture}
+\end{center}
 
 The fact that $B$ is oriented is also very important.  If $B$ is
 oriented, then $\partial B$, the boundary of $B$, is also oriented.
@@ -1091,7 +1512,104 @@ and that
 \]
 provided we interpret the union of two overlapping and oppositely-oriented sets as empty.
 
-XXX Figure showing boundary cancellation
+\begin{center}
+	\begin{tikzpicture}[>=latex, scale=2]
+	\def\mycolor{mypink}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw[->, \mycolor, thick] (V1) -- +(\dd, 0);
+	\draw[->, \mycolor, thick] (V2) -- +(0, \dd);
+	\draw[->, \mycolor, thick] (V3) -- +(-\dd, 0);
+	\draw[->, \mycolor, thick] (V4) -- +(0, -\dd);
+	\draw (.5,.5) node {$\partial B_{(0,0)}$};
+
+\begin{scope}[shift={(1.02,0)}]
+	\def\mycolor{myorange}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw[->, \mycolor, thick] (V1) -- +(\dd, 0);
+	\draw[->, \mycolor, thick] (V2) -- +(0, \dd);
+	\draw[->, \mycolor, thick] (V3) -- +(-\dd, 0);
+	\draw[->, \mycolor, thick] (V4) -- +(0, -\dd);
+	\draw (.5,.5) node {$\partial B_{(1,0)}$};
+
+\end{scope}
+\begin{scope}[shift={(1.02,1.02)}]
+	\def\mycolor{mypink}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw[->, \mycolor, thick] (V1) -- +(\dd, 0);
+	\draw[->, \mycolor, thick] (V2) -- +(0, \dd);
+	\draw[->, \mycolor, thick] (V3) -- +(-\dd, 0);
+	\draw[->, \mycolor, thick] (V4) -- +(0, -\dd);
+	\draw (.5,.5) node {$\partial B_{(1,1)}$};
+\end{scope}
+\begin{scope}[shift={(0,1.02)}]
+	\def\mycolor{myorange}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (1,1);
+		\coordinate (D) at (0,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.3,left] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.3,right] (V4) {} ;
+
+	\def\dd{.5}
+	\draw[->, \mycolor, thick] (V1) -- +(\dd, 0);
+	\draw[->, \mycolor, thick] (V2) -- +(0, \dd);
+	\draw[->, \mycolor, thick] (V3) -- +(-\dd, 0);
+	\draw[->, \mycolor, thick] (V4) -- +(0, -\dd);
+	\draw (.5,.5) node {$\partial B_{(0,1)}$};
+\end{scope}
+
+\draw[->, blue, thick] (.25, -.1) -- (1.75, -.1);
+\draw[<-, blue, thick, shift={(0,2)}] (.25, .1) -- (1.75, .1);
+\draw[->, blue, thick, shift={(2,0)}] ( .1, .25) -- (.1, 1.75);
+\draw[<-, blue, thick, shift={(0,0)}] ( -.1, .25) -- (-.1, 1.75);
+
+	\end{tikzpicture}
+\end{center}
 
 This picture should is just like the one we used when deriving the divergence theorem
 and Stokes's theorem.
@@ -1168,7 +1686,63 @@ where $B=B_{\formarg{\vec x}{\vec v}}(t)$.  But, $B$ is just a line segment
 and so $\partial B$ consist of two points: $\vec x+t\vec v$ oriented positively,
 and $\vec x$ oriented negatively.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			name=plot0,
+		    anchor=origin,
+		    set layers=standard,
+		    disabledatascaling,
+		    xmin=0,xmax=5,
+		    ymin=-0,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.2},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+
+
+		\draw[->, thick, myorange, densely dashed] (1,1) -- (4,2) node[right] {$\vec v$} node[pos=.75] (A){};
+		\draw[thick, mypink] (1,1) -- ($.75*(3,1)+(1,1)$) node[midway, below right] {$B$};
+		\draw[fill=black, draw=none] (1,1) circle (1.5pt) node [below] {$\vec x$};
+		\draw[fill=black, draw=none] (A) circle (1.5pt) node [above left] {$\vec x+t\vec v$};		
+		\end{axis}
+
+		\begin{axis}[
+			at=(plot0.right of south east), xshift=.5cm,
+		    xmin=0,xmax=5,
+		    ymin=-0,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.2},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+
+
+		\draw[->, thick, myorange, densely dashed, draw=none] (1,1) -- (4,2) node[pos=.75] (A){};
+		\draw[thick, mypink, draw=none] (1,1) -- ($.75*(3,1)+(1,1)$) node[midway] {$\partial B$};
+		\draw[fill=mypink, draw=none] (1,1) circle (1.5pt) node(X) {};
+		\draw[fill=mypink, draw=none] (A) circle (1.5pt) node  (Y) {};		
+		\end{axis}
+	\draw (X) node [below right, xshift=-.25cm,yshift=-.1cm]  {$-$ orientation} (Y) node[above right, xshift=-.25cm,yshift=.1cm] {$+$ orientation};
+	\end{tikzpicture}
+\end{center}
 
 Thus,
 \[
@@ -1199,7 +1773,47 @@ a 2-covector and is defined by
 where $B=B_{\formarg{\vec x}{\vec u,\vec v}}(\Delta a,\Delta b)$. We're using $\Delta a$
 and $\Delta b$ on purpose because $\partial B$ is the oriented perimeter of a parallelogram.
 
-XXX Figure
+\begin{center}
+	\begin{tikzpicture}[>=latex, scale=2]
+	\def\mycolor{myorange}
+
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (2,1);
+		\coordinate (D) at (1,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick, fill] (A) -- (B)-- (C) -- (D) -- cycle;
+		
+		\draw[mypink, thick, ->, densely dashed] (A) -- (B) node[midway, below] {$\vec u$};
+		\draw[mypink, thick, ->, densely dashed] (A) -- (D) node[midway, above left] {$\vec v$};
+
+	\draw (1,.5) node {$B$};
+
+
+\begin{scope}[shift={(2,0)}]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (1,0);
+		\coordinate (C) at (2,1);
+		\coordinate (D) at (1,1);
+
+		\draw[\mycolor,fill opacity=0.05,thick] (A) -- (B)-- (C) -- (D) -- cycle;
+
+		\draw[draw=none] (A) -- (B) node[pos=.3,above] (V1) {};
+	\draw[draw=none] (B) -- (C)  node[pos=.2,left, xshift=-.05cm] (V2) {}node[near end] (X) {}node[near start] (Y) {};
+	\draw[draw=none] (C) -- (D)  node[pos=.3,below] (V3) {};
+	\draw[draw=none] (D) -- (A) node[pos=.2,right, xshift=.05cm] (V4) {} ;
+
+	\def\dd{.5}
+	\draw[->, \mycolor, thick] (V1) -- +(\dd, 0);
+	\draw[->, \mycolor, thick] (V2) -- +({\dd}, \dd);
+	\draw[->, \mycolor, thick] (V3) -- +(-\dd, 0);
+	\draw[->, \mycolor, thick] (V4) -- +(-\dd, -\dd);
+	\draw (1,.5) node {$\partial B$};
+\end{scope}
+
+
+	\end{tikzpicture}
+\end{center}
 
 This limit looks exactly like the limit used to compute curl.  In fact,
 if we refer back to the definition of the $\vec w$-component of the curl
@@ -1278,18 +1892,35 @@ and curl.}.  With the exterior derivative rules in hand, we're ready for action.
 \begin{example}
 	Compute $\dd f$ where $f(x,y,z) = xy-z$ is a 0-form.
 
-	XXX Finish
+	Since $f$ is a 0-form, we more-or-less mimic the chain rule.
+	\[
+		\dd f = \dd (xy-z) = \dd (xy) -\dd z = y\dd x+x\dd y-\dd z.
+	\]
 \end{example}
 \begin{example}
 	Compute $\dd \bm f$ where $\bm f(x,y,z) = -y\dd x+x\dd y +\dd z$ is a 1-form.
 
-	XXX Finish
+	Applying the product rule for the exterior derivative, we have
+	\begin{align*}
+		\dd \bm f &= \dd(-y\dd x+x\dd y +\dd z) \\
+		&= -\dd y\wedge \dd x - y\dd(\dd x) + \dd x\wedge \dd y + x\dd(\dd y) + \dd(\dd z)\\
+		&= -\dd y\wedge \dd x+\dd x\wedge \dd y\\
+		&= 2\dd x\wedge \dd y.
+	\end{align*}
 \end{example}
 \begin{example}
 	Compute $\dd \bm g$ where $\bm g(x,y,z) = 2yx\dd y\wedge \dd z
 	+ 4\dd z\wedge \dd x+z^2\dd x\wedge \dd y$ is a 2-form.
 
-	XXX Finish
+	Applying the product rule for the exterior derivative, we have
+	\begin{align*}
+		\dd \bm g &= \dd(2yx\dd y\wedge \dd z) \\
+		&= \dd(2xy)\wedge \dd y\wedge \dd z + 2xy\dd(\dd y)\wedge \dd z -2xy\dd y\wedge \dd(\dd z)\\
+		&= \dd(2xy)\wedge \dd y\wedge \dd z\\
+		&= 2(y\dd x+x\dd y)\wedge \dd y\wedge \dd z\\
+		&= 2y\dd x\wedge \dd y\wedge \dd z,
+	\end{align*}
+	with the last equality following because $\dd y\wedge \dd y=0$.
 \end{example}
 
 \subsection{Changing Coordinates}
@@ -1335,13 +1966,28 @@ we used a limit process.
 over $\mathcal S$, 
 we could do the exact same thing since
 \[
-	\int_{\mathcal S} f\dd x\wedge \dd y = \int_{\mathcal S} fr\dd x\wedge \dd y.
+	\int_{\mathcal S} f\dd x\wedge \dd y = \int_{\mathcal S} fr\dd r\wedge \dd \theta.
 \]
 As long as we can determine what the value of $f$ is at a point in polar coordinates, 
 we can compute the integral with ease.
 
 \begin{example}
-	XXX Poloar coordinates example.
+	Let $\mathcal S$ be the unit disk centered at $\vec 0$ and let $f(x,y) = x^2+2y^2$.
+	Compute $\int_{\mathcal S} f\dd x\wedge \dd y$.
+
+	We can express $f$ in polar coordinates.
+	\[
+		f(x,y) = x^2+2y^2=(x^2+y^2)+y^2 = r^2+r^2\sin^2 \theta
+	\]
+	Therefore
+	\begin{align*}
+		\int_{\mathcal S} f\dd x\wedge \dd y
+		&=\int_{\mathcal S} r^2+r^2\sin^2 \theta\dd x\wedge \dd y\\
+		&=\int_{\mathcal S} r^2+r^2\sin^2 \theta\dd x\wedge \dd y\\
+		&=\int_{\mathcal S} (r^2+r^2\sin^2 \theta) r\dd r\wedge \dd \theta\\
+		&=\int_{\mathcal S} r^3+r^3\sin^2 \theta \dd r\wedge \dd \theta\\
+		&= \int_{\theta=0}^{\theta =2\pi} \int_{r=0}^{r=1} r^3+r^3\sin \theta \,\d r\d \theta = \frac{3\pi}{4}.
+	\end{align*}
 \end{example}
 
 \section{The Hodge Dual}

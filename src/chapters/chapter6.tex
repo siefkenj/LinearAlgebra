@@ -2034,9 +2034,38 @@ $\d V_S$ is the volume form for $S$.  Phrased this way, there is a striking simi
 between Stokes's theorem and the divergence theorem.
 
 \begin{example}
-	Use Stoke's theorem to calculate ...
+	Let $\vec F(x,y,z) = (xy,yz,-xz)$ and notice
+	$\vec G(x,y,z) = (-y,z,-x) = \nabla \times \vec F(x,y,z)$.  Let $\mathcal H$
+	be the portion of the sphere $x^2+y^2+z^2=4$ below the $xy$ plane, oriented downards.
+	Calculate the flux of $\vec G$ through the $\mathcal H$.
 
-	XXX Finish
+	Since $\vec G=\nabla \times \vec F$, by Stokes's theorem, we know
+	\[
+		\Flux_{\mathcal H} \vec G = \Circ_{\partial \mathcal H} \vec F.
+	\]
+	Since line inegrals are easier than surface integrals, let's compute the right-hand side.
+
+	We parameterize $\partial \mathcal H$ by $\vec r(t) = \mat{2\sin t\\2\cos t\\0}$ and verify that the induced
+	orientation of $\partial \mathcal H$ is, indeed, clockwise.  Now,
+	\[
+		\Circ_{\partial \mathcal H}\vec F = \int_0^{2\pi} \vec F\circ \vec r(t)\cdot \vec r'(t)\,\d t
+		=\int_0^{2\pi} 4\cos^2t\sin t\,\d t = 0
+	\]
+
+	We can verify this another way.  Since we know $\nabla \cdot (\nabla \times \vec F)=0$, we know the flux 
+	of $\vec G=\nabla \times \vec F$ through any closed surface is $0$.  Therefore, letting $\mathcal D$
+	be the disk of radius 2 in the $xy$ place centered at the origin and oriented up, we know
+	\[
+		\Flux_{\mathcal H\cup\mathcal D} \vec G = \Flux_{\mathcal H}\vec G+\Flux_{\mathcal D}\vec G = 0,
+	\]
+	and
+	\begin{align*}
+		\Flux_{\mathcal D}\vec G =\int_{x=-2}^{x=2}\int_{y=-\sqrt{4-x^2}}^{y=\sqrt{4-x^2}} \vec G\cdot \zhat \,\d y\d x\\
+		&=\int_{x=-2}^{x=2}\int_{y=-\sqrt{4-x^2}}^{y=\sqrt{4-x^2}} -x \,\d y\d x\\
+		&=\int_{x=-2}^{x=2}-2x\sqrt{4-x^2} \,\d x.
+	\end{align*}
+	Since $-2x\sqrt{4-x^2}$ is an odd function on the range $[-2,2]$, we immediately know its integral is zero.
+	Therefore, $\Flux_{\mathcal D}\vec G=0$ and so $\Flux_{\mathcal H}\vec G=0$.
 \end{example}
 
 
