@@ -17,7 +17,7 @@
 
 \usepackage{calc, ifthen, xparse, xspace}
 \usepackage{makeidx}
-\usepackage[hidelinks]{hyperref}   % Internal hyperlinks
+\usepackage[hidelinks, urlcolor=blue]{hyperref}   % Internal hyperlinks
 \usepackage{mathtools} % replaces amsmath
 \usepackage{etoolbox}
 \usepackage{bbm} %lower case blackboard font
@@ -313,8 +313,6 @@
 \usepgfplotslibrary{external}
 \tikzexternalize[prefix=tikz/]
 %\tikzexternalize[mode=list and make]
-
-
 
 
 
@@ -678,7 +676,7 @@
 	innerbottommargin=5pt,
 	leftmargin=0cm,
 	rightmargin=0cm,
-	linewidth=4pt]{eBox}
+	linewidth=4pt]{dBox}
 
 	% Definition box
 	\newmdenv[skipabove=7pt,
@@ -694,7 +692,7 @@
 	leftmargin=0cm,
 	rightmargin=0cm,
 	linewidth=4pt,
-	innerbottommargin=0pt]{dBox}
+	innerbottommargin=0pt]{eBox}
 
 	% Corollary box
 	\newmdenv[skipabove=7pt,
