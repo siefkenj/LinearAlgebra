@@ -51,7 +51,7 @@ $\R^n$ is a vector space.  However there are many seemingly non-geometric
 sets that are also vector spaces.
 
 \begin{example}
-    \label{VECSPACEEXAMPLE}
+    \label{EXVECSPACEEXAMPLE}
 	Let $V=\Set{\text{functions from }\R\text{ to }\R}$ equipped with
 	pointwise addition and scalar multiplication.  Then, $V$ is a vector space.
 
@@ -236,35 +236,37 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
 \begin{proof}
     Let $f,g\in V^*$. If we can show that $f+g$ and $\alpha f$ are both covectors, 
     then it will follow that $V^*$ is closed under linear combinations. By the
-    argument in \ref{VECSPACEEXAMPLE}, both $f+g$ and $\alpha f$ are functions from
+    argument in \ref{EXVECSPACEEXAMPLE}, both $f+g$ and $\alpha f$ are functions from
     $V$ to $\R$. Thus, we need only show that they are linear. Let $h=f+g$. Then for 
     $\vec u,\vec v\in V$, we have
     \begin{align*}
         h(\vec u+\vec v) & = f(\vec u + \vec v) + g(\vec u + \vec v) \\
                          & = f(\vec u) + f(\vec v) + g(\vec u) + g(\vec v) \\
-                         & = f(\vec u) + g(\vec u) + f(\vec v) + g(\vec v) \\
+                         & = \big(f(\vec u) + g(\vec u)\big) + \big(f(\vec v) + g(\vec v)\big) \\
                          & = h(\vec u) + h(\vec v).
     \end{align*} 
     Similarly,
     \begin{align*}
          h(\alpha\vec u) & = f(\alpha\vec u) + g(\alpha\vec u) \\
                          & = \alpha f(\vec u) + \alpha g(\vec u) \\
-                         & = \alpha (f(\vec u) + g(\vec u)) \\
+                         & = \alpha \big(f(\vec u) + g(\vec u)\big) \\
                          & = \alpha h(\vec u).
     \end{align*}    
     Let $q=\alpha f$. Then
     \begin{align*}
     	q(\vec u +\vec v) & = \alpha f(\vec u + \vec v) \\
                           & = \alpha f(\vec u) + \alpha f(\vec v) \\
-                          & = q(\vec u) + q(\vec u).
+                          & = q(\vec u) + q(\vec u),
     \end{align*} 
-    Lastly, for any $\beta\in\R$ we have
+    and for any $\beta\in\R$ we have
     \[
         q(\beta\vec u)=\alpha f(\beta\vec u)=\alpha\beta f(\vec u) 
         =\beta q(\vec u).
     \]
-    Therefore, $V^*$ satisfies the closure property. The rest of the properties 
-    follow from similar arguments. 
+    Therefore, $V^*$ is closed under linear combinations. The associativity,
+    distributivity, and commutativity properties are inherited from $\R$. 
+    The identity property is satisfied by the zero covector which maps every
+    element of $V$ to $0$.
 \end{proof}
 
 We won't be doing much with the abstract vector space $V^*$, but it is
