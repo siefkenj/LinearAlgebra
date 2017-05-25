@@ -871,7 +871,7 @@ when we move $\alpha$ units away from $(0,0)$ in the direction $\vec u$.
 Since $\vec u$ is a unit vector, the displacement in the domain is $\alpha\vec u$, and so the
 exact change in $g$ from $\vec 0$ to $\alpha\vec u$ is $g(\alpha\vec u)-g(\vec 0)$.  The approximate
 \emph{rate} of change\index{rate of change} is then $\frac{g(\alpha\vec u)-g(\vec 0)}{\alpha}$.  Taking
-a limit as $\alpha\to 0$ will give us an instantaneous rate of change---one worth naming.
+a limit as $\alpha\to 0$ gives us an instantaneous rate of change---one worth naming.
 
 \begin{definition}[Rate of change with respect to distance]
 	For a function $f:\R^n\to\R$, the \emph{rate of change with respect to distance} of $f$
@@ -881,20 +881,25 @@ a limit as $\alpha\to 0$ will give us an instantaneous rate of change---one wort
 	\]
 \end{definition}
 
-We must divide by $\norm{h\vec v}$ in the definition of rate of change with respect to distance
-because $\norm{h\vec v}$ is exactly how far we've displaced.  Of course, if we were forward-thinking
+Pulling apart the pieces of this defintion, $f(\vec a+h\vec v)-f(\vec a)$ is the amount $f$
+changes when moving from $\vec a$ to $\vec a+h\vec v$ and $\norm{h\vec v}$ is the distance between
+$\vec a$ to $\vec a+h\vec v$.  Since we're measuring a rate of change with respect to \emph{distance},
+we should divide $f(\vec a+h\vec v)-f(\vec a)$ by the distance displaced, $\norm{h\vec v}$.  Node that if
+we were forward-thinking
 enough to pick $\vec v$ to be a unit vector, then $\norm{h\vec v}=\abs{h}$.
 
-We can think of the rate of change with respect to distance in another way.  Suppose that $f:\R^n\to \R$
-and that $\vec p:\R\to\R^n$ is the arc-length parameterization of the with direction
-vector $\vec v$ and where $\vec p(0)=\vec a$.  Then $f\circ \vec p:\R\to\R$ is a single-variable
-function and the rate of change of $\vec f$ at $\vec a$ in the direction $\vec v$ is just $(f\circ\vec p)'(0)$.
-Think for a moment about why this is.
+We can think of the rate of change with respect to distance in another way.  
+Suppose that $f:\R^n\to \R$
+and that $\vec p:\R\to\R^n$ is the arc-length parameterization of the line with direction
+vector $\vec v$ passing through $\vec a$ at time $0$ (i.e., $\vec p(0)=\vec a$). 
+Then $f\circ \vec p:\R\to\R$ is a single-variable
+function and the rate of change of $f$ at $\vec a$ in the direction $\vec v$ is just $(f\circ\vec p)'(0)$.
+Pause for a moment until this makes sense.
 
-The rate of change of a function with respect to distance is, in some sense, the most natural
+The rate of change of a function with respect to distance is a natural
 notion of ``rate of change'' for a multivariable function.  (If you're handed a function, what
-would you measure the rate of change against if not distance?)  However, it turns out not
-to be the most useful notion of rate of change.  For that, we introduce the 
+would you measure the rate of change against if not distance?)  However, it turns out 
+another notion of rate of change is more useful.  This notion is called the 
 \emph{directional derivative}\index{directional derivative}.
 
 \begin{definition}[Directional Derivative]
@@ -908,7 +913,7 @@ to be the most useful notion of rate of change.  For that, we introduce the
 The directional derivative $D_{\vec a}f(\vec v)$ corresponds to the rate of change of $f$ at the point $\vec a$
 if you moved in the direction of $\vec v$ with speed $\norm{\vec v}$.  This seems 
 like a less intuitive notion than the rate of change with respect to distance, but its virtues will
-soon become clear\footnote{ For starters, $D_{\vec a}f$ is \emph{linear}.  Namely, if $f$ is differentiable,
+soon become clear\footnote{ For starters, $D_{\vec a}f$ is \emph{linear}.  In particular, if $f$ is differentiable,
 then $D_{\vec a}f(\vec u+\vec v)=D_{\vec a}f(\vec u)+D_{\vec a}f(\vec v)$.  The same cannot
 be said for the rate of change with respect to distance.}.
 
@@ -938,29 +943,29 @@ Similarly, for $f:\R^2\to\R$ we have\footnote{ Assuming $f$ has directional deri
 
 The similarity in these two formulas is one reason
 why directional derivatives are more useful than rates of change with respect to distance\footnote{
-	If we think about vectors in $\R^1$, the number $1$ is actually a vector.  Therefore,
+	If we think about $\R^1$, the number $1$ is actually a vector.  Therefore,
 	for $g:\R\to\R$, we have $g'(1)=D_{a}g(1)$.  Try writing out the limit expression.  It's the same
 	as the usual definition of derivative!
 	}.
 
 \begin{exercise}
-	Create the analogous equation to Equation \eqref{EQDIRDERIVAPPROX} but approximate
+	Create the analogous equation to Equation \eqref{EQDIRDERIVAPPROX}, but approximate
 	$f(\vec a+h\vec v)$ using the rate of change with respect to distance instead of the
 	directional derivative.
 \end{exercise}
 
 
 \subsection{Partial Derivatives}
-There are some particularly common directional derivatives.  Namely, those in the directions
-of the standard basis.  Let $f:\R^2\to\R$ and let $\vec a=(a_x,a_y)$.  Now,
+Directional derivatives in the direction of the coordinate axes are particularly common.
+Let $f:\R^2\to\R$ and let $\vec a=(a_x,a_y)$.  Now,
 \begin{align*}
 	D_{\vec a}f(\xhat) &= \lim_{h\to0}\frac{f(\vec a+h\xhat)-f(\vec a)}{h}
 	=\lim_{h\to0}\frac{f(a_x+h, a_y)-f(a_x,a_y)}{h}.
 \end{align*}
 
 This limit looks quite similar to a one-dimensional derivative.  However, $f$ does not
-have a one-dimensional domain.  Accordingly we call $D_{\vec a}f(\xhat)$ a 
-\emph{partial derivative}\index{partial derivative} and we have a special notation for it.
+have a one-dimensional domain.  Accordingly, we call $D_{\vec a}f(\xhat)$ a 
+\emph{partial derivative}\index{partial derivative}.
 
 \begin{definition}[Partial Derivative]
 	For a function $f:\R^n\to\R$, let $x_i$ denote the $i$th input variable.
@@ -971,36 +976,34 @@ have a one-dimensional domain.  Accordingly we call $D_{\vec a}f(\xhat)$ a
 		\lim_{h\to0}\frac{f(a_1,\ldots,a_{i-1},a_i+h,a_{i+1},\ldots,a_n)-f(\vec a)}{h}.
 	\]
 \end{definition}
-Sometimes we'll write $\frac{\partial f}{\partial x_i}$, omitting the point where the partial
-derivative is taken, if we want to save space, or if we want to view a partial derivative as a function
-of where it is taken.  For functions whose domains are $\R^2$ or $\R^3$, we often use $x,y,z$ 
+Sometimes we write $\frac{\partial f}{\partial x_i}$, omitting the point where the partial
+derivative is taken, and for functions whose domains are $\R^2$ or $\R^3$, we often use $x,y,z$ 
 instead of $x_1,x_2,x_3$ to denote
-the first, second, or third variable.  It is not important how you write your variable as long
+the first, second, or third variable.  It is not important what symbol you use (e.g., 
+$x_3$ or $z$) as long
 as it is clear to you and your reader which variable is changing.
 
 \subsection{Tangent Vectors to Surfaces}
-When we had a curve $\mathcal S$ parameterized by $\vec p:\R\to\mathcal S$,
-we could find tangent vectors to $\mathcal S$ by computing the velocity vectors of $\vec p$.
-In particular, $\vec p\,'(t_0)$ is a tangent vector to $\mathcal S$ at the point $\vec p(y_0)$.
-We will find tangent vectors to surfaces in a similar way---by parameterizing a path on the surface.
+Let $\mathcal S$ be a curve parameterized by $\vec p:\R\to\mathcal S$.
+To find tangent vectors to $\mathcal S$, we compute $\vec p'$.
+In particular, $\vec p\,'(t_0)$ is a tangent vector to $\mathcal S$ at the point $\vec p(t_0)$.
+We find tangent vectors to surfaces in a similar way---by parameterizing paths on the surface.
 
 Suppose $f:\R^2\to \R$ is a function and let $\mathcal S$ be the surface given by $z=f(x,y)$.  Formally,
 \[
 	\mathcal S=\Set*{\matc{x\\y\\z}\given z=f(x,y)}.
 \]
-Since $\mathcal S$ is the graph of a function whose domain is $\R^2$ we have a natural parameterization
-of $\mathcal S$ coming from $f$.  That is,
+Since $\mathcal S$ is the graph of a function whose domain is $\R^2$, we have a natural parameterization
 \[
-	\vec p:\R^2\to\mathcal S\qquad\text{where}\qquad \vec p(x,y)=\matc{x\\y\\f(x,y)}
+	\vec p:\R^2\to\mathcal S\qquad\text{where}\qquad \vec p(x,y)=\matc{x\\y\\f(x,y)}.
 \]
-is a parameterization of $\mathcal S$.
 
 Let $\vec a=(a_x,a_y,f(a_x,a_y))\in\mathcal S$ and consider the function $\vec r_x:\R\to\R^2$
 given by $\vec r_x(t) = (a_x+t,a_y)$.  The function $\vec r_x$ starts at the point $(a_x,a_y)$
-in the $xy$-plane and moves parallel to the $x$-axis with speed one.  Since we have parameterized
-$\mathcal S$ by the $xy$-plane, by composing $\vec p$ and $\vec r_x$, we will get a parameterization
-of a curve on $\mathcal S$.  That is, $\vec c=\vec p\circ \vec r_x$ parameterizes the curve
-on the surface $\mathcal S$ that when viewed from above looks like the line $y=a_y$.
+in the $xy$-plane and moves parallel to the $x$-axis with speed one.  Since 
+$\vec p:\R^2\to\mathcal S$ and $\vec r_x:\R\to\mathcal \R^2$, we have that $\vec p\circ \vec r_x:\R\to\mathcal S$
+parameterizes a curve on $\mathcal S$
+ that when viewed from above looks like the line $y=a_y$.
 
 \begin{center}
 	\begin{tikzpicture}
@@ -1048,8 +1051,8 @@ on the surface $\mathcal S$ that when viewed from above looks like the line $y=a
 	  \end{tikzpicture}
 \end{center}
 
-Further, $\vec c(0)=(a_x,a_y,f(a_x,a_y))=\vec a$.  Thus, if we want a tangent
-vector to $\mathcal S$ at $\vec a$, all we need to do is compute $\vec c\,'(0)$.
+Further, $\vec p\circ \vec r_x(0)=(a_x,a_y,f(a_x,a_y))=\vec a$.  Thus, if we want a tangent
+vector to $\mathcal S$ at $\vec a$, all we need to do is compute $(\vec p\circ \vec r_x)'(0)$.
 
 \begin{center}
 	\begin{tikzpicture}
@@ -1078,27 +1081,28 @@ xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
 
 Computing,
 \[
-	\vec c\,'(0)=(\vec p\circ \vec r_x)'(0)=
+	(\vec p\circ \vec r_x)'(0)=
 	\left(\matc{a_x+t\\a_y\\f(a_x+t,a_y)}'\text{ at $t=0$ } \right)
 	= \matc{1\\0\\\frac{\partial f}{\partial x}(a_x,a_y)}.
 \]
 
 Of course, this was just one choice of a curve along $\mathcal S$.  We could
-have just as easily used $\vec p\circ \vec r_y$ where $\vec r_y(t)=(a_x,a_y+t)$
-as a parameterization of a curve.  We could have parameterized paths
-that weren't parallel to the $x$ or $y$ axes.  For instance
+have just as easily used the parameterization $\vec p\circ \vec r_y$ where $\vec r_y(t)=(a_x,a_y+t)$.
+Or, we could have parameterized paths
+that weren't parallel to either the $x$ or $y$ axes.  For instance
 $\vec p\circ \vec r_{d}$ where $\vec r_{d}(t) = (a_x+td_x, a_y+td_y)$
-for non-zero constants $d_x,d_y$.
+for non-zero constants $d_x,d_y$.  The derivative of any such parameterization will
+give us tangent vectors to $\mathcal S$.
 
 \begin{example}
-	Find at least three tangent vectors at the point $\vec a=(1,2,12)$
-	to the surface $\mathcal S$ defined by $z=f(x,y)$ where $f(x,y)=(x-3)^2+y^3$.
+	Let $\mathcal S$ be the surface defined by $z=f(x,y)$ where $f(x,y)=(x-3)^2+y^3$.
+	Find at least three tangent vectors to $\mathcal S$ at the point $\vec a=(1,2,12)$.
 
 	Let $\vec r_a(t) = (1+t,2)$, $\vec r_b(t)=(1,2+t)$, and $\vec r_c(t)=
 	(1+t,2+t)$.  Further, let $\vec p:\R^2\to\R^3$ be defined by $\vec p(x,y)=
-	(x,y,f(x,y))$.  Since $\vec p$ is a parameterization of $\mathcal S$,
+	(x,y,f(x,y))$.  Since $\vec p$ is a parameterization of $\mathcal S$, we know
 	$\vec p\circ \vec r_a$, $\vec p\circ \vec r_b$, 
-	and $\vec p\circ \vec r_c$ all parameterize paths in $\mathcal S$.  Further,
+	and $\vec p\circ \vec r_c$ parameterize paths in $\mathcal S$.  Further,
 	\[\vec p\circ \vec r_a(0)=\vec p\circ \vec r_b(0)=\vec p\circ \vec r_c(0)=\vec a,\]
 	so the velocity vectors at $t=0$ of these parameterizations will give 
 	tangent vectors to $\mathcal S$ at $\vec a$.
@@ -1130,7 +1134,7 @@ for non-zero constants $d_x,d_y$.
 Suppose $f:\R^2\to\R$ is a function and consider the surface $\mathcal S\subseteq \R^3$
 given by the equation $z=f(x,y)$.  If $f$ is a ``nice'' function, like a polynomial, 
 the surface $\mathcal S$ will be smooth.  Visually, at each point on $\mathcal S$ we
-could imagine a tangent plane---the analog of a tangent line to a curve.
+could imagine a tangent \emph{plane}---the analog of a tangent line to a curve.
 
 
 \begin{center}
@@ -1163,10 +1167,10 @@ could imagine a tangent plane---the analog of a tangent line to a curve.
 
 More formally, fix a point $\vec a\in\mathcal S$ and consider the set $\mathcal P$
 of all tangent vectors to $\mathcal S$ at $\vec a$.  If $\mathcal S$ is a smooth
-surface, these tangent vectors will lie in a single plane.  In other words,
-$\mathcal P$ is a plane, and in this case we call it the 
+surface, 
+$\mathcal P$ will be a plane. In this case we call $\mathcal P$ the 
 \emph{tangent plane}\index{tangent plane}
-to $\mathcal S$ at $\vec a$.  (Fantastically, if $\mathcal P$ is a plane,
+to $\mathcal S$ at $\vec a$.  (Recall that if $\mathcal P$ is a plane,
 it can be fully described by the point $\vec a$ and \emph{two} non-parallel
 tangent vectors.  We'll make use of this idea later.)
 
@@ -1241,19 +1245,18 @@ tangent vectors.  We'll make use of this idea later.)
 
 Tangent planes to surfaces, like tangent lines to curves, have
 the property that they are a very good approximation to a surface
-at their point of tangency.  We will leverage this idea to 
-define what it means to be differentiable for a multivariable function.
+at their point of tangency. 
 
 \subsection{Directional Derivatives and Planes}
 
-A plane $\mathcal P$ is a \emph{set} and is distinct from any equations
+A plane $\mathcal P$ is a \emph{set}, distinct from any equations
 or parameterizations.  However, if $\mathcal P\subseteq \R^3$ is not a vertical
 plane (i.e., one for which $\zhat$ is a direction vector), then it can be represented
 uniquely by an equation of the form $z=\alpha x+\beta y+c$.  In other words,
 a non-vertical plane in $\R^3$ is the graph of a function $f:\R^2\to\R$
 which takes the form $f(x,y)=\alpha x+\beta y+c$.  Functions of this form
-are known as \emph{affine functions}\index{affine function}, and they
-often show up in the context of \emph{linear approximations}\index{linear approximations}\footnote{
+are called \emph{affine functions}\index{affine function} and 
+show up in the context of \emph{linear approximations}\index{linear approximations}\footnote{
 	In many contexts in calculus, the term ``linear approximation'' is used
 	where ``affine approximation'' would be more accurate.  Sometimes, though,
 	it's easiest not to fight the tide of established culture.}.
@@ -1286,7 +1289,8 @@ Let $\vec a=(a_x,a_y)$ and $\vec v=(v_x,v_y)$.  Now,
 	&=\mat{\alpha\\\beta}\cdot \vec v.
 \end{align*}
 
-We have written a formula for the directional derivative of $f$ in an arbitrary direction!  There's more.
+The above formula can be used to compute the directional derivative of $f$ in an arbitrary direction!  
+There's more:
 \[
 	\alpha = \mat{\alpha\\\beta}\cdot \xhat = \frac{\partial f}{\partial x}(\vec a)
 	\qquad\text{ and }\qquad
@@ -1297,8 +1301,8 @@ and so
 	D_{\vec a}f(\vec v) = \mat{\tfrac{\partial f}{\partial x}(\vec a)\\[3pt]\tfrac{\partial f}{\partial y}(\vec a)}
 	\cdot \vec v.
 \]
-The vector $\mat{\tfrac{\partial f}{\partial x}(\vec a)\\[3pt]\tfrac{\partial f}{\partial y}(\vec a)}$ comes up often.
-It is called the \emph{gradient}\index{gradient}.
+The vector $\mat{\tfrac{\partial f}{\partial x}(\vec a)\\[3pt]\tfrac{\partial f}{\partial y}(\vec a)}$ 
+comes up often and is called the \emph{gradient}\index{gradient}.
 
 \begin{definition}[Gradient]
 	For a function $f:\R^n\to\R$, the \emph{gradient} of $f$ at the point $a$ is
@@ -1309,17 +1313,16 @@ It is called the \emph{gradient}\index{gradient}.
 	\]
 \end{definition}
 
-Using the notation of \emph{gradient}, 
+Using the notation for the \emph{gradient}, 
 we conclude (using the same $f(x,y)=\alpha x+\beta y+c$ from earlier) that
 \begin{equation}
 	\label{EQDIRDERIVGRAD}
 	D_{\vec a}f(\vec v) = \nabla f(\vec a)\cdot \vec v.
 \end{equation}
-All directional derivatives of affine functions can be expressed as a dot product with
-the gradient.  So far, we have only proven this for
+All directional derivatives of an affine function can be expressed as a dot product with
+the gradient.  So far, we have only proven this for an
 affine function $f:\R^2\to\R$, but it is true for affine functions
-$g:\R^n\to\R$ as well.  This fact is important enough to write down
-as a theorem.
+$g:\R^n\to\R$ as well.
 
 \begin{theorem}
 	\label{THMAFFINEDERIV}
@@ -1330,21 +1333,22 @@ as a theorem.
 	for all $\vec a,\vec v\in\R^n$.
 \end{theorem}
 
-Note that at the moment, the gradient is just a bag of derivatives---it
-doesn't yet have meaning for us beyond a convenient notational trick.
-
-So far the rule in Equation \eqref{EQDIRDERIVGRAD} only applies to affine functions.
-It would be nice if it worked for other functions.  So, in true mathematical
-fashion, we will define a class of functions based on whether or not Equation
-\eqref{EQDIRDERIVGRAD} applies\footnote{ For technical reasons we won't do exactly this.
+Note that at the moment, the gradient is just a bag of derivatives---a
+convenient notational trick that shows up when working with affine functions.
+However, we will soon see that it applies to differentiable functions in 
+general\footnote{In true mathematical
+fashion, we will define differentiability based on whether
+or not Equation
+\eqref{EQDIRDERIVGRAD} holds.  Though, for technical reasons we won't do exactly this.
 If we considered the set of functions for which Equation \eqref{EQDIRDERIVGRAD}
 holds at every point, we'd never have a reasonable chain rule for multivariable
 functions.  Instead, we'll use the slightly stronger notion of \emph{linear approximations}.}.
 
+
 \subsection{Linear and First-Order Approximations}
 
-Recall from single variable calculus, if $f:\R\to\R$ was a differentiable function,
-a \emph{linear approximation} of $f$ at the point $a\in\R$ was a function $L:\R\to\R$
+Recall from single variable calculus: if $f:\R\to\R$ is a differentiable function,
+a \emph{linear approximation} of $f$ at the point $a\in\R$ is a function $L:\R\to\R$
 whose graph is the tangent line to $y=f(x)$ at the point $(a,f(a))$.  A linear approximation
 is equivalently called a \emph{first-order approximation}\footnote{ This phrasing comes from
 language used in Taylor approximations.}.
@@ -1396,11 +1400,11 @@ language used in Taylor approximations.}.
 Further, $L$ always takes the form $L(x)=\alpha(x-a)+c$.  In fact, if $f'$ exists,
 we can be more
 specific:  \[L(x)=f'(a)(x-a)+f(a).\]
-The approximation $L$ is quite good around the point $a$, so we have
+The approximation $L$ is quite good around the point $a$, so for small $\Delta x$ we have
 \[
-	f(a+\Delta x)\approx L(a+\Delta x) = f'(a)\Delta x+f(a)
+	f(a+\Delta x)\approx L(a+\Delta x) = f'(a)\Delta x+f(a).
 \]
-if $\Delta x$ is small.  It's a little unclear though what ``$\approx$''
+It's a little unclear though what ``$\approx$''
 exactly means.  In your single-variable calculus class, you may or may not
 have made this precise.  Visually, the line given by $y=L(x)=f'(a)(x-a)+f(a)$
 is distinguished from all other lines passing through the point $(a,f(a))$ because
@@ -1436,25 +1440,25 @@ analog of Equation \eqref{EQONEVARLINAPPROX} to define differentiability.
 
 The definition of differentiability can be interpreted in two equivalent
 ways.  One is that a function is differentiable at a point $\vec a$ if there exists a ``good''
-linear approximation to the function at $\vec a$ (where ``good'' is defined
+linear approximation at $\vec a$ (where ``good'' is defined
 to mean that it satisfies the limit).  Alternatively, one could think
 about the graph of a function as a surface.  A function $f$ is then differentiable
 at $\vec a$ if there exists a tangent plane to the surface given by the graph
-of $f$ at the point $(\vec a, f(\vec a))$.  Being able to switch back between these
+of $f$.  Being able to switch back between these
 two perspectives will aid your intuition.
 
 However, there's a big problem with this definition of differentiability.  It
 involves a multivariable limit\footnote{ If you already know how to evaluate
 multi-dimensional limits, this isn't much of a problem.}.  Multivariable limits
-are much more subtle than single-variable limits, and they are covered in the next
-section.  But before we do that, we will further explore the consequences of 
+are more subtle than single-variable limits, and they are covered in the next
+section.  But first, let us consider some consequences of 
 differentiability.
 
 \subsection{Consequences of Differentiability}
 
-Recall, directional derivatives of affine functions can be expressed
-as dot products with the gradient vector.  This is true in general
-for differentiable functions.
+Recall that directional derivatives of affine functions can be expressed
+as dot products with the gradient vector.  We now have the tools
+to show this for differentiable functions in general.
 
 \begin{theorem}
 	\label{THMDIFFERENTIABLE}
@@ -1487,11 +1491,11 @@ for differentiable functions.
 	Putting it all together, Equation \eqref{EQGRADWORKS} implies
 	for any $\vec v$,
 	\[
-		0=0\norm{\vec v}=\norm{\vec v}\lim_{h\to 0} 
+		0=\norm{\vec v}0=\norm{\vec v}\lim_{h\to 0} 
 		\frac{f(\vec a+h\vec v)-L(a+h\vec v)}{\norm{h\vec v}}
 		=
 		\lim_{h\to 0} 
-		\frac{f(\vec a+h\vec v)-L(a+h\vec v)}{h}
+		\frac{f(\vec a+h\vec v)-L(a+h\vec v)}{\abs{h}}
 	\]
 	exists.  In particular, this shows that $D_{\vec a}(f-L)(\vec v)=0$.
 	Applying our fact about limits, since $D_{\vec a}L(\vec v)$ exists
@@ -1529,7 +1533,7 @@ directional derivatives can be computed with dot products instead of limits!
 	given by $f(x,y,z)=x^2-z^3$ at the point $\vec a=(1,1,1)$ in the direction
 	$\vec v=(1,2,3)$.
 
-	Since $f$ is a polynomial it is differentiable.  Computing,
+	Since $f$ is a polynomial, it is differentiable.  Computing,
 	\[
 		\nabla f(1,1,1) = \mat{2\\0\\-3}
 	\]
@@ -1580,7 +1584,7 @@ must occur.  Either $\nabla f(\vec a)=\vec 0$ or $\theta=90^{\circ}$.  Therefore
 if $\nabla f(\vec a)\neq \vec 0$, the direction in which the function doesn't
 change at all is orthogonal to the gradient.
 
-We have another word for paths on which a function doesn't change--level curves.
+We have another word for paths on which a function doesn't change---level curves.
 If we plot level curves for a function, the gradient of the function must always be
 orthogonal to the level curves.
 

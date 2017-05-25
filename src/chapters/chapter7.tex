@@ -944,7 +944,23 @@ in a concept called the \emph{wedge product}\index{wedge product}.
 	product $\bm\alpha\wedge\bm\beta$ is a 2-covector.
 \end{theorem}
 \begin{proof}
- 	XXX Finish
+	We will show that $\bm\alpha\wedge \bm\beta$ obeys the laws
+	of area and is multilinear.
+
+	Based on the formula for $\bm\alpha\wedge \bm\beta$, we immediately
+	have $\bm\alpha\wedge\bm\beta(\vec v,\vec v)=0$ for any $\vec v$.
+	Further,
+	\begin{align*}
+		\bm\alpha\wedge \bm\beta(a\vec v,\vec w)
+		&=\bm\alpha(a\vec v)\bm\beta(\vec w) - \bm\beta(a\vec v)\bm\alpha(\vec w)\\
+		&=a\big(\bm\alpha(\vec v)\bm\beta(\vec w) - \bm\beta(\vec v)\bm\alpha(\vec w) \big)\\
+		&=a\bm\alpha\wedge \bm\beta(a\vec v,\vec w).
+	\end{align*}
+	Similarly, $\bm\alpha\wedge\bm\beta(\vec v,a\vec w) = a\bm\alpha\wedge \bm\beta(a\vec v,\vec w)$.
+
+	The remaining linearity properties can be shown by directly using the formula
+	for $\bm\alpha\wedge\bm\beta$ and appealing to the linearity of $\bm\alpha$ and $\bm\beta$
+	as covectors.
 \end{proof}
 
 We now see that our area-in-the-$xy$-plane 2-covector from before could
