@@ -51,7 +51,6 @@ $\R^n$ is a vector space.  However there are many seemingly non-geometric
 sets that are also vector spaces.
 
 \begin{example}
-    \label{VECTORSPACEEXAMPLE}
 	Let $V=\Set{\text{functions from }\R\text{ to }\R}$ equipped with
 	pointwise addition and scalar multiplication.  Then, $V$ is a vector space.
 
@@ -225,7 +224,6 @@ is all there is (in $\R^n$, at least).
 	for all $\vec v\in\R^n$.
 \end{theorem}
 
-
 Now we know all covectors for $\R^n$ have a geometric meaning
 as measuring some component of an input vector.  The following
 theorem says that the term ``vector'' in co\emph{vector} is justified.
@@ -235,11 +233,9 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
 	covectors for $V$, is also a vector space.
 \end{theorem}
 \begin{proof}
-    Let $f,g\in V^*$ and $h=f+g$. From \ref{VECTORSPACEEXAMPLE} we know
-    that $h$ and $\alpha h$ are functions from $V$ to $\R$. If we can
-    show that they are both linear, then it will follow that sums and 
-    scalar multiples of covectors are also covectors. Let $\vec v,\vec u\in V$.
-    By definition,
+    Let $f,g\in V^*$ and $h=f+g$. If we can show that $f+g$ and $\alpha f$ are both linear, 
+    then it will follow that $V^*$ is closed under linear combinations. Let $h=f+g$. Then for 
+    $\vec u,\vec v\in V$ we have
     \begin{align*}
         h(\vec v+\vec u) & = f(\vec v+\vec u) + g(\vec v+\vec u) \\
                          & = f(\vec v) + f(\vec u) + g(\vec v) + g(\vec u) \\
@@ -247,13 +243,23 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
     \end{align*} 
     Similarly,
     \begin{align*}
-        \alpha h(\vec u) & = \alpha f(\vec v) + \alpha g(\vec v) \\
-                         & = f(\alpha\vec v) + g(\alpha\vec v) \\
-                         & = h(\alpha\vec v).
+         h(\alpha\vec u) & = f(\alpha\vec v) + g(\alpha\vec v) \\
+                         & = \alpha f(\vec v) + \alpha g(\vec v) \\
+                         & = \alpha h(\vec v).
     \end{align*}    
-    It follows that linear combinations of covectors are covectors. As in 
-    \ref{VECTORSPACEEXAMPLE}, the rest of the properties follow from similar
-    arguments.
+    Let $q=\alpha f$. Then
+    \begin{align*}
+    	q(\vec u +\vec v) & = \alpha f(\vec u + \vec v) \\
+                          & = \alpha f(\vec u) + \alpha f(\vec v) \\
+                          & = q(\vec u) + q(\vec u).
+    \end{align*} 
+    Lastly, for any $\beta\in\R$ we have
+    \[
+        q(\beta\vec u)=\alpha f(\beta\vec u)=\alpha\beta f(\vec u) 
+        =\beta q(\vec u).
+    \]
+    Therefore, $V^*$ satisfies the closure property. The rest of the properties 
+    follow from similar arguments. 
 \end{proof}
 
 We won't be doing much with the abstract vector space $V^*$, but it is
