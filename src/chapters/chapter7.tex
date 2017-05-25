@@ -234,7 +234,7 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
 	covectors for $V$, is also a vector space.
 \end{theorem}
 \begin{proof}
-    Let $f,g\in V^*$. If we can show that $f+g$ and $\alpha f$ are both covectors, 
+    Let $f,g\in V^*$ and $\alpha\in\R$. If we can show that $f+g$ and $\alpha f$ are both covectors, 
     then it will follow that $V^*$ is closed under linear combinations. By the
     argument in \ref{EXVECSPACEEXAMPLE}, both $f+g$ and $\alpha f$ are functions from
     $V$ to $\R$. Thus, we need only show that they are linear. Let $h=f+g$. Then for 
@@ -243,14 +243,14 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
         h(\vec u+\vec v) & = f(\vec u + \vec v) + g(\vec u + \vec v) \\
                          & = f(\vec u) + f(\vec v) + g(\vec u) + g(\vec v) \\
                          & = \big(f(\vec u) + g(\vec u)\big) + \big(f(\vec v) + g(\vec v)\big) \\
-                         & = h(\vec u) + h(\vec v).
+                         & = h(\vec u) + h(\vec v),
     \end{align*} 
-    Similarly,
+    and for any $\beta\in\R$
     \begin{align*}
-         h(\alpha\vec u) & = f(\alpha\vec u) + g(\alpha\vec u) \\
-                         & = \alpha f(\vec u) + \alpha g(\vec u) \\
-                         & = \alpha \big(f(\vec u) + g(\vec u)\big) \\
-                         & = \alpha h(\vec u).
+         h(\beta\vec u) & = f(\beta\vec u) + g(\beta\vec u) \\
+                         & = \beta f(\vec u) + \beta g(\vec u) \\
+                         & = \beta \big(f(\vec u) + g(\vec u)\big) \\
+                         & = \beta h(\vec u).
     \end{align*}    
     Let $q=\alpha f$. Then
     \begin{align*}
@@ -261,7 +261,7 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
     and for any $\beta\in\R$ we have
     \[
         q(\beta\vec u)=\alpha f(\beta\vec u)=\alpha\beta f(\vec u) 
-        =\beta q(\vec u).
+        =\beta\big(\alpha f(\vec u)\big)=\beta q(\vec u).
     \]
     Therefore, $V^*$ is closed under linear combinations. The associativity,
     distributivity, and commutativity properties are inherited from $\R$. 
