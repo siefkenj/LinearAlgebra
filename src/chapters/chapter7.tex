@@ -51,6 +51,7 @@ $\R^n$ is a vector space.  However there are many seemingly non-geometric
 sets that are also vector spaces.
 
 \begin{example}
+    \label{VECTORSPACEEXAMPLE}
 	Let $V=\Set{\text{functions from }\R\text{ to }\R}$ equipped with
 	pointwise addition and scalar multiplication.  Then, $V$ is a vector space.
 
@@ -234,7 +235,25 @@ theorem says that the term ``vector'' in co\emph{vector} is justified.
 	covectors for $V$, is also a vector space.
 \end{theorem}
 \begin{proof}
-	XXX Finish
+    Let $f,g\in V^*$ and $h=f+g$. From \ref{VECTORSPACEEXAMPLE} we know
+    that $h$ and $\alpha h$ are functions from $V$ to $\R$. If we can
+    show that they are both linear, then it will follow that sums and 
+    scalar multiples of covectors are also covectors. Let $\vec v,\vec u\in V$.
+    By definition,
+    \begin{align*}
+        h(\vec v+\vec u) & = f(\vec v+\vec u) + g(\vec v+\vec u) \\
+                         & = f(\vec v) + f(\vec u) + g(\vec v) + g(\vec u) \\
+                         & = h(\vec v) + h(\vec u).
+    \end{align*} 
+    Similarly,
+    \begin{align*}
+        \alpha h(\vec u) & = \alpha f(\vec v) + \alpha g(\vec v) \\
+                         & = f(\alpha\vec v) + g(\alpha\vec v) \\
+                         & = h(\alpha\vec v).
+    \end{align*}    
+    It follows that linear combinations of covectors are covectors. As in 
+    \ref{VECTORSPACEEXAMPLE}, the rest of the properties follow from similar
+    arguments.
 \end{proof}
 
 We won't be doing much with the abstract vector space $V^*$, but it is
