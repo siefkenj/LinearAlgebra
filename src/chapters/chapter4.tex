@@ -1623,60 +1623,60 @@ xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
 
 \section{Multidimensional Limits and Continuity}
 
-Most users of mathematics don't worry about things that might
-go wrong with the functions they use to represent physical quantities.
-They tend to assume that  functions  are differentiable when derivatives
-are called for  (except possibly for a finite set of isolated points),
-and they assume all functions which need to be integrated are continuous
-so the integrals will exist.   For much of the period during which
-Calculus was developed (during the 17th and 18th centuries), mathematicians
-also did not bother themselves with such matters.   Unfortunately,
+When dealing with functions coming from the real world,
+most users of mathematics don't worry about subtle things that might
+go wrong.
+We tend to assume that  functions  are differentiable when derivatives
+are called for  (except possibly for a finite set of isolated points)
+and that all functions which need to be integrated can be.   
+During the 17th and 18th centuries, when calculus was developed,
+mathematicians also made these assumptions.   Unfortunately,
 during the 19th century, mathematicians discovered that general
 functions could behave in  unexpected and subtle ways, so they began to 
-devote much more time to careful formulation of definitions and careful
-proofs in analysis.   This is an aspect of mathematics which is
-covered in courses in real analysis, so we won't devote much time
-to it in this course.  (You may have noticed that we didn't worry
+carefully formulate definitions to bolster rigorous
+proofs.   These definitions and proofs are traditionally
+covered in a course on \emph{real analysis}.  In this book, we sweep many
+details under the rug to focus on big ideas\footnote{ You may have noticed that we didn't worry
 about the existence of derivatives in our discussion of
-velocity and acceleration).  However, 
-for functions of several variables,
-lack of rigor can be more troublesome than in
-the one variable case,  so we briefly devote some attention to such
-questions.
- In this section, we shall discuss the concepts
-of \emph{limit} and \emph{continuity} for functions $f:\R^2 \to \R$.
-The big step, it turns out, is going from one independent 
+velocity and acceleration.}.  However, there is no way around the fact
+that for functions of several variables, very strange things can happen.
+ In this section, we shall discuss \emph{limits} and \emph{continuity} for functions $f:\R^2 \to \R$
+ and in general functions $f:\R^n\to\R$.
+The big step, it turns out, is going from one
 variable to two.
-Once you understand that, going to three or more
-independent variables introduces
-few additional difficulties.
+After that, going to three or more
+variables is easy.
 
 Let  $\vec r_0 = ( x_0, y_0 )$ be (the position vector of) a point
-in the domain of the function $f$.   We want to define the
-concept to be expressed symbolically
+in the domain of the function $f:\R^2\to\R$.   The familiar notation
 \[
     \lim_{\vec r \to \vec r_0} f(\vec r) = L \qquad\text{or}\qquad 
-   \lim_{(x,y)\to (x_0,y_0)} f(x,y) = L.
+   \lim_{(x,y)\to (x_0,y_0)} f(x,y) = L
 \]
-\index{limit of a function of several variables}
+\index{limit of a function of several variables}%
+will be used
+for limits of multivariable functions.
 We start with two examples which illustrate the concept and some
 differences from the single variable case.
 
 \begin{example}
 	\label{EXCONTLIMIT}
-	Let $f(x,y) = x^2 + 2y^2$, and consider the
-	nature of the graph of $f$  near the point $(1,2)$.  As
-	we saw in the previous section, the graph is an elliptic paraboloid,
-	the locus of $z = x^2 + 2y^2$.
-	In particular, the surface is quite smooth, and if $(x,y)$ is
+	Let $f(x,y) = x^2 + 2y^2$. Find the limit of $f(x,y)$ as $(x,y)\to(1,2)$.
+	
+	The graph of $f$ is the elliptic paraboloid
+	with equation $z = x^2 + 2y^2$.
+	This surface is quite smooth, and if $(x,y)$ is
 	a point in the domain \emph{close to} $(1,2)$, then $f(x,y)$
-	will be very close to the value of the function there, $f(1,2) =
+	will be very close to the value of the function there: $f(1,2) =
 	1^2 + 2(2^2) = 9$.   Thus, it makes sense to assert that
 	\[
 	 \lim_{(x,y)\to (1,2)} x^2 + 2y^2 = 9.
 	\]
 
-	The heat-map below assigns a color to each output of $f$.
+	We can visually verify that when $(x,y)\approx(1,2)$ we have
+	$f(x,y)\approx 9$ by looking at a heat-map for $f$.  A heat-map
+	assigns a color to each value in the co-domain.  In the heat-map for
+	$f$, we see that all colors near $(1,2)$ are about the color assigned to $9$.
 	\begin{center}
 	\begin{tikzpicture}
 
@@ -1702,7 +1702,7 @@ In Example \ref{EXCONTLIMIT}, the limit was determined simply by evaluating the
 function at the desired point.  You may remember that in the single
 variable case, you cannot always do that.
 For example, putting $x = 0$ in  $\sin x/x$ yields the meaningless
-expression $0/0$, but $\lim_{x \to 0} \sin x/x$ is known to be 1.
+expression $0/0$, but $\lim_{x \to 0} \sin x/x=1$.
 Usually, it requires some ingenuity to find such examples in the single
 variable case, but the next example shows that fairly simple formulas
 can lead to unexpected difficulties for functions of two or more
@@ -1712,7 +1712,7 @@ variables.
 	\label{EXDISCONT}
 	Let
 	\[
-	   f(x,y) = \frac{x^2 - y^2}{x^2 + y^2}\qquad\text{for } (x,y) \not= (0,0).
+	   f(x,y) = \frac{x^2 - y^2}{x^2 + y^2}\qquad\text{for}\quad (x,y) \not= (0,0).
 	\]
 	 What does the graph of this function look like in the vicinity
 	of the point $(0,0)$?   (Since, $(0,0)$ is not in the domain of
@@ -1730,15 +1730,13 @@ variables.
 	on $\theta$.  As $r = \norm{\vec r} \to 0$ with $\theta$ fixed, $f(\vec r)$
 	is constant, and equal to $\cos 2\theta$, so, if  it `approaches'
 	a limit, that limit would have to be $\cos 2\theta$.  
-	Unfortunately, $\cos 2\theta$ varies between $-1$ and $1$, so it
+	Unfortunately, $\cos 2\theta$ takes all values between $-1$ and $1$, so it
 	does not make sense to say $f(\vec r)$ has a limit as $\vec r \to \vec 0$.
 	You can get some idea of what the graph looks like by studying the
-	level curves which are pictured in the diagram.  For each value
-	of $\theta$, the function is constant, so the level curves consist
-	of rays emanating from the origin, as indicated.  On any such
-	ray, the graph is at some constant height $z$ with $z$ taking on
-	\emph{every value} between $-1$ and $+1$.  This is illustrated by
-	lines of constant brightness in the heat-map below.
+	heat-map below.  For each value
+	of $\theta$, the function is constant, so the function
+	is constant on rays emanating from the origin.  In the heat-map
+	this corresponds to the color being constant along rays from the origin.
 
 	\begin{center}
 	\begin{tikzpicture}
@@ -1766,7 +1764,7 @@ In general, the statement
 \]
 will be taken to mean that $f(\vec r)$ is \emph{close to} $L$ whenever
 $\vec r$ is \emph{close to } $\vec r_0$.   To make this completely
-rigorous, we will give an ``$\varepsilon$-$\delta$ definition'' of limit.
+rigorous, we will give the ``$\varepsilon$-$\delta$ definition'' of limit.
  
 \begin{definition}[Limit]
 	Let $f:\R^n\to \R$ be a function.  For a point $\vec a$,
@@ -1788,44 +1786,32 @@ thought of as small, the inequality  makes precise the meaning of
 ``$\vec x$ is close to $\vec a$, but not equal to it.''   Similarly, $\abs{f(\vec x) - L} < 
 \epsilon$ catches the meaning of ``$f(\vec x)$ is close to 
 $L$.''  Note that we never consider the case $\vec x = \vec a$,
-so the value of $f(\vec r_0)$
- is not relevant in checking the limit as $\vec x \to \vec a$.
-(It is not even necessary that $f(\vec r)$  be well defined at
-$\vec x = \vec a$.)
+so the value of $f(\vec a)$
+ is not relevant to the limit as $\vec x \to \vec a$.
+(It is not even necessary that $f(\vec a)$  be defined.)
 
 Limits for functions of several variables behave formally much
 the same as limits for functions of one variable.  Thus, you
 may calculate the limit of a sum by taking the sum of the
 limits, and similarly for products and quotients (except that
 for quotients the limit of the denominator should not be zero).
-The understanding you gained of these matters in the single
-variable case should be an adequate guide to what to expect
-for several variables.  If you never really understood all this
-before, we won't enlighten you much here.  You will have to
-wait for a course in real analysis for real understanding.
 
 \subsection{Continuity}
-In Example \ref{EXCONTLIMIT}, the limit was determined simply by evaluating the
-function at the point.  This is certainly not always possible
-because the value of the function may be irrelevant or there
-may be no 
-meaningful 
-way to 
-attach a value.   Functions
-for which it is always possible to find the limit this way
- are called
-\emph{continuous}.  (This is the same notion as for functions
+Just as in single variable calculus, we call a multivariable function, $f$,
+\emph{continuous}
 \index{continuous function of several variables}
-of a single scalar variable).  More precisely, we say that
+at a point
+if it is defined at that point and equals its limit at that point.
+More precisely, 
 $f$ is continuous at a point $\vec r_0$ if the point is in its domain (i.e.,
 $f(\vec r_0)$ is defined) and
 \[
   \lim_{\vec r \to \vec r_0} f(\vec r) = f(\vec r_0).
 \]
 Points at which this fails  are called \emph{discontinuities}
-or sometimes \emph{singularities}.   (The latter term is also sometimes
+or sometimes \emph{singularities}.   (The latter term is also 
 \index{discontinuity}
-reserved for less serious kinds of mathematical pathology.)  It
+used for less serious kinds of mathematical pathology.)  It
 sometimes happens, that a function $f$ has a well defined limit $L$ at
 a point $\vec r_0$ which does not happen to be in the domain of the function,
 i.e., $f(\vec r_0)$ is not defined.  (In the single variable case,
@@ -1846,8 +1832,7 @@ bizarre.   Usually, just knowing that a function is continuous
 won't be enough to make it a good candidate to represent a
 physical quantity.  We shall also want to be able to take
 derivatives and do the usual things one does in differential
-calculus, but as you might expect, this is somewhat more involved
-than it is in the single variable case. 
+calculus.
 
 
 \begin{exercises}
@@ -1857,7 +1842,7 @@ than it is in the single variable case.
 
 When we try to model the real world with mathematics, we often
 encounter very complicated functions.  The more complicated
-a function, the more difficult it is to analyze, so a common mathematical
+the function, the more difficult it is to analyze, so a common mathematical
 strategy is to substitute complicated functions for simple ones.
 
 Among the simplest mathematical functions are \emph{polynomials}, and in the
@@ -1884,8 +1869,8 @@ also degree-$3$ polynomials.
 
 Affine functions are all degree-$1$ polynomials, and the definition of 
 $f:\R^n\to\R$ being differentiable
-depended on being able to find an affine function that approximated $f$ very well.
-There is a similar concept for higher degree polynomial functions.
+was the existence of an affine function that approximates $f$ very well.
+There is a similar concept for higher-degree polynomials.
 
 \begin{definition}[Taylor Approximation]
 	Given a continuous
