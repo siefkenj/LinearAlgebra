@@ -1,3 +1,94 @@
+	
+\newpage
+\section*{Exploration Questions}
+
+\vspace{.5cm}
+	\begin{numberlessdefinition}[Set]
+		A \emph{set} is a (possibly infinite) collection of items
+		and is notated with curly braces (for example, $\Set{1,2,3}$ is
+		the set containing the numbers 1, 2, and 3).  We call the items in
+		a set \emph{elements}.
+
+		If $X$ is a set and $a$ is an elemento of $X$, we may write $a\in X$,
+		which is read ``$a$ is an element of $X$.''
+
+		If $X$ is a set, a \emph{subset} $Y$ of $X$ (written $Y\subseteq X$)
+		is a set such that every element of $Y$ is an element of $X$.
+
+		We can define a subset using \emph{set-builder notation}.
+		That is, if $X$ is a set, we can define the subset 
+		\[
+			Y= \Set{a\in X\given\text{some rule involving }a},
+		\]
+		which is read ``$Y$ is the set of $a$ in $X$ \emph{such that} some rule
+		involving $a$ is true.''  If $X$ is intuitive, we may omit it and
+		simply write $Y=\Set{a\given\text{some rule involving }a}$.  
+		You may equivalently
+		use ``$|$'' instead of ``$:$'', writing $Y=\Set{a\ |\ \text{some rule involving }a}$.
+	\end{numberlessdefinition}
+
+	\begin{numberlessdefinition}
+		Some common sets are
+		\begin{itemize}
+			\item[] $\N=\Set{\text{natural numbers}} = \Set{\text{non-negative whole numbers}}$.
+			\item[] $\Z=\Set{\text{integers}} = \Set{\text{whole numbers, including negatives}}$.
+			\item[] $\R=\Set{\text{real numbers}}$.
+			\item[] $\R^n=\Set{\text{vectors in $n$-dimensional Euclidean space}}$.
+		\end{itemize}
+	\end{numberlessdefinition}
+
+
+\begin{question}
+	Which of the following are true?
+	\begin{parts}
+		\item $3\in\Set{1,2,3}$.
+		\item $1.5\in\Set{1,2,3}$.
+		\item $4\in\Set{1,2,3}$.
+		\item ``b''$\in\Set{x\given x\text{ is an English letter}}$.
+		\item ``\`o''$\in\Set{x\given x\text{ is an English letter}}$.
+		\item $\Set{1,2}\subseteq \Set{1,2,3}$.
+		\item For some $a\in\Set{1,2,3}$, $a \geq 3$.
+		\item For any $a\in\Set{1,2,3}$, $a\geq 3$.
+		\item $1\subseteq\Set{1,2,3}$.
+		\item $\Set{1,2,3}=\Set{x\in\R\given 1\leq x\leq 3}$.
+		\item $\Set{1,2,3}=\Set{x\in\Z\given 1\leq x\leq 3}$.
+	\end{parts}
+\end{question}
+
+
+\begin{question}
+	Write the following in set-builder notation
+	\begin{parts}
+			\item The subset $A\subseteq \R$ of real numbers larger than $\sqrt{2}$.
+			\item The subset $B\subseteq \R^2$ of vectors whose first coordinate
+			is twice the second.
+	\end{parts}
+\end{question}
+
+	\begin{restatable*}[Intersections \& Unions]{definition}{DefUnionIntersection}
+		Let $A$ and $B$ be sets. Then the \emph{intersection} of $A$ and $B$, written
+		$A\cap B$, is defined by
+		\[
+			A\cap B=\Set{x\given x\in A\text{ and }x\in B}.
+		\]
+		The \emph{union} of $A$ and $B$, written $A\cup B$, is defined by
+		\[
+			A\cup B= \Set{x\given x\in A\text{ or } x\in B}.
+		\]
+	\end{restatable*}
+
+\begin{question}
+	Let $X=\Set{1,2,3}$ and $Y=\Set{2,3,4,5}$ and $Z=\Set{4,5,6}$.  Compute
+	\begin{parts}
+		\item $X\cup Y$
+		\item $X\cap Y$
+		\item $X\cup Y\cup Z$
+		\item $X\cap Y\cap Z$
+	\end{parts}
+\end{question}
+
+
+\newpage
 \section{Mathematical Notation}
 	Mathematics is a sophisticated and precise language, and
 	we best not adventure into calculus without learning some
@@ -110,17 +201,7 @@
 
 
 	There are also some common operations we can do with two sets.
-	\begin{definition}[Intersections \& Unions]
-		Let $A$ and $B$ be sets. Then the \emph{intersection} of $A$ and $B$, written
-		$A\cap B$, is defined by
-		\[
-			A\cap B=\Set{x\given x\in A\text{ and }x\in B}.
-		\]
-		The \emph{union} of $A$ and $B$, written $A\cup B$, is defined by
-		\[
-			A\cup B= \Set{x\given x\in A\text{ or } x\in B}.
-		\]
-	\end{definition}
+	\DefUnionIntersection
 	For example, if $A=\Set{1,2,3}$ and $B=\Set{-1,0,1,2}$, then $A\cap B=\Set{1,2}$ and $A\cup B=
 	\Set{-1,0,1,2,3}$.  Set unions and intersections are \emph{associative}, which means it doesn't
 	matter how you apply parentheses to an expression involving just unions or just intersections.

@@ -1,3 +1,433 @@
+\newpage
+
+\section*{Exploration Questions}
+
+\vspace{-.5cm}
+\begin{minipage}{\textwidth}
+\begin{question}
+	\newcommand{\ul}{$\underline{\phantom{xxx}}$}
+
+	\begin{tikzpicture}[>=latex,scale=4]
+		\draw[style=help lines] (0,0) (2,2);
+
+		\draw[->,thick,black] (0,0) -- (135:1) node [left] {$\mathbf a$};
+		\draw[->,thick,black] (0,0) -- (0,1) node [left] {$\mathbf b$};
+		\draw[->,thick,black] (0,0) -- (45:1) node [above] {$\mathbf c$};
+		\draw[->,thick,black] (0,0) -- (1,0) node [above] {$\mathbf d$};
+		\draw (0,0) node [below] {$\mathbf o$};
+		
+		\draw[thick,blue,fill] (1,2) circle [radius=.02] node [below right,black] {$p$};
+		\draw[thick,blue] (2,1) circle [radius=.02] node [below right,black] {$q$};
+
+	\end{tikzpicture}
+
+	Notice that all arrows in this diagram are the same length.
+	We will call this length a \emph{unit}.
+	\begin{parts}
+		\item Give directions from $\mathbf o$ to $p$ of
+		the form ``Walk \ul units in the direction of arrow \ul, then 
+		walk \ul units in the direction of arrow \ul.''
+
+		\item Can you give directions with the two arrows you haven't
+		used?  Give such directions, or explain why it cannot be done.
+
+		\item Give directions from $\mathbf o$ to $q$.
+
+		\item Can you give directions from $\mathbf o$ to $q$ using $\mathbf c$ 
+			and $\mathbf a$?
+		Give such directions, or explain why it cannot be done.
+
+	\end{parts}
+\end{question}
+
+\begin{question}
+	\newcommand{\ul}{$\underline{\phantom{xxx}}$}
+	\newcommand{\ull}{\underline{\phantom{xxx}}}
+
+	\begin{minipage}{.35\textwidth}
+	\begin{tikzpicture}[>=latex,scale=4]
+		\draw[style=help lines] (0,0) (1,2);
+
+		\draw[->,thick,black] (0,0) -- (0,1) node [left] {$\yhat$};
+		\draw[->,thick,black] (0,0) -- (63.4:1) node [left] {$\mathbf c$};
+		\draw[->,thick,black] (0,0) -- (1,0) node [above] {$\xhat$};
+		\draw (0,0) node [below] {$\mathbf o$};
+		
+		\draw[thick,blue,fill] (1,2) circle [radius=.02] node [below right,black] {$p$};
+
+	\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{.65\textwidth}
+	We are going to start using a more mathematical notation
+	for giving directions.  Our directions will now look like
+	\[
+		p = \ull\, \xhat + \ull\, \yhat
+	\]
+	which is read as ``To get to $p$ (=) go \ul units in the direction $\xhat$ then (+) go \ul units in 
+	the direction $\yhat$.''
+
+	\begin{parts}
+		\item What is the difference between $p = \ull\, \xhat + \ull\, \yhat$ and $p = \ull\, \yhat + \ull\, \xhat$?
+		Can they both give valid directions?
+		\item
+		\begin{enumerate}
+			\item Give directions to $p$ using the new notation. 
+			\item Give directions to $p$ using $\mathbf c$.  (Notice that
+				$\mathbf c$ points directly at $p$.)
+			\item What is the distance from $\mathbf o$ to $p$ in units?
+		\end{enumerate}
+		\item
+		\begin{enumerate}
+			\item $r=1\mathbf c$.  Give directions from $\mathbf o$ to $r$ using $\xhat$ and $\yhat$.
+			\item What is the distance from $\mathbf o$ to $r$?
+		\end{enumerate}
+		\item
+		\begin{enumerate}
+			\item $q=-2\xhat+3\yhat$; find the exact distance from $\mathbf o$ to $q$.
+			\item $s=2\xhat+\mathbf c$; find the exact distance from $\mathbf o$ to $s$.
+		\end{enumerate}
+	\end{parts}
+	\end{minipage}
+\end{question}
+\end{minipage}
+
+\subsection*{Vector Notation}
+	The vectors $\xhat$ and $\yhat$ are called the \emph{standard
+	basis vectors} for $\R^2$ (the plane).  
+
+	\noindent We previously wrote $q=-2\xhat+3\yhat$.  Using \emph{column vector} 
+	notation, we write
+	\[
+		q=\mat{-2\\3}
+	\]
+	We may call $q$ either a \emph{vector} or a \emph{point}.  If we call $q$ a vector,
+	we are emphasizing that $q$ gives direction of some sort.  If we call $q$ a point,
+	we are emphasizing that $q$ is some absolute location in space\footnote{ 
+	What's the philosophical
+	difference between a location in space and 
+	directions from the origin to said location?}.
+
+\begin{question}
+	$r=1\mathbf c$ and $s=2\xhat+\mathbf c$ where $\mathbf c$ is the vector from before.
+	\begin{parts}
+		\item Write $r$ and $s$ in column vector form.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Draw the following subsets of $\R^2$.
+	\begin{parts}
+		\item $V=\Set*{\vec x\in\R^2:\vec x=\mat{0\\t}\text{ for some }t\in\R}$.
+		\item $H=\Set*{\vec x\in\R^2:\vec x=\mat{t\\0}\text{ for some }t\in\R}$.
+		\item $J=\Set*{\vec x\in\R^2:\vec x=t\mat{1\\1}\text{ for some }t\in\R}$.
+		\item $V\cup H$.
+		\item $V\cap H$.
+		\item Does $V\cup H=\R^2$?
+	\end{parts}
+\end{question}
+
+
+\subsection*{Dot Products}
+\begin{numberlessdefinition}[Dot Product]
+	If $\vec a=\mat{a_1\\ a_2\\ \vdots \\ a_n}$ and 
+	$\vec b=\mat{b_1\\ b_2\\ \vdots \\ b_n}$ are two vectors in $n$-dimensional
+		space, then the \emph{dot product} of $\vec a$ an $\vec b$ is
+	\[
+		\vec a\cdot\vec b = a_1b_1+a_2b_2+\cdots+a_nb_n.
+	\]
+	Equivalently, the dot product is defined by the geometric formula
+	\[
+		\vec a\cdot \vec b = \norm{\vec a}\norm{\vec b}\cos \theta
+	\]
+	where $\theta$ is the smaller of the angles between $\vec a$ and $\vec b$.
+\end{numberlessdefinition}
+
+\begin{question}
+	Let $\vec a=\mat{1\\1}$, $\vec b=\mat{3\\2}$, and $\vec u=\mat{1\\2\\1}$.
+	\begin{parts}
+		\item 
+		\begin{enumerate}	
+			\item Draw a picture of $\vec a $ and $\vec b$.
+			\item Compute $\vec a\cdot \vec b$.
+			\item Find $\norm{\vec a}$ and $\norm{\vec b}$ and use your knowledge of
+			the multiple ways to compute the dot product to find $\theta$,
+			the angle between $\vec a$ and $\vec b$. Label $\theta$ on your picture.
+		\end{enumerate}
+		\item Draw the graph of $\cos$ and identify which angles make $\cos$ negative, zero,
+		or positive.
+
+		\item Draw a new picture of $\vec a$ and $\vec b$ and on that picture draw
+		\begin{enumerate}	
+			\item a vector $\vec c$ where $\vec c\cdot \vec a$ is negative.
+			\item a vector $\vec d$ where $\vec d\cdot \vec a=0$ and $\vec d\cdot \vec b < 0$.
+			\item a vector $\vec e$ where $\vec e\cdot \vec a=0$ and $\vec e\cdot \vec b>0$.
+			\item Could you find a vector $\vec f$ where $\vec f\cdot \vec a=0$ and $\vec f\cdot \vec b=0$?
+			Explain why or why not.
+		\end{enumerate}
+
+		\item Recall the vector $\vec u$ whose coordinates are given at the beginning of this problem.
+		\begin{enumerate}
+			\item Write down a vector $\vec v$ so that the angle between $\vec u$ and $\vec v$
+			is $\pi/2$. (Hint, how does this relate to the dot product?)
+			\item Write down another vector $\vec w$ (in a different direction from $\vec v$)
+			so that the angle between $\vec w$ and $\vec u$ is $\pi/2$.
+			\item Can you write down other vectors different than both $\vec v$ and $\vec w$ that still
+			form an angle of $\pi/2$ with $\vec u$?  How many such vectors are there?
+		\end{enumerate}
+	\end{parts}
+\end{question}
+
+\begin{numberlessdefinition}[Norm]
+	The \emph{norm} of a vector $\vec v\in \R^n$ is its length and is given
+	by the formula
+	\[
+		\norm{\vec v} = \sqrt{\vec v\cdot\vec v}
+	\]
+\end{numberlessdefinition}
+
+\begin{question}
+	\begin{parts}
+		\item Let $\vec a = \mat{3\\2}$.  Find $\|\vec a\|$ using the Pythagorean theorem
+			and using the formula from the definition of the norm.  How do
+			these quantities relate?
+		\item Let $\vec b = \mat{1\\1\\-2\\2}$, and find $\|\vec b\|$.
+		Did you know how to find 4-d lengths before?
+	
+		\item Suppose $\vec u=\mat{x\\ y}$ for some $x,y\in \R$.
+		Could $\vec u\cdot \vec u$ be negative? Compute $\vec u\cdot \vec u$ algebraically
+		and use this to justify your answer.
+	\end{parts}
+\end{question}
+
+\begin{numberlessdefinition}[Distance between vectors]
+	The \emph{distance} between two vectors $\vec u$ and $\vec v$ is $\|\vec u-\vec v\|$.
+\end{numberlessdefinition}
+
+\begin{restatable*}[Unit Vector]{definition}{DefUnitVector}
+	A \emph{unit vector}\index{unit vector} is a vector $\vec u$
+	satisfying $\norm{\vec u}=1$.
+\end{restatable*}
+
+\begin{question}
+	Let $\vec u=\mat{1\\2\\1}$ and $\vec v=\mat{1\\1\\3}$.
+	\begin{parts}
+		\item Find the distance between $\vec u$ and $\vec v$.
+		\item Find a unit vector in the direction of $\vec u$.
+		\item Does there exists a \emph{unit vector} $\vec x$ that is distance
+			$1$ from $\vec u$?
+		\item Suppose $\vec y$ is a unit vector and the distance between $\vec y$ and
+			$\vec u$ is $2$.  What is the angle between $\vec y$ and $\vec u$?
+	\end{parts}
+\end{question}
+
+\begin{restatable*}[Orthogonal]{definition}{DefOrthogonal}
+	The vectors $\vec u$ and $\vec v$ are \emph{orthogonal}\index{orthogonal}
+	if $\vec u\cdot\vec v=0$.
+\end{restatable*}
+
+\begin{question}
+	\begin{parts}
+		\item Find two vectors orthogonal to $\vec a=\mat{1\\-3}$.  Can you find two such vectors that
+			are not parallel?
+		\item Find two vectors orthogonal to $\vec b=\mat{1\\-3\\4}$.  Can you find two 
+			such vectors that are not parallel?
+		\item Suppose $\vec x$ and $\vec y$ are orthogonal to each other and $\|\vec x\|=5$ and $\|\vec y\|=3$.
+			What is the distance between $\vec x$ and $\vec y$?
+	\end{parts}
+\end{question}
+
+
+\subsection*{Projections}
+Projections (sometimes called orthogonal projections) are a way to measure how much one vector
+points in the direction of another.
+
+\begin{restatable*}[Projection]{definition}{DefProjection}
+	For a vector $\vec u$ and a non-zero vector $\vec v$,
+	the \emph{projection} of $\vec u$ onto $\vec v$ is written
+	as $\Proj_{\vec v}\vec u$ and is a vector in the direction
+	of $\vec v$ with the property that $\vec u-\Proj_{\vec v}\vec u$
+	is orthogonal to $\vec v$.
+
+	The vector $\vec u-\Proj_{\vec v}\vec u$ is called the
+	\emph{perpendicular component} of the projection of $\vec u$
+	onto $\vec v$ and is notated $\Perp_{\vec v}\vec u$.
+\end{restatable*}
+	
+	\begin{center}
+	\begin{tikzpicture}[>=latex,scale=2.5]
+		\draw[->,thick,black] (0,0) -- (2,1) node [above] {$\vec u$};
+		\draw[->,thick,black] (0,0) -- (3,0) node [above] {$\vec v$};
+		\draw[->,thick,black,yshift=-.07cm] (0,0) -- (2,0);
+		\draw[decoration={brace, mirror}, decorate, yshift=-.15cm] (0,0) -- (2,0) node [midway,below,yshift=-4pt] {$\Proj_{\vec v}\vec u$};
+
+		\draw[dashed,thick,black] (2,0) -- (2,1);
+		\draw[decoration={brace, mirror}, decorate, xshift=1.15cm] (2,0) -- (2,1)
+			node [midway,right,xshift=4pt] {$\Perp_{\vec v}\vec u$};
+		\draw[thin,black] (1.85,0)--(1.85,.15)--(2,.15);
+
+	\end{tikzpicture}
+	\end{center}
+
+
+\begin{question}
+	\begin{center}
+	\usetikzlibrary{patterns,decorations.pathreplacing}
+	\begin{tikzpicture}[>=latex,scale=2.5]
+		\draw[->,thick,black] (0,0) -- (30:2) node [above] {$\vec a$};
+		\draw[->,thick,black] (0,0) -- (3,0) node [above] {$\vec b$};
+		\draw[thick,black] (0,0) +(0:.3cm) arc (0:30:.3cm) node[right,yshift=-4pt] {$\theta$};
+
+	\end{tikzpicture}
+	\end{center}
+
+
+	In this picture $\|\vec a\|=4$, $\theta = \pi/6$, and $\vec b=\mat{6\\0}$.
+	\begin{parts}
+		\item   Write $\vec a$ in column vector form.
+		\item   Find $\|\Proj_{\vec b}\vec a\|$ and $\|\Perp_{\vec b}\vec a\|$.
+		\item Write down 
+				$\Proj_{\vec b}\vec a$ and $\Perp_{\vec b}\vec a$ in column vector
+				form.
+		\item If $\vec c=\mat{-4\\0}$, write down 
+				$\Proj_{\vec c}\vec a$ and $\Perp_{\vec c}\vec a$ in column vector
+				form.
+		\item If $\vec d=\mat{3\\1}$, write down 
+				$\Proj_{\vec d}\vec a$ and $\Perp_{\vec d}\vec a$ in column vector
+				form.  (You may need to use your knowledge of how dot products and angles
+				relate to answer this one.)
+		\item Consider $\vec d=\mat{3\\1}$.  Compute $\proj_{\xhat}\vec d$ and 
+		$\proj_{\yhat}\vec d$.  How do these projections relate to the components of $\vec d$? What
+		can you say in general about projections onto $\xhat$ and $\yhat$?
+	\end{parts}
+\end{question}
+
+\subsection*{Lines and Planes}
+\begin{numberlessdefinition}[Normal Vector]
+	A \emph{normal vector} to a line (or plane or hyperplane) is a non-zero vector that is orthogonal to it.
+\end{numberlessdefinition}
+
+\begin{question}
+	\begin{parts}
+		\item Draw $\vec u=\mat{2\\3}$ and \emph{all}
+		vectors perpendicular to it.
+		\item If $\vec x=\mat{x\\y}$ and $\vec x$ is 
+		perpendicular to $\vec u$, what is $\vec x\cdot \vec u$?
+		\item Expand the dot product $\vec u\cdot \vec x$ to get an equation
+		for a line.  This equation is called the \emph{scalar equation} representing the line.
+		\item Rewrite the line $\vec u\cdot \vec x = 0$ in $y=mx+b$ form and verify it matches
+		the line you drew above.
+	\end{parts}
+\end{question}
+
+	We can also write a line in \emph{parametric form} by introducing a parameter
+	that traces out the line as the parameter runs over all real numbers.
+\begin{question}
+	\begin{parts}
+		\item Draw the line $L$ with $x,y$ coordinates given by
+		\[
+			\begin{array}{l}x=t\\y=2t\end{array}
+		\]
+		as $t$ ranges over $\R$.
+		\item Write the line $\vec u \cdot \vec x=0$ (where $\vec u$ is the same as before) in parametric form.
+	\end{parts}
+\end{question}
+
+	\emph{Vector form} is the same as parametric form but written in vector notation.  For example, the
+	line $L$ from earlier could be written as 
+	\[
+		\mat{x\\y}=\mat{t\\2t}
+	\]
+	or
+	\[
+		\mat{x\\y}=t\mat{1\\2}.
+	\]
+
+\begin{question}
+	\begin{parts}
+		\item Write the line $\vec u\cdot \vec x=0$ in vector form.  That is, find a vector $\vec v$ so
+		the line $\vec u\cdot \vec x=0$  can be written as
+		\[
+		\mat{x\\y} = t\vec v
+		\]
+		as $t$ ranges over $\R$.
+		\item What is $\vec v\cdot \vec u$? Why? Will this always happen?
+	\end{parts}
+\end{question}
+
+\begin{question}
+	\begin{parts}
+		\item Write down three solutions $\vec a$, $\vec b$, $\vec c\in\R^3$ to
+		\begin{equation}\label{eq1}
+			2x+y-z=0.
+		\end{equation}
+		\item Find $\vec n\in\R^3$ so that equation \eqref{eq1} is equivalent
+		to $\vec n\cdot \vec x=0$ where $\vec x=\mat{x\\ y\\ z}$.
+		\item What do you notice about the angle between solutions 
+			to equation \eqref{eq1} and $\vec n$?
+	\end{parts}
+\end{question}
+
+	When writing down solutions to equation \eqref{eq1}, you get to 
+	choose two coordinates before the remaining
+	coordinate becomes determined.  This means solutions to equation \eqref{eq1}
+	have two free parameters (and consequently form a
+	two dimensional space).
+
+\begin{question}
+	\begin{parts}
+		\item Write down parametric form of a line of solutions to equation (\ref{eq1}).
+		\item Write down parametric form of a different line of solutions to equation (\ref{eq1}).
+		\item Write down all solutions to equation (\ref{eq1}) in parametric form.  That is, find $a_x,
+		a_y,a_z,b_x,b_y,b_z$ so that
+		\[
+			\begin{array}{l}
+				x=a_x t+b_x s\\
+				y=a_y t+b_y s\\
+				z=a_z t+b_z s
+			\end{array}
+		\]
+		gives all solutions as $t,s$ vary over all of $\R$.
+		\item Write all solutions to equation (\ref{eq1}) in vector form.
+	\end{parts}
+\end{question}
+
+
+	So far, all of our lines and planes have passed through the origin. To 
+	produce the equation of an arbitrary line/plane, we first make one of
+	same ``slope'' that passes through the origin, then we translate it
+	to the appropriate place.
+
+\begin{question}
+	We'd like to write the equation of a line $L$ with normal vector
+	$\vec n=\begin{bmatrix}4\\-1\end{bmatrix}$ that passes through
+	the point $p=\mat{-1\\-1}$
+
+	\begin{parts}
+		\item The line $L_2$ which is parallel to $L$
+		but passes through the origin. Give a scalar equation for $L_2$
+		\item Draw a picture of $L$ and $L_2$, and find two points that lie on
+		$L$.  Call these points $p_1$ and $p_2$.
+		\item Verify the vector $\overline {p_1p_2}$ is orthogonal to $\vec n$.
+		\item What is $\vec n\cdot p_1$, $\vec n\cdot p_2$, $\vec n\cdot p$?
+		Should these values be zero, equal, or different?  Explain (think about
+		projections).
+		\item How does the equation $\vec n\cdot (\vec x-p)=0$ relate to $L$?
+	\end{parts}
+\end{question}
+
+\begin{question}
+	$W$ is the plane with normal vector $\vec n=\mat{1\\2\\3}$ and 
+	which passes through
+	the point $p=\mat{1\\1\\2}$.
+	\begin{parts}
+		\item Write normal form of $W$.
+		\item Write vector form of $W$.
+	\end{parts}
+\end{question}
+
+
+
+\newpage
 A \emph{vector}\index{vector} is a quantity which is characterized by
 a \emph{magnitude} and a \emph{direction}.   Many quantities are best
 described by vectors rather than
@@ -50,23 +480,6 @@ relationships between geometric objects in space\footnote{
 		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,above,yshift=2pt] {$\overrightarrow{PQ}$};
 
 		\end{axis}
-%		\begin{axis}[
-%			anchor=origin,
-%			disabledatascaling,
-%			% tell pgfplots to use the same unit vectors
-%			% as tikz:
-%			x=1cm,y=1cm,
-%			xmin=-1,xmax=4, ymin=-1,ymax=4,grid=both]
-%			% this uses the point defined OUTSIDE of the axis
-%			\draw [blue,fill] (Point) circle (2pt)
-%			node [right] {(1,2)};
-%			% this uses a TIKZ coordinate (2,0) in the axis:
-%			\draw [blue,fill] (2,0) circle (2pt)
-%			node [right] {(2,0)};
-%			% this here will always work inside of an axis:
-%			\draw [blue,fill] (-1,0) circle (2pt)
-%			node [right] {(-1,0)};
-%		\end{axis}
 	\end{tikzpicture}
 \end{center}
 
@@ -304,10 +717,7 @@ of length in three-dimensional space indeed obeys those properties\footnote{
 
 Homogeneity is a particularly special property of a norm.  It allows us
 to easily create \emph{unit vectors}.
-\begin{definition}[Unit Vector]
-	A \emph{unit vector}\index{unit vector} is a vector $\vec u$
-	satisfying $\norm{\vec u}=1$.
-\end{definition}
+\DefUnitVector
 Unit vectors are handy because if $\vec u$ is a unit vector, then $k\vec u$
 has length $\abs{k}$.  Further, we can always turn a vector into a unit vector.
 \begin{example}
@@ -1014,10 +1424,7 @@ can be used to tell if two vectors are perpendicular.  There is some strangeness
 with the zero vector here, but it turns out this strangeness simplifies our lives
 mathematically.
 
-\begin{definition}[Orthogonal]
-	The vectors $\vec u$ and $\vec v$ are \emph{orthogonal}\index{orthogonal}
-	if $\vec u\cdot\vec v=0$.
-\end{definition}
+\DefOrthogonal
 
 The definition of orthogonal encapsulates both the idea of two vectors being
 perpendicular and the idea of one of them being $\vec 0$.
@@ -1031,7 +1438,7 @@ this idea, but we'll go with this one.
 	the vector $\vec v$ if $k\vec u=\vec v$ for some scalar $k$.
 \end{definition}
 
-A simple example is that $2\xhat$ points in the direction of $\xhat$ since
+As a simple example, $2\xhat$ points in the direction of $\xhat$ since
 $\frac{1}{2}(2\xhat)=\xhat$.  However, nothing in the definition says the
 scalar needs to be positive, so $-\xhat$ also points in the direction $\xhat$.
 
@@ -1041,17 +1448,7 @@ Projection measures how much a vector points in the direction
 of another.  This quantity is encoded as a vector.  We make this
 definition mathematically precise as follows.
 
-\begin{definition}[Projection]
-	For a vector $\vec u$ and a non-zero vector $\vec v$,
-	the \emph{projection} of $\vec u$ onto $\vec v$ is written
-	as $\Proj_{\vec v}\vec u$ and is a vector in the direction
-	of $\vec v$ with the property that $\vec u-\Proj_{\vec v}\vec u$
-	is orthogonal to $\vec v$.
-
-	The vector $\vec u-\Proj_{\vec v}\vec u$ is called the
-	\emph{perpendicular component} of the projection of $\vec u$
-	onto $\vec v$ and is notated $\Perp_{\vec v}\vec u$.
-\end{definition}
+\DefProjection
 
 We can visualize
 projections with the following diagram.

@@ -1,3 +1,193 @@
+\newpage
+\section*{Exploration Questions}
+
+\subsection*{Arc-length}
+\begin{question}
+	The parameterized curve
+	\[
+		\vec r(t) = \mat{2\cos t\\2\sin t}
+	\]
+	describes the position of a particle at time $t$.
+	\begin{parts}
+		\item Describe the path and motion of this particle in words.
+		\item Compute the displacement  of the particle between $t=0$
+			and $t=\Delta t$ and call the resulting vector $\Delta \vec r$.  
+			(Assume $\Delta t$ is small.)
+		\item Approximate the length of $\Delta \vec r$.  
+			You may use the fact that
+			when $x\approx 0$,
+			\[
+				\sin x\approx x\qquad\text{and}\qquad \cos x\approx -\tfrac{1}{2}x^2+1.
+			\]
+		\item Use a limit to compute the velocity of the particle at $t=0$. Call this 
+			vector $\vec v_0$.
+		\item Use a limit to compute the speed at $t=0$.  Call this value $s_0$.
+		\item How do $\norm{\vec v_0}$ and $s_0$ relate?  Why?
+	\end{parts}
+\end{question}
+
+\begin{question}
+	A particle's path is parameterized by
+	\[
+		\vec m(t) = (f(t), g(t), h(t))
+	\]
+	where $t$ represents time.
+	\begin{parts}
+		\item Derive (with explanation) a formula for the velocity of
+			the particle at time $t=t_0$.
+		\item Derive (with explanation) a formula for the speed of
+			the particle at time $t=t_0$.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Recall the particle whose path is given by
+	$
+		\vec r(t) = \mat{2\cos t\\2\sin t}
+	$
+	where $t$ represents time.
+	\begin{parts}
+		\item Use the fact that
+			\[
+				\text{distance traveled}=\int\text{\it speed}\ \mathrm{d}\,\text{\it time}
+			\]
+		to produce a formula for how far the particle has traveled from $t=0$ to $t=t_0$.
+		\item Use geometry to do the same thing.
+		\item Derive an expression (with explanation) for the arc length of $\vec m(t) = (f(t), g(t), h(t))$
+			from $t=0$ to $t=t_0$.
+	\end{parts}
+\end{question}
+
+
+\subsection*{Arc-length parameterization}
+	An \emph{arc-length parameterization} of a curve $\mathcal C$ 
+	is a function $\vec s:\R\to\R^n$ whose
+	image is $\mathcal C$ with the added property that the arc 
+	length of $\vec s(t)$ from $t=0$ to $t=t_0$
+	is $t_0$ for all valid choices of $t_0$.  I.e., the distance 
+	traveled by the parameter in
+	$\R$ is the same as the distance traveled by the 
+	point $\vec s(t)$ in $\R^n$.
+
+
+\begin{question}
+	\begin{parts}
+		\item The function
+			$
+				\vec r(t) =\mat{2\cos t\\ 2\sin t}.
+			$
+			parameterizes a circle $\mathcal C$.  Produce an arc-length parameterization
+			of $\mathcal C$.
+		\item Produce an arc-length parameterization of the curve parameterized by
+			$
+				\vec q(t) =\mat{t\\ t^{3/2}}.
+			$
+	\end{parts}
+\end{question}
+	
+	If you interpret a parameterized curve as describing the motion of a
+	particle,
+	an arc-length parameterization of a curve can also be thought of
+	as a parameterization where the particle always moves at unit speed.
+
+	By reparameterizing, we can describe the motion of a particle along
+	a path at any speed.
+
+\begin{question}
+	Let $\mathcal C$ be a circle in $\R^2$ of radius $3$ centerd at the origin.
+	A particle moves counter clockwise along $\mathcal C$.
+	\begin{parts}
+		\item Parameterize $\mathcal C$ so that the speed is $2.5$.
+		\item Parameterize $\mathcal C$ so that the speed of the particle starts and ends at $0$.
+		\item Parameterize $\mathcal C$ so that the speed of the particle starts at $0$ and ends at $4$.
+		\item Parameterize $\mathcal C$ so that the speed of the particle is $0$ at six points along the curve.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	A particle's motion is described by the function $\vec h(t) = \mat{f(t)\\ g(t)}$,  which is a 
+	parameterization of the curve $\mathcal H$.  The arc length of $\mathcal H$ from $t=0$ to
+	$t=t_0$ using this parameterization is given by the function $s(t_0) = t_0^2$.
+	\begin{parts}
+		\item Write an expression for the speed of the particle at time $t$.
+		\item Give a formula for the arc length parameterization of $\mathcal H$.
+	\end{parts}
+\end{question}
+
+\subsection*{Components of Acceleration}
+\begin{restatable*}[Velocity]{definition}{DefVelocity}
+	Let $\vec p:[a,b]\to\mathcal S$ be a parameterization of $\mathcal S$.  The
+	\emph{velocity} of $\vec p$ at the time $t\in[a,b]$ is 
+	\[
+		\Vel \vec p(t) = \lim_{\Delta t\to 0} \frac{\vec p(t+\Delta t) - \vec p(t)}{\Delta t}.	
+	\]
+\end{restatable*}
+\begin{restatable*}[Acceleration]{definition}{DefAcceleration}
+	Let $\vec p:\R\to\mathcal S$ be a parameterization of $\mathcal S$.  The \emph{acceleration}
+	of $\vec p$ is 
+	\[
+		\Accel \vec p(t) = (\Vel \vec p)'(t)=\vec p\,''(t).
+	\]
+\end{restatable*}
+
+\begin{question}
+	Let $\vec r(t) = \mat{t+2\\ \sin t\\ t^3}$ represent the position of a particle at time $t$.
+	\begin{parts}
+		\item Find the velocity of the particle at time $t$.
+		\item Find the acceleration of the particle at time $t$.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let $\vec r_\ell(t) = \mat{\frac{t^2}{2}\\\frac{t^2}{2}}$ and $\vec r_c(t) = \mat{\cos t\\ \sin t}$ give the position
+	of the particles $r_\ell$ and $r_c$ at time $t$.
+	\begin{parts}
+		\item Describe the paths of each of these particles.  What should their accelerations be?  Why?
+		\item Compute the accelerations of $r_\ell$ and $r_c$ at time $t$.
+		\item Compute the tangent vectors for the functions $\vec r_\ell$ and $\vec r_c$ at time $t$.
+			How does the direction of the tangent vectors and the direction of the acceleration vectors
+			compare?
+	\end{parts}
+\end{question}
+
+	If $\vec r(t)$ describes the position of a particle at time $t$ and $\vec a(t)$ its acceleration, $\vec a(t)$
+	can be decomposed into a \emph{tangential} component, $\vec a_T(t)$, and a \emph{normal} component $\vec a_N(t)$
+	so that
+	\[
+		\vec a(t) = \vec a_T(t) +\vec a_N(t).
+	\]
+
+\begin{question}
+	Let $\vec r_{p}(t) = \mat{t\\ t^2}$ give the position
+	of the particle $\vec r_{p}$ at time $t$.
+	\begin{parts}
+		\item Compute the tangential and normal components of the acceleration of $\vec r_{p}$.
+		\item By changing the speed of $\vec r_{p}$ (but not its path), is it possible to make 
+			the tangential component of its acceleration zero?
+		\item By changing the speed of $\vec r_{p}$ (but not its path), is it possible to make 
+			the normal component of its acceleration zero?
+	\end{parts}
+\end{question}
+
+	We're going to develop some tools to mathematically verify our intuition about the acceleration
+	vector.
+
+\begin{question}
+	\begin{parts}
+		\item Suppose $\vec p(t)$ and $\vec q(t)$ are both vector-valued functions.  Expand $\vec p(t)\cdot\vec q(t)$
+		using components. Now, come up with an expression for $\Big(\vec p(t)\cdot\vec q(t)\Big)'$.  Look at your
+		result and rewrite it as an expression involving dot products.
+		You've just discovered a product rule for the dot product!
+		\item Using similar methods to the computation of $\Big(\vec p(t)\cdot\vec q(t)\Big)'$, find an expression
+			for $\|\vec p(t)\|'$.
+		\item If a particle whose path is given by $\vec r(t)$ is moving at unit speed, then $\|\vec v(t)\| = 1$.
+			Take derivatives of both sides of this expression to show that $\vec v(t)\cdot \vec a(t) = 0$.
+	\end{parts}
+
+\end{question}
+
+
+\newpage
 \emph{Parameterization}\index{parameterization} is a mouthful, but the
 fundamental idea of a parameterization is to describe one object in
 terms of another.  For example, consider the line $\ell$ described
@@ -121,13 +311,7 @@ Taking limits, we arrive at exact rates of change, which leads us to the followi
 		\Speed \vec p(t) = \lim_{\Delta t\to 0} \frac{\norm{\vec p(t+\Delta t) - \vec p(t)}}{\abs{\Delta t}}.	
 	\]
 \end{definition}
-\begin{definition}[Velocity]
-	Let $\vec p:[a,b]\to\mathcal S$ be a parameterization of $\mathcal S$.  The
-	\emph{velocity} of $\vec p$ at the time $t\in[a,b]$ is 
-	\[
-		\Vel \vec p(t) = \lim_{\Delta t\to 0} \frac{\vec p(t+\Delta t) - \vec p(t)}{\Delta t}.	
-	\]
-\end{definition}
+\DefVelocity
 
 Both the definition of speed and the definition of velocity look a lot like the definition
 of the derivative.  In fact, if $\vec p$ were a scalar valued function, the velocity of $\vec p$
@@ -858,13 +1042,7 @@ the arc-length parameterization will somehow get canceled out and we won't ever 
 In the Newtonian mechanics of one-dimensional motion, acceleration\index{acceleration} is the second
 derivative of position with respect to time.  In $\R^n$, we define it in the same way.
 
-\begin{definition}[Acceleration]
-	Let $\vec p:\R\to\mathcal S$ be a parameterization of $\mathcal S$.  The \emph{acceleration}
-	of $\vec p$ is 
-	\[
-		\Accel \vec p(t) = (\Vel \vec p)'(t)=\vec p\,''(t).
-	\]
-\end{definition}
+\DefAcceleration
 
 Just like velocity, acceleration is a \emph{vector}.  Let's consider two examples.  Define
 \[

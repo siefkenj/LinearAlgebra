@@ -1,3 +1,335 @@
+\newpage
+\section*{Exploration Questions}
+
+	\begin{numberlessdefinition}[Vector Field \& Scalar Field]
+		A \emph{scalar field} is a function $f:\R^n\to \R$.  A \emph{vector field}
+		is a function $g:\R^n\to\R^m$.
+	\end{numberlessdefinition}
+
+	We've already worked with scalar fields---when we found the area above a curve and below
+	a surface, we were integrating a scalar field (namely the height of the function at a given point).
+	We'll now explore vector fields, which assign a vector to each point in space.
+	Since vectors can be used to represent forces, and velocities, and accelerations, vector fields are a key object of study in physics.
+
+\begin{question}
+	Sketch the following vector fields.
+	\begin{parts}
+		\item $\vec f(x,y) = x^2\xhat +\yhat$.
+		\item $\vec g(x,y) = (x,-y)$
+		\item $\nabla h(x,y)$ where $h(x,y) = -(x^2+y^2)$.
+	\end{parts}
+\end{question}
+
+	We already have experience with some vector fields.  Namely, the gradient of a function is a vector field.
+	We're going to explore some special properties of vector fields arising from gradients.
+	
+\begin{question}
+	Let $f(x,y) = x^2+y$, and let $A=(0,0)$ and $B=(1,1)$.
+	\begin{parts}
+		\item Let $\vec x=(x,y)$, and compute $\nabla f(\vec x)$.   
+			If $\vec u$ is a vector with small
+			magnitude, how can $\nabla f(\vec x)$ be used to
+			estimate the change in $f$ from $\vec x$ to $\vec x+\vec u$?
+		\item Parameterize a straight line segment from $A$ to $B$.  If we imagine
+			$\nabla f(\vec x)$ as representing a force at position $\vec x$,
+			how much work is done moving along a straight line
+			from $A$ to $B$?  (This is a line integral that you've done
+			before!)
+		\item How much work is done moving from $A$ to $B$ if you first move
+			horizontally and then move vertically?
+		\item What does the amount of work represent?  Will the work done
+			depend on your path from $A$ to $B$?
+
+	\end{parts}
+\end{question}
+
+\begin{restatable*}[Conservative Vector Field \& Potential Function]{definition}{DefConservative}
+	A vector field $\vec h:\R^n\to\R^n$ is called \emph{conservative}
+	if there is some function $f:\R^n\to\R$ so that $\nabla f=\vec h$.
+	Such an $f$ is called a \emph{potential function for $\vec h$}.
+\end{restatable*}
+
+\begin{question}
+	\begin{parts}
+		\item Give two examples of conservative vector fields in $\R^2$.
+		\item Is the vector field $\vec f(x,y) = (y,x)$ conservative?
+			Why or why not?
+		\item Is the vector field $\vec f(x,y) = (-y,x)$ conservative?
+			Why or why not?
+		\item Give two examples of non-conservative vector fields in $\R^2$.
+	\end{parts}
+\end{question}
+
+\subsection*{Let's get phisicsical}
+	Vector fields merely assign a vector to every point in space.  We've
+	seen how it can be fruitful to interpret a vector field as describing
+	the force at a particular point.  It's also useful to think of vector
+	fields as describing the velocity at particular points of some fluid.
+
+	Interpreting a vector field as describing the velocity of a fluid brings
+	us to the idea of flux.  Given a vector field $\vec f$,
+	the \emph{flux} of $\vec f$ through the surface $\mathcal S$ is the volume of fluid
+	that passes through $\mathcal S$ in one time unit (assuming the fluid has density one).
+	If $\mathcal S$ has an orientation, the flux is positive if the fluid moves ``out''
+	of $\mathcal S$ and negative if the fluid moves ``in'' $\mathcal S$.
+
+\begin{question}
+	Let $\vec f(x,y,z)=(0,0,2)$.  Let $P(\vec u,\vec v)$ be the function
+	that outputs the parallelogram with adjacent sides given by $\vec u$ and
+	$\vec v$ and whose orientation is given by the right hand rule.
+	\begin{parts}
+		\item Describe $P(\hat y, \hat x)$.  What is its orientation?
+		\item Compute the flux of $\vec f$ through the surface $R_1= P(\hat y, \hat x)$.
+		\item Compute the flux of $\vec f$ through the surface $R_2=
+			P\Big( (\sqrt{2}/2,0,\sqrt{2}/2), (0,1,0) \Big)$
+		\item Compute the flux through a box with side-lengths of one which
+			is parallel to the $xz$-plane and meets the $xy$-plane at an
+			angle of $\pi/4$ and whose faces are oriented outwards.
+		\item If $\mathcal S$ is a closed surface (i.e., $\mathcal S$ encloses
+			a region and has no holes), what is the flux of
+			$\vec f$ through $\mathcal S$?  Would your
+			answer be the same for the flux of $\vec g(x,y,z)=(0,0,2z)$
+			through $\vec S$?  Why or why not?
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let $\vec f(x,y,z)=(0,0,-z)$ and let $\mathcal S$ be the surface
+	parameterized by $\vec s(u,v) = (u,v,u^2+v^2)$ for $u^2+v^2\leq 4$ oriented
+	downwards.
+	\begin{parts}
+		\item Find the flux of $\vec f$ through $\mathcal S$ using the parameterization $\vec s$.
+		\item Let $\vec p(r,\theta)$ be a parameterization of $\mathcal S$
+			in cylindrical coordinates.  Find $\vec p$ and use $\vec p$
+			to find the flux of $\vec f$ through $\mathcal S$.
+		\item Does flux depend on the choice of parameterization?
+	\end{parts}
+\end{question}
+
+	We're going to play the approximation game again (just like
+	we did when we discovered that tangent planes approximate a surface
+	near their point of tangency). But, this time, we're going
+	to be approximating flux.
+
+\begin{restatable*}[Divergence]{definition}{DefDivergence}
+	Let $\vec F:\R^3\to\R^3$ be a vector field and let $R_{\Delta x,\Delta y,\Delta z}(x,y,z)$
+	be the surface of the box with lower left corner at $(x,y,z)$,
+	side-lengths $\Delta x,\Delta y,\Delta z$,
+	and oriented outwards\footnote{ Precisely, $R_{\Delta x,\Delta y,\Delta z}(x,y,z)$
+	is the surface of  $[x,x+\Delta x]\times[y,y+\Delta y]\times[z,z+\Delta z]$ oriented outwards.}.
+	The \emph{divergence} of $\vec F$ at the point $(x,y,z)$, notated as $\nabla \cdot \vec F(x,y,z)$
+	is
+	\[
+		\nabla \cdot \vec F(x,y,z) = \lim_{\Delta x,\Delta y,\Delta z\to 0}
+		\frac{\text{flux of }\vec F\text{ through }R_{\Delta x,\Delta y,\Delta z}(x,y,z)}
+		{\text{volume of }
+		R_{\Delta x,\Delta y,\Delta z}(x,y,z)}.
+	\]
+\end{restatable*}
+
+\begin{question}
+	Let $C_{\Delta x,\Delta y,\Delta z}$ be the box with side lengths
+	$\Delta x$, $\Delta y$, $\Delta z$, parallel to the $xy$ and $xz$ planes
+	and with lower left corner at $\vec 0$.  Assume each face of the box is
+	oriented outwards.
+	Let $\vec f:\R^3\to\R^3$ be
+	a vector field.
+	\begin{parts}
+		\item Find the normal vector and the surface area for each face of $C_{\Delta x,\Delta y,\Delta z}$.
+		\item Let $B$ be the bottom face of $C_{\Delta x,\Delta y,\Delta z}$.  Assuming
+			$\Delta x$ and $\Delta y$ are very small, what might be a reasonable
+			approximation for the flux of $\vec f$ through $B$?
+		\item Compute the approximate flux through $C_{\Delta x,\Delta y,\Delta z}$.
+		\item Compute the divergence of $\vec f$ at $(0,0,0)$.
+		\item Compute the divergence of $\vec f$ at $(x,y,z)$.  Is $\nabla \cdot \vec f(x,y,z)$ a reasonable
+			notation for this?
+	\end{parts}
+\end{question}
+
+	Divergence works in two dimensions just like it does in three (but two dimensions are
+	easier to draw pictures of).
+
+\begin{question}
+	Plot each vector field and estimate whether the divergence is positive,
+	negative, or zero.  Then, check your answer with a computation.
+	\begin{parts}
+		\item $\vec f(x,y) = (x,y)$.
+		\item $\vec g(x,y) = (|x|, 0)$.
+		\item $\vec h(x,y) = (-y,x)$
+		\item $\vec l(x,y) = \mat{\frac{-y}{\sqrt{x^2+y^2}}\\\frac{x}{\sqrt{x^2+y^2}}}$.
+	\end{parts}
+\end{question}
+
+\subsection*{Divergence}
+\begin{restatable*}[Boundary]{definition}{DefBoundary}
+	For a region $R\subseteq \R^n$, the \emph{boundary}\index{boundary}
+	of $R$ is notated $\partial R$ and always comes with an outward orientation.
+\end{restatable*}
+
+\begin{restatable*}[Divergence Theorem]{theorem}{ThmDivergenceTheorem}
+	Let $\vec F$ be a vector field and $R$ be a region.  Then
+	\[
+		\Flux_{\partial R} \vec F = \int_{R} \nabla \cdot \vec F.
+	\]
+\end{restatable*}
+
+	If we interpret $\vec f$ as the velocity
+	of a fluid, the divergence of $\vec f$ can be thought of as how much fluid is being created or destroyed at a point.
+	The divergence theorem then says, the amount of fluid leaving $R$ (the flux through $\partial R$) is 
+	equal to the sum of all the fluid being created or destroyed in $R$ (the integral of $\nabla \cdot \vec f$
+	over $R$).
+
+	We will produce an intuition for the divergence theorem in 2 dimensions, since it's easier to draw.
+	
+\begin{question}
+	Let $\vec f(x,y)=(x,y)$ be a vector field and let $R=[0,3]\times [0,3]$.
+	\begin{parts}
+		\item Draw $\vec f$ and $R$.
+		\item Compute the flux of $\vec f$ through $\partial R$.
+		\item Divide $R$ up into tiny subsquares of equal size.  What is the sum of
+			the flux of $\vec f$ through all the subsquares?  Why?
+		\item Explain how a Riemann sum and the definition of divergence can be used
+			to motivate the divergence theorem.
+	\end{parts}
+\end{question}
+
+\subsection*{Curl}
+	Curl is the compliment to divergence, and as the name suggests it has something to do
+	with rotations.
+
+	Imagine a vector field $\vec f:\R^3\to\R^3$.  If you stuck a small sphere at the point
+	$\vec x\in\R^3$ and interpreted $\vec f$ as the velocity of a fluid, the sphere might
+	start spinning, and this spinning is exactly what curl measures.  
+
+	\begin{numberlessdefinition}[Rotation]
+		An isometric parameterization $\vec p:\R^3\to\R^3$ is called an \emph{isometry}.
+		An isometry $\vec r:\R^3\to\R^3$ is called a \emph{rotation} if $\vec r(0,0,0)=(0,0,0)$
+		and if $\vec r$ is orientation preserving.  That is, $\vec r(1,0,0)\times \vec r(0,1,0) = \vec r(0,0,1)$.
+
+		If $\vec r:\R^3\to\R^3$ is a rotation, an \emph{axis of rotation} for $\vec r$ is a line
+		$\ell = \{t\vec d:t\in\R\}$ such that $\vec r(\ell) = \ell$.
+	\end{numberlessdefinition}
+
+	Amazingly (though maybe you're used to this) any non-trivial rotation has exactly one axis of rotation!
+	This is something very special about three dimensional space (and it's not true in 4D and higher)!  
+	Further, a non-trivial rotation $\vec r$ can be described
+	by its axis of rotation, the magnitude of the rotation, and the attribute of clockwise or counterclockwise.
+
+	Another amazing coincidence of $\R^3$ (following from the first coincidence) 
+	is that we can encode all of this information in a single vector.
+	Let $\vec r:\R^3\to \R^3$ be a rotation and let $\vec u$ be a unit vector in the direction of $\vec r$'s 
+	axis of rotation.  We can describe $\vec r$ by the vector $\alpha \vec u$ where $\abs{\alpha}$ is the magnitude
+	of the rotation (i.e., the number of radians $\vec r$ rotates by), and the sign of $\alpha$ is positive
+	if the rotation is counterclockwise and negative if it's clockwise (as judged by looking at
+	how the plane $\vec u\cdot \vec x=0$ rotates from the vantage point of $\vec u$).
+
+\begin{question}
+	For each of the following rotations in $\R^3$, write down its representation as a vector.
+	\begin{parts}
+		\item Rotation of the $xy$ plane counterclockwise by $\pi/3$ as viewed from the positive $z$-axis.
+		\item Rotation of the $xy$ plane clockwise by $\pi/3$ as viewed from the positive $z$-axis.
+		\item The rotation that sends $\xhat$ to $\vec v=(\sqrt{2}/2, 0, \sqrt{2}/2)$ with the additional
+			propert that every vector that starts in the $xz$ plane remains in
+			the $xz$ plane.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let $\vec f:\R^3\to\R^3$ be a vector field and let $R_{\Delta x, \Delta y}$ be the 
+	rectangle parallel to the $xy$-plane with lower left corner at $\vec 0$ and side lengths
+	$\Delta x$ and $\Delta y$.  Give $\partial R_{\Delta x, \Delta y}$ a counterclockwise
+	orientation.
+	\begin{parts}
+		\item Let $B$ be the bottom of $\partial R_{\Delta x, \Delta y}$.  That is, 
+			$B=\{(x,0,0): 0\leq x\leq \Delta x\}$ with the orientation
+			inherited from $\partial R_{\Delta x, \Delta y}$.  If $\Delta x$
+			is very small, what is a reasonable estimate for the amount of work
+			done as a point moves through $\vec f$ along $B$?
+		\item Estimate the amount of work done traversing $\partial R_{\Delta x, \Delta y}$,
+			and call this quantity $C_{\Delta x, \Delta y}$.
+		\item Consider the limit
+			\[
+				\lim_{\Delta x,\Delta y\to 0} \frac{C_{\Delta x, \Delta y}}{\Delta x \Delta y}.
+			\]
+			Can you express this limit in terms of quantities we're already familiar with 
+			(directional/partial derivatives maybe)?
+		\item You've just computed the $\hat z$ component of the curl of $\vec f$!
+			Now, suppose that $\Delta x$ and $\Delta y$ are large.  Subdivide $R_{\Delta x, \Delta y}$
+			into small rectangles.  Using a Riemann sum idea, come up with a conjecture
+			about a theorem of similar form to the divergence theorem but for curl.
+	\end{parts}
+\end{question}
+
+
+\begin{restatable*}[Curl]{definition}{DefCurl}
+	For a unit vector $\vec v$, 
+	let $R^{\vec v}_{\Delta a,\Delta b}(x,y,z)$ be the perimeter
+	of a rectangle with lower left
+	corner at $(x,y,z)$, side lengths $\Delta a$ and $\Delta b$, contained
+	in a plane with normal vector $\vec v$, and oriented counter-clockwise.
+
+	Let $\vec F:\R^3\to\R^3$ be a vector field.  The \emph{$\vec v$
+	component of the curl of $\vec F$ at the point $(x,y,z)$} is
+	\[
+		\Curl_{\vec v}\vec F(x,y,z) = \lim_{\Delta a,\Delta b\to 0}
+		\frac{
+			\text{circulation of }\vec F\text{ around }R^{\vec v}_{\Delta a,\Delta b}(x,y,z)
+			}{
+			\text{area of }R^{\vec v}_{\Delta a,\Delta b}(x,y,z)}.
+	\]
+
+	The \emph{curl} of $\vec F$ at the point $(x,y,z)$, notated
+	$\nabla \times \vec F(x,y,z)$, is the vector so that
+	\[\Big(\nabla \times \vec F(x,y,z)\Big)\cdot \vec v = \Curl_{\vec v}\vec F(x,y,z).\]
+\end{restatable*}
+
+
+	Computing curl from the definition each time can be cumbersome, so let's see
+	if there's a formula.
+	
+\begin{question}
+	Let $\vec f:\R^3\to\R^3$ be a vector field.
+	\begin{parts}
+		\item Write down the definition
+			for the $\hat x$, $\hat y$, and $\hat z$ components of the curl of $\vec f$.
+			Do you see anything that looks like a derivative?
+		\item Does the notation $\nabla \times \vec f(x,y,z)$ make sense for the curl of
+			$\vec f$ at a point?  Explain.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let $\vec f:\R^3\to\R^3$ be a vector field and let $g:\R^3\to \R$ be a scalar field.
+	\begin{parts}
+		\item What is the curl of the gradient of $g$?
+		\item What is the divergence of the curl of $\vec f$?  Does it
+			make sense to take the curl of the divergence of $\vec f$?
+		\item Could the vector field $\vec h(x,y,z) = (x,y,z)$ be the curl
+			of $\vec f$?
+	\end{parts}
+\end{question}
+
+
+\begin{restatable*}[Stokes's Theorem]{theorem}{ThmStokes}
+	Let $S\subset \R^3$ be an oriented surface and let $\vec F:\R^3\to\R^3$.  Then,
+	\[
+		\Circ_{\partial R} \vec F = \Flux_{R}(\nabla \times \vec F).
+	\]
+\end{restatable*}
+A rephrasing of Stokes's theorem in terms of integrals says that for an oriented
+surface $S$ and vector field $\vec F:\R^3\to\R^3$,
+\[
+	\int_{\partial S} \vec F\cdot \d\vec r = \iint_S (\nabla \times \vec F)\cdot
+	\hat n\,\d V_S,
+\]
+where $\hat n$ is the unit normal vector to $S$ with appropriate orientation and 
+$\d V_S$ is the volume form for $S$\footnote{ Phrased this way, there is a striking similarity
+between Stokes's theorem and the divergence theorem.}.  
+
+
+
+
+\newpage
 A \emph{scalar field}\index{scalar field}
 is a function that assigns each point in space a
 scalar value.  For example, given latitude and longitude $(x,y)$,
@@ -377,11 +709,7 @@ Theorem \ref{THMFTC1} shows that gradients and vector line integrals
 interact nicely.  So nicely, in fact, that vector fields coming 
 from gradients have a special name.
 
-\begin{definition}[Conservative Vector Field \& Potential Function]
-	A vector field $\vec h:\R^n\to\R^n$ is called \emph{conservative}
-	if there is some function $f:\R^n\to\R$ so that $\nabla f=\vec h$.
-	Such an $f$ is called a \emph{potential function for $\vec h$}.
-\end{definition}
+\DefConservative
 
 We can think of conservative vector fields\index{conservative vector field}
 as those having anti-derivatives,
@@ -1045,21 +1373,7 @@ and where they are generally pointing towards each other (converging).
 The \emph{divergence}\index{divergence} of a vector field precisely measures
 where a vector field is diverging or converging.  
 
-\begin{definition}[Divergence]
-	Let $\vec F:\R^3\to\R^3$ be a vector field and let $R_{\Delta x,\Delta y,\Delta z}(x,y,z)$
-	be the surface of the box with lower left corner at $(x,y,z)$,
-	side-lengths $\Delta x,\Delta y,\Delta z$,
-	and oriented outwards\footnote{ Precisely, $R_{\Delta x,\Delta y,\Delta z}(x,y,z)$
-	is the surface of  $[x,x+\Delta x]\times[y,y+\Delta y]\times[z,z+\Delta z]$ oriented outwards.}.
-	The \emph{divergence} of $\vec F$ at the point $(x,y,z)$, notated as $\nabla \cdot \vec F(x,y,z)$
-	is
-	\[
-		\nabla \cdot \vec F(x,y,z) = \lim_{\Delta x,\Delta y,\Delta z\to 0}
-		\frac{\text{flux of }\vec F\text{ through }R_{\Delta x,\Delta y,\Delta z}(x,y,z)}
-		{\text{volume of }
-		R_{\Delta x,\Delta y,\Delta z}(x,y,z)}.
-	\]
-\end{definition}
+\DefDivergence
 
 In plain language, the divergence of a vector field can be though of as the flux per unit volume
 of that vector field.  Divergence in dimensions other than three is defined similarly.
@@ -1298,10 +1612,7 @@ precise.
 
 In order to properly state the divergence theorem, we need some notation.
 
-\begin{definition}[Boundary]
-	For a region $R\subseteq \R^n$, the \emph{boundary}\index{boundary}
-	of $R$ is notated $\partial R$ and always comes with an outward orientation.
-\end{definition}
+\DefBoundary
 
 Precisely defining what it means to be a boundary
 of a region is tricky business.  Fortunately, your intuition will take you quite far.
@@ -1343,12 +1654,7 @@ We can now precisely state the \emph{divergence theorem}\index{divergence theore
 (also known as \emph{Gauss's theorem}\index{Gauss's theorem} or 
 \emph{Ostrogradsky's theorem}\index{Ostrogradsky's theorem}).
 
-\begin{theorem}[Divergence Theorem]
-	Let $\vec F$ be a vector field and $R$ be a region.  Then
-	\[
-		\Flux_{\partial R} \vec F = \int_{R} \nabla \cdot \vec F.
-	\]
-\end{theorem}
+\ThmDivergenceTheorem
 
 The divergence theorem holds in all dimensions, and it is sometimes
 stated in $\R^3$ as
@@ -1575,28 +1881,7 @@ for every choice of vector $\vec n$, we could consider a tiny curve going around
 $\vec p$ and contained in the plane with normal vector $\vec n$.  
 Thus, curl cannot be represented by a single scalar quantity.
 
-
-\begin{definition}[Curl]
-	For a unit vector $\vec v$, 
-	let $R^{\vec v}_{\Delta a,\Delta b}(x,y,z)$ be the perimeter
-	of a rectangle with lower left
-	corner at $(x,y,z)$, side lengths $\Delta a$ and $\Delta b$, contained
-	in a plane with normal vector $\vec v$, and oriented counter-clockwise.
-
-	Let $\vec F:\R^3\to\R^3$ be a vector field.  The \emph{$\vec v$
-	component of the curl of $\vec F$ at the point $(x,y,z)$} is
-	\[
-		\Curl_{\vec v}\vec F(x,y,z) = \lim_{\Delta a,\Delta b\to 0}
-		\frac{
-			\text{circulation of }\vec F\text{ around }R^{\vec v}_{\Delta a,\Delta b}(x,y,z)
-			}{
-			\text{area of }R^{\vec v}_{\Delta a,\Delta b}(x,y,z)}.
-	\]
-
-	The \emph{curl} of $\vec F$ at the point $(x,y,z)$, notated
-	$\nabla \times \vec F(x,y,z)$, is the vector so that
-	\[\Big(\nabla \times \vec F(x,y,z)\Big)\cdot \vec v = \Curl_{\vec v}\vec F(x,y,z).\]
-\end{definition}
+\DefCurl
 
 It's important to notice that for a vector field $\vec F$
 and a unit vector $\vec v$, the \emph{component} of the curl of $\vec F$ in the direction
@@ -2016,18 +2301,13 @@ where $\vec n$ is a unit normal vector to $\Delta X$.  But,
 After taking a limit, the approximation becomes exact and we get Stokes's theorem
 relating flux, circulation, and curl.
 
-\begin{theorem}[Stokes's Theorem]
-	Let $S\subset \R^3$ be an oriented surface and let $\vec F:\R^3\to\R^3$.  Then,
-	\[
-		\Circ_{\partial R} \vec F = \Flux_{R}(\nabla \times \vec F).
-	\]
-\end{theorem}
+\ThmStokes
 
 We can rephrase Stokes's theorem in terms of integrals.  That is, for an oriented
 surface $S$ and vector field $\vec F:\R^3\to\R^3$,
 \[
 	\int_{\partial S} \vec F\cdot \d\vec r = \iint_S (\nabla \times \vec F)\cdot
-	\hat n\d V_S,
+	\hat n\,\d V_S,
 \]
 where $\hat n$ is the unit normal vector to $S$ with appropriate orientation and 
 $\d V_S$ is the volume form for $S$.  Phrased this way, there is a striking similarity

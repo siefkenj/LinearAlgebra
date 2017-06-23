@@ -22,10 +22,12 @@
 \usepackage{etoolbox}
 \usepackage{bbm} %lower case blackboard font
 \usepackage{amsthm, bm}
+\usepackage{thmtools} % be able to repeat a theorem
+\usepackage{thm-restate}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{multicol}
-\usepackage{fnpct} %fancy footnote spacing
+\usepackage{fnpct} % fancy footnote spacing
 \usepackage{tikz}
 	\tikzset{>=latex}
 	\usetikzlibrary{calc}
@@ -302,8 +304,7 @@
 		    }
 		  }
 		}
-\usepackage{tcolorbox}
-	\tcbuselibrary{breakable}
+\usepackage[breakable, skins]{tcolorbox}
 \usepackage[inline,shortlabels]{enumitem}
 \setlistdepth{9}
 
@@ -621,125 +622,182 @@
 	\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
 	\makeatother
 
+	% tcolorbox doesn't work with tikz externalize,
+	% so we need to disable it around a tcolorbox.
+	% since \tikzexternaldisable is locally scoped,
+	% create a global version of the command
+	\global\let\extdisable\tikzexternaldisable
+	\global\let\extenable\tikzexternalenable
+
 	% Defines the theorem text style for each type of theorem to one of the three styles above
 	\newcounter{dummy}
 	\numberwithin{dummy}{section}
 	\theoremstyle{orangenumbox}
 	\newtheorem{theoremeT}[dummy]{Theorem}
+	\declaretheorem[numberwithin=section,
+			style=orangenumbox,
+			preheadhook={\extdisable\begin{leftborderbox}[colframe=myorange, colback=myorange!20]},
+			postfoothook={\end{leftborderbox}\extenable}]{theorem}
+
 	\theoremstyle{ocrenumbox}
-	\newtheorem{problem}{Problem}[chapter]
-	\newtheorem{exerciseT}{Exercise}[chapter]
-	\theoremstyle{blacknumex}
-	\newtheorem{exampleT}{Example}[chapter]
-	\theoremstyle{blacknumbox}
-	\newtheorem{vocabulary}{Vocabulary}[chapter]
-	\newtheorem{definitionT}{Definition}[section]
-	\newtheorem{corollaryT}[dummy]{Corollary}
-	\theoremstyle{ocrenum}
-	\newtheorem{proposition}[dummy]{Proposition}
+	\declaretheorem[sibling=theorem,
+			style=ocrenumbox,
+			preheadhook={\extdisable\begin{leftborderbox}[colframe=mypink, colback=mypink!10]},
+			postfoothook={\end{leftborderbox}\extenable}]
+			{definition}
+	
+	\declaretheorem[numbered=no,
+			name={Definition\!\!},
+			style=ocrenumbox,
+			preheadhook={\extdisable\begin{leftborderbox}[colframe=mypink, colback=mypink!10]},
+			postfoothook={\end{leftborderbox}\extenable}]
+			{numberlessdefinition}
+	
+	\declaretheorem[numberwithin=chapter,
+			style=blacknumex,
+			prefoothook={\hfill{\tiny\ensuremath{\blacksquare}}}]
+			{example}
+	
+	\declaretheorem[sibling=example,
+			style=ocrenumbox,
+			preheadhook={\extdisable\begin{leftborderbox}[colframe=mypink, colback=white]},
+			postfoothook={\end{leftborderbox}\extenable}]
+			{exercise}
 
-	%----------------------------------------------------------------------------------------
-	%	DEFINITION OF COLORED BOXES
-	%----------------------------------------------------------------------------------------
 
-	\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+	% custom tcolorbox with colored bar on the left
+	\newtcolorbox{leftborderbox}[1][]{
+		blanker,
+		frame hidden,
+		enhanced,
+		breakable,
+		beforeafter skip=7pt,
+		%frame code={
+		%	\fill[fill=tcbcol@frame] (frame.south west) -- (interior.south west) -- (interior.north west) -- (frame.north west);
+		%	},
+		sharp corners,
+		borderline west={4pt}{0pt}{tcbcol@frame},
+		boxsep=0pt,
+		left=8pt,
+		right=5pt,
+		top=5pt,
+		bottom=5pt,
+		%boxrule=0pt,
+		%leftrule=4pt,
+		colframe=myorange,
+		colback=myorange!20,
+		#1
+	}
+	
+	% background for the end-of-chapter exercises
+	\newtcolorbox{exsbox}[1][]{
+		blanker,
+		frame hidden,
+		enhanced,
+		breakable,
+		beforeafter skip=7pt,
+		%frame code={
+		%	\fill[fill=tcbcol@frame] (frame.south west) -- (interior.south west) -- (interior.north west) -- (frame.north west);
+		%	},
+		sharp corners,
+		boxsep=0pt,
+		left=8pt,
+		right=5pt,
+		top=5pt,
+		bottom=5pt,
+		%boxrule=0pt,
+		%leftrule=4pt,
+		colback=blue!20,
+		#1
+	}
 
-	% Theorem box
-	\newmdenv[skipabove=7pt,
-	skipbelow=7pt,
-	rightline=false,
-	leftline=true,
-	topline=false,
-	bottomline=false,
-	backgroundcolor=myorange!20,
-	linecolor=myorange,
-	innerleftmargin=5pt,
-	innerrightmargin=5pt,
-	innertopmargin=5pt,
-	innerbottommargin=5pt,
-	leftmargin=0cm,
-	rightmargin=0cm,
-	linewidth=4pt]{tBox}
+	% box for practice questions
+	\newtcolorbox{probbox}[1][]{
+		blanker,
+		frame hidden,
+		enhanced,
+		breakable,
+		beforeafter skip=7pt,
+		frame code={
+			\draw (frame.west) node[left] {#1};
+			},
+		overlay first={
+			\draw (frame.west) node[left] {#1};
+			},
+		overlay middle={
+			\draw (frame.west) node[left] {#1};
+			},
+		overlay last={
+			\draw (frame.west) node[left] {#1};
+			},
+		sharp corners,
+		boxsep=0pt,
+		left=8pt,
+		right=5pt,
+		top=5pt,
+		bottom=5pt,
+		borderline west={1pt}{0pt}{tcbcol@frame},
+		colback=black!3,
+	}
 
-	% Exercise box
-	\newmdenv[skipabove=7pt,
-	skipbelow=7pt,
-	rightline=false,
-	leftline=true,
-	topline=false,
-	bottomline=false,
-	backgroundcolor=ocre!10,
-	linecolor=ocre,
-	innerleftmargin=5pt,
-	innerrightmargin=5pt,
-	innertopmargin=5pt,
-	innerbottommargin=5pt,
-	leftmargin=0cm,
-	rightmargin=0cm,
-	linewidth=4pt]{dBox}
 
-	% Definition box
-	\newmdenv[skipabove=7pt,
-	skipbelow=7pt,
-	rightline=false,
-	leftline=true,
-	topline=false,
-	bottomline=false,
-	linecolor=ocre,
-	innerleftmargin=5pt,
-	innerrightmargin=5pt,
-	innertopmargin=0pt,
-	leftmargin=0cm,
-	rightmargin=0cm,
-	linewidth=4pt,
-	innerbottommargin=0pt]{eBox}
 
-	% Corollary box
-	\newmdenv[skipabove=7pt,
-	skipbelow=7pt,
-	rightline=false,
-	leftline=true,
-	topline=false,
-	bottomline=false,
-	linecolor=gray,
-	backgroundcolor=black!5,
-	innerleftmargin=5pt,
-	innerrightmargin=5pt,
-	innertopmargin=5pt,
-	leftmargin=0cm,
-	rightmargin=0cm,
-	linewidth=4pt,
-	innerbottommargin=5pt]{cBox}
-
-	% Exercises box
-	\newmdenv[skipabove=7pt,
-	skipbelow=7pt,
-	rightline=false,
-	leftline=false,
-	topline=false,
-	bottomline=false,
-	linecolor=gray,
-	backgroundcolor=blue!5,
-	innerleftmargin=5pt,
-	innerrightmargin=18pt,
-	innertopmargin=0pt,
-	innerbottommargin=6pt,
-	leftmargin=0cm,
-	rightmargin=0cm,
-	linewidth=4pt]{exsBox}
+	% MAKE AN ENVIRONEMENT FOR PROBLEM LISTS
+	% the parts environment should act quite similarly to the
+	% list environment, so we'll use the latex list environment
+	% to create it
+	\newcounter{probcounter}[chapter] % reset this counter every chapter
+	\newcounter{partsitem}
+	\newcounter{partsitemlast}
+	\newcommand{\formatpartsitem}{%
+		{\color{gray}{\sffamily\small\thequestion.\thepartsitem}}
+	}
+	\DeclareDocumentEnvironment{question}{o}{
+		\nopagebreak
+		\stepcounter{probcounter}
+		\extdisable% disable tikz externalization for tcolorbox's sake
+		\begin{probbox}[\thechapter.\theprobcounter]
+		% if we gave the [resume] argument, start counting from where we 
+		% left off.
+		\ifthenelse{ \equal{#1}{resume} }{
+			\setcounter{partsitem}{\value{partsitemlast}}
+		}{}%
+		% we'd like an sub-enumerate environments 
+		% to act like they're nested, so advance
+		% the level by one.
+		%\advance\@enumdepth\@ne
+	}{
+		\setcounter{partsitemlast}{\value{partsitem}}
+		\end{probbox}
+		\extenable
+	}
+	\DeclareDocumentEnvironment{parts}{o}{
+		\nopagebreak
+		\begin{enumerate}[
+			label={\color{mypink}(\alph*)},
+			leftmargin=17pt,
+			labelsep=2.5pt,
+			topsep=0pt,
+			partopsep=0pt,
+			parsep=0pt,
+			itemsep=0pt]
+	}{
+		\end{enumerate}
+	}
+	
 \makeatother
 
 % Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
-\newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
-\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\end{exerciseT}\end{eBox}}
+%\newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+%\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\end{exerciseT}\end{eBox}}
 %\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
-\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
-\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
-\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
+%\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
+%\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+%\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
 
 \newenvironment{exercises}{%
 	\newpage
-	\begin{multicols*}{2}[\begin{exsBox}{\subsection*{Exercises for \thesection}}\vspace{-0pt}\end{exsBox}]\small %
+	\begin{multicols*}{2}[{\extdisable\begin{tcolorbox}[enhanced, frame hidden, colback=blue!10, sharp corners]{\subsection*{Exercises for \thesection}}\vspace{-0pt}\end{tcolorbox}\extenable}]\small %
 	}{%
 	\end{multicols*}%
 	\clearpage
@@ -772,6 +830,8 @@
 	\end{center}
 }
 \usepackage{lipsum} % Just to put in some text
+
+
 
 \begin{document}
 

@@ -1,3 +1,204 @@
+\newpage
+\section*{Exploration Questions}
+
+	Integrals add things up, and iterated integrals are no different; it's just that instead of adding things
+	up in one dimension, we add things up in multiple dimensions.
+
+\begin{question}
+	To get our bearings, let's revisit integrating with respect of $\mathrm{d}x$ and $\mathrm{d}y$
+	when finding area.  Let $T$ be the triangle with vertices $(0,0)$, $(4,0)$, and $(4,3)$.
+	\begin{parts}
+		\item Draw a picture representing how a Riemann sum could be used to compute the area of $T$.
+		\item Draw a picture representing a different way to compute the area of $T$ using a Riemann sum.
+		\item Compute the area of $T$ using an integral with respect to $x$; now using an integral with 
+			respect to $y$; now using the formula $\frac{1}{2}base\times height$.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let $T$ be the triangle with vertices $(0,0)$, $(4,0)$, and $(4,3)$, and imagine that $T$
+	outlines a triangular strip of foil.  The density of this foil at any given point (in the 
+	first quadrant) is
+	$\rho(x,y) = x^2+y$.
+	\begin{parts}
+		\item Using the fact that for this foil, $mass=density\times area$, write down two different
+			integrals that would compute the total mass of $T$, and draw their corresponding
+			Riemann-sum pictures.
+		\item Evaluate your two integrals.  Is one easier to evaluate than the other?
+		\item Can $(x^2+y)\mathrm{d}x\mathrm{d}y$ be interpreted on its own?
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let the region $R\subset \R^2$ be the area between the parabola $x=y^2$ and the line $x=1$.  Let 
+	$f(x,y)=3x+y^2$.
+	\begin{parts}
+		\item Write down two different iterated integrals to compute $\displaystyle \iint_R f(x,y)\d x\d y$.
+		\item Is one of your integrals easier to evaluate than the other?
+		\item Describe and draw a region $A$ so that 
+			$\displaystyle\iint_A f(x,y)\d x\d y = \int_{x=0}^{x=1}\int_{y=-\sqrt{1-x^2}}^{y=\sqrt{1-x^2}} f(x,y)\d y\d x$.
+	\end{parts}
+\end{question}
+
+\subsection*{The Volume Form}
+	We've been using integrals to find the area or volume (or hypervolume) under a curve.
+	Abstractly, this process has been the same every time: chop the region into little pieces, and
+	add up each piece's contribution with an integral to find the total.  We're continuing the same
+	process, but we're going to start chopping regions up into (sometimes) non-rectangular chunks.
+
+\begin{question}
+	\begin{parts}
+		\item Draw the lines $x=x_0$, $x=x_0+\Delta x$, $y=y_0$ and $y=y_0+\Delta y$ where
+			$\Delta x$ and $\Delta y$ are assume to be small.  Write down a formula for the area enclosed by
+			those lines.  Does your formula depend on $x_0$ and $y_0$?
+		\item Draw the curves, specified in polar coordinates by $r=r_0$, $r=r_0+\Delta r$, $\theta = \theta_0$,
+			and $\theta = \theta_0+\Delta\theta$ where $\Delta r$ and $\Delta \theta$ are assumed to
+			be small.  Write down a formula for the area enclosed by those curves.  Does your
+			formula depend on $r_0$ and $\theta_0$?
+		\item Using the idea that a limit as $\Delta ?\to 0$ of a Riemann sum results in an integral, 
+			write down a double-integral expression for the area of a semicircle of radius $1$
+			in both rectangular and polar coordinates.
+		\item Let $V(r_0,\theta_0) = r_0\Delta r\Delta\theta$, and let $\Delta V(r_0,\theta_0)$ be the exact
+			area of the annular (ring-shaped) section you found earlier.  What is $\displaystyle \lim_{\Delta r, \Delta\theta\to 0}
+			\frac{\Delta V(r_0,\theta_0)}{V(r_0,\theta_0)}$?  Do we need the $(\Delta r)^2\Delta \theta$ term
+			at infinitesimal scales?
+	\end{parts}
+\end{question}
+
+\begin{restatable*}[Volume Form]{definition}{DefVolumeForm}
+	Suppose $\mathcal F$ is a coordinate system for $\R^2$ with a relationship
+	to rectangular coordinates given by $(x,y)=\vec f(a,b)$.
+	The \emph{pre-volume form} associated with $\mathcal F$ at the point $(a,b)$
+	is written $\Delta V(a,b)$ and is defined to be the area of
+	$\vec f\big([a,a+\Delta a]\times [b,b+\Delta b]\big)$.
+	
+	The \emph{volume form} associated with $\mathcal F$ at the point $(a,b)$
+	is the infinitesimal $\d V(a,b)=V(a,b)\d a\d b$ where $V:\R^2\to\R$ is the 
+	unique function satisfying
+	\[
+		\lim_{\Delta a,\Delta b\to 0} \frac{\Delta V(a,b)}{V(a,b)\Delta a\Delta b}=1.
+	\]
+\end{restatable*}
+
+	For coordinate systems in $\R^3$ (and $\R^n$), the volume form is defined in an analogous way.
+
+
+\begin{question}
+	\begin{parts}
+		\item Write down the pre-volume and volume forms for polar coordinates.  What are the functions
+			$f_1$ and $f_2$ for polar coordinates?
+		\item Write down the pre-volume and volume forms for rectangular coordinates.  What
+			are the functions $f_1$ and $f_2$?
+		\item Let $\mathcal S$ be a stretched coordinate system.  That is, the point $(a,b)$ in
+			$\mathcal S$-coordinates corresponds to the point $(a/2, b/3)$ in rectangular 
+			coordinates.  Write down the pre-volume and volume forms for $\mathcal S$-coordinates.
+		\item Consider the set $X=\{(a,b): 0\leq b\leq a^2\text{ and }0\leq a\leq 1\}$ specified in $\mathcal S$ coordinates.
+			Draw $X$ on the $\mathcal S$-coordinate plane and in standard coordinate plane.  Then, compute
+			the area of $X$ by setting up an integral using the volume form for $\mathcal S$ coordinates.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let $f(x,y)=x^2+y^2$ and let $D$ be a disk of radius 2 centered at the origin.  We would like to
+	find $B=\displaystyle \int_D f\d V$.
+	\begin{parts}
+		\item Write down the bounds of $D$ in rectangular coordinates and set up (but don't evaluate)
+			an integral for $B$.
+		\item Write down the bounds of $D$ in polar coordinates and set up (but don't evaluate) an 
+			an integral for $B$.
+		\item Find $B$ by evaluating whichever integral you want.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Cylindrical coordinates for $\R^3$ take the form $(r,\theta, z)$ where the
+	$xy$-plane is specified in polar coordinates by the first two components
+	and the height along the $z$-axis
+	is given by the third component.
+	\begin{parts}
+		\item Compute the volume form for cylindrical coordinates.
+		\item A discuss is constructed from gluing two cones' bases together.
+			The radius of the base of each cone is $4$ and the height of each
+			cone is $1$.  Describe the surface of the discuss using cylindrical coordinates
+			(you may need to describe the top and bottom separately)
+		\item The discuss has a density given by $\rho(x,y,z) = x^2+y^2+2|z|$.  Find the
+			mass of the discuss. (You may exploit symmetry.)
+	\end{parts}
+\end{question}
+
+\subsection*{Surface Integrals}
+	We've done line integrals, which were adding up the values of a function along a curve.
+	Now we're going to do the same thing with surfaces.
+
+\begin{question}
+	\begin{parts}
+		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(0,1)$ and $\vec b=(4,0)$.
+		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(0,1,0)$ and $\vec b=(4,0,4)$.
+		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(1,2,3)$ and $\vec b=(2,1,-1)$.
+	\end{parts}
+\end{question}
+
+\begin{question}
+	Let $\mathcal S\subset \R^3$ be a surface and let $f:\mathcal S\to \R$ be a function.
+	\begin{parts}
+		\item Think of two examples of surfaces $\mathcal S$ and functions $f$ that correspond
+			to the world you live in.
+		\item We'd like to add up (integrate) the values of $f$ over the surface $\mathcal S$.  Explain
+			how a Riemann sum can help us do this.
+		\item Suppose that $\vec r(a,b)$ for $0\leq a\leq 2$ and $-1\leq b\leq 1$ is an isometric
+			parameterization of $\mathcal S$ (i.e., $\vec r$ preserves area).  Write down
+			an iterated integral to compute $\displaystyle \int_{\mathcal S} f$ with respect
+			to surface area.
+		\item Suppose that $\vec q(\alpha,\beta)$ for $-3\leq \alpha\leq 0$ and $5\leq \beta\leq 6$
+			is a non-isometric parameterization of $\mathcal S$.  However,
+			you also know that if $R\subset \R^2$ is a rectangle with side lengths $\Delta\alpha$
+			and $\Delta\beta$ and lower-left corner $(\alpha,\beta)$, then $\vec q(R)$ has surface area
+			$Q(\alpha,\beta)\Delta \alpha\Delta\beta$.  Set up an iterated integral to compute
+			$\displaystyle \int_{\mathcal S} f$ with respect
+			to surface area using $\vec q$ and $Q$.  Justify your intuition with an explanation in
+			terms of Riemann sums.
+	\end{parts}
+\end{question}
+
+	In the previous problem, $Q$ looked a lot like a volume form, but finding it from first principles
+	is hard!  Instead, we'll develop intuition and a formula for $Q$ using tangent planes.
+
+\begin{question}
+	Suppose $\mathcal P\subset \R^3$ is a plane with parameterization $\vec p(t,s) = t\mat{1\\2\\3} + s\mat{1\\1\\1}$.
+	\begin{parts}
+		\item Suppose $R_{(t_0,s_0)}\subset \R^2$ is a rectangle with lower left corner at $(t_0,s_0)$ and 
+			sides of length $\Delta t$ and $\Delta s$.  Find a function $Q$ so that $Q(t,s) =\text{area of }\vec p(R_{(t_0,s_0)})$.
+			Does $Q$ depend on $t_0$ and $s_0$?  Does this make sense?
+		\item Consider the new parameterization $\tilde p$ given by $\tilde p(t,s) = \vec p(t^2,s)$.  What does
+			$\tilde p$ parameterize?  How does it relate to $\mathcal P$?
+		\item Let $R_{(t_0,s_0)}$ be a rectangle as before.  Find a function $\tilde Q$ so that
+			$\tilde Q(t,s) =\text{area of }\tilde p(R_{(t_0,s_0)})$.  Does $\tilde Q$ depend on
+			$(t_0,s_0)$?
+		\item Find a function $V(t,s)$ so that $\displaystyle\lim_{\Delta t,\Delta s\to 0} \frac{\tilde Q(t,s)}{V(t,s)\Delta t\Delta s}
+			=1$.  Does $V$ remind you of anything?
+	\end{parts}
+\end{question}
+
+	Given a surface $\mathcal S$ parameterized by $r(t,s)$, there is a canonical way to write vector form
+	of the tangent plane to $\mathcal S$ at the point $(t,s,r(t,s))$ by using the directional derivatives
+	of $r$ in the $t$ direction and the $s$ direction as two direction vectors for your plane.
+	
+\begin{question}
+	Consider the surface $\mathcal S$ parameterized by $(t,s,r(t,s))$ where $r(t,s) = t^2+s^2$ and $0\leq t\leq 1$ and $0\leq s\leq 1$.
+	\begin{parts}
+		\item Find the canonical representation of the tangent plane to $\mathcal S$ at the point
+			$(t_0,s_0)$.
+		\item Let $R_{(t_0,s_0)}$ be a rectangle with lower left corner $(t_0,s_0)$ and sides of 
+			very short lengths $\Delta t$ and $\Delta s$.  Describe the set $I_{(t_0,s_0)}=\{(a,b,r(a,b)): (a,b)\in R_{(t_0,s_0)}\}$.
+		\item Give an estimation of the surface area of $I_{(t_0,s_0)}$.  What assumptions are you making?
+		\item Write down an integral to compute the surface area $\mathcal S$.
+	\end{parts}
+\end{question}
+
+
+
+
+\newpage
 \section{Multivariable Integrals}
 
 Abstractly, the processes of integration is:
@@ -936,21 +1137,8 @@ In this expression, $\norm{\vec q\,'(t)}$ compensates for the fact that as the p
 $t$ marches on, the arc-length traced out by $\vec q$ is non-uniform.  The volume form\index{volume form} does
 the same thing but for parameterizations of multi-dimensional regions.
 
+\DefVolumeForm
 
-\begin{definition}[Volume Form]
-	Suppose $\mathcal F$ is a coordinate system for $\R^2$ with a relationship
-	to rectangular coordinates given by $(x,y)=\vec f(a,b)$.
-	The \emph{pre-volume form} associated with $\mathcal F$ at the point $(a,b)$
-	is written $\Delta V(a,b)$ and is defined to be the area of
-	$\vec f\big([a,a+\Delta a]\times [b,b+\Delta b]\big)$.
-	
-	The \emph{volume form} associated with $\mathcal F$ at the point $(a,b)$
-	is the infinitesimal $\d V(a,b)=V(a,b)\d a\d b$ where $V:\R^2\to\R$ is the 
-	unique function satisfying
-	\[
-		\lim_{\Delta a,\Delta b\to 0} \frac{\Delta V(a,b)}{V(a,b)\Delta a\Delta b}=1.
-	\]
-\end{definition}
 We only wrote down the definition of the volume form for two-dimensional coordinate systems,
 but the definition for three and higher dimensions is similar.  To define the
 volume form in an $n$-dimensional coordinate system, you take the image
