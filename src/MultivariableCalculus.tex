@@ -773,6 +773,7 @@
 	}
 	\DeclareDocumentEnvironment{parts}{o}{
 		\nopagebreak
+		\setlist[enumerate, 2]{label=({\itshape\roman*})}
 		\begin{enumerate}[
 			label={\color{mypink}(\alph*)},
 			leftmargin=17pt,
