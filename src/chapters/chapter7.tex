@@ -20,7 +20,7 @@ Because of their abstract foundation and newness\footnote{
 The foundation for differential forms was laid out Hermann Grassmann
 in 1847, and it wasn't until Albert Einstein needed a new kind
 of mathematics to describe relativity that differential forms
-started gaining in popularity.}, differential forms they are not typically encountered in a
+started gaining in popularity.}, differential forms are not typically encountered in a
 first course on multivariable calculus, but that has more to do with culture
 than anything else.
 
@@ -78,7 +78,7 @@ get abstract lines and planes.  These objects can be defined using
 \emph{linear functions}\index{linear transformation} which are equivalently
 called \emph{linear transformations}\footnote{ The words \emph{function},
 \emph{transformation}, and \emph{mapping} are synonymous in math.  We like
-to mix it up some times.}.
+to mix it up sometimes.}.
 
 \begin{definition}[Linear]
 	Let $V$ and $W$ be vector spaces and let
@@ -184,7 +184,7 @@ displacement,
 we will be able to measure area as ``displacement in two directions''
 and volume as ``displacement in three directions.''
 
-Displacement is measures with objects called \emph{covectors}\index{covector}.
+Displacement is measured with objects called \emph{covectors}\index{covector}.
 In other contexts, these objects are also known as 
 \emph{linear functionals}\index{linear functional} or \emph{dual vectors}\index{dual vector}.
 We will typically write covectors in a \textbf{bold} font to  distinguish 
@@ -200,7 +200,7 @@ This definition is very abstract, but again, we've encountered covectors
 before!  Let $\bm{\alpha}:\R^3\to\R$ be defined by $\bm{\alpha}(\vec v) =\xhat \cdot \vec v$.
 We already know that $\bm{\alpha}$ is linear and that it outputs
 real numbers.  Therefore it is a covector.  However, $\bm \alpha$ also has
-geometric meaning.  It $\bm\alpha(\vec v)$ outputs the $x$-coordinate
+geometric meaning.  The quantity $\bm\alpha(\vec v)$ is the $x$-coordinate
 of $\vec v$.  We could similarly come up with covectors that output the $y$ or $z$ coordinates
 of their input.
 
@@ -1069,7 +1069,7 @@ product of two 1-forms produces a 2-form.
 
 Notice the order of $\dd x$, $\dd y$, and $\dd z$.  In particular, the third basis element
 is $\dd z\wedge \dd x$ and not $\dd x\wedge \dd z$.  This has to do with 
-orientation.  When we use the basis 2-forms to measure area, we'd that either all of
+orientation.  When we use the basis 2-forms to measure area, we'd prefer that either all of
 $\dd x\wedge \dd y(\mathcal P), \dd y\wedge \dd z(\mathcal P), \dd z\wedge \dd x(\mathcal P)\geq 0$
 or all of
 $\dd x\wedge \dd y(\mathcal P), \dd y\wedge \dd z(\mathcal P), \dd z\wedge \dd x(\mathcal P)\leq 0$.
@@ -1236,7 +1236,7 @@ The techniques used in Example \ref{EXTWOFORMINT} will work in any dimension
 to integrate a 2-form over any surface, whether situated in the $xy$-plane or not.
 However, it can be hard to come up
 with parameterizations for strange surfaces---especially with rectangular domains.
-Fortunately, by adjusting the bounds of integration, you can all the domain
+Fortunately, by adjusting the bounds of integration, you can let the domain
 of your parameterization to be any reasonable subset of $\R^2$.
 
 \begin{example}
@@ -1443,7 +1443,7 @@ Before we define the exterior derivative, we need one bit of notation.
 	$\vec v_1,\ldots,\vec v_n\in\R^n$ 
 	and scalars $t_1,\ldots, t_n\in \R$, define 
 	$B_{\formarg{\vec x}{\vec v_1,\ldots, \vec v_n}}(t_1,\ldots, t_n)$ 
-	to be the oriented parallelotope with based at $\vec x$ with
+	to be the oriented parallelotope based at $\vec x$ with
 	sides $t_1\vec v_1, t_2\vec v_2, \ldots, t_n\vec v_n$.
 \end{definition}
 
@@ -1659,7 +1659,7 @@ provided we interpret the union of two overlapping and oppositely-oriented sets 
 	\end{tikzpicture}
 \end{center}
 
-This picture should is just like the one we used when deriving the divergence theorem
+This picture should look just like the one we used when deriving the divergence theorem
 and Stokes's theorem.
 
 
@@ -1711,7 +1711,7 @@ truly a scalar.  Further, we never had to add ``$-$'' signs to the
 \emph{outside} of the integral for other $n$-forms.  What gives?
 
 We'll, it turns out, a $0$-covector should really be a function
-that inputs no vectors \emph{and} and orientation, and returns a scalar.  This is 
+that inputs no vectors \emph{and} an orientation, and returns a scalar.  This is 
 true for $n$-covectors in general.  However, for
 $n>0$, we could always deduce orientation from how we ordered the input-vectors.  No
 input vectors means we have to specify the orientation manually.  If it
@@ -1731,7 +1731,7 @@ $\dd \bm\alpha$.  By definition
 	= \lim_{t\to 0} \frac{1}{t} \int_{\partial B} \bm\alpha
 \]
 where $B=B_{\formarg{\vec x}{\vec v}}(t)$.  But, $B$ is just a line segment
-and so $\partial B$ consist of two points: $\vec x+t\vec v$ oriented positively,
+and so $\partial B$ consists of two points: $\vec x+t\vec v$ oriented positively,
 and $\vec x$ oriented negatively.
 
 \begin{center}
@@ -2008,7 +2008,7 @@ because $\dd r\wedge \dd r$ and $\dd\theta\wedge \dd\theta$ are 0 and $\dd r\wed
 and have just used differential forms to find the volume form for polar 
 coordinates\footnote{
 Notice that the terms that got thrown away because $\dd r\wedge \dd r=\dd\theta\wedge \dd\theta=0$
-were very similar to the terms that go thrown away from the pre-volume form when
+were very similar to the terms that got thrown away from the pre-volume form when
 we used a limit process.
 }.  Further, if we instead wanted to integrate a function $f:\mathcal S\to \R$
 over $\mathcal S$, 
@@ -2042,7 +2042,7 @@ we can compute the integral with ease.
 
 There is a certain symmetry to $n$-covectors and $n$-forms.  We haven't delved
 deeply into the linear algebra reasoning behind it, but (at least for $\R^3$)
-the standard basis for $n$-covectors and $n$-forms always consisted of a linear
+the standard basis for $n$-covectors and $n$-forms always consisted of linear
 combinations of the wedge product of $n$ covectors/1-forms.  This is true in
 general.
 
@@ -2055,7 +2055,7 @@ general.
 \end{theorem}
 Theorem \ref{THMSTDBASIS} applies equally well to $k$-forms and has an immediate consequence.
 
-For the time being, assume we are always taking about $k$-covectors on $\R^n$.
+For the time being, assume we are always talking about $k$-covectors on $\R^n$.
 Since $\bm \alpha\wedge \bm\alpha=0$ if $\bm\alpha$ is a covector\footnote{
 Remember, this may not be true for $n$-covectors with $n>1$, and certainly isn't true
 for $0$-covectors.
@@ -2064,7 +2064,7 @@ covectors from $B^1$.  Further, if $\bm\alpha,\bm\beta\in B^k$ are wedge product
 the same $k$ covectors from $B^1$, by applying the alternating
 property, we know either $\bm\alpha=\bm\beta$ or $\bm\alpha=-\bm\beta$, and so
 $\bm\beta$ is a linear combination of $\bm\alpha$.   This means, to create all
-$k$-covectors as linear combinations, all we really need a set consisting of one wedge
+$k$-covectors as linear combinations, all we really need is a set consisting of one wedge
 product for each distinct set $k$ covectors from $B^1$.
 
 Given $n$ items, $\binom{n}{k}=\frac{n!}{k!(n-k)!}$ is the number of ways to choose\index{choose}\index{binomial coefficient}
@@ -2158,7 +2158,7 @@ sends a $k$-covector to its missing half.
 \end{definition}
 
 The Hodge dual of a $k$-covector $\bm\alpha$ is a kind of compliment that fills
-it out to be a full $n$-covector.  But why the $\sum t_i^2$ terms?  We'll, that should
+it out to be a full $n$-covector.  But why the $\sum t_i^2$ terms?  Well, that should
 make you think of norms!
 
 Recall that if a vector $\vec v = \sum t_i \vec e_i$ where $\vec e_i$ are the standard
@@ -2320,13 +2320,13 @@ orientations and so cancel.  All that is left are contributions from the boundar
 		and a $\partial \mathcal R$ on the right.
 \end{enumerate}
 The only hard part of the proof is bookkeeping---making sure the orientation of adjacent
-sides really to cancel---and exchanging a limit and a sum---this requires some assumptions
+sides really do cancel---and exchanging a limit and a sum---this requires some assumptions
 about the differentiability of $\bm\alpha$ and the smoothness of $\partial \mathcal R$.
 
 \section{de Rham Cohomology}
 
 Recall that a vector field $\vec F$ is called \emph{conservative} if
-there is a scalar filed $f$ so that $\nabla f=\vec F$.  Further, if $\vec F$ is
+there is a scalar field $f$ so that $\nabla f=\vec F$.  Further, if $\vec F$ is
 conservative, then $\nabla \times \vec F=0$---this was called the screening test.
 However, it may be that $\vec F$ is not conservative but even still
 $\nabla \times \vec F=0$.  Poincar\'e's lemma states that if $\nabla \times \vec F=0$
@@ -2340,7 +2340,7 @@ has zero curl, but the $z$-axis must be excluded from the domain.  The key insig
 is that the difference between a conservative and a closed vector field only shows
 up when the domain has certain topologies\footnote{ A topology describes how a set is
 connected.  A plane and the surface of a doughnut are both two dimensional objects, but they have
-very different topologies.}.  Using differential forms, we get a supped up topology-recognizing
+very different topologies.}.  Using differential forms, we get a souped up topology-recognizing
 machine called \emph{cohomology}\index{cohomology}.
 
 Before we begin, we need some definitions.
@@ -2441,7 +2441,7 @@ However, the image of $\dd$ applied to 1-forms is \emph{not} the kernel of $\dd$
 \[
 	\vec F(x,y,z) = \frac{1}{(x^2+y^2+z^2)^{3/2}}\mat{x\\y\\z},
 \]
-which you may recognize as related the force due to gravity of a point-mass centered
+which you may recognize as related to the force due to gravity of a point-mass centered
 at the origin acting on a particle at position $(x,y,z)$.  $\nabla \cdot \vec F=0$,
 but $\vec F$ cannot be the curl of any vector field. Thus, $\bm f=\star \Transu\vec F$ is a
 2-form in the kernel of $\dd$ but not the image of any 1-form under $\dd$.  This would be very
