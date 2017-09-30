@@ -1,23 +1,23 @@
-# MultivariableCalculus
-A textbook for multivariable calculus
+# LinearAlgebra
+A textbook for Linear Algebra
 
 ## Compiling
 
 This textbook is compiled with
     
     cd src/
-    xelatex -shell-escape MultivariableCalculus.tex
-    xelatex -shell-escape MultivariableCalculus.tex
+    xelatex -shell-escape LinearAlgebra.tex
+    xelatex -shell-escape LinearAlgebra.tex
 
 Note that to get the index to appear, you must compile the document
 twice.
 Alternatively, if you have `arara` installed you can run
 
     cd src/
-    arara MultivariableCalculus
+    arara LinearAlgebra
 
 
-_Multivariable Calculus_ relies heavily on the `tikz` and `pgfplots` 
+_Linear Algebra_ relies heavily on the `tikz` and `pgfplots` 
 package for LaTeX, so make sure you have it installed.
 
 ##Exercises
