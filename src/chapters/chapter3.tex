@@ -4,4 +4,66 @@
 
 \section{Span}
 
+Let $\vec u=\mat{1\\1}$ and $\vec v=\mat{-1\\2}$. Can the vectors $\vec w=\mat{2\\5}$ be obtained
+as a linear combination of $\vec u$ and $\vec v$?
+
+By drawing a picture, the answer appears to be \emph{yes}.
+
+XXX Figure
+
+Algebraically, we can use the definition of \emph{linear combination} to set up a system of equations.
+We know $\vec w$ can be expressed as a linear combination of $\vec u$ and $\vec v$ if and only if 
+the vector equation
+\[
+	\vec w = \mat{2\\5}=\alpha\mat{1\\1}+\beta\mat{-1\\2}=\alpha \vec u+\beta \vec v
+\]
+has a solution. By inspection, we see $\alpha=3$ and $\beta=1$ solve this equation.
+
+After initial success, we might be tempted to ask the following:
+\emph{starting at the origin, what are all the locations in $\R^2$ that can be obtained
+as a linear combination of $\vec u$ and $\vec v$?} Geometrically, it appears
+any location can be reached. To verify this algebraically, we consider the vector equation
+\begin{equation}
+	\label{EQSPAN1}
+	\vec x=\mat{x\\y} = \alpha\mat{1\\1}+\beta\mat{-1\\2} = \alpha\vec u+\beta\vec v.
+\end{equation}
+Here $\vec x$ represents an arbitrary point in $\R^2$. Thus, if equation \eqref{EQSPAN1} always
+has a solution, any vector in $\R^2$ can be obtained as a linear combination of $\alpha$ and $\beta$.
+
+We can solve this equation for $\alpha$ and $\beta$ by considering the equations arising from the
+first and second components. Namely,
+\begin{alignat*}{3}
+	x &{}={}& \alpha &{}+{}& \beta\\
+	y &{}={}& \alpha &{}-{}& 2\beta.
+\end{alignat*}
+Subtracting the second equation from the first, we get $x-y=3\beta$ and so $\beta=(x-y)/3$. Plugging 
+$\beta$ into the first equation and solving, we get $\alpha=(2x+y)/3$. Thus, equation \eqref{EQSPAN1}
+\emph{always} has a solution.
+
+There is a formal term for the set of vectors that can be obtained as linear combinations: \emph{span}.
+
+\begin{definition}[Span]
+	Let $\mathcal X$ be a set of vectors. The \emph{span} of $\mathcal X$, written $\Span \mathcal X$,
+	is the set of all linear combinations of vectors in $\mathcal X$. Formally,
+	\[
+	\Span \mathcal X = \Set{\vec x\given \vec x = \alpha_1\vec v_1+\alpha_2\vec v_2+
+	\cdots+\alpha_n\vec v_n\text{ for some }\vec v_1,\ldots,\vec v_n\in\mathcal X
+	\text{ and scalars }\alpha_1,\ldots,\alpha_n}
+	\]
+\end{definition}
+
+We just showed above that $\Span\Set*{\mat{1\\1},\mat{-1\\2}}=\R^2$.
+
+\begin{example}
+	Let $\vec u=\mat{-1\\2}$ and $\vec v=\mat{1\\-2}$. Find $\Span\Set{\vec u,\vec v}$.
+
+	XXX Finish
+\end{example}
+
+The objects that arise from spans are familiar. If $\vec v\neq\vec 0$, then $\Span\Set{\vec v}$
+is the line with direction vector $\vec v$ through the origin. If $\vec v,\vec w\neq \vec 0$ and
+aren't parallel, $\Span\Set{\vec v,\vec w}$ is a plane through the origin. In fact, vector form of
+a line or a plane is nothing more than a \emph{translated span}.
+
+\section{Linear Independence}
 
