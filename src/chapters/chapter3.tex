@@ -40,16 +40,17 @@ Subtracting the second equation from the first, we get $x-y=3\beta$ and so $\bet
 $\beta$ into the first equation and solving, we get $\alpha=(2x+y)/3$. Thus, equation \eqref{EQSPAN1}
 \emph{always} has a solution.
 
-There is a formal term for the set of vectors that can be obtained as linear combinations: \emph{span}.
+There is a formal term for the set of vectors that can be obtained as linear combinations: \emph{span}\index{Span}.
 
 \begin{definition}[Span]
 	Let $\mathcal X$ be a set of vectors. The \emph{span} of $\mathcal X$, written $\Span \mathcal X$,
 	is the set of all linear combinations of vectors in $\mathcal X$. Formally,
 	\[
-	\Span \mathcal X = \Set{\vec x\given \vec x = \alpha_1\vec v_1+\alpha_2\vec v_2+
+	\Span \mathcal X = \Set{\vec x\given \vec x = \alpha_1\vec v_1+
 	\cdots+\alpha_n\vec v_n\text{ for some }\vec v_1,\ldots,\vec v_n\in\mathcal X
-	\text{ and scalars }\alpha_1,\ldots,\alpha_n}
+	\text{ and scalars }\alpha_1,\ldots,\alpha_n}.
 	\]
+	Further, we define $\Span\emptyset =\Set{\vec 0}$.
 \end{definition}
 
 We just showed above that $\Span\Set*{\mat{1\\1},\mat{-1\\2}}=\R^2$.
@@ -67,3 +68,235 @@ a line or a plane is nothing more than a \emph{translated span}.
 
 \section{Linear Independence}
 
+Let
+\[
+	\vec u=\mat{1\\0\\0}\qquad\vec v=\mat{0\\1\\0}\qquad \vec w=\mat{1\\1\\0}.
+\]
+Since $\vec w=\vec u+\vec v$, we know that $\vec w\in\Span\Set{\vec u,\vec v}$. It follows
+that if 
+\[
+	\vec r=\alpha\vec u+\beta\vec u+\gamma\vec w\in\Span\Set{\vec u,\vec v,\vec w},
+\] then
+\[
+	\vec r=\alpha\vec u+\beta\vec u+\gamma(\vec u+\vec v) 
+	= (\alpha+\gamma)\vec u+(\beta+\gamma)\vec v\in\Span\Set{\vec u,\vec v}.
+\]
+Thus, $\Span\Set{\vec u,\vec v,\vec w}\subseteq \Span\Set{\vec u,\vec v}$. In fact, 
+$\Span\Set{\vec u,\vec v,\vec w}= \Span\Set{\vec u,\vec v}$. In this case, $\vec w$ was a redundant
+vector.
+
+\begin{theorem}
+	Suppose $\vec w\in\Span\Set{\vec v_1,\ldots,\vec v_n}$. Then, 
+	$
+		\Span\Set{\vec v_1,\ldots,\vec v_n}=\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}.
+	$
+\end{theorem}
+\begin{proof}
+	First notice that if $\vec r=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n\in\Span\Set{\vec v_1,\ldots,\vec v_n}$,
+	then $\vec r=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n+0\vec w\in \Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$.
+	Thus $\Span\Set{\vec v_1,\ldots,\vec v_n}\subseteq \Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$ 
+	for any vector $\vec w$.
+
+	Now, suppose $\vec w\in \Span\Set{\vec v_1,\ldots,\vec v_n}$. By definition, $\vec w=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n$.
+	Fix $\vec r\in\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$.  We have
+	\begin{align*}
+		\vec r &=
+		\beta\vec w+\beta_1\vec v_1+\cdots+\beta_n\vec v_n \\ &=
+		\beta(\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n) + \beta_1\vec v_1+\cdots+\beta_n\vec v_n\\
+		&= (\beta\alpha_1+\beta_1)\vec v_1+\cdots+(\beta\alpha_n+\beta_n)\vec v_n\in\Span\Set{\vec v_1,\ldots,\vec v_n}.
+	\end{align*}
+	Thus, $\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}\subseteq \Span\Set{\vec v_1,\ldots,\vec v_n}$. We
+	conclude that $\Span\Set{\vec v_1,\ldots,\vec v_n}=\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$.
+\end{proof}
+
+Sets without any redundant vectors play an important role in linear algebra.
+
+\begin{definition}[Linear Independence \& Linear Dependence (I)]
+	\label{DEFLININD}
+	The vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly dependent}\index{linearly independent} if 
+	for at least one $i$, 
+	\[
+		\vec v_i \in \Span\Set{\vec v_1,\ldots,\vec v_{i-1},\vec v_{i+1},\ldots,\vec v_n}.
+	\]
+	If there is no such $i$, the vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly
+	independent}\index{linearly dependent}.
+\end{definition}
+We will also refer to sets of vectors (for example $\Set{\vec v_1,\ldots,\vec v_n}$) as being linearly
+independent or linearly dependent. For technical reasons, we didn't state the definition in terms
+of sets\footnote{ The issue is, every element of a set is unique. Clearly, the vectors $\vec v$ and $\vec v$
+are linearly dependent, but $\Set{\vec v,\vec v}=\Set{\vec v}$, and so $\Set{\vec v,\vec v}$ is technically
+a linearly independent set. This issue would be resolved by talking about \emph{multisets} instead of sets,
+but it isn't worth the hassle.}.
+
+Definition \ref{DEFLININD} says that the vectors $\vec v_1,\ldots,\vec v_n$ are linearly dependent
+if you can remove at least one vector without changing the span. In other words, $\vec v_1,\ldots,\vec v_n$ 
+are linearly dependent \emph{if there is a redundant vector}.
+
+\begin{example}
+	Let $\vec u=\mat{1\\2}$, $\vec v=\mat{2\\3}$, and $\vec w=\mat{4\\5}$. Determine whether
+	$\Set{\vec u,\vec v,\vec w}$ is linearly independent or linearly dependent.
+
+	XXX Finish
+\end{example}
+
+\begin{example}
+	Determine whether the planes ... (given in vector form) are the same.
+
+	XXX Finish
+\end{example}
+
+The idea of a ``redundant vector'' is geometrically intuitive; algebraically, it can be hard
+to work with. Fortunately, there is another definition of linear independence more suitable
+for algebra.
+
+\begin{definition}[Trivial Linear Combination]
+	A linear combination $\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n$ is called
+	\emph{trivial}\index{trivial linear combination}
+	if $\alpha_1=\cdots=\alpha_n=0$. If at least one $\alpha_i\neq 0$,
+	the linear combination is called \emph{non-trivial}.
+\end{definition}
+
+\begin{definition}[Linear Independence \& Linear Dependence (II)]
+	\label{DEFLININDII}
+	The vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly independent}\index{linearly independent}
+	if for the only linear combination satisfying
+	\[
+		\vec 0=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n
+	\]
+	is the trivial linear combination (where $\alpha_1=\cdots=\alpha_n=0$).
+\end{definition}
+
+XXX Finish
+
+\section{Systems of Linear Equations}
+
+	Consider the vector equation
+	\begin{equation}\label{EQVECEQ}
+		t\vec u+s\vec v+r\vec w = \vec p\qquad\text{where}\qquad \vec u=\mat{1\\2\\1},\ 
+		\vec v=\mat{2\\1\\-4},\ \vec w=\mat{-2\\-5\\1},\ \vec p=\mat{-15\\-21\\18}.
+	\end{equation}
+	A \emph{solution} to this equation are values of $t$, $s$, and $r$ that make the equation true.
+	There are many ways to find $t$, $s$, and $r$, but one way that always works is by
+	equating components of each vector in the equation. By equating components in equation
+	\eqref{EQVECEQ}, we get the following system:
+	\begin{equation}
+		\label{EQVECEQ2}
+		\systeme[tsr]{
+			t+2s-2r=-15@\qquad\text{row}_1,
+			2t+s-5r=-21@\qquad\text{row}_2,
+			t-4s+r=18@\qquad\text{row}_3
+		}
+	\end{equation}
+
+	The system \eqref{EQVECEQ2} could be solve by \emph{substitution}:
+	solve the first equation for $t$; substitute $t$ into the second two equation
+	which then would contain $s$ and $r$ as the only unknowns; solve the second
+	equation for $s$; substitute $s$ into the last equation which now contains
+	$r$ as the only unknown; solve for $r$; work backwards plugging in $r$ to get $s$,
+	and finally plugging in $r$ and $s$ to get $t$.
+
+	We will instead solve system \eqref{EQVECEQ2} by \emph{elimination}\footnote{
+	Elimination is sometimes referred to as \emph{Gaussian elimination}
+	or \emph{Gauss-Jordan elimination}.}.  Observe the following: if $A=B$ and
+	$C=D$, then $A+ \alpha C=B+\alpha D$ for any $\alpha$; and, 
+	if $A=B$ then $A/\alpha=B/\alpha$, provided $\alpha\neq 0$.
+	Using these facts, we can eliminate unknowns by adding equations rather than by
+	substituting values.
+	\begin{align*}
+	\sysdelim\{.
+		\systeme[tsr]{
+			t+2s-2r=-15,
+			2t+s-5r=-21,
+			t-4s+r=18
+		}
+		&\xrightarrow{\text{row}_3\mapsto\text{row}_3-\text{row}_1}
+	\sysdelim\{.
+		\systeme[tsr]{
+			t+2s-2r=-15,
+			2t+s-5r=-21,
+			-6s+3r=33
+		}\\[4pt]
+		&\xrightarrow{\text{row}_2\mapsto\text{row}_2-2\text{row}_1}
+	\sysdelim\{.
+		\systeme[tsr]{
+			t+2s-2r=-15,
+			-3s-r=9,
+			-6s+3r=33
+		}\\[4pt]
+		&\xrightarrow{\text{row}_3\mapsto\text{row}_3-2\text{row}_3}
+	\sysdelim\{.
+		\systeme[tsr]{
+			t+2s-2r=-15,
+			-3s-r=9,
+			  5r=15
+		}\\[4pt]
+	\end{align*}
+	At this point, we have eliminated all but one unknown from
+	the last equation. By inspection, we see that $r=3$; substituting 
+	$r$ into the second equation gives $s=-4$; finally, substituting both
+	$r$ and $s$ into the first equation gives $t=-1$.
+
+	The benefit of elimination over substitution is that elimination
+	is \emph{algorithmic} (that is, you could program a computer to do it)
+	and can be made notationally convenient.
+
+\subsection{Row Reduction}
+	Recall system \eqref{EQVECEQ2}:
+	\[
+		\systeme[tsr]{
+			t+2s-2r=-15@\qquad\text{row}_1,
+			2t+s-5r=-21@\qquad\text{row}_2,
+			t-4s+r=18@\qquad\text{row}_3
+		}
+	\]
+	When performing elimination, there was a lot of redundant information. 
+	In particular, the variables and the ``$=$'' never changed---it was
+	only the numbers that changed. To make our lives easier, we will
+	write a this system as an \emph{augmented matrix}\index{augmented matrix}\footnote{
+	A \emph{matrix} is just a box of numbers. An \emph{augmented matrix} is a matrix
+	with an extra column.
+	}.
+	\[
+		\systeme[tsr]{
+			t+2s-2r=-15,
+			2t+s-5r=-21,
+			t-4s+r=18
+		}\qquad\text{corresponds to}\qquad
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			2&1&-5&-21\\
+			1&-4&1&18
+		\end{bmatrix}
+	\]
+	We use a vertical line in our matrix to separate coefficients of our unknowns
+	from numbers on the right side of the ``$=$''. Written as a matrix, elimination
+	becomes easier to perform by hand.
+	\begin{align*}
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			2&1&-5&-21\\
+			1&-4&1&18
+		\end{bmatrix}
+		&\xrightarrow{\text{row}_3\mapsto\text{row}_3-\text{row}_1}
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			2&1&-5&-21\\
+			0&-6&3&33
+		\end{bmatrix}\\
+		&\xrightarrow{\text{row}_2\mapsto\text{row}_2-2\text{row}_1}
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			0&-3&-1&9\\
+			0&-6&3&33
+		\end{bmatrix}\\
+		&\xrightarrow{\text{row}_3\mapsto\text{row}_3-2\text{row}_3}
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			0&-3&-1&9\\
+			0&0&5&15
+		\end{bmatrix}
+	\end{align*}
+
+	
+\subsection{Geometry of Systems of Linear Equations}
+\subsection{Free Variables}
