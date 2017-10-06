@@ -20,7 +20,7 @@ the vector equation
 has a solution. By inspection, we see $\alpha=3$ and $\beta=1$ solve this equation.
 
 After initial success, we might be tempted to ask the following:
-\emph{starting at the origin, what are all the locations in $\R^2$ that can be obtained
+\emph{what are all the locations in $\R^2$ that can be obtained
 as a linear combination of $\vec u$ and $\vec v$?} Geometrically, it appears
 any location can be reached. To verify this algebraically, we consider the vector equation
 \begin{equation}
@@ -38,9 +38,14 @@ first and second components. Namely,
 \end{alignat*}
 Subtracting the second equation from the first, we get $x-y=3\beta$ and so $\beta=(x-y)/3$. Plugging 
 $\beta$ into the first equation and solving, we get $\alpha=(2x+y)/3$. Thus, equation \eqref{EQSPAN1}
-\emph{always} has a solution.
+\emph{always} has a solution. Namely,
+\begin{align*}
+	\alpha &= \tfrac{1}{3}(2x+y)\\
+	\beta &= \tfrac{1}{3}(x-y).
+\end{align*}
 
-There is a formal term for the set of vectors that can be obtained as linear combinations: \emph{span}\index{Span}.
+There is a formal term for the set of vectors that can be obtained as linear combinations
+of others: \emph{span}\index{Span}.
 
 \begin{definition}[Span]
 	Let $\mathcal X$ be a set of vectors. The \emph{span} of $\mathcal X$, written $\Span \mathcal X$,
@@ -62,7 +67,7 @@ We just showed above that $\Span\Set*{\mat{1\\1},\mat{-1\\2}}=\R^2$.
 \end{example}
 
 The objects that arise from spans are familiar. If $\vec v\neq\vec 0$, then $\Span\Set{\vec v}$
-is the line with direction vector $\vec v$ through the origin. If $\vec v,\vec w\neq \vec 0$ and
+is the line through the origin with direction vector $\vec v$. If $\vec v,\vec w\neq \vec 0$ and
 aren't parallel, $\Span\Set{\vec v,\vec w}$ is a plane through the origin. In fact, vector form of
 a line or a plane is nothing more than a \emph{translated span}.
 
@@ -109,7 +114,6 @@ vector.
 	conclude that $\Span\Set{\vec v_1,\ldots,\vec v_n}=\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$.
 \end{proof}
 
-Sets without any redundant vectors play an important role in linear algebra.
 
 \begin{definition}[Linear Independence \& Linear Dependence (I)]
 	\label{DEFLININD}
@@ -168,6 +172,107 @@ for algebra.
 
 XXX Finish
 
+\section{Matrices}
+	Talking about matrices now may seem like a non sequitur, but we will soon be
+	using them as a notational device.
+	\begin{definition}[Matrix]
+		An $m\times n$ \emph{matrix}\index{matrix} is a rectangular
+		array of numbers with $m$ rows and $n$ columns, usually surrounded by
+		brackets.
+	\end{definition}
+
+	The \emph{dimensions}, \emph{shape}, or \emph{size} of a matrix refers
+	to the number of rows and columns in a matrix and is always listed
+	as $\#$rows and then $\#$columns. The most common way to specify the
+	size of a matrix is by writing ``$\text{rows}\times\text{columns}$''.
+
+	We are already familiar with certain matrices. When we write down
+	a column vector like $\mat{2\\1}$, we are writing down a $2\times 1$ matrix.
+	It is a theorem that a vector $\vec v\in\R^n$ can be represented by an $n\times 1$
+	matrix.
+
+	We can also \emph{index} a matrix---that is, refer to particular entries in the matrix.
+	An $m\times n$ matrix $A$ takes the form
+	\[
+		A = \matc{
+			a_{11}&a_{12}&a_{13}&\cdots& a_{1n}\\
+			a_{21}&a_{22}&a_{23}&\cdots& a_{2n}\\
+			a_{31}&a_{32}&a_{33}&\cdots& a_{3n}\\
+			\vdots&\vdots&\vdots&\ddots&\vdots\\
+			a_{m1}&a_{m2}&a_{m3}&\cdots& a_{mn}\\
+		}.
+	\]
+	Here, $a_{ij}$ refers to the number in the $i$th row and $j$th column of $A$\footnote{
+	It would be clearer to write $a_{i,j}$, but it is tradition to omit the comma.}. We can
+	use \emph{index notation}\index{matrix indexing} to define a matrix. For example,
+	we can define a $2\times 3$ matrix $B=[b_{ij}]$ where $b_{ij}=i+j$.  In this case,
+	\[
+		B=[b_{ij}] = \mat{1&2&3\\4&5&6}.
+	\]
+	Writing $B=[b_{ij}]$ is shorthand for ``$B$ is the matrix whose $i,j$ entry is $b_{ij}$''.
+
+	\bigskip
+	Matrices have no intrinsic meaning---\emph{they are just boxes of numbers}.
+	But, we can use matrices to represent things like vectors, coefficients of
+	equations, grocery lists, etc..
+
+\subsection{Special Matrices}
+	There are two special matrices that will come up often.
+	\begin{definition}[The Identity Matrix]
+		The $n\times n$ \emph{identity matrix}\index{identity matrix}, written $I_{n\times n}$ is the $n\times n$
+		matrix with ones along the diagonal and zeros everywhere else.
+	\end{definition}
+	Some examples are
+	\[
+		I_{2\times 2}=\mat{1&0\\0&1}\qquad\text{and}\qquad I_{3\times 3}=\mat{1&0&0\\0&1&0\\0&0&1}.
+	\]
+	Identity matrices are always square, and when it is obvious from context what
+	the size must be, we omit the subscript and simply write $I$.
+
+	\begin{definition}[The Zero Matrix]
+		The $m\times n$ \emph{zero matrix}\index{zero matrix},
+		written $0_{m\times n}$ is the matrix of all zeros.
+	\end{definition}
+	Some examples are
+	\[
+		0_{2\times 2}=\mat{0&0\\0&0}\qquad\text{and}\qquad
+		0_{3\times 2}=\mat{0&0\\0&0\\0&0}.
+	\]
+	Again, when the size of a zero matrix is obvious from context, we omit the subscript
+	and simply write $0$.
+
+\subsection{Block Notation}
+	Occasionally we want to create new matrices by stacking existing matrices.
+	These are called \emph{block} matrices. Typically, but not always, we draw lines
+	to emphasize there is something special about the entry of a block matrix.
+
+	For example, if $M=\mat{1&2\\3&4}$, then
+	\[
+		\begin{bmatrix}[c|c]
+			0_{2\times 2} & I_{2\times 2}\\
+			\hline
+			I_{2\times 2} & M\\
+		\end{bmatrix}
+		=\mat{0&0&1&0\\0&0&0&1\\
+		1&0&1&2\\
+		0&1&3&4}.
+	\]
+	We can also read block notation backwards to define a matrix. For example,
+	we can write
+	\[
+		\begin{bmatrix}[c|c]
+			7 & \vec v\\
+			\hline
+			\vec u & M\\
+		\end{bmatrix}
+		=\mat{7&0&1&0\\0&0&0&1\\
+		1&0&1&2\\
+		0&1&3&4},
+	\]
+	which defines the matrix $M=\mat{0&0&1\\0&1&2\\1&3&4}$, the column 
+	vector $\vec u=\mat{0\\1\\0}$
+	and the row vector $\vec v=\mat{0&1&0}$.
+
 \section{Systems of Linear Equations}
 
 	Consider the vector equation
@@ -175,7 +280,7 @@ XXX Finish
 		t\vec u+s\vec v+r\vec w = \vec p\qquad\text{where}\qquad \vec u=\mat{1\\2\\1},\ 
 		\vec v=\mat{2\\1\\-4},\ \vec w=\mat{-2\\-5\\1},\ \vec p=\mat{-15\\-21\\18}.
 	\end{equation}
-	A \emph{solution} to this equation are values of $t$, $s$, and $r$ that make the equation true.
+	A \emph{solution} to this equation is values of $t$, $s$, and $r$ that make the equation true.
 	There are many ways to find $t$, $s$, and $r$, but one way that always works is by
 	equating components of each vector in the equation. By equating components in equation
 	\eqref{EQVECEQ}, we get the following system:
@@ -198,10 +303,9 @@ XXX Finish
 	We will instead solve system \eqref{EQVECEQ2} by \emph{elimination}\footnote{
 	Elimination is sometimes referred to as \emph{Gaussian elimination}
 	or \emph{Gauss-Jordan elimination}.}.  Observe the following: if $A=B$ and
-	$C=D$, then $A+ \alpha C=B+\alpha D$ for any $\alpha$; and, 
-	if $A=B$ then $A/\alpha=B/\alpha$, provided $\alpha\neq 0$.
-	Using these facts, we can eliminate unknowns by adding equations rather than by
-	substituting values.
+	$C=D$, then $A+ \alpha C=B+\alpha D$ for any $\alpha$.
+	Using this fact, we can eliminate unknowns by summing equations rather than by
+	substituting.
 	\begin{align*}
 	\sysdelim\{.
 		\systeme[tsr]{
@@ -269,7 +373,7 @@ XXX Finish
 		\end{bmatrix}
 	\]
 	We use a vertical line in our matrix to separate coefficients of our unknowns
-	from numbers on the right side of the ``$=$''. Written as a matrix, elimination
+	from numbers on the right side of the ``$=$''. Written with matrices, elimination
 	becomes easier to perform by hand.
 	\begin{align*}
 		\begin{bmatrix}[rrr|r]
@@ -296,7 +400,424 @@ XXX Finish
 			0&0&5&15
 		\end{bmatrix}
 	\end{align*}
+From here, we can solve the original system by substitution---the last
+row of the matrix corresponds to the equation $5r=15$, just as before.
+Notice that if we multiplied the last row of the augmented matrix by $\tfrac{1}{5}$,
+we would be left with the equation $r=3$ and could continue eliminating.
+Since working with augmented matrices is so fun, let's keep eliminating!
+	\begin{align*}
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			0&-3&-1&9\\
+			0&0&5&15
+		\end{bmatrix}
+		&\xrightarrow{\text{row}_3\mapsto\tfrac{1}{5}\text{row}_3}
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			0&-3&-1&9\\
+			0&0&1&3
+		\end{bmatrix}
+		&\xrightarrow{\text{row}_2\mapsto\text{row}_2+\text{row}_3}
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			0&-3&0&12\\
+			0&0&1&3
+		\end{bmatrix}\\
+		&\xrightarrow{\text{row}_1\mapsto\text{row}_1+2\text{row}_3}
+		\begin{bmatrix}[rrr|r]
+			1&2&0 & -9\\
+			0&-3&0&12\\
+			0&0&1&3
+		\end{bmatrix}
+		&\xrightarrow{\text{row}_2\mapsto\tfrac{-1}{3}\text{row}_2}
+		\begin{bmatrix}[rrr|r]
+			1&2&0 & -9\\
+			0&1&0&-4\\
+			0&0&1&3
+		\end{bmatrix}\\
+		&\xrightarrow{\text{row}_1\mapsto\text{row}_1-2\text{row}_2}
+		\begin{bmatrix}[rrr|r]
+			1&0&0 & -1\\
+			0&1&0&-4\\
+			0&0&1&3
+		\end{bmatrix}\\
+	\end{align*}
+Now we have something truly special. If we turn the augmented
+matrix back into a system of equations, we have that 
+	\[
+		\begin{bmatrix}[rrr|r]
+			1&0&0 & -1\\
+			0&1&0&-4\\
+			0&0&1&3
+		\end{bmatrix}\\
+		\qquad\text{corresponds to}\qquad
+		\systeme[tsr]{
+			t\phantom{++}=-1,
+			s\phantom{++}=-4,
+			r=3
+		}
+	\]
+The system's solution can be read right from the matrix!
+
+The process of writing a system as an augmented matrix and manipulating
+the rows of the matrix until a simpler system is obtained is called
+\emph{row reduction}.
+
+\subsection{The Row-reduction Algorithm}
+The beauty of row reduction is that it can be done to any matrix. Not only
+that, but there is an algorithm, called \emph{Gauss's algorithm}\footnote{ Gauss
+popularized this algorithm in the West, but it was known to the ancient Chinese
+long before Gauss's time.}, that allows you to perform row reduction without
+the need for any creativity.
+
+First, we present the possible operations used in row reduction.
+\begin{definition}[Elementary Row Operations]
+	The \emph{elementary row operations}\index{elementary row operation}
+	are the three operations of
+	\begin{enumerate}
+		\item swapping two rows (written $\text{row}_i\leftrightarrow\text{row}_j$);
+		\item multiplying a row by a non-zero scalar (written
+		$\text{row}_i\mapsto \alpha\,\text{row}_i$); and
+		\item adding a multiple of one row to a different row (written $\text{row}_i\mapsto
+		\text{row}_i+\alpha\,\text{row}_j$).
+	\end{enumerate}
+\end{definition}
+\begin{theorem}
+	Every elementary row operation has an inverse which is also an elementary
+	row operation. In other words, every elementary row operation can be undone.
+\end{theorem}
+\begin{proof}
+	We can explicitly write down the inverses of each elementary row operation.
+	$\text{row}_i\leftrightarrow\text{row}_j$ is its own inverse. Since
+	$\alpha\neq 0$, we have that $\text{row}_i\mapsto \alpha\,\text{row}_i$
+	and $\text{row}_i\mapsto \tfrac{1}{\alpha}\,\text{row}_i$ are inverses.
+	Finally, $\text{row}_i\mapsto
+		\text{row}_i+\alpha\,\text{row}_j$
+		and $\text{row}_i\mapsto
+		\text{row}_i-\alpha\,\text{row}_j$ are inverses.
+\end{proof}
+
+\begin{definition}[Equivalent Systems]
+	Two systems of equations, $(X)$ and $(Y)$, are called \emph{equivalent},
+	written $(X)\sim(Y)$ if they have
+	exactly the same solution(s). 
+	
+	Two matrices are called equivalent if their corresponding systems are equivalent.
+\end{definition}
+
+\begin{theorem}
+	Let $(X)$ be a system of equation and let $(Y)$ be
+	the result of applying any number of elementary
+	row operations to $(X)$.  Then, $(X)$ and $(Y)$ are equivalent systems.
+\end{theorem}
+\begin{proof}
+	Let $(X)$ be a system of equations and let $R(X)$ be the result of applying
+	a single row operation to $(X)$.
+	Because equivalence of systems is transitive\footnote{ That
+	is, if $(X)\sim(Y)$ and $(Y)\sim(Z)$, then $(X)\sim (Z)$}, it is sufficient
+	to show $(X)\sim R(X)$.
+
+	Note that every row operation obeys the \emph{law of algebraic manipulation}.
+	That is, a row operation takes a list of true statements (the equations) to another 
+	list of true statements (an new list of equations). As such, if the statement
+	\[
+		\vec x\text{ is a solution to }(X)
+	\]
+	is true, then the statement 
+	\[
+		\vec x\text{ is a solution to }R(X)
+	\]
+	must also be true.  Phrased compactly, the law of algebraic manipulation
+	ensures that
+	\[
+		\vec x\text{ is a solution to }(X)\qquad \text{implies}
+		\qquad \vec x\text{ is a solution to }R(X).
+	\]
+
+	To show $(X)\sim R(X)$, we need to prove that
+	\[
+		\vec x\text{ is a solution to }R(X)\qquad \text{implies}
+		\qquad \vec x\text{ is a solution to }(X).
+	\]
+	
+	Fix a row operation $R$ and let $R^{-1}$ denote its inverse. Since
+	$R^{-1}$ is also an elementary row operation, by the law of
+	algebraic manipulation, we have that
+	\[
+		\vec x\text{ is a solution to }(X)\qquad \text{implies}
+		\qquad \vec x\text{ is a solution to }R^{-1}(X)
+	\]
+	and so
+	\[
+		\vec x\text{ is a solution to }R(X)\qquad \text{implies}
+		\qquad \vec x\text{ is a solution to }R\circ R^{-1}(X) = (X).
+	\]
+	Thus, $(X)\sim R(X)$.
+\end{proof}
+
+Now that we have established that applying elementary row operations produces
+equivalent systems, we are ready to give a row-reduction algorithm.
+
+\begin{definition}[Row Reduction Algorithm]
+	Let $M$ be a matrix.
+	\begin{enumerate}
+		\item If $M$ takes the form $M=[\vec 0|M']$ (that is, its first column
+		is all zeros), apply the algorithm to $M'$;
+		\item if not, perform a row-swap so the upper-left entry of $M$ is
+			non-zero.
+		\item Perform the row operation $\text{row}_1\mapsto \tfrac{1}{\alpha}\text{row}_1$
+		where $\alpha$ is the upper-left entry of $M$. This entry is referred to as
+		a \emph{pivot}.
+		\item Use the row operation $\text{row}_i\mapsto \text{row}_i-\beta\text{row}_1$
+		to zero every entry below the pivot.
+		\item Now $M$ has the form
+		\[
+			M=\begin{bmatrix}[c|c]
+				1 & ??\\
+				\hline\\[\dimexpr-\normalbaselineskip+2pt]
+				\vec 0 & M'
+			\end{bmatrix}.
+		\]
+		Apply the algorithm to $M'$.
+
+	\end{enumerate}
+
+	The resulting matrix is now in \emph{row echelon form}. To put the matrix in 
+	\emph{reduced row echelon form}, additionally apply step 6.
+	\begin{enumerate}
+		\item[6.] Use the row operation $\text{row}_i\mapsto \text{row}_i+\alpha\text{row}_j$
+		to zero above each pivot.
+	\end{enumerate}
+\end{definition}
+
+Stated all at once, this algorithm can be hard to follow, but with practice it becomes
+straightforward.
+
+\begin{example}
+	Apply the row-reduction algorithm to the matrix
+	\[
+		M=\mat{0&0&0&-2&-2\\0&1&2&3&2\\0&2&4&5&3}.
+	\]
+	
+	First notice that $M$ starts with a column of zeros, so we will focus on
+	the right side of $M$. We will draw a line to separate it.
+	\[
+	M=\begin{bmatrix}[r|rrrr]
+		0&0&0&-2&-2\\0&1&2&3&2\\0&2&4&5&3
+	\end{bmatrix}
+	\]
+	Next, we perform a row swap to bring a non-zero entry to the upper left.
+	\[
+	\begin{bmatrix}[r|rrrr]
+		0&0&0&-2&-2\\0&1&2&3&2\\0&2&4&5&3
+	\end{bmatrix}
+	\xrightarrow{\text{row}_1\leftrightarrow\text{row}_2}
+	\begin{bmatrix}[r|rrrr]
+		0&1&2&3&2\\0&0&0&-2&-2\\0&2&4&5&3
+	\end{bmatrix}
+	\]
+	The upper-left entry is already a $1$, so we can use it to zero all entries below.
+	\[
+	\begin{bmatrix}[r|rrrr]
+		0&1&2&3&2\\0&0&0&-2&-2\\0&2&4&5&3
+	\end{bmatrix}
+	\xrightarrow{\text{row}_3\mapsto\text{row}_3-2\text{row}_1}
+	\begin{bmatrix}[r|rrrr]
+		0&1&2&3&2\\0&0&0&-2&-2\\0&0&0&-1&-1
+	\end{bmatrix}
+	\]
+	Now we work on the submatrix.
+	\[
+	\begin{bmatrix}[rr|rrr]
+		0&1&2&3&2\\
+		\hline\\[\dimexpr-\normalbaselineskip+2pt]
+		0&0&0&-2&-2\\0&0&0&-1&-1
+	\end{bmatrix}
+	\]
+	Again, the submatrix has a first column of zeros, so we pass to a submatrix.
+	\[
+	\begin{bmatrix}[rrr|rr]
+		0&1&2&3&2\\
+		\hline\\[\dimexpr-\normalbaselineskip+2pt]
+		0&0&0&-2&-2\\0&0&0&-1&-1
+	\end{bmatrix}
+	\]
+	Now we turn the upper left entry into a $1$ and use that pivot
+	to zero all entries below.
+	\[
+	\begin{bmatrix}[rrr|rr]
+		0&1&2&3&2\\
+		\hline\\[\dimexpr-\normalbaselineskip+2pt]
+		0&0&0&-2&-2\\0&0&0&-1&-1
+	\end{bmatrix}
+	\xrightarrow{\text{row}_2\mapsto\tfrac{-1}{2}\text{row}_2}
+	\begin{bmatrix}[rrr|rr]
+		0&1&2&3&2\\
+		\hline\\[\dimexpr-\normalbaselineskip+2pt]
+		0&0&0&1&1\\0&0&0&-1&-1
+	\end{bmatrix}
+	\xrightarrow{\text{row}_3\mapsto\text{row}_3+\text{row}_2}
+	\begin{bmatrix}[rrr|rr]
+		0&1&2&3&2\\
+		\hline\\[\dimexpr-\normalbaselineskip+2pt]
+		0&0&0&1&1\\0&0&0&0&0
+	\end{bmatrix}
+	\]
+	The matrix is now in row echelon form. To put it in reduced row echelon
+	form, we zero above each pivot.
+	\[
+	\begin{bmatrix}
+		0&1&2&3&2\\
+		0&0&0&1&1\\0&0&0&0&0
+	\end{bmatrix}
+	\xrightarrow{\text{row}_1\mapsto\text{row}_1-3\text{row}_2}
+	\begin{bmatrix}
+		0&1&2&0&-1\\
+		0&0&0&1&1\\0&0&0&0&0
+	\end{bmatrix}
+	\]
+\end{example}
+
+The row-reduction algorithm applies to any matrix, whether augmented or not. However,
+whether or not the reduced form of a matrix has any \emph{meaning} depends on where
+the matrix came from in the first place.
 
 	
 \subsection{Geometry of Systems of Linear Equations}
+We encountered systems of linear equations when trying to answer questions about
+span and linear independence, but they are worth thinking about in their own right.
+Consider the system
+\begin{equation}
+\label{EQSYSGEO}
+		\systeme{
+			x+2y-2z=-15,
+			2x+y-5z=-21,
+			x-4y+z=18
+		}
+\end{equation}
+A solution to this system is a tuple $(x,y,z)$ that satisfies every equation simultaneously.
+Taken individually, each equation in this system represents a plane. Let
+\begin{align*}
+	\mathcal P_1&=\Set*{(x,y,z)\in\R^3\given x+2y-2z=-15}\\
+	\mathcal P_2&=\Set*{(x,y,z)\in\R^3\given 2x+y-5z=-21}\\
+	\mathcal P_3&=\Set*{(x,y,z)\in\R^3\given x-4y+z=18}
+\end{align*}
+be the planes corresponding to the equations in system \eqref{EQSYSGEO}.
+We can think of solutions to system \eqref{EQSYSGEO} as points in $\mathcal P_1\cap 
+\mathcal P_2\cap \mathcal P_3$.
+
+Geometrically, we now have an immediate intuition for the what the solution
+sets to systems with three equations and three unknowns look like. Three planes
+can either intersect in a plane (if they are all the same plane), a line, a point,
+or they may not have a common intersection.
+
+XXX Figure
+
+If a system of equations has only two unknowns, then the solution set must look
+like the intersection of lines. Namely, the solution set is a line, a point, or
+empty.
+
+XXX Figure
+
+This logic generalizes to higher dimensions: the set of solutions to a system of linear
+equations is always a ``flat'' object (a line, plane, volume, etc.), a point, or empty.
+This is captured in the following theorem, which we will prove later.
+\begin{theorem}
+	Let $(X)$ be a system of linear equations. Then $(X)$ either has
+	no solutions, one solution, or infinitely many solutions.
+\end{theorem}
+
 \subsection{Free Variables}
+By now we are very familiar with the system
+\begin{equation}
+		\systeme{
+			x+2y-2z=-15,
+			2x+y-5z=-21,
+			x-4y+z=18
+		}
+\end{equation}
+which has a solution $(x,y,z)=(-1,-4,3)$. When we use the row reduction algorithm
+on an augmented matrix, we get
+\[
+		\begin{bmatrix}[rrr|r]
+			1&2&-2 & -15\\
+			2&1&-5&-21\\
+			1&-4&1&18
+		\end{bmatrix}
+		\qquad\sim\qquad
+		\begin{bmatrix}[rrr|r]
+			1&0&0 & -1\\
+			0&1&0&-4\\
+			0&0&1&3
+		\end{bmatrix},
+\]
+and we can read the unique solution directly from the matrix. But what happens when there isn't a 
+unique solution?
+
+Consider the system
+\begin{equation}
+	\label{EQFREEVAR}
+	\systeme{x+3y=2,2x+6y=4}.
+\end{equation}
+When using an augmented matrix to solve this system, we run into an issue.
+\[
+		\begin{bmatrix}[rr|r]
+			1&3 & 2\\
+			2&6&4\\
+		\end{bmatrix}
+		\qquad\sim\qquad
+		\begin{bmatrix}[rr|r]
+			1&3&2\\
+			0&0&0\\
+		\end{bmatrix}
+\]
+From the reduced row echelon form we're left with the equation $x+3y=2$, which isn't exactly
+a \emph{solution}. Effectively, the original system had only one equation's worth of information,
+so we cannot solve for both $x$ and $y$ based on the original system. To get ourselves out of
+this pickle, we will use a notational trick: introduce the arbitrary equation $y=t$.
+Now, because we've already done row-reduction, we see
+\[
+	\systeme{x+3y=2,2x+6y=4,y=t}\qquad\sim\qquad
+	\systeme{x+3y=2,y=t}.
+\]
+Here we've omitted the equation $0=0$ since it adds no information.
+We can write the solution to this system as
+\[
+	\vec x=\mat{x\\y} = \matc{2-3t\\t}=t\mat{-3\\1}+\mat{2\\0}.
+\]
+Notice that $t$ here stands for an arbitrary real number. And choice of $t$
+produces a valid solution to the original system (go ahead, pick some values
+for $t$ and see what happens).  We call $t$ a \emph{parameter} and $y$ a
+\emph{free variable}\footnote{ We call $y$ \emph{free} because we may pick
+it to be anything we want and still produce a solution to the system.}.
+Notice further that 
+\[
+	\vec x=t\mat{-3\\1}+\mat{2\\0}
+\]
+is vector form of the line $x+3y=2$.
+
+If a system of equations has infinitely many solutions, solving it will
+require picking a free variable. You have a lot of choice over which variables
+you pick to be free, but there is an algorithmic way to pick free variables that leaves
+no room for failure.
+\begin{definition}[Canonical Choice of Free Variables]
+	Let $(X)$ be a system of linear equations in the variables
+	$x_1,\ldots, x_n$, and let $R$ be the corresponding
+	row-reduced matrix. The variable $x_i$ is a \emph{canonical
+	free variable} if the $i$th column of $R$ does not contain a pivot.
+\end{definition}
+By picking assigning parameters to the canonical free variables, you are guaranteed
+to be able to write down all solutions to a system of linear equations.
+
+\begin{example}
+	XXX Finish
+\end{example}
+
+XXX Finish. Complete solutions, etc.?
+
+\subsection{Consistent and Inconsistent Systems}
+
+XXX Finish
+
+
+\section{Subspaces \& Bases}
