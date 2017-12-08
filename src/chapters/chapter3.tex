@@ -634,7 +634,7 @@ straightforward.
 		0&0&0&-2&-2\\0&0&0&-1&-1
 	\end{bmatrix}
 	\]
-	Again, the submatrix has a first column of zeros, so we pass to a submatrix.
+	Again, the submatrix has a first column of zeros, so we pass to a sub-submatrix.
 	\[
 	\begin{bmatrix}[rrr|rr]
 		0&1&2&3&2\\
@@ -821,3 +821,235 @@ XXX Finish
 
 
 \section{Subspaces \& Bases}
+
+	Lines or planes through the origin can be written as spans
+	of their direction vectors. However, a line or plane that doesn't
+	pass through the origin cannot be written as a span---it must
+	be expressed as a \emph{translated} span.
+
+	XXX Figure
+
+
+	There's something special about sets that can be expressed as 
+	(untranslated) spans. In particular, since a linear combination
+	of linear combinations is still a linear combination, a span
+	is \emph{closed} with respect to linear combinations. That is, 
+	by taking linear combinations of vectors in a span, you cannot
+	escape the span. In general, sets that have this property are called
+	\emph{subspaces}\index{subspace}.
+
+	\begin{definition}[Subspace]
+		A subset $\mathcal V\subseteq \R^n$ is called a \emph{subspace}
+		if the following two properties are satisfied.
+		\begin{enumerate}
+			\item[(i)] $\vec v\in\mathcal V$ implies $\alpha\vec v\in\mathcal V$
+			for all $\alpha$.
+			\item[(ii)] $\vec u,\vec v\in \mathcal V$ implies $\vec u+\vec v\in\mathcal V$.
+		\end{enumerate}
+	\end{definition}
+
+	The properties listed in the definition of a subspace are a succinct
+	way of stating that a linear combinations of vectors in a subspace
+	remain in that subspace\footnote{ An even more succinct
+	way of defining a subspace $\mathcal V$ is that if $\vec u,\vec v\in\mathcal V$,
+	then $\alpha\vec u+\vec v\in\mathcal V$ for all scalars $\alpha$.}.
+	Subspaces generalize the idea of \emph{flat spaces through the origin}. They encompass
+	lines, planes, volumes and more.
+
+	\begin{example}
+		Let $\mathcal V\subseteq \R^2$ be the complete solution to 
+		$x+2y=0$.  Show that $\mathcal V$ is a subspace.
+
+		XXX Finish
+	\end{example}
+
+	\begin{example}
+		Let $\mathcal W\subseteq \R^2$ be the line expressed in vector form
+		as 
+		\[
+			\vec x=t\mat{1\\2}+\mat{1\\1}.
+		\]
+		Determine whether $\mathcal W$ is a subspace.
+
+		XXX Finish
+	\end{example}
+
+
+	As mentioned earlier, subspaces and spans are deeply connected
+	by the following theorem.
+
+	\begin{theorem}
+		Every subspace is a span and every span is a subspace.  More precisely,
+		$\mathcal V\subseteq \R^n$ is a subspace if and only if $\mathcal V=
+		\Span\mathcal X$ for some set $\mathcal X$.
+	\end{theorem}
+	\begin{proof}
+		We will start by showing every span is a subspace.  Fix $\mathcal X\subseteq\R^2$
+		and let
+		$\mathcal V=\Span\mathcal X$. By definition, $\vec v\in\mathcal V$ means that
+		\[
+			\vec v=\sum \alpha_i\vec x_i
+		\]
+		for some $\vec x_i\in\mathcal X$ and scalars $\alpha_i$. It follows that
+		\[
+			\alpha\vec v=\alpha\sum \alpha_i\vec x_i = \sum (\alpha\alpha_i)\vec x_i\in
+			\Span\mathcal X=\mathcal V.
+		\]
+		Similarly, if $\vec u\in\mathcal V$, then
+		\[
+			\vec u=\sum\beta_i\vec y_i
+		\]
+		for some $\vec y_i\in\mathcal X$ and scalars $\beta_i$. It follows that
+		\[
+			\vec u+\vec v=\sum\alpha_i\vec x_i + \sum\beta_i\vec y_i
+		\]
+		is also a linear combination of vectors in $\mathcal X$, and so $\vec u+\vec v\in
+		\Span\mathcal X=\mathcal V$. Thus, $\mathcal V$ is a subspace.
+
+		Now we will prove that every subspace is a span. Let $\mathcal V$ be a subspace
+		and consider $\mathcal V'=\Span\mathcal V$. We know that 
+		$\mathcal V\subseteq \mathcal V'$. If we establish that $\mathcal V'\subseteq\mathcal V$,
+		then $\mathcal V=\mathcal V'=\Span\mathcal V$, which would complete the proof.
+
+		Fix $\vec x\in\mathcal V'$. By definition, 
+		\[
+			\vec x=\sum \alpha_i\vec v_i
+		\]
+		for some $\vec v_i\in\mathcal V$ and scalars $\alpha_i$. Observe that 
+		$\alpha_i\vec v_i\in\mathcal V$ since $\mathcal V$ is closed under scalar
+		multiplication. Thus, $\alpha_1\vec v_1+\alpha_2\vec v_2\in\mathcal V$
+		because $\mathcal V$ is closed under sums. Continuing, 
+		$(\alpha_1\vec v_1+\alpha_2\vec v_2)+\alpha_3\vec v_3\in\mathcal V$ because
+		$\mathcal V$ is closed under sums. It follows that
+		\[
+			\vec x=\sum \alpha_i\vec v_i
+			=\Big(\big((\alpha_1\vec v_1+\alpha_2\vec v_2)
+			+\alpha_3\vec v_3\big)+\cdots+\alpha_{n-1}\vec v_{n-1} \Big)
+			+\alpha_n\vec v_n\in\mathcal V.
+		\]
+		Thus $\mathcal V'\subseteq\mathcal V$, which completes the proof.
+	\end{proof}
+
+
+\subsection{Basis}
+	Let $\vec d=\mat{1\\2}$ and consider $\ell=\Span\Set{\vec d}$.
+
+	XXX Figure
+
+	We know that since $\ell$ is a subspace, $\ell=\Span\ell$. However,
+	the simplest descriptions of $\ell$ involve the span of only one vector.
+
+
+	Analogously, let $\mathcal P=\Span\Set{\vec d_1,\vec d_2}$ be the plane
+	through the origin with direction vectors $\vec d_1$ and $\vec d_2$. There
+	are many ways to write $\mathcal P$ as a span, but the simplest ones
+	involve exactly two vectors. The simplest way to describe a subspace
+	as a span is captured in the idea of \emph{basis}\index{basis}.
+
+	\begin{definition}[Basis]
+		Let $\mathcal V$ be a subspace. A \emph{basis} for 
+		$\mathcal V$ is a linearly independent set $\mathcal B$
+		such that $\mathcal V=\Span\mathcal B$.
+	\end{definition}
+
+	In short, a basis for a subspace is a linearly independent set that spans that
+	subspace.
+
+	\begin{example}
+		\label{EXLINEBASIS}
+		Let $\ell=\Span\Set*{\mat{1\\2},\mat{-2\\-4}, \mat{1/2\\1}}$. Find
+		a basis for $\ell$.
+
+		XXX Finish
+	\end{example}
+
+	Bases for subspaces are not unique. For a line through the origin, 
+	any non-zero direction vector serves as a basis. However, every basis
+	must have the same size.
+
+	\begin{theorem}
+		Let $\mathcal X$ and $\mathcal Y$ both be bases
+		for the subspace $\mathcal V$. Then $\Abs{\mathcal X}=\Abs{\mathcal Y}$.
+		That is, $\mathcal X$ and $\mathcal Y$ have the same size.
+	\end{theorem}
+	\begin{proof}
+		Let $\mathcal X=\Set{\vec x_1,\ldots, \vec x_m}$ and $\mathcal Y=\Set{\vec y_1,
+		\ldots,\vec y_n}$ both be bases for $\mathcal V$.
+		Without loss of generality, assume $\Abs{\mathcal X}>\Abs{\mathcal Y}$.
+		We will replace the elements of $\mathcal X$ with elements of $\mathcal Y$
+		one by one.
+
+		Consider the set $\mathcal X\cup\Set{\vec y_1}$. Since
+		$\vec y_1\in\mathcal V=\Span\mathcal X$, the set
+		$\mathcal X\cup\Set{\vec y_1}$ must be linearly dependent.
+		Further, since $\mathcal Y$ is a basis, $\Set{\vec y_1}$ is a linearly
+		independent set. We conclude that there must exist some $0\leq {r_1}\leq m$
+		so that
+		\[
+			\vec x_{r_1}\in\Span\, (\mathcal X\cup\Set{y_1})\backslash \Set{x_{r_1}}.
+		\]
+		Let $\mathcal B_1=(X\cup\Set{\vec y_1})\backslash \Set{\vec x_{r_1}}$ and note that
+		$\Abs{\mathcal B_1}=\Abs{\mathcal X}$ and that $\mathcal V=\Span\mathcal B_1$.
+
+		Continuing, consider $\mathcal B_1\cup\Set{\vec y_2}$. Since $\Set{\vec y_1,\vec y_2}$
+		is a linearly independent set, there must exist some $0\leq r_2\leq m$ with $r_2\neq r_1$
+		so that
+		\[
+			\vec x_{r_2}\in\Span\, (\mathcal B_1\cup\Set{y_2})\backslash \Set{\vec x_{r_2}}.
+		\]
+		Let $\mathcal B_2=(\mathcal B_1\cup\Set{\vec y_2})\backslash \Set{\vec x_{r_2}}$.
+
+		Continuing in this way, construct the sets $\mathcal B_3,\ldots,\mathcal B_n$ where
+		\[
+			\mathcal B_n=\mathcal Y\cup (\mathcal X\backslash \Set{\vec x_{r_1},\ldots,\vec x_{r_n}}).
+		\]
+		Since $\Abs{\mathcal X}>\Abs{\mathcal Y}$, we know $\mathcal Y\subsetneq \mathcal B_n$.
+		Since $\mathcal Y$ is a basis, we conclude that $\mathcal B_n$ must be 
+		linearly dependent. However, any dependency relationship in $\mathcal B_n$ corresponds
+		to a dependency relationship in $\mathcal X$, which is a contradiction.
+	\end{proof}
+
+	Since all bases for a particular subspace have the same size, we can
+	refer to \emph{the} size of \emph{a} basis for a subspace---this number is special
+	and is called the \emph{dimension}\index{dimension} of the subspace.
+
+	\begin{definition}[Dimension]
+		Let $\mathcal V$ be a subspace. The \emph{dimension} of $\mathcal V$
+		is the size of a basis for $\mathcal V$.
+	\end{definition}
+
+	Using this definition, the dimension of a plane is $2$, of a line is $1$,
+	and of a point is $0$\footnote{ The dimension of a line, plane, or point
+	not through the origin is defined to be the dimension of the subspace obtained
+	when translating it to the origin.}.
+
+	\begin{example}
+		Find the dimension of $\R^2$.
+
+		Since $\Set{\xhat, \yhat}$ is a basis for $\R^2$, we know $\R^2$ is
+		two dimensional.
+	\end{example}
+
+	\begin{example}
+		Let $\ell=\Span\Set*{\mat{1\\2},\mat{-2\\-4}, \mat{1/2\\1}}$.
+
+		In Example \ref{EXLINEBASIS}, we found XXX was a basis for $\ell$.
+
+		XXX Finish
+	\end{example}
+
+	\begin{definition}[Standard Basis for $\R^n$]
+		The \emph{standard basis} for $\R^n$ are the 
+		vectors $\vec e_1,\ldots,\vec e_n$ where
+		\[
+			\vec e_1=\matc{1\\0\\0\\\vdots}\qquad
+			\vec e_2=\matc{0\\1\\0\\\vdots}\qquad
+			\vec e_3=\matc{0\\0\\1\\\vdots}\qquad\cdots.
+		\]
+		That is $\vec e_i$ is the vector with a $1$ in its
+		$i$th component and zeros elsewhere.
+	\end{definition}
+
+	The notation $\vec e_i$ is context specific. If we say $\vec e_i\in\R^2$,
+	then $\vec e_i$ must have exactly two components. If we say $\vec e_i\in\R^{45}$,
+	then $\vec e_i$ must have $45$ components. 
