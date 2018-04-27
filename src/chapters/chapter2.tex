@@ -428,10 +428,10 @@ points in the direction of another.
 
 
 \newpage
-A \emph{vector}\index{vector} is a quantity which is characterized by
-a \emph{magnitude} and a \emph{direction}.   Many quantities are best
-described by vectors rather than
-numbers.  For example, when driving a car,
+A \emph{vector}\index{vector} is characterized by
+a \emph{magnitude} and a \emph{direction}, and using vectors, we can
+mathematically describe more situations than with regular numbers.
+For example, when driving a car,
  it may be sufficient to
 know your speed, which can be described by a single number,
  but the motion of an airplane must be described
@@ -498,12 +498,18 @@ For example, $\vec a$ or $\mathbf{a}$ may both be used to represent the vector
 quantity named ``$a$.''  In this book we will use $\vec a$ to represent a vector.
 The notation $\norm{\vec a}$\index{$\norm{\:\cdot\:}$}\index{magnitude}\index{norm}
 represents the magnitude of the vector $\vec a$, which is sometimes called
-the \emph{norm} of $\vec a$.
+the \emph{norm} or \emph{length} of $\vec a$.
+
+\begin{definition}[Norm]
+	The \emph{norm} of a vector $\vec a$, notated $\norm{\vec a}$, is the
+	magnitude of $\vec a$.
+\end{definition}
 
 Graphically, vectors are represented as directed line segments (a
-line segment with an arrow at one end).  The endpoints of the segment are called the
-\emph{initial
-point} (the base) and the \emph{terminal point} (the tip) of the vector.
+line segment with an arrow at one end), however, vectors are fundamentally
+directions and magnitudes. Since any directed line segment contains a starting
+point and an ending point, a directed line segment contains extra information that
+is not actually part of the vector.
 
 \begin{center}
 	\usetikzlibrary{patterns,decorations.pathreplacing}
@@ -511,18 +517,15 @@ point} (the base) and the \emph{terminal point} (the tip) of the vector.
 		\coordinate (A) at (1,1);
 		\coordinate (B) at (-.5,2);
 
-		\draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point};
-		\draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point};
+		\draw [mypink,fill] (A) circle (1.5pt) node [right] {starting point};
+		\draw [mypink,fill] (B) circle (1.5pt) node [left] {ending point};
 		\draw[->,thick,myred!60!white] (A) -- (B);
 	\end{tikzpicture}
 \end{center}
 
-Let $A=(1,1)$, $B=(3,2)$, $X=(1,0)$, and $Y=(3,1)$ and consider the vectors
-$\vec a = \overrightarrow{AB}$ and $\vec x=\overrightarrow{XY}$.  Are these
-the same or different vectors?  If we drew them as directed line segments,
-the drawings would be distinct.  However, both $\vec a$ and $\vec x$ have equivalent
-magnitudes and directions.  Thus, $\vec a$ and $\vec x$ are \emph{equivalent},
-and we would be justified writing $\vec a=\vec x$.
+For example, let $A=(1,1)$, $B=(3,2)$, $X=(1,0)$, and $Y=(3,1)$ and consider the vectors
+$\vec a = \overrightarrow{AB}$ and $\vec x=\overrightarrow{XY}$.  
+
 
 \begin{center}
 	\usetikzlibrary{patterns,decorations.pathreplacing}
@@ -546,7 +549,7 @@ and we would be justified writing $\vec a=\vec x$.
 		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
 		]
 
-			\draw[->,thick,myred!60!white] (1,1) -- +(A) node [midway,above,xshift=-8pt] {$\vec x=\overrightarrow{AB}$};
+			\draw[->,thick,myred!60!white] (1,1) -- +(A) node [midway,above,xshift=-8pt] {$\vec a=\overrightarrow{AB}$};
 			\draw[->,thick,mypink] (1,0) -- +(A) node [midway,above,xshift=-8pt] {$\vec x=\overrightarrow{XY}$};
 		%\draw[->,thick,myred!60!white] (3,1) -- +(A) node [midway,above,yshift=2pt] {$\vec x$};
 
@@ -554,11 +557,19 @@ and we would be justified writing $\vec a=\vec x$.
 	\end{tikzpicture}
 \end{center}
 
-Alternatively, we could consider the \emph{rooted vector}\index{rooted vector}
-$\vec a$ rooted at the point $A$.  In this terminology, $\vec a$ rooted
-at $A$ is \emph{different} than $\vec a$ rooted at $X$.  This idea
-of rooted vectors will occasionally be useful, but our primary study will be unrooted
-vectors.
+Are these vectors
+the same or different vectors?  As directed line segments,
+they are different because they are at different locations in space.  
+However, both $\vec a$ and $\vec x$ have the same
+magnitude and direction.  Thus, $\vec a=\vec x$ despite the fact that $A\neq X$\footnote{
+	Some theories use \emph{rooted vectors}\index{rooted vector} instead of
+	vectors as the fundamental object of study. A rooted vector
+	represents a magnitude, direction, \emph{and} a starting point. And, 
+	as rooted vectors, $\vec a\neq \vec x$ (from the example above).
+	But for us, vectors will always be unrooted, even though our graphical
+	representations of vectors might appear rooted.
+}.
+
 
 \subsection{Vectors and Points}
 The distinction between vectors and points is sometimes nebulous because
@@ -1328,6 +1339,790 @@ variety of contexts, some of which we shall encounter later.
 \end{exercises}
 
 
+
+\section{Lines and Planes}
+
+With a handle on vectors, we can now use them to describe some common geometric
+objects: lines and planes.
+
+\subsection{Lines}
+Consider for a moment the line $\ell$ through the points $P$ and $Q$.  When $P,Q\in\R^2$, we
+can describe $\ell$ with an equation of the form $y=mx+b$ (provided it isn't a vertical line), but if
+$P,Q\in\R^3$, it's much harder to describe $\ell$ with an equation.  Using vectors
+provides an easier way.
+
+Let $\vec d=\overrightarrow{PQ}$ and consider the set of points (or vectors)
+\[
+	\vec x=t\vec d+P
+\]
+for $t\in \R$.  Geometrically, this is the set of all points we get by starting at $P$ and
+displacing by some multiple of $\vec d$.  This is a line!
+
+
+\begin{center}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\coordinate (D) at ($(B)-(A)$);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$P$};
+		\draw [mypink,fill] (B) circle (1.5pt) node [below right] {$Q$};
+		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,below right,yshift=2pt] {$\vec d$};
+
+
+		\end{axis}
+		\foreach \x in {-1,5} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt) node [left] {\footnotesize$\tfrac{\x}{3}\vec d+P$};
+		}
+		\foreach \x in {-3,-2,4,6} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt);
+		}
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\coordinate (A) at (1,1);
+		\coordinate (B) at (3,2);
+		\coordinate (D) at ($(B)-(A)$);
+		\begin{axis}[
+		    anchor=origin,
+		    disabledatascaling,
+		    xmin=-1,xmax=5,
+		    ymin=-1,ymax=3,
+		    x=1cm,y=1cm,
+		    grid=both,
+		    grid style={line width=.1pt, draw=gray!10},
+		    %major grid style={line width=.2pt,draw=gray!50},
+		    axis lines=middle,
+		    minor tick num=0,
+		    enlargelimits={abs=0.5},
+		    axis line style={latex-latex},
+		    ticklabel style={font=\tiny,fill=white},
+		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
+		]
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$P$};
+		\draw [mypink,fill] (B) circle (1.5pt) node [below right] {$Q$};
+		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,below right,yshift=2pt] {$\vec d$};
+
+		\end{axis}
+
+		\foreach \x in {-3,-2,-1,0,4,5,6} {
+			\draw [->, gray!50!white] (0,0) -- ($(A)+\x/3*(D)$);
+		}
+		\foreach \x in {-1,5} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt) node [left] {\footnotesize$\tfrac{\x}{3}\vec d+P$};
+		}
+		\foreach \x in {-3,-2,4,6} {
+			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt);
+		}
+	\end{tikzpicture}
+\end{center}
+Note that sometimes we draw vectors as line segments.
+Other times, drawing drawing vectors as line segments makes
+it hard to see what is going on, and so it is better to draw
+each vector by marking only its ending point.
+
+
+The line $\ell$ described above can be written in set-builder notation
+as:
+\[
+	\ell=\Set{\vec x\given \vec x=t\vec d+P\text{ for some }t\in \R}.
+\]
+Notice that in set-builder notation, we write ``for some $t\in \R$.'' Make sure you
+understand why replacing ``for some $t\in\R$'' with ``for
+all $t\in \R$'' would be incorrect.
+
+Writing lines with set-builder notation all the time can be overkill,
+so we will allow ourselves to describe lines in a shorthand called \emph{vector form}\footnote{
+	$y=mx+b$ form of a line is also shorthand.  The line $\ell$ described by the equation
+	$y=mx+b$ is actually the set $\Set{(x,y)\in\R^2\given y=mx+b}$.
+}.
+
+\begin{definition}[Vector form of a Line]
+	A line $\ell$ is described in \emph{vector form}\index{vector form of line} if
+	there are two vectors $\vec d\neq \vec 0$ and $\vec p$ so that
+	\[
+		\vec x=t\vec d+\vec p
+	\]
+	satisfies $\vec x\in \ell$ for all $t\in \R$.  In this case we call $\vec d$ the
+	\emph{direction} of $\ell$ and the equation $\vec x=t\vec d+\vec p$ the
+	\emph{vector equation} or \emph{vector form}
+	of $\ell$.
+\end{definition}
+
+Note that if $\vec x=t\vec d+\vec p$ is the vector equation of a line $\ell$, by setting $t=0$
+we necessarily have $\vec p\in\ell$.
+
+The direction of a line is easily obtained by finding the displacement vector between two points
+on the line.  Thus, given a line in another form, computing its vector form is straightforward.
+\begin{example}
+	Find vector form of the line $\ell\subseteq\R^2$ with equation $y=2x+3$.
+
+	First, we find two
+	points on the line.  By guess-and-check we see $P=(0,3)$ and $Q=(1,5)$ are on $\ell$.
+	Thus, a direction vector for $\ell$ is given by
+	\[
+		\vec d = (1,5)-(0,3)=(1,2).
+	\]
+	We may now write the vector equation of $\ell$ as
+	\[
+		\vec x=t\vec d+P
+	\]
+	or, in components,
+	\[
+		\mat{x\\y} = t\mat{1\\2}+\mat{0\\3}.
+	\]
+\end{example}
+
+The downside of writing lines in vector form is that there are multiple direction vectors and multiple points
+for every line.  Thus, merely by looking at the vector equation for two lines, it can be hard to tell if
+they're equal.
+
+For example,
+\[
+	\mat{x\\y} = t\mat{1\\2}+\mat{0\\3},\qquad
+	\mat{x\\y} = t\mat{2\\4}+\mat{0\\3},\quad\text{and}\quad
+	\mat{x\\y} = t\mat{1\\2}+\mat{1\\5}
+\]
+all represent the same line.  In the second equation, the direction is parallel but scaled, and in
+the third equation, a different point on the line was chosen.
+
+In vector form, the variable $t$ is called the \emph{parameter variable}.  It is an instance of
+a \emph{dummy variable}; that is, it is mostly there as a placeholder.  Remember, vector
+form is shorthand for a set described in set-builder notation.
+
+\bigskip
+Let $\vec d_1,\vec d_2\neq\vec 0$ and $\vec p_1,\vec p_2$ be vectors and define the lines
+\[
+	\ell_1=\Set{\vec x\given \vec x=t\vec d_1+\vec p_1\text{ for some }t\in\R}
+\]
+\[
+	\ell_2=\Set{\vec x\given \vec x=t\vec d_2+\vec p_2\text{ for some }t\in\R}.
+\]
+These lines have vector equations $\vec x=t\vec d_1+\vec p_1$ and $\vec x=t\vec d_2+\vec p_2$.
+However, declaring that $\ell_1=\ell_2$ if and only if $t\vec d_1+\vec p_1=t\vec d_2+\vec p_2$
+does \emph{not} make sense.   Instead $\ell_1=\ell_2$ if $\ell_1\subseteq\ell_2$ and $\ell_2\subseteq\ell_1$.
+If $\vec x\in\ell_1$ then $\vec x=t\vec d_1+\vec p_1$ for some $t\in\R$.  If $\vec x\in\ell_2$
+then $\vec x=t\vec d_2+\vec p_2$ for some \emph{possibly different} $t\in \R$.  This can get
+confusing really quickly.  The easiest solution is to use different parameter variables if
+we want to compare lines in vector form.
+
+\begin{example}
+	Determine if the lines $\ell_1$ and $\ell_2$, represented in vector form by the equations
+	\[
+		\vec x=t\mat{1\\1}+\mat{2\\1}\qquad\text{and}\qquad
+		\vec x=t\mat{2\\2}+\mat{4\\3}
+	\]
+	are the same line.  To determine this, we need to figure out if $\vec x\in\ell_1$
+	implies $\vec x\in \ell_2$ and if $\vec x\in\ell_2$ implies $\vec x\in\ell_1$.
+
+	If $\vec x\in\ell_1$, then $\vec x=t\mat{1\\1}+\mat{2\\1}$ for some $t\in\R$.  If
+	$\vec x\in\ell_2$, then $\vec x=s\mat{2\\2}+\mat{4\\3}$ for some $s\in \R$.  Thus if
+	\[
+		t\mat{1\\1}+\mat{2\\1} = \vec x = s\mat{2\\2}+\mat{4\\3}
+	\]
+	always has a solution, $\ell_1=\ell_2$.  Moving everything to one side we see
+	\begin{align*}
+		\vec 0 = \mat{4\\3}-\mat{2\\1} + s\mat{2\\2}-t\mat{1\\1}
+		&=\mat{2\\2}+s\mat{2\\2}-t\mat{1\\1}\\
+		&=(s+1)\mat{2\\2}-\tfrac{t}{2}\mat{2\\2}\\
+		&= (s+1-\tfrac{t}{2})\mat{2\\2}.
+	\end{align*}
+	This has a solution whenever $0=s+1-t/2$.  Since for every $t\in\R$ we can find an $s\in\R$
+	and for every $s\in \R$ we can find a $t\in \R$ satisfying this equation, we know $\ell_1=\ell_2$.
+\end{example}
+
+
+The geometry of lines in space is a bit more complicated than that of lines
+in the plane.  Lines in the plane either intersect or are parallel.
+In space,  we have to be a bit more careful about what we mean by
+``parallel lines,'' since lines with entirely different directions can
+still fail to intersect\footnote{ Recall that in Euclidean geometry
+two lines are defined to be parallel if they coincide or never intersect.}.
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
+	    zmin=0,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
+	    ]
+	    \addplot3 [no marks,orange,ultra thick] coordinates {(0,10,10) (20,10,30)};
+	    \addplot3 [no marks,orange,dashed, thick] coordinates {(0,10,0) (20,10,0)};
+	    \addplot3 [no marks,mypink,ultra thick] coordinates {(0,0,20) (20,20,0)};
+	    \addplot3 [no marks,mypink,dashed, thick] coordinates {(0,0,0) (20,20,0)};
+	%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,orange, opacity=0.5,ultra thick]
+	%    ({x},{118.89/x},{2*x});
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+\begin{example}
+Consider the lines described by
+\begin{align*}
+\vec x &= t( 1, 3, -2 ) + ( 1, 2, 1 ) \\
+\vec x &= t( -2, -6, 4) + ( 3, 1, 0 ).
+\end{align*}
+They have parallel directions since $( -2, -6, 4 ) = -2( 1, 3,-2 )$.
+Hence, in this case, we say the lines are \emph{parallel}\index{parallel lines}.  (How can
+we be sure the lines are not the same?)
+\end{example}
+
+\begin{example}
+Consider the lines described by
+\begin{align*}
+	\vec x &= t(1, 3, -2 ) + ( 1, 2, 1 ) \\
+	\vec x &= t( 0, 2, 3) + ( 0, 3, 9 ).
+\end{align*}
+They are not parallel because neither of the direction
+vectors is a multiple
+of the other.  They may or may not intersect.  (If they don't,
+	we say the lines are \emph{skew}\index{skew lines}.)  How can we find out?
+	Mirroring our earlier approach,
+	we can set their equations equal and see if we can solve for the point
+	of intersection \emph{after ensuring we give their parametric variables
+	different names}.   We'll keep one parametric variable named $t$ and name the
+	other one $s$.  Thus, we want
+\[
+\vec x = t( 1, 3, -2 ) + ( 1, 2, 1 ) =
+s( 0, 2, 3) + ( 0, 3, 9 ),
+\]
+which after collecting terms yields
+\[
+    ( t + 1, 3t + 2, -2t + 1 ) = ( 0, 2s + 3, 3s + 9).
+\]
+Picking out the components yields three equations
+\begin{align*}
+    t + 1 &= 0 \\
+    3t +2 &= 2s + 3 \\
+    -2t + 1 &=  3s + 9
+\end{align*}
+in 2 unknowns  $s$ and $t$.  This is an {\it overdetermined\/}
+system, and it may or may not have a consistent solution.
+The first two equations yield $t = -1$  and $s = -2$.  Putting
+these values in the last equation yields $(-2)(-1) + 1 = 3(-2) + 9$,
+which is indeed true.
+Hence, the equations are consistent, and the lines
+intersect.   To find the point of intersection, put $t = -1$
+in the equation for the first line (or
+$s = -2$ in that for the second) to obtain  $( 0, -1, 3 )$.
+\end{example}
+
+\subsection{Planes}
+
+Any two distinct points define a line.  To define a plane, we
+need three points.  But there's a caveat: the three points cannot
+be on the same line, otherwise they'd define a line
+and not a plane.  Let $A,B,C\in\R^3$ be three points that are not
+collinear and let $\mathcal P$ be the plane that passes through $A$,
+$B$, and $C$.
+
+Just like lines, planes have direction vectors.  For $\mathcal P$, both
+$\vec d_1=\overrightarrow{AB}$ and $\vec d_2=\overrightarrow{AC}$ are direction
+vectors for $\mathcal P$.  Of course, $\vec d_1$, $\vec d_2$ and their multiples
+are not the only direction vectors for $\mathcal P$. There are infinitely many more, including
+$\vec d_1+\vec d_2$, and $\vec d_1-7\vec d_2$, and so on.  However, since a plane
+is a \emph{two}-dimensional object, we only need two different direction vectors to describe it.
+
+Again like lines, planes have a vector form.  $\mathcal P$ can be written in vector form as
+\[
+	\mat{x\\y\\z} = t\vec d_1+s\vec d_2+A.
+\]
+Vector form of $\mathcal P$ is not unique.  Any two different directions in $\mathcal P$
+suffice for defining $\mathcal P$ in vector form.
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
+	    %zmin=0,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
+	    ]
+		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+		{x+y};
+		\coordinate (A) at (axis cs:-3,-3,-6);
+		\coordinate (B) at (axis cs:3,4,7);
+		\coordinate (C) at (axis cs:-4,4,0);
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
+		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
+		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+\begin{definition}[Vector form of a plane]
+	The plane $\mathcal P$ is described in \emph{vector form} if there are
+	three vectors $\vec d_1$, $\vec d_2$, and $\vec p$ where $\vec d_1,\vec d_2\neq \vec 0$
+	point in different directions and
+	\[
+		\vec x=t\vec d_1+s\vec d_2+\vec p
+	\]
+	satisfies $\vec x\in \mathcal P$ for all scalars $t,s\in\R$.  The vectors $\vec d_1$
+	and $\vec d_2$ are called \emph{direction vectors} for the plane $\mathcal P$.
+\end{definition}
+
+Since we will commonly be working in $\R^3$ there is another way to define a plane.  Given
+any vector $\vec n\in\R^3$, we can consider the set $\mathcal Q\subseteq\R^3$ of vectors orthogonal to $\vec n$.
+If $\vec n=\vec 0$, then $\mathcal Q=\R^3$.  Otherwise, $\mathcal Q$ is a plane through the origin.
+In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} of the plane $\mathcal Q$.
+
+
+\begin{center}
+\begin{tikzpicture}
+	\newcommand{\RightAngle}[4][5pt]{%
+        \draw ($#3!#1!#2$)
+        --($ #3!2!($($#3!#1!#2$)!.5!($#3!#1!#4$)$) $)
+        --($#3!#1!#4$) ;
+        }
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
+	    width=12cm,
+	    scale mode=scale uniformly,
+	    zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+	    xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+	    ]
+		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+		{.25*x+.25*y};
+		\coordinate (A) at (axis cs:-4,-4,-2);
+		\coordinate (N) at (axis cs:-6,-6,6);
+		\coordinate (B) at (axis cs:4,4,2);
+		\coordinate (C) at (axis cs:-4,4,0);
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
+		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
+		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
+		\draw [->, thick] (A) -- (N) node [midway,left] {$\vec n$};
+		\RightAngle{(N)}{(A)}{(C)}
+		%\RightAngle{(N)}{(A)}{(B)}
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+\begin{definition}[Normal form of a plane]
+	The plane $\mathcal P$ is described in \emph{normal form} if for some $\vec n$ and $\vec p$,
+	the equation
+	\[
+		\vec n\cdot(\vec x-\vec p)=0
+	\]
+	if and only if $\vec x\in\mathcal P$.  Equivalently, $\mathcal P$ is described in normal form if
+	for some $\vec n$ and scalar $\alpha\in\R$ the equation
+	\[
+		\vec n\cdot \vec x=\alpha
+	\]
+	is satisfied if and only if $\vec x\in \mathcal P$.  In either case, the vector $\vec n$
+	is call a \emph{normal vector} for $\mathcal P$.
+\end{definition}
+
+Normal form of a plane only exists in $\R^3$, but it is often useful\footnote{ Just like $y=mx+b$ form
+of a line only exists in $\R^2$.}.  The equivalence of the two ways to write a normal form of a plane
+is straight forward.
+\[
+		\vec n\cdot(\vec x-\vec p)=0
+\]
+if and only if
+\[
+		\vec n\cdot\vec x = \vec n\cdot \vec p = \alpha.
+\]
+Since $\vec n$ and $\vec p$ are fixed, $\alpha$ is a constant. Expanding normal form in terms of
+components we see
+\[
+		\vec n\cdot(\vec x-\vec p)=\vec n\cdot\vec x-\alpha=
+		n_xx+n_yy+n_zz-\alpha=0
+\]
+and so
+\begin{equation}
+	\label{EQScalarForm}
+		n_xx+n_yy+n_zz=\alpha
+\end{equation}
+is another way to write a plane.  Equation \eqref{EQScalarForm} is sometimes
+called \emph{scalar form}\index{scalar form of a plane}
+of a plane.  For us, it will not be important to distinguish between scalar and normal form.
+
+It should be noted that like vector form of a plane, normal form of a plane is not unique.
+For example, the plane described by $\vec n\cdot(\vec x-\vec p)=0$ is the same as the
+plane $(2\vec n)\cdot(\vec x-\vec p)=0$.
+
+\begin{example}
+	Find vector form and normal form of the plane $\mathcal P$ passing
+	through the point $A=(1,0,0)$, $B=(0,1,0)$ and $C=(0,0,1)$.
+
+	To find vector form of $\mathcal P$, we need a point on the plane and
+	two direction vectors.  We have three points on the plane, so we can
+	obtain two direction vectors by subtracting these points in different ways.
+	Let
+	\[
+		\vec d_1=\overrightarrow{AB} = \mat{-1\\1\\0}\qquad\vec d_2=\overrightarrow{AC}=
+		\mat{-1\\0\\1}.
+	\]
+	Using the point $A$, we may now write vector form of $\mathcal P$ as
+	\[
+		\mat{x\\y\\z} = t\mat{-1\\1\\0}+s\mat{-1\\0\\1}+\mat{1\\0\\0}.
+	\]
+
+	To write normal form we need to find a normal vector to $\mathcal P$.  By symmetry,
+	we can see that $\vec n=(1,1,1)$ is a normal vector to $\mathcal P$.  If we weren't
+	so insightful, we could also compute $\vec d_1\times \vec d_2 = (1,1,1)$ to find a
+	normal vector.  Now, we may express $\mathcal P$ in normal form as
+	\[
+		\mat{1\\1\\1}\cdot\left(\mat{x\\y\\z}-\mat{1\\0\\0}\right)=0
+	\]
+	or equivalently,
+	\[
+		x+y+z=1.
+	\]
+\end{example}
+
+\begin{example}
+	Find the line $\mathcal P_1\cap \mathcal P_2$ where
+	$\mathcal P_1$ is the plane given by the equation
+	\[
+		x+y+z=2
+	\]
+	and $\mathcal P_2$ is the plane given by the equation
+	\[
+		2x-y+z=0.
+	\]
+
+	Let $\ell=\mathcal P_1\cap \mathcal P_2$.  Since $\ell\subseteq \mathcal P_1$
+	and $\ell\subseteq\mathcal P_2$, every direction vector for $\ell$ is also
+	a direction vector for $\mathcal P_1$ and $\mathcal P_2$.
+
+	Let $\vec n_1=(1,1,1)$
+	be a normal vector for $\mathcal P_2$ and $\vec n_2=(2,-1,1)$ be a normal vector
+	for $\mathcal P_2$.  If $\vec d$ is a direction vector for $\ell$, then
+	$\vec n_1\cdot \vec d=0$ and $\vec n_2\cdot \vec d=0$.  Thus,
+	\[
+		\vec d=\vec n_1\times\vec n_2=\mat{2\\1\\-3}
+	\]
+	is a direction vector for $\ell$.  By guess and check we find that $\vec p=(0,1,1)$
+	satisfies $\vec p\in\mathcal P_1$ and $\vec p\in\mathcal P_2$ and so $\vec p\in\ell$.
+	Thus, we may write $\ell$ in vector form as
+	\[
+		\mat{x\\y\\z} = t\mat{2\\1\\-3}+\mat{0\\1\\1}.
+	\]
+\end{example}
+
+%  \begin{tikzpicture}
+%    \begin{axis}[grid=major,view={20}{40},z buffer=sort]
+%      %\addplot3 [surf, domain=0:360, domain y=5:10,samples=30, samples y=10]
+%      %{-y+5};
+%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+%	    ({x},{118.89/x},{2*x});
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {0};
+%      %\addplot3 [domain=-10:10,samples=10, black,mark=none]
+%	%\addplot3[domain=0:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+%	 %   ({x},{y},{x+y});
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {x+y};
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {-2*x+y+3};
+%      %\addplot3 [domain=0:360, samples y=0, samples=30, thick, z buffer=auto]
+%      %(x,5.1,0);
+%      %\addplot3 [surf,domain=0:360, domain y=0:5,samples=30, samples y=10]
+%      %{-y+5};
+%    \end{axis}
+%  \end{tikzpicture}
+
+
+\begin{exercises}
+    \begin{problist}
+        \prob   Give, in vector form, an equation for the line that
+        \begin{enumerate}
+            \item   passes through $(0, 0, 0)$ and is parallel to $\vec{v} = 3\xhat +4\yhat + 5\zhat$,
+            \item   passes through $(1, 2, 3)$ and $(4, -1, 2)$,
+            \item   passes through $(1, 1)$ and is orthogonal to $\vec{v} = (3, 1)$,
+            \item   passes through $(9, -2, 3)$ and $(1, 2, 3)$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $r(t) = 3t\xhat + 4t\yhat + 5t\zhat$
+                \item   $r(t) = (1+3t)\xhat + (2-3t)\yhat + (3-t)\zhat$
+                \item   $r(t) = (1-t)\xhat + (1+3t)\yhat$
+                \item   $r(t) = (1+8t)\xhat + (2-4t)\yhat + 3\zhat$.
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Determine if the lines with the following vector equations intersect:
+        \[
+            \vec{p}(t) = \mat{1\\-1\\2} + t\mat{2\\1\\1} \quad
+            \vec{r}(t) = \mat{0\\1\\1} + t\mat{1\\0\\-1}.
+        \]
+        \begin{solution}
+            The lines intersect if they have at least one common point between them. Therefore, if we
+            can find $t, s \in \R$ so that $p(t) = r(s)$, then the lines will intersect. Thus if $p(t) =
+            r(s)$ then
+            \[
+                \mat{1\\-1\\2} + t\mat{2\\1\\1} = \mat{0\\1\\1} + s\mat{1\\0\\-1}.  
+            \]
+            Therefore, we want to find $t, s \in \R$ so that
+            \[
+                \mat{1\\-2\\1} = s\mat{1\\0\\-1} - t\mat{2\\1\\1}.
+            \]
+            In particular, it must be true that $-t = -2$, which says that $t = 2$. Thus, by
+            substitution
+            \[
+                \mat{5\\0\\3} = s\mat{1\\0\\-1}.  
+            \]
+            There are no selections of $s \in \R$ for which this is true, which says that there is no
+            pair $t,s \in \R$ so that $p(t) = r(s)$. Therefore the lines do not intersect.
+        \end{solution}
+
+        \prob   Find an equation for the plane with the given normal vector and containing the given
+        point:
+        \begin{enumerate}
+            \item   $\vec{n} = (2, -1, 3)$, $P(1, 2, 0)$
+            \item   $\vec{n} = (1, 0, 3)$, $P(2, 4, 5)$
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $2(x-1) - (y-2) + 3z = 0$.
+                \item   $(x-2) + 3(z-5) = 0$.
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Write an equation for the plane that
+        \begin{enumerate}
+            \item   passes through $(1, 4, 3)$ and is orthogonal to the line with equation $\vec{r}(t) =
+                (1 + t, 2 + 4t, t)$,
+            \item   passes through the origin and is parallel to the plane with equation $3x + 4y - 5z =
+                -1$,
+            \item   passes through $(0, 0, 0)$, $(1, -2, 8)$, and $(-2, -1, 3)$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $x + 4y + z = 20$
+                \item   $3x + 4y -5z = 0$
+                \item   $2x - 19y -5z = 0$.           
+            \end{enumerate}
+        \end{solution}
+
+        \prob   Find a vector (parametric) equation for the line of intersection of the planes with
+        equations $2x + 3y - z = 1$ and $x - y - z = 0$.
+        \begin{solution}
+            $\vec{r}(t) = (1-4t, t, 1-5t)$ is one solution.
+        \end{solution}
+
+        \prob   Find the angle between the normals to the following planes:
+        \begin{enumerate}
+            \item   the planes with equations $x + 2y -z = 2$ and $2x - y + 3z = 1$,
+            \item   the plane with equation $2x+3y-5z=0$ and the plane containing the points $(1,3,-2)$,
+                $(5,1,3)$, and $(1,0,1)$.
+        \end{enumerate}
+        \begin{solution}
+            \begin{enumerate}
+                \item   $\theta = \cos^{-1}\left(\frac{-3}{2\sqrt{21}}\right)$
+                \item   $\theta = \cos^{-1}\left(\frac{14}{\sqrt{38}\,\sqrt{41}}\right)$
+            \end{enumerate}
+        \end{solution}
+
+        \prob[\grout]    Two of these points are on the same side of the plane $3x+2y-2z=0$. Which two
+        are they? $P(10,3,2)$, $Q(-2,5,3)$, $R(-2,5,1)$.
+        \begin{solution}
+            The normal vector $\vec{n} = (3,2,-2)$ points towards one side of the plane. If any point
+            lies on this side of the plane, then it will form an angle with the normal vector that is
+            less than $90^{\circ}$. If any point lies on the opposite side of the plane, then it will
+            form an angle with the normal vector that is larger than $90^{\circ}$. So we should
+            calculate the angles each of $P,Q$ and $R$ make with $\vec{n}$ using the dot-product.
+            \begin{enumerate}
+                \item   Considering $P$, we find that $\theta = \cos^{-1} \left(\frac{32}{\sqrt{113}\,
+                    \sqrt{17}}\right) < 90^{\circ}$.
+                \item   Considering $Q$, we find that $\theta = \cos^{-1}
+                    \left(\frac{-2}{\sqrt{38}\,\sqrt{17}}\right) > 90^{\circ}$.
+                \item   Considering $R$, we find that $\theta = \cos^{-1}
+                    \left(\frac{2}{\sqrt{30}\,\sqrt{17}}\right) < 90^{\circ}$.
+            \end{enumerate}
+            Since $P$ and $R$ both make angles with $\vec{n}$ that are larger than $90^{\circ}$, they
+            must lie on the same side of the plane.
+        \end{solution}
+    \end{problist}
+\end{exercises}
+
+
+
+\section{Geometry \& Sets}
+
+Using vectors, we can describe more than just lines and planes---we can describe 
+all sorts of geometric objects.
+
+Recall that vector form of a line is actually a shorthand. When we write $\vec x=t\vec d+\vec p$
+to describe the line $\ell$,
+what we mean is
+\[
+	\ell=\Set{\vec x\given \vec x=t\vec d+\vec p\text{ for some }t\in \R}.
+\]
+We could notate a portion of this line by restricting $t$. For instance, consider the ray $R$
+and the line segment $S$:
+\begin{align*}
+	R&=\Set{\vec x\given \vec x=t\vec d+\vec p\text{ for some }t\geq 0}\\
+	S&=\Set{\vec x\given \vec x=t\vec d+\vec p\text{ for some }t\in [0,2]}
+\end{align*}
+
+XXX Figure
+
+We can also make polygons by adding restrictions to vector form of planes. Let
+$\vec a=\mat{2\\1}$ and $\vec b=\mat{-1\\1}$ and consider the unit square $U$ and
+the parallelogram $P$ defined by
+\begin{align*}
+	U&=\Set{\vec x\given \vec x=t\xhat+s\yhat\text{ for some }t,s\in [0,1]}\\
+	P&=\Set{\vec x\given \vec x=t\vec a+s\vec b\text{ for some }t\in [0,1]\text{ and }s\in[-1,1]}
+\end{align*}
+
+XXX Figure
+
+Each set so far is a set of linear combinations, and we 
+have made different shapes by restricting the coefficients of those linear
+combinations. Certain restrictions have special names, the most useful one
+being a \emph{convex combination}\index{convex combination}.
+
+\begin{definition}[Convex Combination]
+	Let $\vec v_1,\ldots,\vec v_n$ be vectors and consider the linear
+	combination
+	\[
+		\vec x=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n.
+	\]
+	The vectors $\vec x$ is a \emph{convex combination} of $\vec v_1,\ldots,\vec v_n$
+	if $\alpha_1,\ldots,\alpha_n\geq 0$ and $\alpha_1+\cdots+\alpha_n=1$.
+\end{definition}
+
+You can think of convex combinations as weighted averages of vectors (the average of $\vec v_1,\ldots,
+\vec v_n$ would be the convex combination with coefficients $\alpha_i=\frac{1}{n}$). Convex combinations
+of two vectors gives the line segment between their ending points. 
+
+\begin{example}
+	Let $\vec a=\mat{2\\1}$ and $\vec b=\mat{-1\\1}$ and define
+	\begin{align*}
+		A&=\Set{\vec x\given \vec x\text{ is a convex combination of }\vec a\text{ and }\vec b}\\
+		&=\Set{\vec x\given \vec x=\alpha\vec a+(1-\alpha)\vec b\text{ for some }\alpha\in [0,1]}.
+	\end{align*}
+	Draw $A$.
+
+	XXX Finish
+
+	XXX Figure
+\end{example}
+
+\subsection{Set Operations}
+We can also use set operations to define geometric objects. For instance, let $H$ be the upper
+half-plane and $C$ be the unit circle. That is
+\begin{align*}
+	H&=\Set{\vec x\in \R^2\given \vec x=\alpha\xhat+\beta\yhat\text{ for some }
+	\alpha,\beta\in \R\text{ with }\alpha\geq 0}\\
+	C&=\Set{\vec x\in \R^2\given \norm{\vec x}= 1}.
+\end{align*}
+
+We can define now define the semi-circle $S=C\cap H$ using a set intersection.
+
+XXX Figure
+
+But what if we wanted to describe three identical circles but centered in different
+locations? We could define three circles $S_1$, $S_2$, and $S_3$ and consider
+their union $S_1\cup S_2\cup S_3$, or we could use the operation of \emph{set addition}
+or the \emph{sum of sets}\footnote{ Recall that the result of $a+b$ is called 
+the \emph{sum} of $a$ and $b$, and the mathematical operation performed to get the sum
+is called \emph{addition}}.
+
+\begin{definition}[Set Addition]
+	Let $A$ and $B$ be sets of vectors. The \emph{set sum} of $A$ and $B$,
+	denoted $A+B$, is the set
+	\[
+		A+B=\Set{\vec x\given \vec x=\vec a+\vec b\text{ for some }\vec a\in A\text{ and }\vec b\in B}.
+	\]
+\end{definition}
+
+Set sums are very different than regular sums despite using the same symbol, ``$+$''.
+For example, $A+\Set{}=\Set{}$. That is, any set plus the empty set is empty. However, they are very useful.
+Let $C=\Set{\vec x\in\R^2\given \norm{\vec x}=1}$ be the unit circle centered at the origin, and consider
+the sets
+\[
+	X=C+\Set{\yhat}\qquad Y=C+\Set{3\xhat,\yhat}\qquad Z=C+\Set{\vec 0, \xhat,\yhat}.
+\]
+Rewriting, we see $X=\Set{\vec x+\yhat\given \norm{\vec x}=1}$ is just $C$ translated
+by $\yhat$. Similarly, $Y=\Set{\vec x+\vec v\given \norm{\vec x}=1\text{ and }\vec v=3\xhat\text{
+	or }\vec v=\yhat}=(C+\Set{3\xhat})\cup (C+\Set{\xhat})$, and so $Y$ is the union
+of two translated copies of $C$\footnote{ If you want to stretch your mind, consider what $C+C$
+is as a set.}.
+
+XXX Figure
+
+Set addition allows us to easily create parallel lines and planes by translation. For example,
+consider the lines $\ell_1$ and $\ell_2$ given in vector form as $\vec x=t\vec d$ and $\vec x=t\vec d+\vec p$,
+respectively, where  $\vec d=\mat{2\\1}$ and $\vec p=\mat{-1\\1}$.  These lines
+differ from each other by translation, and using the idea of set addition we can write
+\[
+	\ell_2 = \ell_1+\Set{\vec p}.
+\]
+
+XXX Figure (with lots of copies of $\vec p$ translating $\ell_1$).
+
+Note that it would be incorrect to write ``$\ell_2=\ell_1+\vec p$''. Because $\ell_1$
+is a set and $\vec p$ is not a set, ``$\ell_1+\vec p$'' does not make mathematical sense.
+
+As we pursue our study of linear algebra, we will come to see that lines and planes through
+the origin are especially important (and will have special notation). 
+Set addition will allow us to describe all lines and planes as translations of lines
+and planes through the origin.
+
+
+\subsection{Images}
+
+There is one more important way to create geometric objects, and that is using functions
+and the idea of \emph{image}\index{image}.
+
+\DefImage
+
+In plain language, the image of a set $X$ under a function $f$ is the set
+of all outputs of $f$ when only points from $X$ are input.
+
+\begin{example}
+	Let $f:\R^2\to\R^2$ be defined as $f(x,y)=(2x,y)$ and let $C=\Set{\vec x\in\R^2\given
+	\norm{\vec x}=1}$ be the unit circle. Find $f(C)$.
+
+	The image $f(C)$ consists of all the points of $C$ after $f$ is applied.
+	Since $f$ doubles the $x$-coordinate, we $f(C)$ will be $C$ stretched in the $x$-direction
+	by $2$.
+
+	XXX Figure
+\end{example}
+
+Images allow exotic transformations of sets. For example, consider \[f(x,y)=((x+y)\sin x, (x+y)\cos x),\]
+and let $X=\Set{t\xhat\given t\geq 0}$ be the positive $x$-axis. The image $f(X)$ is a spiral!
+
+XXX Figure
+
+Nearly any geometric figure can be made using images and cleverly chosen functions, and multi-variable
+calculus studies how arbitrary functions (via taking images) change geometry. For our purposes, we will
+stick mainly with down to earth functions: linear functions\footnote{ Linear functions
+have the property that they always take lines to lines.} and translations. But, we can still get a 
+lot of utility out of images even in the restricted case of linear functions and translations.
+
+Let $T=\Set{\vec x\in\R^2\given \vec x=\alpha\xhat+\beta\yhat\text{ where } \alpha,\beta\geq 0\text{ and }
+\alpha+\beta \leq 1}$ be a triangle and let $R:\R^2\to\R^2$ be the function that rotates vectors 
+counter-clockwise by 90$^\circ$. That is $R(x,y)=(-y,x)$. And, let $V:\R^2\to\R^2$ defined by $V(\vec a)=
+\vec a+\yhat$ be vertical translation. Then, we can start making some fun pictures!
+
+XXX Figure ({T, R(T)}, {T, V of R(T)}, ...)
+
+
+
+
+
 \section{Dot Products \& Projections}
 \subsection{Dot Product}
 Let $\vec a$ and $\vec b$ be vectors.  We assume they are placed so their
@@ -1995,615 +2790,3 @@ many problems.
 \end{exercises}
 
 
-\section{Lines and Planes}
-
-With a handle on vectors, we can now use them to describe some common geometric
-objects: lines and planes.
-
-\subsection{Lines}
-Consider for a moment the line $\ell$ through the points $P$ and $Q$.  If $P,Q\in\R^2$, we
-could describe this line in $y=mx+b$ form (provided it isn't a vertical line), but if
-$P,Q\in\R^3$, it's much harder to describe $\ell$ with an equation.  Using vectors
-provides an easier way.
-
-Let $\vec d=\overrightarrow{PQ}$ and consider the set of points (or vectors)
-\[
-	\vec x=t\vec d+P
-\]
-for $t\in \R$.  Geometrically, this is the set of all points we get by starting at $P$ and
-displacing by some multiple of $\vec d$.  This is a line!
-
-
-\begin{center}
-	\begin{tikzpicture}
-		\coordinate (A) at (1,1);
-		\coordinate (B) at (3,2);
-		\coordinate (D) at ($(B)-(A)$);
-		\begin{axis}[
-		    anchor=origin,
-		    disabledatascaling,
-		    xmin=-1,xmax=5,
-		    ymin=-1,ymax=3,
-		    x=1cm,y=1cm,
-		    grid=both,
-		    grid style={line width=.1pt, draw=gray!10},
-		    %major grid style={line width=.2pt,draw=gray!50},
-		    axis lines=middle,
-		    minor tick num=0,
-		    enlargelimits={abs=0.5},
-		    axis line style={latex-latex},
-		    ticklabel style={font=\tiny,fill=white},
-		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
-		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
-		]
-
-		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$P$};
-		\draw [mypink,fill] (B) circle (1.5pt) node [below right] {$Q$};
-		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,below right,yshift=2pt] {$\vec d$};
-
-
-		\end{axis}
-		\foreach \x in {-1,5} {
-			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt) node [left] {\footnotesize$\tfrac{\x}{3}\vec d+P$};
-		}
-		\foreach \x in {-3,-2,4,6} {
-			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt);
-		}
-	\end{tikzpicture}
-	\begin{tikzpicture}
-		\coordinate (A) at (1,1);
-		\coordinate (B) at (3,2);
-		\coordinate (D) at ($(B)-(A)$);
-		\begin{axis}[
-		    anchor=origin,
-		    disabledatascaling,
-		    xmin=-1,xmax=5,
-		    ymin=-1,ymax=3,
-		    x=1cm,y=1cm,
-		    grid=both,
-		    grid style={line width=.1pt, draw=gray!10},
-		    %major grid style={line width=.2pt,draw=gray!50},
-		    axis lines=middle,
-		    minor tick num=0,
-		    enlargelimits={abs=0.5},
-		    axis line style={latex-latex},
-		    ticklabel style={font=\tiny,fill=white},
-		    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
-		    ylabel style={at={(ticklabel* cs:1)},anchor=south west}
-		]
-
-		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$P$};
-		\draw [mypink,fill] (B) circle (1.5pt) node [below right] {$Q$};
-		\draw[->,thick,myred!60!white] (A) -- (B) node [midway,below right,yshift=2pt] {$\vec d$};
-
-		\end{axis}
-
-		\foreach \x in {-3,-2,-1,0,4,5,6} {
-			\draw [->, gray!50!white] (0,0) -- ($(A)+\x/3*(D)$);
-		}
-		\foreach \x in {-1,5} {
-			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt) node [left] {\footnotesize$\tfrac{\x}{3}\vec d+P$};
-		}
-		\foreach \x in {-3,-2,4,6} {
-			\draw [mypink,fill] ($(A)+\x/3*(D)$) circle (1.5pt);
-		}
-	\end{tikzpicture}
-\end{center}
-Note that sometimes when we draw vectors as line segments.
-Other times, drawing drawing vectors as line segments can make
-it hard to see what's going on, and so it is better to draw
-each vector by marking only its terminal point.
-
-
-Call the line described above $\ell$.  In set-builder notation, we would write
-\[
-	\ell=\Set{\vec x\given \vec x=t\vec d+P\text{ for some }t\in \R}.
-\]
-Notice that in set-builder notation, we write ``for some $t\in \R$.'' Make sure you
-understand why replacing ``for some $t\in\R$'' with ``for
-all $t\in \R$'' would be incorrect.
-
-Writing lines with set-builder notation all the time can be overkill,
-so we will allow ourselves to describe lines in a shorthand called \emph{vector form}\footnote{
-	$y=mx+b$ form of a line is also shorthand.  The line $\ell$ described by the equation
-	$y=mx+b$ is actually the set $\Set{(x,y)\in\R^2\given y=mx+b}$.
-}.
-
-\begin{definition}[Vector form of a Line]
-	A line $\ell$ is described in \emph{vector form}\index{vector form of line} if
-	there are two vectors $\vec d\neq \vec 0$ and $\vec p$ so that
-	\[
-		\vec x=t\vec d+\vec p
-	\]
-	satisfies $\vec x\in \ell$ for all $t\in \R$.  In this case we call $\vec d$ the
-	\emph{direction} of $\ell$ and the equation $\vec x=t\vec d+\vec p$ the
-	\emph{vector equation} or \emph{vector form}
-	of $\ell$.
-\end{definition}
-
-Note that if $\vec x=t\vec d+\vec p$ is the vector equation of a line $\ell$, by setting $t=0$
-we necessarily have $\vec p\in\ell$.
-
-The direction of a line is easily obtained by finding the displacement vector between two points
-on the line.  Thus, given a line in another form, computing its vector form is straightforward.
-\begin{example}
-	Find vector form of the line $\ell\subseteq\R^2$ with equation $y=2x+3$.
-
-	First, we find two
-	points on the line.  By guess-and-check we see $P=(0,3)$ and $Q=(1,5)$ are on $\ell$.
-	Thus, a direction vector for $\ell$ is given by
-	\[
-		\vec d = (1,5)-(0,3)=(1,2).
-	\]
-	We may now write the vector equation of $\ell$ as
-	\[
-		\vec x=t\vec d+P
-	\]
-	or, in components,
-	\[
-		\mat{x\\y} = t\mat{1\\2}+\mat{0\\3}.
-	\]
-\end{example}
-
-The downside of writing lines in vector form is that there are multiple direction vectors and multiple points
-for every line.  Thus, merely by looking at the vector equation for two lines, it can be hard to tell if
-they're equal.
-
-For example,
-\[
-	\mat{x\\y} = t\mat{1\\2}+\mat{0\\3},\qquad
-	\mat{x\\y} = t\mat{2\\4}+\mat{0\\3},\quad\text{and}\quad
-	\mat{x\\y} = t\mat{1\\2}+\mat{1\\5}
-\]
-all represent the same line.  In the second equation, the direction is parallel but scaled, and in
-the third equation, a different point on the line was chosen.
-
-In vector form, the variable $t$ is called the \emph{parameter variable}.  It is an instance of
-a \emph{dummy variable}; that is, it is mostly there as a placeholder.  Remember, vector
-form is shorthand for a set described in set-builder notation.
-
-\bigskip
-Let $\vec d_1,\vec d_2\neq\vec 0$ and $\vec p_1,\vec p_2$ be vectors and define the lines
-\[
-	\ell_1=\Set{\vec x\given \vec x=t\vec d_1+\vec p_1\text{ for some }t\in\R}
-\]
-\[
-	\ell_2=\Set{\vec x\given \vec x=t\vec d_2+\vec p_2\text{ for some }t\in\R}.
-\]
-These lines have vector equations $\vec x=t\vec d_1+\vec p_1$ and $\vec x=t\vec d_2+\vec p_2$.
-However, declaring that $\ell_1=\ell_2$ if and only if $t\vec d_1+\vec p_1=t\vec d_2+\vec p_2$
-does \emph{not} make sense.   Instead $\ell_1=\ell_2$ if $\ell_1\subseteq\ell_2$ and $\ell_2\subseteq\ell_1$.
-If $\vec x\in\ell_1$ then $\vec x=t\vec d_1+\vec p_1$ for some $t\in\R$.  If $\vec x\in\ell_2$
-then $\vec x=t\vec d_2+\vec p_2$ for some \emph{possibly different} $t\in \R$.  This can get
-confusing really quickly.  The easiest solution is to use different parameter variables if
-we want to compare lines in vector form.
-
-\begin{example}
-	Determine if the lines $\ell_1$ and $\ell_2$, represented in vector form by the equations
-	\[
-		\vec x=t\mat{1\\1}+\mat{2\\1}\qquad\text{and}\qquad
-		\vec x=t\mat{2\\2}+\mat{4\\3}
-	\]
-	are the same line.  To determine this, we need to figure out if $\vec x\in\ell_1$
-	implies $\vec x\in \ell_2$ and if $\vec x\in\ell_2$ implies $\vec x\in\ell_1$.
-
-	If $\vec x\in\ell_1$, then $\vec x=t\mat{1\\1}+\mat{2\\1}$ for some $t\in\R$.  If
-	$\vec x\in\ell_2$, then $\vec x=s\mat{2\\2}+\mat{4\\3}$ for some $s\in \R$.  Thus if
-	\[
-		t\mat{1\\1}+\mat{2\\1} = \vec x = s\mat{2\\2}+\mat{4\\3}
-	\]
-	always has a solution, $\ell_1=\ell_2$.  Moving everything to one side we see
-	\begin{align*}
-		\vec 0 = \mat{4\\3}-\mat{2\\1} + s\mat{2\\2}-t\mat{1\\1}
-		&=\mat{2\\2}+s\mat{2\\2}-t\mat{1\\1}\\
-		&=(s+1)\mat{2\\2}-\tfrac{t}{2}\mat{2\\2}\\
-		&= (s+1-\tfrac{t}{2})\mat{2\\2}.
-	\end{align*}
-	This has a solution whenever $0=s+1-t/2$.  Since for every $t\in\R$ we can find an $s\in\R$
-	and for every $s\in \R$ we can find a $t\in \R$ satisfying this equation, we know $\ell_1=\ell_2$.
-\end{example}
-
-
-The geometry of lines in space is a bit more complicated than that of lines
-in the plane.  Lines in the plane either intersect or are parallel.
-In space,  we have to be a bit more careful about what we mean by
-``parallel lines,'' since lines with entirely different directions can
-still fail to intersect\footnote{ Recall that in Euclidean geometry
-two lines are defined to be parallel if they coincide or never intersect.}.
-
-\begin{center}
-  \begin{tikzpicture}
-    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
-	    zmin=0,
-	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
-	    ]
-	    \addplot3 [no marks,orange,ultra thick] coordinates {(0,10,10) (20,10,30)};
-	    \addplot3 [no marks,orange,dashed, thick] coordinates {(0,10,0) (20,10,0)};
-	    \addplot3 [no marks,mypink,ultra thick] coordinates {(0,0,20) (20,20,0)};
-	    \addplot3 [no marks,mypink,dashed, thick] coordinates {(0,0,0) (20,20,0)};
-	%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,orange, opacity=0.5,ultra thick]
-	%    ({x},{118.89/x},{2*x});
-    \end{axis}
-  \end{tikzpicture}
-\end{center}
-
-\begin{example}
-Consider the lines described by
-\begin{align*}
-\vec x &= t( 1, 3, -2 ) + ( 1, 2, 1 ) \\
-\vec x &= t( -2, -6, 4) + ( 3, 1, 0 ).
-\end{align*}
-They have parallel directions since $( -2, -6, 4 ) = -2( 1, 3,-2 )$.
-Hence, in this case, we say the lines are \emph{parallel}\index{parallel lines}.  (How can
-we be sure the lines are not the same?)
-\end{example}
-
-\begin{example}
-Consider the lines described by
-\begin{align*}
-	\vec x &= t(1, 3, -2 ) + ( 1, 2, 1 ) \\
-	\vec x &= t( 0, 2, 3) + ( 0, 3, 9 ).
-\end{align*}
-They are not parallel because neither of the direction
-vectors is a multiple
-of the other.  They may or may not intersect.  (If they don't,
-	we say the lines are \emph{skew}\index{skew lines}.)  How can we find out?
-	Mirroring our earlier approach,
-	we can set their equations equal and see if we can solve for the point
-	of intersection \emph{after ensuring we give their parametric variables
-	different names}.   We'll keep one parametric variable named $t$ and name the
-	other one $s$.  Thus, we want
-\[
-\vec x = t( 1, 3, -2 ) + ( 1, 2, 1 ) =
-s( 0, 2, 3) + ( 0, 3, 9 ),
-\]
-which after collecting terms yields
-\[
-    ( t + 1, 3t + 2, -2t + 1 ) = ( 0, 2s + 3, 3s + 9).
-\]
-Picking out the components yields three equations
-\begin{align*}
-    t + 1 &= 0 \\
-    3t +2 &= 2s + 3 \\
-    -2t + 1 &=  3s + 9
-\end{align*}
-in 2 unknowns  $s$ and $t$.  This is an {\it overdetermined\/}
-system, and it may or may not have a consistent solution.
-The first two equations yield $t = -1$  and $s = -2$.  Putting
-these values in the last equation yields $(-2)(-1) + 1 = 3(-2) + 9$,
-which is indeed true.
-Hence, the equations are consistent, and the lines
-intersect.   To find the point of intersection, put $t = -1$
-in the equation for the first line (or
-$s = -2$ in that for the second) to obtain  $( 0, -1, 3 )$.
-\end{example}
-
-\subsection{Planes}
-
-Any two distinct points define a line.  To define a plane, we
-need three points.  But there's a caveat: the three points cannot
-be on the same line, otherwise they'd define a line
-and not a plane.  Let $A,B,C\in\R^3$ be three points that are not
-collinear and let $\mathcal P$ be the plane that passes through $A$,
-$B$, and $C$.
-
-Just like lines, planes have direction vectors.  For $\mathcal P$, both
-$\vec d_1=\overrightarrow{AB}$ and $\vec d_2=\overrightarrow{AC}$ are direction
-vectors for $\mathcal P$.  Of course, $\vec d_1$, $\vec d_2$ and their multiples
-are not the only direction vectors for $\mathcal P$. There are infinitely many more, including
-$\vec d_1+\vec d_2$, and $\vec d_1-7\vec d_2$, and so on.  However, since a plane
-is a \emph{two}-dimensional object, we only need two different direction vectors to describe it.
-
-Again like lines, planes have a vector form.  $\mathcal P$ can be written in vector form as
-\[
-	\mat{x\\y\\z} = t\vec d_1+s\vec d_2+A.
-\]
-Vector form of $\mathcal P$ is not unique.  Any two different directions in $\mathcal P$
-suffice for defining $\mathcal P$ in vector form.
-
-\begin{center}
-  \begin{tikzpicture}
-    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
-	    %zmin=0,
-	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,}
-	    ]
-		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-		{x+y};
-		\coordinate (A) at (axis cs:-3,-3,-6);
-		\coordinate (B) at (axis cs:3,4,7);
-		\coordinate (C) at (axis cs:-4,4,0);
-
-		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
-		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
-		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
-    \end{axis}
-  \end{tikzpicture}
-\end{center}
-
-\begin{definition}[Vector form of a plane]
-	The plane $\mathcal P$ is described in \emph{vector form} if there are
-	three vectors $\vec d_1$, $\vec d_2$, and $\vec p$ where $\vec d_1,\vec d_2\neq \vec 0$
-	point in different directions and
-	\[
-		\vec x=t\vec d_1+s\vec d_2+\vec p
-	\]
-	satisfies $\vec x\in \mathcal P$ for all scalars $t,s\in\R$.  The vectors $\vec d_1$
-	and $\vec d_2$ are called \emph{direction vectors} for the plane $\mathcal P$.
-\end{definition}
-
-Since we will commonly be working in $\R^3$ there is another way to define a plane.  Given
-any vector $\vec n\in\R^3$, we can consider the set $\mathcal Q\subseteq\R^3$ of vectors orthogonal to $\vec n$.
-If $\vec n=\vec 0$, then $\mathcal Q=\R^3$.  Otherwise, $\mathcal Q$ is a plane through the origin.
-In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} of the plane $\mathcal Q$.
-
-
-\begin{center}
-\begin{tikzpicture}
-	\newcommand{\RightAngle}[4][5pt]{%
-        \draw ($#3!#1!#2$)
-        --($ #3!2!($($#3!#1!#2$)!.5!($#3!#1!#4$)$) $)
-        --($#3!#1!#4$) ;
-        }
-    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
-	    width=12cm,
-	    scale mode=scale uniformly,
-	    zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
-	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
-	    xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
-	    ]
-		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-		{.25*x+.25*y};
-		\coordinate (A) at (axis cs:-4,-4,-2);
-		\coordinate (N) at (axis cs:-6,-6,6);
-		\coordinate (B) at (axis cs:4,4,2);
-		\coordinate (C) at (axis cs:-4,4,0);
-
-		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
-		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
-		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
-		\draw [->, thick] (A) -- (N) node [midway,left] {$\vec n$};
-		\RightAngle{(N)}{(A)}{(C)}
-		%\RightAngle{(N)}{(A)}{(B)}
-    \end{axis}
-  \end{tikzpicture}
-\end{center}
-
-\begin{definition}[Normal form of a plane]
-	The plane $\mathcal P$ is described in \emph{normal form} if for some $\vec n$ and $\vec p$,
-	the equation
-	\[
-		\vec n\cdot(\vec x-\vec p)=0
-	\]
-	if and only if $\vec x\in\mathcal P$.  Equivalently, $\mathcal P$ is described in normal form if
-	for some $\vec n$ and scalar $\alpha\in\R$ the equation
-	\[
-		\vec n\cdot \vec x=\alpha
-	\]
-	is satisfied if and only if $\vec x\in \mathcal P$.  In either case, the vector $\vec n$
-	is call a \emph{normal vector} for $\mathcal P$.
-\end{definition}
-
-Normal form of a plane only exists in $\R^3$, but it is often useful\footnote{ Just like $y=mx+b$ form
-of a line only exists in $\R^2$.}.  The equivalence of the two ways to write a normal form of a plane
-is straight forward.
-\[
-		\vec n\cdot(\vec x-\vec p)=0
-\]
-if and only if
-\[
-		\vec n\cdot\vec x = \vec n\cdot \vec p = \alpha.
-\]
-Since $\vec n$ and $\vec p$ are fixed, $\alpha$ is a constant. Expanding normal form in terms of
-components we see
-\[
-		\vec n\cdot(\vec x-\vec p)=\vec n\cdot\vec x-\alpha=
-		n_xx+n_yy+n_zz-\alpha=0
-\]
-and so
-\begin{equation}
-	\label{EQScalarForm}
-		n_xx+n_yy+n_zz=\alpha
-\end{equation}
-is another way to write a plane.  Equation \eqref{EQScalarForm} is sometimes
-called \emph{scalar form}\index{scalar form of a plane}
-of a plane.  For us, it will not be important to distinguish between scalar and normal form.
-
-It should be noted that like vector form of a plane, normal form of a plane is not unique.
-For example, the plane described by $\vec n\cdot(\vec x-\vec p)=0$ is the same as the
-plane $(2\vec n)\cdot(\vec x-\vec p)=0$.
-
-\begin{example}
-	Find vector form and normal form of the plane $\mathcal P$ passing
-	through the point $A=(1,0,0)$, $B=(0,1,0)$ and $C=(0,0,1)$.
-
-	To find vector form of $\mathcal P$, we need a point on the plane and
-	two direction vectors.  We have three points on the plane, so we can
-	obtain two direction vectors by subtracting these points in different ways.
-	Let
-	\[
-		\vec d_1=\overrightarrow{AB} = \mat{-1\\1\\0}\qquad\vec d_2=\overrightarrow{AC}=
-		\mat{-1\\0\\1}.
-	\]
-	Using the point $A$, we may now write vector form of $\mathcal P$ as
-	\[
-		\mat{x\\y\\z} = t\mat{-1\\1\\0}+s\mat{-1\\0\\1}+\mat{1\\0\\0}.
-	\]
-
-	To write normal form we need to find a normal vector to $\mathcal P$.  By symmetry,
-	we can see that $\vec n=(1,1,1)$ is a normal vector to $\mathcal P$.  If we weren't
-	so insightful, we could also compute $\vec d_1\times \vec d_2 = (1,1,1)$ to find a
-	normal vector.  Now, we may express $\mathcal P$ in normal form as
-	\[
-		\mat{1\\1\\1}\cdot\left(\mat{x\\y\\z}-\mat{1\\0\\0}\right)=0
-	\]
-	or equivalently,
-	\[
-		x+y+z=1.
-	\]
-\end{example}
-
-\begin{example}
-	Find the line $\mathcal P_1\cap \mathcal P_2$ where
-	$\mathcal P_1$ is the plane given by the equation
-	\[
-		x+y+z=2
-	\]
-	and $\mathcal P_2$ is the plane given by the equation
-	\[
-		2x-y+z=0.
-	\]
-
-	Let $\ell=\mathcal P_1\cap \mathcal P_2$.  Since $\ell\subseteq \mathcal P_1$
-	and $\ell\subseteq\mathcal P_2$, every direction vector for $\ell$ is also
-	a direction vector for $\mathcal P_1$ and $\mathcal P_2$.
-
-	Let $\vec n_1=(1,1,1)$
-	be a normal vector for $\mathcal P_2$ and $\vec n_2=(2,-1,1)$ be a normal vector
-	for $\mathcal P_2$.  If $\vec d$ is a direction vector for $\ell$, then
-	$\vec n_1\cdot \vec d=0$ and $\vec n_2\cdot \vec d=0$.  Thus,
-	\[
-		\vec d=\vec n_1\times\vec n_2=\mat{2\\1\\-3}
-	\]
-	is a direction vector for $\ell$.  By guess and check we find that $\vec p=(0,1,1)$
-	satisfies $\vec p\in\mathcal P_1$ and $\vec p\in\mathcal P_2$ and so $\vec p\in\ell$.
-	Thus, we may write $\ell$ in vector form as
-	\[
-		\mat{x\\y\\z} = t\mat{2\\1\\-3}+\mat{0\\1\\1}.
-	\]
-\end{example}
-
-%  \begin{tikzpicture}
-%    \begin{axis}[grid=major,view={20}{40},z buffer=sort]
-%      %\addplot3 [surf, domain=0:360, domain y=5:10,samples=30, samples y=10]
-%      %{-y+5};
-%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
-%	    ({x},{118.89/x},{2*x});
-%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-%      {0};
-%      %\addplot3 [domain=-10:10,samples=10, black,mark=none]
-%	%\addplot3[domain=0:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
-%	 %   ({x},{y},{x+y});
-%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-%      {x+y};
-%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-%      {-2*x+y+3};
-%      %\addplot3 [domain=0:360, samples y=0, samples=30, thick, z buffer=auto]
-%      %(x,5.1,0);
-%      %\addplot3 [surf,domain=0:360, domain y=0:5,samples=30, samples y=10]
-%      %{-y+5};
-%    \end{axis}
-%  \end{tikzpicture}
-
-
-\begin{exercises}
-    \begin{problist}
-        \prob   Give, in vector form, an equation for the line that
-        \begin{enumerate}
-            \item   passes through $(0, 0, 0)$ and is parallel to $\vec{v} = 3\xhat +4\yhat + 5\zhat$,
-            \item   passes through $(1, 2, 3)$ and $(4, -1, 2)$,
-            \item   passes through $(1, 1)$ and is orthogonal to $\vec{v} = (3, 1)$,
-            \item   passes through $(9, -2, 3)$ and $(1, 2, 3)$.
-        \end{enumerate}
-        \begin{solution}
-            \begin{enumerate}
-                \item   $r(t) = 3t\xhat + 4t\yhat + 5t\zhat$
-                \item   $r(t) = (1+3t)\xhat + (2-3t)\yhat + (3-t)\zhat$
-                \item   $r(t) = (1-t)\xhat + (1+3t)\yhat$
-                \item   $r(t) = (1+8t)\xhat + (2-4t)\yhat + 3\zhat$.
-            \end{enumerate}
-        \end{solution}
-
-        \prob   Determine if the lines with the following vector equations intersect:
-        \[
-            \vec{p}(t) = \mat{1\\-1\\2} + t\mat{2\\1\\1} \quad
-            \vec{r}(t) = \mat{0\\1\\1} + t\mat{1\\0\\-1}.
-        \]
-        \begin{solution}
-            The lines intersect if they have at least one common point between them. Therefore, if we
-            can find $t, s \in \R$ so that $p(t) = r(s)$, then the lines will intersect. Thus if $p(t) =
-            r(s)$ then
-            \[
-                \mat{1\\-1\\2} + t\mat{2\\1\\1} = \mat{0\\1\\1} + s\mat{1\\0\\-1}.  
-            \]
-            Therefore, we want to find $t, s \in \R$ so that
-            \[
-                \mat{1\\-2\\1} = s\mat{1\\0\\-1} - t\mat{2\\1\\1}.
-            \]
-            In particular, it must be true that $-t = -2$, which says that $t = 2$. Thus, by
-            substitution
-            \[
-                \mat{5\\0\\3} = s\mat{1\\0\\-1}.  
-            \]
-            There are no selections of $s \in \R$ for which this is true, which says that there is no
-            pair $t,s \in \R$ so that $p(t) = r(s)$. Therefore the lines do not intersect.
-        \end{solution}
-
-        \prob   Find an equation for the plane with the given normal vector and containing the given
-        point:
-        \begin{enumerate}
-            \item   $\vec{n} = (2, -1, 3)$, $P(1, 2, 0)$
-            \item   $\vec{n} = (1, 0, 3)$, $P(2, 4, 5)$
-        \end{enumerate}
-        \begin{solution}
-            \begin{enumerate}
-                \item   $2(x-1) - (y-2) + 3z = 0$.
-                \item   $(x-2) + 3(z-5) = 0$.
-            \end{enumerate}
-        \end{solution}
-
-        \prob   Write an equation for the plane that
-        \begin{enumerate}
-            \item   passes through $(1, 4, 3)$ and is orthogonal to the line with equation $\vec{r}(t) =
-                (1 + t, 2 + 4t, t)$,
-            \item   passes through the origin and is parallel to the plane with equation $3x + 4y - 5z =
-                -1$,
-            \item   passes through $(0, 0, 0)$, $(1, -2, 8)$, and $(-2, -1, 3)$.
-        \end{enumerate}
-        \begin{solution}
-            \begin{enumerate}
-                \item   $x + 4y + z = 20$
-                \item   $3x + 4y -5z = 0$
-                \item   $2x - 19y -5z = 0$.           
-            \end{enumerate}
-        \end{solution}
-
-        \prob   Find a vector (parametric) equation for the line of intersection of the planes with
-        equations $2x + 3y - z = 1$ and $x - y - z = 0$.
-        \begin{solution}
-            $\vec{r}(t) = (1-4t, t, 1-5t)$ is one solution.
-        \end{solution}
-
-        \prob   Find the angle between the normals to the following planes:
-        \begin{enumerate}
-            \item   the planes with equations $x + 2y -z = 2$ and $2x - y + 3z = 1$,
-            \item   the plane with equation $2x+3y-5z=0$ and the plane containing the points $(1,3,-2)$,
-                $(5,1,3)$, and $(1,0,1)$.
-        \end{enumerate}
-        \begin{solution}
-            \begin{enumerate}
-                \item   $\theta = \cos^{-1}\left(\frac{-3}{2\sqrt{21}}\right)$
-                \item   $\theta = \cos^{-1}\left(\frac{14}{\sqrt{38}\,\sqrt{41}}\right)$
-            \end{enumerate}
-        \end{solution}
-
-        \prob[\grout]    Two of these points are on the same side of the plane $3x+2y-2z=0$. Which two
-        are they? $P(10,3,2)$, $Q(-2,5,3)$, $R(-2,5,1)$.
-        \begin{solution}
-            The normal vector $\vec{n} = (3,2,-2)$ points towards one side of the plane. If any point
-            lies on this side of the plane, then it will form an angle with the normal vector that is
-            less than $90^{\circ}$. If any point lies on the opposite side of the plane, then it will
-            form an angle with the normal vector that is larger than $90^{\circ}$. So we should
-            calculate the angles each of $P,Q$ and $R$ make with $\vec{n}$ using the dot-product.
-            \begin{enumerate}
-                \item   Considering $P$, we find that $\theta = \cos^{-1} \left(\frac{32}{\sqrt{113}\,
-                    \sqrt{17}}\right) < 90^{\circ}$.
-                \item   Considering $Q$, we find that $\theta = \cos^{-1}
-                    \left(\frac{-2}{\sqrt{38}\,\sqrt{17}}\right) > 90^{\circ}$.
-                \item   Considering $R$, we find that $\theta = \cos^{-1}
-                    \left(\frac{2}{\sqrt{30}\,\sqrt{17}}\right) < 90^{\circ}$.
-            \end{enumerate}
-            Since $P$ and $R$ both make angles with $\vec{n}$ that are larger than $90^{\circ}$, they
-            must lie on the same side of the plane.
-        \end{solution}
-    \end{problist}
-\end{exercises}

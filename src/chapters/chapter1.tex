@@ -91,9 +91,8 @@
 
 \newpage
 \section{Mathematical Notation}
-	Mathematics is a sophisticated and precise language, and
-	we best not adventure into calculus without learning some
-	basic words.
+	Mathematics is a sophisticated and precise language.
+	We will start our linear algebra journey by learning some basic words.
 
 	The most basic mathematical word is that of a \emph{set}\index{set}.  
 	A set is an unordered collection of distinct objects.  We won't try and pin
@@ -110,8 +109,9 @@
 		\Set{1,2,3}.
 	\]
 	This would be read aloud as ``the set containing the elements $1$, $2$, and $3$.''
-	The symbol $\in$\index{$\in$} is used to specify that some object is an element of a set, and
-	$\notin$ is used to specify it is not.  For example,
+	Things in a set are called \emph{elements}\index{element of a set},
+	and the symbol $\in$\index{$\in$} is used to specify that something is an element of a set.
+	In contrast, $\notin$ is used to specify something is not an element of a set.  For example,
 	\[
 		3\in\Set{1,2,3}\qquad 4\notin\Set{1,2,3}.
 	\]
@@ -125,14 +125,13 @@
 	or $X=\{7\}$.  There is, however, a special set with a special name---the
 	empty set.  The \emph{empty set} is the set containing no elements
 	and is written $\emptyset$ or $\Set{}$.  Note that $\Set{\emptyset}$ is \emph{not}
-	the empty set.  It is the set containing the empty set!  It is also traditional
+	the empty set---it is the set containing the empty set!  It is also traditional
 	to call elements of a set \emph{points}\index{point} regardless of whether you
 	consider them ``point-like'' objects.
 
 	\subsection{Operations on Sets}
 	If the set $A$ contains all the elements that the set $B$ does, we call $A$ a \emph{superset}\index{superset}
-	and $B$ a \emph{subset}\index{subset}.  We'll give this a formal
-	definition.
+	and $B$ a \emph{subset}\index{subset}.  
 	\begin{definition}[Subset \& Superset]
 		The set $B$ is a \emph{subset} of the set $A$, written $B\subseteq A$, if for all
 		$b\in B$ we also have $b\in A$.  In this case, $A$ is called a \emph{superset}
@@ -156,8 +155,10 @@
 		an odd whole number.  We will show $A=B$.
 
 		First, let us show $A\subseteq B$.  If $x\in A$ then $x=2n$
-		for some whole number $n$.  Therefore $x=2n=2(n-1)+1+1=m+1$ where
-		$m=2(n-1)+1$ is, by definition, an odd number.  Therefore $x\in B$.
+		for some whole number $n$.  Therefore 
+		\[x=2n=2(n-1)+1+1=m+1\] where
+		$m=2(n-1)+1$ is, by definition, an odd number.  Thus $x\in B$,
+		which proves $A\subseteq B$.
 
 		Now we will show $B\subseteq A$.  Let $x\in B$.  By definition,
 		$x=m+1$ for some odd $m$ and so by the definition of oddness, $m=2k+1$
@@ -224,7 +225,7 @@
 		contains infinitely many elements, we write $\abs{A}=\infty$.
 	\end{definition}
 
-	Let's define some notation for common sets.
+	Some common sets have special notation:
 	\begin{align*}
 		\emptyset &= \Set{}\text{, the empty set}\\
 		\N &= \Set{0,1,2,3,\ldots}=\Set{\text{natural numbers}}\\
@@ -257,7 +258,7 @@
 	seen before%
 	\footnote{
 		If you're scratching your head saying, ``I thought $\R^3$ was vectors in $3$-dimensional
-		space.  How do we know that's the same thing as triples of real numbers?'' your mind
+		space.  How do we know that's the same thing as triples of real numbers?''~your mind
 		is keen.  This is a theorem of linear algebra.
 	}.
 
@@ -311,14 +312,14 @@
 			\Range f = \Set{y\in B\given y=f(x)\text{ for some }x\in A}.
 		\]
 	\end{definition}
-	\begin{definition}[Image]
+	\begin{restatable}[Image]{definition}{DefImage}
 		Let $f:A\to B$ be a function.
 		The \emph{image}\index{image} of a set $X\subseteq A$, written $f(X)$ is
 		defined by
 		\[
 			f(X)=\Set{y\in B\given y=f(x)\text{ for some }x\in X}.
 		\]
-	\end{definition}
+	\end{restatable}
 
 	We see that if $f:A\to B$, $\Range f = f(A)$.  In words, the range of $f$ is the image
 	of its domain.  This language will become useful when we think of functions as transformations
