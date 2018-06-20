@@ -1976,7 +1976,7 @@ and the line segment $S$:
 
 XXX Figure
 
-We can also make polygons by adding restrictions to vector form of planes. Let
+We can also make polygons by adding restrictions to the vector form of a plane. Let
 $\vec a=\mat{2\\1}$ and $\vec b=\mat{-1\\1}$ and consider the unit square $U$ and
 the parallelogram $P$ defined by
 \begin{align*}
@@ -1988,22 +1988,23 @@ XXX Figure
 
 Each set so far is a set of linear combinations, and we 
 have made different shapes by restricting the coefficients of those linear
-combinations. Certain restrictions have special names, the most useful one
+combinations. Certain restrictions have special names, the most useful
 being a \emph{convex combination}\index{convex combination}.
 
 \begin{definition}[Convex Combination]
-	Let $\vec v_1,\ldots,\vec v_n$ be vectors and consider the linear
-	combination
+	Let $\vec v_1,\ldots,\vec v_n$ be vectors.
+	The vector 
 	\[
 		\vec x=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n.
 	\]
-	The vectors $\vec x$ is a \emph{convex combination} of $\vec v_1,\ldots,\vec v_n$
+	is a \emph{convex combination} of $\vec v_1,\ldots,\vec v_n$
 	if $\alpha_1,\ldots,\alpha_n\geq 0$ and $\alpha_1+\cdots+\alpha_n=1$.
 \end{definition}
 
 You can think of convex combinations as weighted averages of vectors (the average of $\vec v_1,\ldots,
-\vec v_n$ would be the convex combination with coefficients $\alpha_i=\frac{1}{n}$). Convex combinations
-of two vectors gives the line segment between their ending points. 
+\vec v_n$ would be the convex combination with coefficients $\alpha_i=\frac{1}{n}$). 
+A convex combination
+of two vectors gives a point on the line segment connecting them. 
 
 \begin{example}
 	Let $\vec a=\mat{2\\1}$ and $\vec b=\mat{-1\\1}$ and define
@@ -2046,8 +2047,10 @@ is called \emph{addition}}.
 	\]
 \end{definition}
 
-Set sums are very different than regular sums despite using the same symbol, ``$+$''.
-For example, $A+\Set{}=\Set{}$. That is, any set plus the empty set is empty. However, they are very useful.
+Set sums are very different than regular sums despite using the same symbol, ``$+$''\footnote{
+For example, $A+\Set{}=\Set{}$, which might seem counterintuitive for an ``addition'' operation.
+}.
+ However, they are very useful.
 Let $C=\Set{\vec x\in\R^2\given \norm{\vec x}=1}$ be the unit circle centered at the origin, and consider
 the sets
 \[
@@ -2123,10 +2126,9 @@ XXX Figure ({T, R(T)}, {T, V of R(T)}, ...)
 
 
 
-\section{Dot Products \& Projections}
-\subsection{Dot Product}
+\section{Dot Products}
 Let $\vec a$ and $\vec b$ be vectors.  We assume they are placed so their
-tails coincide.  Let $\theta$ denote the \emph{smaller} of the
+starting points coincide.  Let $\theta$ denote the \emph{smaller} of the
 two angles between them, so $0\le \theta \le \pi$.
 The \emph{dot product}\index{dot product} of $\vec a$ and $\vec b$ is defined to be
 \[
@@ -2225,19 +2227,23 @@ The definition of orthogonal encapsulates both the idea of two vectors being
 perpendicular and the idea of one of them being $\vec 0$.
 
 Before we continue, let's pin down the idea of one vector pointing
-in the \emph{direction} of another.  There are many ways we could define
+in the \emph{direction}\index{direction}\index{positive direction} of another.  
+There are many ways we could define
 this idea, but we'll go with this one.
 
 \begin{definition}
 	The vector $\vec u$ points in the \emph{direction} of
 	the vector $\vec v$ if $k\vec u=\vec v$ for some scalar $k$.
+	The vector $\vec u$ points in the \emph{positive direction} of
+	$\vec v$ if $k\vec u=\vec v$ for some positive scalar $k$.
 \end{definition}
 
 As a simple example, $2\xhat$ points in the direction of $\xhat$ since
-$\frac{1}{2}(2\xhat)=\xhat$.  However, nothing in the definition says the
-scalar needs to be positive, so $-\xhat$ also points in the direction $\xhat$.
+$\frac{1}{2}(2\xhat)=\xhat$.  Since $\frac{1}{2}>0$, $2\xhat$ also points
+in the positive direction of $\xhat$. In contrast, 
+$-\xhat$ points in the direction $\xhat$ but not the positive direction of $\xhat$.
 
-\subsection{Projection}
+\section{Projection}
 Another common vector operation is \emph{projection}\index{projection}.
 Projection measures how much a vector points in the direction
 of another.  This quantity is encoded as a vector.  We make this
