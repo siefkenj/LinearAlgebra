@@ -312,9 +312,18 @@
 
 \usepackage{datatool}
 
+\usepackage{iftex}
 
-\usepgfplotslibrary{external}
-\tikzexternalize[prefix=tikz/]
+\ifXeTeX
+	\usepgfplotslibrary{external}
+	\tikzexternalize[prefix=tikz/]
+\else
+\fi
+\ifLuaTeX
+	\usepgfplotslibrary{external}
+	\tikzexternalize[prefix=tikz/]
+\else
+\fi
 %\tikzexternalize[mode=list and make]
 
 
