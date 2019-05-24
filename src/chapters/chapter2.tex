@@ -1,431 +1,3 @@
-\newpage
-\section*{Exploration Questions}
-\addcontentsline{toc}{section}{Exploration Questions}
-
-\vspace{-.5cm}
-\begin{minipage}{\textwidth}
-\begin{question}
-	\newcommand{\ul}{$\underline{\phantom{xxx}}$}
-
-	\begin{tikzpicture}[>=latex,scale=4]
-		\draw[style=help lines] (0,0) (2,2);
-
-		\draw[->,thick,black] (0,0) -- (135:1) node [left] {$\mathbf a$};
-		\draw[->,thick,black] (0,0) -- (0,1) node [left] {$\mathbf b$};
-		\draw[->,thick,black] (0,0) -- (45:1) node [above] {$\mathbf c$};
-		\draw[->,thick,black] (0,0) -- (1,0) node [above] {$\mathbf d$};
-		\draw (0,0) node [below] {$\mathbf o$};
-		
-		\draw[thick,blue,fill] (1,2) circle [radius=.02] node [below right,black] {$p$};
-		\draw[thick,blue] (2,1) circle [radius=.02] node [below right,black] {$q$};
-
-	\end{tikzpicture}
-
-	Notice that all arrows in this diagram are the same length.
-	We will call this length a \emph{unit}.
-	\begin{parts}
-		\item Give directions from $\mathbf o$ to $p$ of
-		the form ``Walk \ul units in the direction of arrow \ul, then 
-		walk \ul units in the direction of arrow \ul.''
-
-		\item Can you give directions with the two arrows you haven't
-		used?  Give such directions, or explain why it cannot be done.
-
-		\item Give directions from $\mathbf o$ to $q$.
-
-		\item Can you give directions from $\mathbf o$ to $q$ using $\mathbf c$ 
-			and $\mathbf a$?
-		Give such directions, or explain why it cannot be done.
-
-	\end{parts}
-\end{question}
-
-\begin{question}
-	\newcommand{\ul}{$\underline{\phantom{xxx}}$}
-	\newcommand{\ull}{\underline{\phantom{xxx}}}
-
-	\begin{minipage}{.35\textwidth}
-	\begin{tikzpicture}[>=latex,scale=4]
-		\draw[style=help lines] (0,0) (1,2);
-
-		\draw[->,thick,black] (0,0) -- (0,1) node [left] {$\yhat$};
-		\draw[->,thick,black] (0,0) -- (63.4:1) node [left] {$\mathbf c$};
-		\draw[->,thick,black] (0,0) -- (1,0) node [above] {$\xhat$};
-		\draw (0,0) node [below] {$\mathbf o$};
-		
-		\draw[thick,blue,fill] (1,2) circle [radius=.02] node [below right,black] {$p$};
-
-	\end{tikzpicture}
-	\end{minipage}
-	\begin{minipage}{.65\textwidth}
-	We are going to start using a more mathematical notation
-	for giving directions.  Our directions will now look like
-	\[
-		p = \ull\, \xhat + \ull\, \yhat
-	\]
-	which is read as ``To get to $p$ (=) go \ul units in the direction $\xhat$ then (+) go \ul units in 
-	the direction $\yhat$.''
-
-	\begin{parts}
-		\item What is the difference between $p = \ull\, \xhat + \ull\, \yhat$ and $p = \ull\, \yhat + \ull\, \xhat$?
-		Can they both give valid directions?
-		\item
-		\begin{enumerate}
-			\item Give directions to $p$ using the new notation. 
-			\item Give directions to $p$ using $\mathbf c$.  (Notice that
-				$\mathbf c$ points directly at $p$.)
-			\item What is the distance from $\mathbf o$ to $p$ in units?
-		\end{enumerate}
-		\item
-		\begin{enumerate}
-			\item $r=1\mathbf c$.  Give directions from $\mathbf o$ to $r$ using $\xhat$ and $\yhat$.
-			\item What is the distance from $\mathbf o$ to $r$?
-		\end{enumerate}
-		\item
-		\begin{enumerate}
-			\item $q=-2\xhat+3\yhat$; find the exact distance from $\mathbf o$ to $q$.
-			\item $s=2\xhat+\mathbf c$; find the exact distance from $\mathbf o$ to $s$.
-		\end{enumerate}
-	\end{parts}
-	\end{minipage}
-\end{question}
-\end{minipage}
-
-\subsection*{Vector Notation}
-	The vectors $\xhat$ and $\yhat$ are called the \emph{standard
-	basis vectors} for $\R^2$ (the plane).  
-
-	\noindent We previously wrote $q=-2\xhat+3\yhat$.  Using \emph{column vector} 
-	notation, we write
-	\[
-		q=\mat{-2\\3}
-	\]
-	We may call $q$ either a \emph{vector} or a \emph{point}.  If we call $q$ a vector,
-	we are emphasizing that $q$ gives direction of some sort.  If we call $q$ a point,
-	we are emphasizing that $q$ is some absolute location in space\footnote{ 
-	What's the philosophical
-	difference between a location in space and 
-	directions from the origin to said location?}.
-
-\begin{question}
-	$r=1\mathbf c$ and $s=2\xhat+\mathbf c$ where $\mathbf c$ is the vector from before.
-	\begin{parts}
-		\item Write $r$ and $s$ in column vector form.
-	\end{parts}
-\end{question}
-
-\begin{question}
-	Draw the following subsets of $\R^2$.
-	\begin{parts}
-		\item $V=\Set*{\vec x\in\R^2:\vec x=\mat{0\\t}\text{ for some }t\in\R}$.
-		\item $H=\Set*{\vec x\in\R^2:\vec x=\mat{t\\0}\text{ for some }t\in\R}$.
-		\item $J=\Set*{\vec x\in\R^2:\vec x=t\mat{1\\1}\text{ for some }t\in\R}$.
-		\item $V\cup H$.
-		\item $V\cap H$.
-		\item Does $V\cup H=\R^2$?
-	\end{parts}
-\end{question}
-
-
-\subsection*{Dot Products}
-\begin{numberlessdefinition}[Dot Product]
-	If $\vec a=\mat{a_1\\ a_2\\ \vdots \\ a_n}$ and 
-	$\vec b=\mat{b_1\\ b_2\\ \vdots \\ b_n}$ are two vectors in $n$-dimensional
-		space, then the \emph{dot product} of $\vec a$ an $\vec b$ is
-	\[
-		\vec a\cdot\vec b = a_1b_1+a_2b_2+\cdots+a_nb_n.
-	\]
-	Equivalently, the dot product is defined by the geometric formula
-	\[
-		\vec a\cdot \vec b = \norm{\vec a}\norm{\vec b}\cos \theta
-	\]
-	where $\theta$ is the smaller of the angles between $\vec a$ and $\vec b$.
-\end{numberlessdefinition}
-
-\begin{question}
-	Let $\vec a=\mat{1\\1}$, $\vec b=\mat{3\\2}$, and $\vec u=\mat{1\\2\\1}$.
-	\begin{parts}
-		\item 
-		\begin{enumerate}	
-			\item Draw a picture of $\vec a $ and $\vec b$.
-			\item Compute $\vec a\cdot \vec b$.
-			\item Find $\norm{\vec a}$ and $\norm{\vec b}$ and use your knowledge of
-			the multiple ways to compute the dot product to find $\theta$,
-			the angle between $\vec a$ and $\vec b$. Label $\theta$ on your picture.
-		\end{enumerate}
-		\item Draw the graph of $\cos$ and identify which angles make $\cos$ negative, zero,
-		or positive.
-
-		\item Draw a new picture of $\vec a$ and $\vec b$ and on that picture draw
-		\begin{enumerate}	
-			\item a vector $\vec c$ where $\vec c\cdot \vec a$ is negative.
-			\item a vector $\vec d$ where $\vec d\cdot \vec a=0$ and $\vec d\cdot \vec b < 0$.
-			\item a vector $\vec e$ where $\vec e\cdot \vec a=0$ and $\vec e\cdot \vec b>0$.
-			\item Could you find a vector $\vec f$ where $\vec f\cdot \vec a=0$ and $\vec f\cdot \vec b=0$?
-			Explain why or why not.
-		\end{enumerate}
-
-		\item Recall the vector $\vec u$ whose coordinates are given at the beginning of this problem.
-		\begin{enumerate}
-			\item Write down a vector $\vec v$ so that the angle between $\vec u$ and $\vec v$
-			is $\pi/2$. (Hint, how does this relate to the dot product?)
-			\item Write down another vector $\vec w$ (in a different direction from $\vec v$)
-			so that the angle between $\vec w$ and $\vec u$ is $\pi/2$.
-			\item Can you write down other vectors different than both $\vec v$ and $\vec w$ that still
-			form an angle of $\pi/2$ with $\vec u$?  How many such vectors are there?
-		\end{enumerate}
-	\end{parts}
-\end{question}
-
-\begin{numberlessdefinition}[Norm]
-	The \emph{norm} of a vector $\vec v\in \R^n$ is its length and is given
-	by the formula
-	\[
-		\norm{\vec v} = \sqrt{\vec v\cdot\vec v}
-	\]
-\end{numberlessdefinition}
-
-\begin{question}
-	\begin{parts}
-		\item Let $\vec a = \mat{3\\2}$.  Find $\|\vec a\|$ using the Pythagorean theorem
-			and using the formula from the definition of the norm.  How do
-			these quantities relate?
-		\item Let $\vec b = \mat{1\\1\\-2\\2}$, and find $\|\vec b\|$.
-		Did you know how to find 4-d lengths before?
-	
-		\item Suppose $\vec u=\mat{x\\ y}$ for some $x,y\in \R$.
-		Could $\vec u\cdot \vec u$ be negative? Compute $\vec u\cdot \vec u$ algebraically
-		and use this to justify your answer.
-	\end{parts}
-\end{question}
-
-\begin{numberlessdefinition}[Distance between vectors]
-	The \emph{distance} between two vectors $\vec u$ and $\vec v$ is $\|\vec u-\vec v\|$.
-\end{numberlessdefinition}
-
-\begin{restatable*}[Unit Vector]{definition}{DefUnitVector}
-	A \emph{unit vector}\index{unit vector} is a vector $\vec u$
-	satisfying $\norm{\vec u}=1$.
-\end{restatable*}
-
-\begin{question}
-	Let $\vec u=\mat{1\\2\\1}$ and $\vec v=\mat{1\\1\\3}$.
-	\begin{parts}
-		\item Find the distance between $\vec u$ and $\vec v$.
-		\item Find a unit vector in the direction of $\vec u$.
-		\item Does there exists a \emph{unit vector} $\vec x$ that is distance
-			$1$ from $\vec u$?
-		\item Suppose $\vec y$ is a unit vector and the distance between $\vec y$ and
-			$\vec u$ is $2$.  What is the angle between $\vec y$ and $\vec u$?
-	\end{parts}
-\end{question}
-
-\begin{restatable*}[Orthogonal]{definition}{DefOrthogonal}
-	The vectors $\vec u$ and $\vec v$ are \emph{orthogonal}\index{orthogonal}
-	if $\vec u\cdot\vec v=0$.
-\end{restatable*}
-
-\begin{question}
-	\begin{parts}
-		\item Find two vectors orthogonal to $\vec a=\mat{1\\-3}$.  Can you find two such vectors that
-			are not parallel?
-		\item Find two vectors orthogonal to $\vec b=\mat{1\\-3\\4}$.  Can you find two 
-			such vectors that are not parallel?
-		\item Suppose $\vec x$ and $\vec y$ are orthogonal to each other and $\|\vec x\|=5$ and $\|\vec y\|=3$.
-			What is the distance between $\vec x$ and $\vec y$?
-	\end{parts}
-\end{question}
-
-
-\subsection*{Projections}
-Projections (sometimes called orthogonal projections) are a way to measure how much one vector
-points in the direction of another.
-
-\begin{restatable*}[Projection]{definition}{DefProjection}
-	For a vector $\vec u$ and a non-zero vector $\vec v$,
-	the \emph{projection} of $\vec u$ onto $\vec v$ is written
-	as $\Proj_{\vec v}\vec u$ and is a vector in the direction
-	of $\vec v$ with the property that $\vec u-\Proj_{\vec v}\vec u$
-	is orthogonal to $\vec v$.
-
-	The vector $\vec u-\Proj_{\vec v}\vec u$ is called the
-	\emph{perpendicular component} of the projection of $\vec u$
-	onto $\vec v$ and is notated $\Perp_{\vec v}\vec u$.
-\end{restatable*}
-	
-	\begin{center}
-	\begin{tikzpicture}[>=latex,scale=2.5]
-		\draw[->,thick,black] (0,0) -- (2,1) node [above] {$\vec u$};
-		\draw[->,thick,black] (0,0) -- (3,0) node [above] {$\vec v$};
-		\draw[->,thick,black,yshift=-.07cm] (0,0) -- (2,0);
-		\draw[decoration={brace, mirror}, decorate, yshift=-.15cm] (0,0) -- (2,0) node [midway,below,yshift=-4pt] {$\Proj_{\vec v}\vec u$};
-
-		\draw[dashed,thick,black] (2,0) -- (2,1);
-		\draw[decoration={brace, mirror}, decorate, xshift=1.15cm] (2,0) -- (2,1)
-			node [midway,right,xshift=4pt] {$\Perp_{\vec v}\vec u$};
-		\draw[thin,black] (1.85,0)--(1.85,.15)--(2,.15);
-
-	\end{tikzpicture}
-	\end{center}
-
-
-\begin{question}
-	\begin{center}
-	\usetikzlibrary{patterns,decorations.pathreplacing}
-	\begin{tikzpicture}[>=latex,scale=2.5]
-		\draw[->,thick,black] (0,0) -- (30:2) node [above] {$\vec a$};
-		\draw[->,thick,black] (0,0) -- (3,0) node [above] {$\vec b$};
-		\draw[thick,black] (0,0) +(0:.3cm) arc (0:30:.3cm) node[right,yshift=-4pt] {$\theta$};
-
-	\end{tikzpicture}
-	\end{center}
-
-
-	In this picture $\|\vec a\|=4$, $\theta = \pi/6$, and $\vec b=\mat{6\\0}$.
-	\begin{parts}
-		\item   Write $\vec a$ in column vector form.
-		\item   Find $\|\Proj_{\vec b}\vec a\|$ and $\|\Perp_{\vec b}\vec a\|$.
-		\item Write down 
-				$\Proj_{\vec b}\vec a$ and $\Perp_{\vec b}\vec a$ in column vector
-				form.
-		\item If $\vec c=\mat{-4\\0}$, write down 
-				$\Proj_{\vec c}\vec a$ and $\Perp_{\vec c}\vec a$ in column vector
-				form.
-		\item If $\vec d=\mat{3\\1}$, write down 
-				$\Proj_{\vec d}\vec a$ and $\Perp_{\vec d}\vec a$ in column vector
-				form.  (You may need to use your knowledge of how dot products and angles
-				relate to answer this one.)
-		\item Consider $\vec d=\mat{3\\1}$.  Compute $\proj_{\xhat}\vec d$ and 
-		$\proj_{\yhat}\vec d$.  How do these projections relate to the components of $\vec d$? What
-		can you say in general about projections onto $\xhat$ and $\yhat$?
-	\end{parts}
-\end{question}
-
-\subsection*{Lines and Planes}
-\begin{numberlessdefinition}[Normal Vector]
-	A \emph{normal vector} to a line (or plane or hyperplane) is a non-zero vector that is orthogonal to it.
-\end{numberlessdefinition}
-
-\begin{question}
-	\begin{parts}
-		\item Draw $\vec u=\mat{2\\3}$ and \emph{all}
-		vectors perpendicular to it.
-		\item If $\vec x=\mat{x\\y}$ and $\vec x$ is 
-		perpendicular to $\vec u$, what is $\vec x\cdot \vec u$?
-		\item Expand the dot product $\vec u\cdot \vec x$ to get an equation
-		for a line.  This equation is called the \emph{scalar equation} representing the line.
-		\item Rewrite the line $\vec u\cdot \vec x = 0$ in $y=mx+b$ form and verify it matches
-		the line you drew above.
-	\end{parts}
-\end{question}
-
-	We can also write a line in \emph{parametric form} by introducing a parameter
-	that traces out the line as the parameter runs over all real numbers.
-\begin{question}
-	\begin{parts}
-		\item Draw the line $L$ with $x,y$ coordinates given by
-		\[
-			\begin{array}{l}x=t\\y=2t\end{array}
-		\]
-		as $t$ ranges over $\R$.
-		\item Write the line $\vec u \cdot \vec x=0$ (where $\vec u$ is the same as before) in parametric form.
-	\end{parts}
-\end{question}
-
-	\emph{Vector form} is the same as parametric form but written in vector notation.  For example, the
-	line $L$ from earlier could be written as 
-	\[
-		\mat{x\\y}=\mat{t\\2t}
-	\]
-	or
-	\[
-		\mat{x\\y}=t\mat{1\\2}.
-	\]
-
-\begin{question}
-	\begin{parts}
-		\item Write the line $\vec u\cdot \vec x=0$ in vector form.  That is, find a vector $\vec v$ so
-		the line $\vec u\cdot \vec x=0$  can be written as
-		\[
-		\mat{x\\y} = t\vec v
-		\]
-		as $t$ ranges over $\R$.
-		\item What is $\vec v\cdot \vec u$? Why? Will this always happen?
-	\end{parts}
-\end{question}
-
-\begin{question}
-	\begin{parts}
-		\item Write down three solutions $\vec a$, $\vec b$, $\vec c\in\R^3$ to
-		\begin{equation}\label{eq1}
-			2x+y-z=0.
-		\end{equation}
-		\item Find $\vec n\in\R^3$ so that equation \eqref{eq1} is equivalent
-		to $\vec n\cdot \vec x=0$ where $\vec x=\mat{x\\ y\\ z}$.
-		\item What do you notice about the angle between solutions 
-			to equation \eqref{eq1} and $\vec n$?
-	\end{parts}
-\end{question}
-
-	When writing down solutions to equation \eqref{eq1}, you get to 
-	choose two coordinates before the remaining
-	coordinate becomes determined.  This means solutions to equation \eqref{eq1}
-	have two free parameters (and consequently form a
-	two dimensional space).
-
-\begin{question}
-	\begin{parts}
-		\item Write down parametric form of a line of solutions to equation (\ref{eq1}).
-		\item Write down parametric form of a different line of solutions to equation (\ref{eq1}).
-		\item Write down all solutions to equation (\ref{eq1}) in parametric form.  That is, find $a_x,
-		a_y,a_z,b_x,b_y,b_z$ so that
-		\[
-			\begin{array}{l}
-				x=a_x t+b_x s\\
-				y=a_y t+b_y s\\
-				z=a_z t+b_z s
-			\end{array}
-		\]
-		gives all solutions as $t,s$ vary over all of $\R$.
-		\item Write all solutions to equation (\ref{eq1}) in vector form.
-	\end{parts}
-\end{question}
-
-
-	So far, all of our lines and planes have passed through the origin. To 
-	produce the equation of an arbitrary line/plane, we first make one of
-	same ``slope'' that passes through the origin, then we translate it
-	to the appropriate place.
-
-\begin{question}
-	We'd like to write the equation of a line $L$ with normal vector
-	$\vec n=\begin{bmatrix}4\\-1\end{bmatrix}$ that passes through
-	the point $p=\mat{-1\\-1}$
-
-	\begin{parts}
-		\item The line $L_2$ which is parallel to $L$
-		but passes through the origin. Give a scalar equation for $L_2$
-		\item Draw a picture of $L$ and $L_2$, and find two points that lie on
-		$L$.  Call these points $p_1$ and $p_2$.
-		\item Verify the vector $\overline {p_1p_2}$ is orthogonal to $\vec n$.
-		\item What is $\vec n\cdot p_1$, $\vec n\cdot p_2$, $\vec n\cdot p$?
-		Should these values be zero, equal, or different?  Explain (think about
-		projections).
-		\item How does the equation $\vec n\cdot (\vec x-p)=0$ relate to $L$?
-	\end{parts}
-\end{question}
-
-\begin{question}
-	$W$ is the plane with normal vector $\vec n=\mat{1\\2\\3}$ and 
-	which passes through
-	the point $p=\mat{1\\1\\2}$.
-	\begin{parts}
-		\item Write normal form of $W$.
-		\item Write vector form of $W$.
-	\end{parts}
-\end{question}
-
-
 
 \newpage
 A \emph{vector}\index{vector} is characterized by
@@ -444,8 +16,8 @@ when we want to emphasize that they are not vectors.
 Whereas numbers allow us to specify relationships between single quantities
 (put in twice as much flour as sugar), vectors will allow us to specify
 relationships between geometric objects in space\footnote{
-	Though in this book we will treat vectors as intertwined with Euclidean
-	space, they are much more general.  For instance, someone's internet
+	Though in this book we will treat vectors as objects in Euclidean
+	space, but they are much more general.  For instance, someone's internet
 	browsing habits could be described by a vector---the topics they
 	find most interesting might be the ``direction'' and the amount
 	of time they browse might be the ``magnitude.''
@@ -728,7 +300,11 @@ of length in three-dimensional space indeed obeys those properties\footnote{
 
 Homogeneity is a particularly special property of a norm.  It allows us
 to easily create \emph{unit vectors}.
-\DefUnitVector
+\begin{restatable}[Unit Vector]{definition}{DefUnitVector}
+	A \emph{unit vector}\index{unit vector} is a vector $\vec u$
+	satisfying $\norm{\vec u}=1$.
+\end{restatable}
+
 Unit vectors are handy because if $\vec u$ is a unit vector, then $k\vec u$
 has length $\abs{k}$.  Further, we can always turn a vector into a unit vector.
 \begin{example}
@@ -771,7 +347,7 @@ has length $\abs{k}$.  Further, we can always turn a vector into a unit vector.
 
 
 \section{Coordinates}
-Recall that a rectangular coordinate system in the plane is specified by choosing
+A rectangular coordinate system in the plane is specified by choosing
 an origin $O$ and then choosing two perpendicular axes meeting at
 the origin.  These axes are chosen in some order so that we know which
 axis (usually the $x$-axis) comes first and which (usually the
@@ -870,8 +446,8 @@ the pair $(\alpha,\beta)$ captures all information\footnote{
 
 For a vector $\vec w=\alpha\xhat+\beta\yhat$,
 we call the pair $(\alpha,\beta)$  the
-\emph{components}\index{components} of the vector $\vec w$.  There
-are many equivalent notations used to represent components.
+\emph{coordinates}\index{coordinates} of the vector $\vec w$.  There
+are many equivalent notations used to represent a vector in coordinates.
 \begin{center}
 	\begin{tabular}{c p{5cm}}
 		$(\alpha,\beta)$ & parenthesis\\
@@ -882,7 +458,7 @@ are many equivalent notations used to represent components.
 \end{center}
 
 Given what we now know about representing vectors and their equivalency
-with points, we can now dissect the notation $\R^2$.
+with points, we can dissect the notation $\R^2$.
 On the one hand, $\R^2$ is the set of vectors in two-dimensional Euclidean
 space.  On the other hand $\R^2=\R\times \R$ is the set of all pairs of real
 numbers.  Via the use of coordinates, we know these concepts represent the
@@ -891,15 +467,15 @@ Further,
 since vectors in $\R^2$ are equivalent to their representation in coordinates,
 we will often write
 \[
-	\vec v=(\alpha,\beta)
+	\vec v=\mat{\alpha\\\beta}
 \]
 as a shorthand for $\vec v=\alpha\xhat+\beta\yhat$.
 
 
-Breaking vectors into components, and in particular, viewing vectors as linear
+Breaking vectors into coordinates, and in particular, viewing vectors as linear
 combinations of the standard basis vectors, allows us to solve problems that were
 difficult before.  For instance, suppose we have vectors $\vec v$ and $\vec w$.
-How can we compute $\norm{\vec v+\vec w}$?  With components, it's easy.
+How can we compute $\norm{\vec v+\vec w}$?  With coordinates, it's easy.
 
 \begin{example}
 	\label{EXAMPLE-vecadd}
@@ -1351,7 +927,7 @@ can describe $\ell$ with an equation of the form $y=mx+b$ (provided it isn't a v
 $P,Q\in\R^3$, it's much harder to describe $\ell$ with an equation.  Using vectors
 provides an easier way.
 
-Let $\vec d=\overrightarrow{PQ}$ and consider the set of points (or vectors)
+Let $\vec d=\overrightarrow{PQ}$ and consider the set of points (or vectors) $\vec x$ that can be expressed as
 \[
 	\vec x=t\vec d+P
 \]
@@ -1434,7 +1010,10 @@ displacing by some multiple of $\vec d$.  This is a line!
 		}
 	\end{tikzpicture}
 \end{center}
-Note that sometimes we draw vectors as line segments.
+We simultaneously interpret this line as a set of points (the points that make up
+the line) and as a set of vectors 
+rooted at the origin (the vectors pointing from the origin to the line).
+Note that sometimes we draw vectors as directed line segments from the origin.
 Other times, drawing drawing vectors as line segments makes
 it hard to see what is going on, and so it is better to draw
 each vector by marking only its ending point.
@@ -1456,19 +1035,21 @@ so we will allow ourselves to describe lines in a shorthand called \emph{vector 
 }.
 
 \begin{definition}[Vector form of a Line]
-	A line $\ell$ is described in \emph{vector form}\index{vector form of line} if
-	there are two vectors $\vec d\neq \vec 0$ and $\vec p$ so that
+	Let $\ell$ be a line and let $\vec d$ and $\vec p$ be vectors such that
+	$\ell=\Set{\vec x\given \vec x=t\vec d+\vec p\text{ for some }t\in\R}$. Then,
+	$\ell$ may be  described in \emph{vector form}\index{vector form of line} as
 	\[
-		\vec x=t\vec d+\vec p
+		\vec x=t\vec d+\vec p.
 	\]
-	satisfies $\vec x\in \ell$ for all $t\in \R$.  In this case we call $\vec d$ the
-	\emph{direction} of $\ell$ and the equation $\vec x=t\vec d+\vec p$ the
+	We call $\vec d$ a
+	\emph{direction vector} for $\ell$ and the equation $\vec x=t\vec d+\vec p$ a
 	\emph{vector equation} or \emph{vector form}
 	of $\ell$.
 \end{definition}
 
 Note that if $\vec x=t\vec d+\vec p$ is the vector equation of a line $\ell$, by setting $t=0$
-we necessarily have $\vec p\in\ell$.
+we necessarily have $\vec p\in\ell$. The converse is true, too. If $\vec q\in \ell$ and 
+$\vec d$ is a direction for $\ell$, then $\ell$ may be expressed in vector form as $\vec x=t\vec d+\vec p$.
 
 The direction of a line is easily obtained by finding the displacement vector between two points
 on the line.  Thus, given a line in another form, computing its vector form is straightforward.
@@ -1489,6 +1070,40 @@ on the line.  Thus, given a line in another form, computing its vector form is s
 	\[
 		\mat{x\\y} = t\mat{1\\2}+\mat{0\\3}.
 	\]
+\end{example}
+
+It's important to note that when we write a line in vector form, it is a \emph{specific shorthand} notation.
+If we augment the notation, we no longer have written a line in ``vector form.''
+
+\begin{example} Let $\ell$ and let $\vec d$ be a direction vector for $\ell$ and let $\vec p\in \ell$
+	be a point on $\ell$. Writing
+	\[
+		\vec x=t\vec d+\vec p
+	\]
+	or 
+	\[
+		\vec x=t\vec d+\vec p\quad\text{ where }\quad t\in \R
+	\]
+	specifies $\ell$ in vector form and are both shorthands for $\Set{\vec x\given
+	\vec x=t\vec d+\vec p\text{ for some }t\in \R}$. But,
+	\[
+		\vec x=t\vec d+\vec p\quad\text{ for some }\quad t\in \R
+	\]
+	and
+	\[
+		\vec x=t\vec d+\vec p\quad\text{ for all }\quad t\in \R
+	\]
+	are logical statements about the vectors $\vec x$, $\vec d$, and
+	$\vec p$. These statements are either true or false; they do \emph{not} 
+	specify $\ell$ in vector form.
+
+	Similarly, the statement
+	\[
+		\ell = t\vec d+\vec p
+	\]
+	is mathematically nonsensical and does not specify $\ell$ in vector form. (On the
+	left is a \emph{set} and on the right is a \emph{vector}!)
+
 \end{example}
 
 The downside of writing lines in vector form is that there are multiple direction vectors and multiple points
@@ -1667,178 +1282,38 @@ suffice for defining $\mathcal P$ in vector form.
 \end{center}
 
 \begin{definition}[Vector form of a plane]
-	The plane $\mathcal P$ is described in \emph{vector form} if there are
-	three vectors $\vec d_1$, $\vec d_2$, and $\vec p$ where $\vec d_1,\vec d_2\neq \vec 0$
-	point in different directions and
+	Let $\mathcal P$ be a plane and let $\vec d_1$, $\vec d_2$, and $\vec p$ be vectors such
+	that $\mathcal P=\Set{\vec x\given \vec x=t\vec d_1+s\vec d_2+\vec p\text{ for some }t,s\in\R}$.
+	We then say the equation
 	\[
 		\vec x=t\vec d_1+s\vec d_2+\vec p
 	\]
-	satisfies $\vec x\in \mathcal P$ for all scalars $t,s\in\R$.  The vectors $\vec d_1$
+	describes $\mathcal P$ in \emph{vector form}.
+	The vectors $\vec d_1$
 	and $\vec d_2$ are called \emph{direction vectors} for the plane $\mathcal P$.
 \end{definition}
 
-Since we will commonly be working in $\R^3$ there is another way to define a plane.  Given
-any vector $\vec n\in\R^3$, we can consider the set $\mathcal Q\subseteq\R^3$ of vectors orthogonal to $\vec n$.
-If $\vec n=\vec 0$, then $\mathcal Q=\R^3$.  Otherwise, $\mathcal Q$ is a plane through the origin.
-In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} of the plane $\mathcal Q$.
-
-
-\begin{center}
-\begin{tikzpicture}
-	\newcommand{\RightAngle}[4][5pt]{%
-        \draw ($#3!#1!#2$)
-        --($ #3!2!($($#3!#1!#2$)!.5!($#3!#1!#4$)$) $)
-        --($#3!#1!#4$) ;
-        }
-    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
-	    width=12cm,
-	    scale mode=scale uniformly,
-	    zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
-	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
-	    xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
-	    ]
-		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-		{.25*x+.25*y};
-		\coordinate (A) at (axis cs:-4,-4,-2);
-		\coordinate (N) at (axis cs:-6,-6,6);
-		\coordinate (B) at (axis cs:4,4,2);
-		\coordinate (C) at (axis cs:-4,4,0);
-
-		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
-		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
-		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
-		\draw [->, thick] (A) -- (N) node [midway,left] {$\vec n$};
-		\RightAngle{(N)}{(A)}{(C)}
-		%\RightAngle{(N)}{(A)}{(B)}
-    \end{axis}
-  \end{tikzpicture}
-\end{center}
-
-\begin{definition}[Normal form of a plane]
-	The plane $\mathcal P$ is described in \emph{normal form} if for some $\vec n$ and $\vec p$,
-	the equation
-	\[
-		\vec n\cdot(\vec x-\vec p)=0
-	\]
-	if and only if $\vec x\in\mathcal P$.  Equivalently, $\mathcal P$ is described in normal form if
-	for some $\vec n$ and scalar $\alpha\in\R$ the equation
-	\[
-		\vec n\cdot \vec x=\alpha
-	\]
-	is satisfied if and only if $\vec x\in \mathcal P$.  In either case, the vector $\vec n$
-	is call a \emph{normal vector} for $\mathcal P$.
-\end{definition}
-
-Normal form of a plane only exists in $\R^3$, but it is often useful\footnote{ Just like $y=mx+b$ form
-of a line only exists in $\R^2$.}.  The equivalence of the two ways to write a normal form of a plane
-is straight forward.
-\[
-		\vec n\cdot(\vec x-\vec p)=0
-\]
-if and only if
-\[
-		\vec n\cdot\vec x = \vec n\cdot \vec p = \alpha.
-\]
-Since $\vec n$ and $\vec p$ are fixed, $\alpha$ is a constant. Expanding normal form in terms of
-components we see
-\[
-		\vec n\cdot(\vec x-\vec p)=\vec n\cdot\vec x-\alpha=
-		n_xx+n_yy+n_zz-\alpha=0
-\]
-and so
-\begin{equation}
-	\label{EQScalarForm}
-		n_xx+n_yy+n_zz=\alpha
-\end{equation}
-is another way to write a plane.  Equation \eqref{EQScalarForm} is sometimes
-called \emph{scalar form}\index{scalar form of a plane}
-of a plane.  For us, it will not be important to distinguish between scalar and normal form.
-
-It should be noted that like vector form of a plane, normal form of a plane is not unique.
-For example, the plane described by $\vec n\cdot(\vec x-\vec p)=0$ is the same as the
-plane $(2\vec n)\cdot(\vec x-\vec p)=0$.
-
 \begin{example}
-	Find vector form and normal form of the plane $\mathcal P$ passing
-	through the point $A=(1,0,0)$, $B=(0,1,0)$ and $C=(0,0,1)$.
+	Describe the plane $\mathcal P\subseteq \R^3$ with equation $z=2x+y+3$ in vector form.
 
-	To find vector form of $\mathcal P$, we need a point on the plane and
-	two direction vectors.  We have three points on the plane, so we can
-	obtain two direction vectors by subtracting these points in different ways.
-	Let
+	To describe $\mathcal P$ in vector form, we need a point on $\mathcal P$ and two direction
+	vectors for $\mathcal P$. By guess-and-check, we see the points
 	\[
-		\vec d_1=\overrightarrow{AB} = \mat{-1\\1\\0}\qquad\vec d_2=\overrightarrow{AC}=
-		\mat{-1\\0\\1}.
+		A=\mat{0\\0\\3}\qquad B=\mat{1\\0\\5}\qquad C=\mat{0\\1\\4}
 	\]
-	Using the point $A$, we may now write vector form of $\mathcal P$ as
+	are all on $\mathcal P$. Thus
 	\[
-		\mat{x\\y\\z} = t\mat{-1\\1\\0}+s\mat{-1\\0\\1}+\mat{1\\0\\0}.
+		\vec d_1=B-A=\mat{1\\0\\2}\qquad \text{and}\qquad
+		\vec d_2=C-A=\mat{0\\1\\1}
 	\]
-
-	To write normal form we need to find a normal vector to $\mathcal P$.  By symmetry,
-	we can see that $\vec n=(1,1,1)$ is a normal vector to $\mathcal P$.  If we weren't
-	so insightful, we could also compute $\vec d_1\times \vec d_2 = (1,1,1)$ to find a
-	normal vector.  Now, we may express $\mathcal P$ in normal form as
+	are both direction vectors for $\mathcal P$.  Therefore, we can express $\mathcal P$ in vector
+	form as
 	\[
-		\mat{1\\1\\1}\cdot\left(\mat{x\\y\\z}-\mat{1\\0\\0}\right)=0
-	\]
-	or equivalently,
-	\[
-		x+y+z=1.
+		\vec x=t\vec d_1+s\vec d_2+A=t\mat{1\\0\\2}+s\mat{0\\1\\1}+\mat{0\\0\\3}.
 	\]
 \end{example}
 
-\begin{example}
-	Find the line $\mathcal P_1\cap \mathcal P_2$ where
-	$\mathcal P_1$ is the plane given by the equation
-	\[
-		x+y+z=2
-	\]
-	and $\mathcal P_2$ is the plane given by the equation
-	\[
-		2x-y+z=0.
-	\]
 
-	Let $\ell=\mathcal P_1\cap \mathcal P_2$.  Since $\ell\subseteq \mathcal P_1$
-	and $\ell\subseteq\mathcal P_2$, every direction vector for $\ell$ is also
-	a direction vector for $\mathcal P_1$ and $\mathcal P_2$.
-
-	Let $\vec n_1=(1,1,1)$
-	be a normal vector for $\mathcal P_2$ and $\vec n_2=(2,-1,1)$ be a normal vector
-	for $\mathcal P_2$.  If $\vec d$ is a direction vector for $\ell$, then
-	$\vec n_1\cdot \vec d=0$ and $\vec n_2\cdot \vec d=0$.  Thus,
-	\[
-		\vec d=\vec n_1\times\vec n_2=\mat{2\\1\\-3}
-	\]
-	is a direction vector for $\ell$.  By guess and check we find that $\vec p=(0,1,1)$
-	satisfies $\vec p\in\mathcal P_1$ and $\vec p\in\mathcal P_2$ and so $\vec p\in\ell$.
-	Thus, we may write $\ell$ in vector form as
-	\[
-		\mat{x\\y\\z} = t\mat{2\\1\\-3}+\mat{0\\1\\1}.
-	\]
-\end{example}
-
-%  \begin{tikzpicture}
-%    \begin{axis}[grid=major,view={20}{40},z buffer=sort]
-%      %\addplot3 [surf, domain=0:360, domain y=5:10,samples=30, samples y=10]
-%      %{-y+5};
-%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
-%	    ({x},{118.89/x},{2*x});
-%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-%      {0};
-%      %\addplot3 [domain=-10:10,samples=10, black,mark=none]
-%	%\addplot3[domain=0:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
-%	 %   ({x},{y},{x+y});
-%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-%      {x+y};
-%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
-%      {-2*x+y+3};
-%      %\addplot3 [domain=0:360, samples y=0, samples=30, thick, z buffer=auto]
-%      %(x,5.1,0);
-%      %\addplot3 [surf,domain=0:360, domain y=0:5,samples=30, samples y=10]
-%      %{-y+5};
-%    \end{axis}
-%  \end{tikzpicture}
 
 
 \begin{exercises}
@@ -1988,28 +1463,41 @@ XXX Figure
 
 Each set so far is a set of linear combinations, and we 
 have made different shapes by restricting the coefficients of those linear
-combinations. Certain restrictions have special names, the most useful
-being a \emph{convex combination}\index{convex combination}.
+combinations. There are two ways of restricting linear combinations that arise
+up often enough to get their own names.
 
-\begin{definition}[Convex Combination]
+\begin{definition}[Non-negative Linear Combination]
 	Let $\vec v_1,\ldots,\vec v_n$ be vectors.
 	The vector 
 	\[
 		\vec x=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n.
 	\]
-	is a \emph{convex combination} of $\vec v_1,\ldots,\vec v_n$
+	is a \emph{non-negative linear combination}\index{non-negative linear combination} of $\vec v_1,\ldots,\vec v_n$
+	if $\alpha_1,\ldots,\alpha_n\geq 0$.
+\end{definition}
+
+\begin{definition}[Convex Linear Combination]
+	Let $\vec v_1,\ldots,\vec v_n$ be vectors.
+	The vector 
+	\[
+		\vec x=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n.
+	\]
+	is a \emph{convex linear combination}\index{convex linear combination} of $\vec v_1,\ldots,\vec v_n$
 	if $\alpha_1,\ldots,\alpha_n\geq 0$ and $\alpha_1+\cdots+\alpha_n=1$.
 \end{definition}
 
-You can think of convex combinations as weighted averages of vectors (the average of $\vec v_1,\ldots,
-\vec v_n$ would be the convex combination with coefficients $\alpha_i=\frac{1}{n}$). 
-A convex combination
+You can think of a non-negative linear combinations as vector you can arrive at by
+only displacing ``forward'' along your vectors.
+
+Convex linear combinations can be thought of as weighted averages of vectors (the average of $\vec v_1,\ldots,
+\vec v_n$ would be the convex linear combination with coefficients $\alpha_i=\frac{1}{n}$). 
+A convex linear combination
 of two vectors gives a point on the line segment connecting them. 
 
 \begin{example}
 	Let $\vec a=\mat{2\\1}$ and $\vec b=\mat{-1\\1}$ and define
 	\begin{align*}
-		A&=\Set{\vec x\given \vec x\text{ is a convex combination of }\vec a\text{ and }\vec b}\\
+		A&=\Set{\vec x\given \vec x\text{ is a convex linear combination of }\vec a\text{ and }\vec b}\\
 		&=\Set{\vec x\given \vec x=\alpha\vec a+(1-\alpha)\vec b\text{ for some }\alpha\in [0,1]}.
 	\end{align*}
 	Draw $A$.
@@ -2083,47 +1571,345 @@ Set addition will allow us to describe all lines and planes as translations of l
 and planes through the origin.
 
 
-\subsection{Images}
+\section{Span}
 
-There is one more important way to create geometric objects, and that is using functions
-and the idea of \emph{image}\index{image}.
+Let $\vec u=\mat{1\\1}$ and $\vec v=\mat{-1\\2}$. Can the vectors $\vec w=\mat{2\\5}$ be obtained
+as a linear combination of $\vec u$ and $\vec v$?
 
-\DefImage
-
-In plain language, the image of a set $X$ under a function $f$ is the set
-of all outputs of $f$ when only points from $X$ are input.
-
-\begin{example}
-	Let $f:\R^2\to\R^2$ be defined as $f(x,y)=(2x,y)$ and let $C=\Set{\vec x\in\R^2\given
-	\norm{\vec x}=1}$ be the unit circle. Find $f(C)$.
-
-	The image $f(C)$ consists of all the points of $C$ after $f$ is applied.
-	Since $f$ doubles the $x$-coordinate, we $f(C)$ will be $C$ stretched in the $x$-direction
-	by $2$.
-
-	XXX Figure
-\end{example}
-
-Images allow exotic transformations of sets. For example, consider \[f(x,y)=((x+y)\sin x, (x+y)\cos x),\]
-and let $X=\Set{t\xhat\given t\geq 0}$ be the positive $x$-axis. The image $f(X)$ is a spiral!
+By drawing a picture, the answer appears to be \emph{yes}.
 
 XXX Figure
 
-Nearly any geometric figure can be made using images and cleverly chosen functions, and multi-variable
-calculus studies how arbitrary functions (via taking images) change geometry. For our purposes, we will
-stick mainly with down to earth functions: linear functions\footnote{ Linear functions
-have the property that they always take lines to lines.} and translations. But, we can still get a 
-lot of utility out of images even in the restricted case of linear functions and translations.
+Algebraically, we can use the definition of \emph{linear combination} to set up a system of equations.
+We know $\vec w$ can be expressed as a linear combination of $\vec u$ and $\vec v$ if and only if 
+the vector equation
+\[
+	\vec w = \mat{2\\5}=\alpha\mat{1\\1}+\beta\mat{-1\\2}=\alpha \vec u+\beta \vec v
+\]
+has a solution. By inspection, we see $\alpha=3$ and $\beta=1$ solve this equation.
 
-Let $T=\Set{\vec x\in\R^2\given \vec x=\alpha\xhat+\beta\yhat\text{ where } \alpha,\beta\geq 0\text{ and }
-\alpha+\beta \leq 1}$ be a triangle and let $R:\R^2\to\R^2$ be the function that rotates vectors 
-counter-clockwise by 90$^\circ$. That is $R(x,y)=(-y,x)$. And, let $V:\R^2\to\R^2$ defined by $V(\vec a)=
-\vec a+\yhat$ be vertical translation. Then, we can start making some fun pictures!
+After initial success, we might be tempted to ask the following:
+\emph{what are all the locations in $\R^2$ that can be obtained
+as a linear combination of $\vec u$ and $\vec v$?} Geometrically, it appears
+any location can be reached. To verify this algebraically, consider the vector equation
+\begin{equation}
+	\label{EQSPAN1}
+	\vec x=\mat{x\\y} = \alpha\mat{1\\1}+\beta\mat{-1\\2} = \alpha\vec u+\beta\vec v.
+\end{equation}
+Here $\vec x$ represents an arbitrary point in $\R^2$. Thus, if equation \eqref{EQSPAN1} always
+has a solution\footnote{ The official terminology would be to say that
+the equations is always \emph{consistent}.}, any vector in $\R^2$ can be obtained as a linear combination of $\alpha$ and $\beta$.
 
-XXX Figure ({T, R(T)}, {T, V of R(T)}, ...)
+We can solve this equation for $\alpha$ and $\beta$ by considering the equations arising from the
+first and second coordinates. Namely,
+\begin{alignat*}{3}
+	x &{}={}& \alpha &{}+{}& \beta\\
+	y &{}={}& \alpha &{}-{}& 2\beta.
+\end{alignat*}
+Subtracting the second equation from the first, we get $x-y=3\beta$ and so $\beta=(x-y)/3$. Plugging 
+$\beta$ into the first equation and solving, we get $\alpha=(2x+y)/3$. Thus, equation \eqref{EQSPAN1}
+\emph{always} has a solution. Namely,
+\begin{align*}
+	\alpha &= \tfrac{1}{3}(2x+y)\\
+	\beta &= \tfrac{1}{3}(x-y).
+\end{align*}
+
+There is a formal term for the set of vectors that can be obtained as linear combinations
+of others: \emph{span}\index{Span}.
+
+\begin{definition}[Span]
+	Let $\mathcal X$ be a set of vectors. The \emph{span} of $\mathcal X$, written $\Span \mathcal X$,
+	is the set of all linear combinations of vectors in $\mathcal X$. Formally,
+	\[
+	\Span \mathcal X = \Set{\vec x\given \vec x = \alpha_1\vec v_1+
+	\cdots+\alpha_n\vec v_n\text{ for some }\vec v_1,\ldots,\vec v_n\in\mathcal X
+	\text{ and scalars }\alpha_1,\ldots,\alpha_n}.
+	\]
+	Further, we define $\Span\emptyset =\Set{\vec 0}$.
+\end{definition}
+
+We just showed above that $\Span\Set*{\mat{1\\1},\mat{-1\\2}}=\R^2$.
+
+\begin{example}
+	Let $\vec u=\mat{-1\\2}$ and $\vec v=\mat{1\\-2}$. Find $\Span\Set{\vec u,\vec v}$.
+
+	XXX Finish
+\end{example}
+
+The objects that arise from spans are familiar. If $\vec v\neq\vec 0$, then $\Span\Set{\vec v}$
+is the line through the origin with direction vector $\vec v$. If $\vec v,\vec w\neq \vec 0$ and
+aren't parallel, $\Span\Set{\vec v,\vec w}$ is a plane through the origin. In fact, vector form of
+a line or a plane is nothing more than a \emph{translated span}.
+
+\subsection{Representing Lines \& Planes as Translated Spans}
+
+Consider the line $\ell$ given in vector form by
+\[
+	\vec x=t\vec d+\vec 0.
+\]
+The line $\ell$ passes through the origin, and if we unravel its definition, we see
+\[
+	\ell=\Set{\vec x\given \vec x=t\vec d+\vec 0\text{ for some }t\in \R}
+	=\Set{\vec x\given \vec x=t\vec d\text{ for some }t\in \R}=\Span\Set{\vec d}.
+\]
+
+Similarly, if $\mathcal P$ is a plane given in vector form by
+\[
+	\vec x=t\vec d_1+s\vec d_2+\vec 0,
+\]
+then
+\[
+	\mathcal P=
+	\Set{\vec x\given \vec x=t\vec d_1+s\vec d_2\text{ for some }t,s\in \R}=\Span\Set{\vec d_1,\vec d_2}.
+\]
+
+If the ``$\vec p$'' in our vector form is $\vec 0$, then that vector form actually defines
+a span. This means, if you accept that every line/plane through the origin has a
+vector form, then every line/plane through the origin can be written as a span. Conversely,
+if $X=\Span\Set{\vec v_1,\ldots,\vec v_n}$ is a span, we know $\vec 0=0\vec v_1+\cdots+0\vec v_n\in X$,
+and so every span contains the origin.
+
+As it turns out, spans exactly describe points, lines, planes, and volumes\footnote{
+ We use the word \emph{volume} to indicate the higher-dimensional analogue of a plane.} through the origin.
+
+\begin{example}
+	The line $\ell_1\subseteq\R^2$ is described by the equation $x+2y=0$ and the line 
+	$\ell_2\subseteq \R^2$ is described by the equation $4x-2y=6$.
+	If possible, describe $\ell_1$ and $\ell_2$ using spans.
+
+	XXX Finish
+\end{example}
+
+However, not all points, lines, planes, and volumes pass through the origin
+and so we can't describe every such object directly as a span. But, if we \emph{translate} a span using set addition we
+can describe objects which don't pass through the origin.
+
+\begin{example}
+	Recall $\ell_2\subseteq\R^2$ is the line described by the equation $4x-2y=6$.
+	Describe $\ell_2$ as a translated span.
+
+	XXX Finish
+\end{example}
+
+We can now see translated spans provide an alternative notation to vector form 
+for specifying lines and planes. If $X$ is described in vector form by
+\[
+	\vec x=t\vec d_1+s\vec d_2+\vec p,
+\]
+then
+\[
+	X=\Span\Set{\vec d_1,\vec d_2}+\Set{\vec p}.
+\]
 
 
+\section{Linear Independence}
 
+Let
+\[
+	\vec u=\mat{1\\0\\0}\qquad\vec v=\mat{0\\1\\0}\qquad \vec w=\mat{1\\1\\0}.
+\]
+Since $\vec w=\vec u+\vec v$, we know that $\vec w\in\Span\Set{\vec u,\vec v}$. Geometrically,
+this is also clear because $\Span\Set{\vec u,\vec v}$ is the $xy$-plane in $\R^3$ and 
+$\vec w$ lies on that plane.
+
+What about $\Span\Set{\vec u,\vec v,\vec w}$? Intuitively, since $\vec w$ is already
+a linear combination of $\vec u$ and $\vec v$, we can't get anywhere \emph{new} by
+taking linear combinations of $\vec u$, $\vec v$, and $\vec w$ compared to linear combinations
+of just $\vec u$ and $\vec v$. So $\Span\Set{\vec u,\vec v}=\Span\Set{\vec u,\vec v,\vec w}$.
+
+Can we prove this from the definitions? Yes! Suppose $\vec r\in \Span\Set{\vec u,\vec v,\vec w}$.
+By definition,
+\[
+	\vec r=\alpha\vec u+\beta\vec v+\gamma\vec w
+\] for some $\alpha,\beta,\gamma\in\R$. Since $\vec w=\vec u+\vec v$, we see
+\[
+	\vec r=\alpha\vec u+\beta\vec v+\gamma(\vec u+\vec v) 
+	= (\alpha+\gamma)\vec u+(\beta+\gamma)\vec v\in\Span\Set{\vec u,\vec v}.
+\]
+Thus, $\Span\Set{\vec u,\vec v,\vec w}\subseteq \Span\Set{\vec u,\vec v}$. Conversely, if $\vec s\in\Span\Set{\vec u,\vec v}$,
+by definition,
+\[
+	\vec s=a\vec u+b\vec v=a\vec u+b\vec v+0\vec w
+\]
+for some $a,b\in \R$,
+and so $\vec s\in\Span\Set{\vec u,\vec v,\vec w}$. Thus $\Span\Set{\vec u,\vec v}\subseteq\Span\Set{\vec u,\vec v,\vec w}$.
+We conclude $\Span\Set{\vec u,\vec v}=\Span\Set{\vec u,\vec v,\vec w}$.
+
+In this case, $\vec w$ was a redundant vector---it wasn't needed for the span.
+
+
+\begin{definition}[Linear Independence \& Dependence (Geometric)]
+	\label{DEFLININD}
+	The vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly dependent}\index{linearly independent} if 
+	for at least one $i$, 
+	\[
+		\vec v_i \in \Span\Set{\vec v_1,\ldots,\vec v_{i-1},\vec v_{i+1},\ldots,\vec v_n}.
+	\]
+	If there is no such $i$, the vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly
+	independent}\index{linearly dependent}.
+\end{definition}
+We will also refer to sets of vectors (for example $\Set{\vec v_1,\ldots,\vec v_n}$) as being linearly
+independent or linearly dependent. For technical reasons, we didn't state the definition in terms
+of sets\footnote{ The issue is, every element of a set is unique. Clearly, the vectors $\vec v$ and $\vec v$
+are linearly dependent, but $\Set{\vec v,\vec v}=\Set{\vec v}$, and so $\Set{\vec v,\vec v}$ is technically
+a linearly independent set. This issue would be resolved by talking about \emph{multisets} instead of sets,
+but it isn't worth the hassle.}.
+
+Definition \ref{DEFLININD} says that the vectors $\vec v_1,\ldots,\vec v_n$ are linearly dependent
+if you can remove at least one vector without changing the span. In other words, $\vec v_1,\ldots,\vec v_n$ 
+are linearly dependent \emph{if there is a redundant vector}.
+
+\begin{example}
+	\label{EXLINDEP}
+	Let $\vec u=\mat{1\\2}$, $\vec v=\mat{2\\3}$, and $\vec w=\mat{4\\5}$. Determine whether
+	$\Set{\vec u,\vec v,\vec w}$ is linearly independent or linearly dependent.
+
+	XXX Finish
+\end{example}
+
+\begin{example}
+	Determine whether the planes ... (given in vector form) are the same.
+
+	XXX Finish
+\end{example}
+
+Suppose the vectors $\vec u$, $\vec v$, and $\vec w$ satisfy 
+\begin{equation}
+	\label{EQLIND}
+	\vec w=\vec u+\vec v.
+\end{equation}
+The set
+$\Set{\vec u,\vec v,\vec w}$ is linearly dependent since $\vec w\in\Span\Set{\vec u,\vec v}$.
+But we can think of this another way. In particular, equation \eqref{EQLIND} can be rearranged
+to get
+\[
+	\vec 0=\vec u+\vec v-\vec w.
+\]
+Here we have expressed $\vec 0$ as a non-trivial linear combination of $\vec u$, $\vec v$, and $\vec w$.
+That is, we have written $\vec 0$ as a linear combination without all zero coefficients.
+
+\begin{definition}[Trivial Linear Combination]
+	A linear combination $\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n$ is called
+	\emph{trivial}\index{trivial linear combination}
+	if $\alpha_1=\cdots=\alpha_n=0$. If at least one $\alpha_i\neq 0$,
+	the linear combination is called \emph{non-trivial}.
+\end{definition}
+
+We can always write $\vec 0$ as a linear combination of vectors if we let all the coefficients
+be zero, but it turns out we can only write $\vec 0$ as a \emph{non-trivial} linear combination
+of vectors if those vectors are linearly dependent. This is the basis for another definition
+of linear independence and dependence.
+
+\begin{definition}[Linear Independence \& Linear Dependence (Algebraic)]
+	\label{DEFLININDII}
+	The vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly independent}\index{linearly independent}
+	if for the only linear combination satisfying
+	\[
+		\vec 0=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n
+	\]
+	is the trivial linear combination (where $\alpha_1=\cdots=\alpha_n=0$).
+\end{definition}
+
+The idea of a ``redundant vector'' coming from the geometric definition of linear dependence
+is geometrically intuitive, but it can be hard to work with. After all, checking independence
+with this definition involves verifying for every vector that it is not in the span of the others.
+The algebraic definition on the other hand is less obvious, but checking independence or dependence
+of a set involves reasoning about solutions to just one equation.
+
+\begin{theorem}
+	The geometric and algebraic definitions of linear independence are equivalent.
+\end{theorem}
+\begin{proof}
+	To show the two definitions are equivalent, we need to show that geometric~$\implies$~algebraic
+	and algebraic~$\implies$~geometric.
+
+	\medskip
+	\noindent
+	(geometric~$\implies$~algebraic) Suppose $\vec v_1,\ldots,\vec v_n$ are linearly dependent by the 
+	geometric definition. That means that for some $i$, we have
+	\[
+		\vec v_i \in \Span\Set{\vec v_1,\ldots,\vec v_{i-1},\vec v_{i+1},\ldots,\vec v_n}.
+	\]
+	Fix such an $i$. Then, by the definition of span we know
+	\[
+		\vec v_i=\alpha_1\vec v_1+\cdots \alpha_{i-1}\vec v_{i-1}+\alpha_{i+1}\vec v_{i+1}+\cdots +\alpha_n\vec v_n,
+	\]
+	and so
+	\[
+		\vec 0=\alpha_1\vec v_1+\cdots \alpha_{i-1}\vec v_{i-1}-\vec v_i+\alpha_{i+1}\vec v_{i+1}+\cdots +\alpha_n\vec v_n.
+	\]
+	This must be a non-trivial linear combination because the coefficient of $\vec v_i$ is $-1\neq 0$. Therefore, 
+	$\vec v_1,\ldots,\vec v_n$ is linearly dependent by the algebraic definition.
+	
+	\medskip
+	\noindent
+	(geometric~$\implies$~algebraic) Suppose $\vec v_1,\ldots,\vec v_n$ are linearly dependent by the 
+	algebraic definition. That means there exist $\alpha_1,\ldots,\alpha_n$, not all zero, so that
+	\[
+		\vec 0=\alpha_1\vec v_1+\cdots +\alpha_n\vec v_n.
+	\]
+	Fix $i$ so that $\alpha_i\neq 0$ (why do we know there is such an $i$?). Rearranging we get
+	\[
+		-\alpha_i\vec v_i=\alpha_1\vec v_1+\cdots \alpha_{i-1}\vec v_{i-1}+\alpha_{i+1}\vec v_{i+1}+\cdots +\alpha_n\vec v_n,
+	\]
+	and since $\alpha_i\neq 0$, we can multiply both sides by $\frac{-1}{\alpha_i}$ to get
+	\[
+		\vec v_i=\tfrac{-\alpha_1}{\alpha_i}\vec v_1+\cdots +\tfrac{-\alpha_{i-1}}{\alpha_i}\vec v_{i-1}
+	+\tfrac{-\alpha_{i+1}}{\alpha_i}\vec v_{i+1}+\cdots +\tfrac{-\alpha_n}{\alpha_i}\vec v_n.
+	\]
+	This shows that
+	\[
+		\vec v_i \in \Span\Set{\vec v_1,\ldots,\vec v_{i-1},\vec v_{i+1},\ldots,\vec v_n},
+	\]
+	and so $\vec v_1,\ldots,\vec v_n$ is linearly dependent by the geometric definition.
+\end{proof}
+
+\begin{example}
+	Let $\vec u=\mat{1\\2}$, $\vec v=\mat{2\\3}$, and $\vec w=\mat{4\\5}$. Use the algebraic definition
+	of linear independence to determine whether
+	$\Set{\vec u,\vec v,\vec w}$ is linearly independent or dependent.
+
+	Notice that $\vec u$, $\vec v$, and $\vec w$ are the vectors from Example \ref{EXLINDEP},
+	so we already know that they are linearly dependent by the geometric definition of linear dependence.
+
+	XXX Finish
+\end{example}
+
+\subsection{Linear Independence and Vector Form}
+
+Fix a vector $\vec d$ and consider the question: When is
+\[
+	\vec x=t\vec d
+\]
+the vector form of a line? The answer is whenever $\vec d\neq \vec 0$, a simple enough rule. What about
+for planes? Fix $\vec d_1$ and $\vec d_2$. When is
+\[
+	\vec x=t_1\vec d_1+t_2\vec d_2
+\]
+vector form of a plane? Here the rule is more complicated: $\vec d_1$ and $\vec d_2$ cannot be zero
+nor can they be parallel. 
+
+How about upping the dimension? Fix $\vec d_1$, $\vec d_2$, and $\vec d_3$. When is
+\[
+	\vec x=t_1\vec d_1+t_2\vec d_2+t_3\vec d_3
+\]
+vector form of a \emph{volume}? Coming up with such a rule seems hard, until we think
+about spans.
+
+Recall that if $\vec x=t\vec d$ is vector form of a line, then that line is $\Span\Set{\vec d}$,
+and if $\vec x=t_1\vec d_1+t_2\vec d_2$ is vector form of a plane, that plane is $\Span\Set{\vec d_1,\vec d_2}$.
+Similarly, if $\vec x=t_1\vec d_1+t_2\vec d_2+t_3\vec d_3$ is vector form of a volume,
+that volume must be $\Span\Set{\vec d_1,\vec d_2,\vec d_3}$. So we can focus on a (maybe) simpler question:
+When is $\Span\Set{\vec d_1,\vec d_2,\vec d_3}$ a volume?
+
+This question is answered by considering whether or not $\Set{\vec d_1,\vec d_2,\vec d_3}$ is linearly
+dependent. If $\Set{\vec d_1,\vec d_2,\vec d_3}$ is linearly dependent, then $\Span\Set{\vec d_1,\vec d_2,\vec d_3}$
+is either a (i) plane, if there is one redundant vector, (ii) a line, if there are two redundant vectors, or (iii)
+a point, if $\vec d_1=\vec d_2=\vec d_3=\vec 0$. If $\Set{\vec d_1,\vec d_2,\vec d_3}$ is linearly independent,
+then $\Span\Set{\vec d_1,\vec d_2,\vec d_3}$ is a volume.
+
+The moral of the story is that when you describe an object in vector form, the \emph{direction vectors must be linearly
+independent}. 
 
 
 \section{Dot Products}
@@ -2181,7 +1967,7 @@ more interestingly, if their directions are perpendicular.
 	\end{tikzpicture}
 \end{center}
 
-Algebraically, we can define the dot product in terms of components:
+Algebraically, we can define the dot product in terms of coordinates:
 \[
 	\mat{a_1\\a_2\\\vdots\,\,\,\, \\a_n}\cdot \mat{b_1\\b_2\\\vdots\,\,\,\,\\b_n}
 	=a_1b_1+a_2b_2+\cdots+a_nb_n.
@@ -2221,10 +2007,13 @@ can be used to tell if two vectors are perpendicular.  There is some strangeness
 with the zero vector here, but it turns out this strangeness simplifies our lives
 mathematically.
 
-\DefOrthogonal
+\begin{restatable}[Orthogonal]{definition}{DefOrthogonal}
+	The vectors $\vec u$ and $\vec v$ are \emph{orthogonal}\index{orthogonal}
+	if $\vec u\cdot\vec v=0$.
+\end{restatable}
 
-The definition of orthogonal encapsulates both the idea of two vectors being
-perpendicular and the idea of one of them being $\vec 0$.
+The definition of orthogonal encapsulates both the idea of two vectors forming
+a right angle and the idea of one of them being $\vec 0$.
 
 Before we continue, let's pin down the idea of one vector pointing
 in the \emph{direction}\index{direction}\index{positive direction} of another.  
@@ -2238,10 +2027,215 @@ this idea, but we'll go with this one.
 	$\vec v$ if $k\vec u=\vec v$ for some positive scalar $k$.
 \end{definition}
 
-As a simple example, $2\xhat$ points in the direction of $\xhat$ since
+The vector $2\xhat$ points in the direction of $\xhat$ since
 $\frac{1}{2}(2\xhat)=\xhat$.  Since $\frac{1}{2}>0$, $2\xhat$ also points
 in the positive direction of $\xhat$. In contrast, 
 $-\xhat$ points in the direction $\xhat$ but not the positive direction of $\xhat$.
+
+This idea can be rephrased using using linear combinations.
+\begin{definition}
+	The vector $\vec u$ points in the \emph{direction} of the vector $\vec v$
+	if $\vec u\in\Span\Set{\vec v}$.
+\end{definition}
+
+An important use of the dot product is to determine two what extent two
+vectors point in the same direction.
+
+\begin{theorem}
+	Let $\vec u$ and $\vec v$ be non-zero vectors. Then, $\vec u$ is in the direction
+	of $\vec v$ if and only if 
+	\[
+		\frac{\vec u\cdot \vec v}{\Norm{\vec u}\Norm{\vec v}} = \pm 1.
+	\]
+\end{theorem}
+\begin{proof}
+	Let $\vec u$ and $\vec v$ be non-zero vectors.
+	By the geometric definition of the dot product,
+	\[
+		\frac{\vec u\cdot \vec v}{\Norm{\vec u}\Norm{\vec v}} = \frac{\Norm{\vec u}\Norm{\vec v}\cos\theta}{\Norm{\vec u}\Norm{\vec v}}
+		=\cos\theta,
+	\]
+	where $\theta$ is the angle between $\vec u$ and $\vec v$.
+
+	The vector $\vec u$ is in the direction of $\vec v$ if and only if $\theta=0$ or $\pi$.
+	But, for $\theta\in[0,\pi]$, we know $\cos\theta=\pm1$ if and only if $\theta=0$ or $\pi$.
+\end{proof}
+
+\begin{example}
+	Let $\vec a=\mat{1\\2}$, $\vec b=\mat{3\\3}$, $\vec c=\mat{2\\1}$, and $\vec v=\mat{3\\4}$. Which vector out of
+	$\vec a$, $\vec b$, and $\vec c$ has a direction closest to the direction of $\vec v$?
+
+	XXX Finish
+\end{example}
+
+
+\subsection{Normal Form of Lines and Planes}
+
+
+Since we will commonly be working in $\R^3$ there is another way to define a plane.  Given
+any vector $\vec n\in\R^3$, we can consider the set $\mathcal Q\subseteq\R^3$ of vectors orthogonal to $\vec n$.
+If $\vec n=\vec 0$, then $\mathcal Q=\R^3$.  Otherwise, $\mathcal Q$ is a plane through the origin.
+In this case, $\vec n$ is called the \emph{normal vector}\index{normal vector} of the plane $\mathcal Q$.
+
+
+\begin{center}
+\begin{tikzpicture}
+	\newcommand{\RightAngle}[4][5pt]{%
+        \draw ($#3!#1!#2$)
+        --($ #3!2!($($#3!#1!#2$)!.5!($#3!#1!#4$)$) $)
+        --($#3!#1!#4$) ;
+        }
+    \begin{axis}[grid=major,view={20}{40},z buffer=sort,
+	    width=12cm,
+	    scale mode=scale uniformly,
+	    zmin=-5,zmax=5,xmin=-10,xmax=10,ymin=-10,ymax=10,
+	    xticklabels={,,}, yticklabels={,,}, zticklabels={,,},
+	    xtick={-10,-5,...,10}, ytick={-10,-5,...,10}
+	    ]
+		\addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+		{.25*x+.25*y};
+		\coordinate (A) at (axis cs:-4,-4,-2);
+		\coordinate (N) at (axis cs:-6,-6,6);
+		\coordinate (B) at (axis cs:4,4,2);
+		\coordinate (C) at (axis cs:-4,4,0);
+
+		\draw [mypink,fill] (A) circle (1.5pt) node [below right] {$A$};
+		\draw [->, thick] (A) -- (B) node [midway,below right] {$\vec d_1$};
+		\draw [->, thick] (A) -- (C) node [midway,above left] {$\vec d_2$};
+		\draw [->, thick] (A) -- (N) node [midway,left] {$\vec n$};
+		\RightAngle{(N)}{(A)}{(C)}
+		%\RightAngle{(N)}{(A)}{(B)}
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+\begin{definition}[Normal form of a plane]
+	The plane $\mathcal P$ is described in \emph{normal form} if for some $\vec n$ and $\vec p$,
+	the equation
+	\[
+		\vec n\cdot(\vec x-\vec p)=0
+	\]
+	if and only if $\vec x\in\mathcal P$.  Equivalently, $\mathcal P$ is described in normal form if
+	for some $\vec n$ and scalar $\alpha\in\R$ the equation
+	\[
+		\vec n\cdot \vec x=\alpha
+	\]
+	is satisfied if and only if $\vec x\in \mathcal P$.  In either case, the vector $\vec n$
+	is call a \emph{normal vector} for $\mathcal P$.
+\end{definition}
+
+Normal form of a plane only exists in $\R^3$, but it is often useful\footnote{ Just like $y=mx+b$ form
+of a line only exists in $\R^2$.}.  The equivalence of the two ways to write a normal form of a plane
+is straight forward.
+\[
+		\vec n\cdot(\vec x-\vec p)=0
+\]
+if and only if
+\[
+		\vec n\cdot\vec x = \vec n\cdot \vec p = \alpha.
+\]
+Since $\vec n$ and $\vec p$ are fixed, $\alpha$ is a constant. Expanding normal form in terms of
+coordinates we see
+\[
+		\vec n\cdot(\vec x-\vec p)=\vec n\cdot\vec x-\alpha=
+		n_xx+n_yy+n_zz-\alpha=0
+\]
+and so
+\begin{equation}
+	\label{EQScalarForm}
+		n_xx+n_yy+n_zz=\alpha
+\end{equation}
+is another way to write a plane.  Equation \eqref{EQScalarForm} is sometimes
+called \emph{scalar form}\index{scalar form of a plane}
+of a plane.  For us, it will not be important to distinguish between scalar and normal form.
+
+It should be noted that like vector form of a plane, normal form of a plane is not unique.
+For example, the plane described by $\vec n\cdot(\vec x-\vec p)=0$ is the same as the
+plane $(2\vec n)\cdot(\vec x-\vec p)=0$.
+
+\begin{example}
+	Find vector form and normal form of the plane $\mathcal P$ passing
+	through the point $A=(1,0,0)$, $B=(0,1,0)$ and $C=(0,0,1)$.
+
+	To find vector form of $\mathcal P$, we need a point on the plane and
+	two direction vectors.  We have three points on the plane, so we can
+	obtain two direction vectors by subtracting these points in different ways.
+	Let
+	\[
+		\vec d_1=\overrightarrow{AB} = \mat{-1\\1\\0}\qquad\vec d_2=\overrightarrow{AC}=
+		\mat{-1\\0\\1}.
+	\]
+	Using the point $A$, we may now write vector form of $\mathcal P$ as
+	\[
+		\mat{x\\y\\z} = t\mat{-1\\1\\0}+s\mat{-1\\0\\1}+\mat{1\\0\\0}.
+	\]
+
+	To write normal form we need to find a normal vector to $\mathcal P$.  By symmetry,
+	we can see that $\vec n=(1,1,1)$ is a normal vector to $\mathcal P$.  If we weren't
+	so insightful, we could also compute $\vec d_1\times \vec d_2 = (1,1,1)$ to find a
+	normal vector.  Now, we may express $\mathcal P$ in normal form as
+	\[
+		\mat{1\\1\\1}\cdot\left(\mat{x\\y\\z}-\mat{1\\0\\0}\right)=0
+	\]
+	or equivalently,
+	\[
+		x+y+z=1.
+	\]
+\end{example}
+
+\begin{example}
+	Find the line $\mathcal P_1\cap \mathcal P_2$ where
+	$\mathcal P_1$ is the plane given by the equation
+	\[
+		x+y+z=2
+	\]
+	and $\mathcal P_2$ is the plane given by the equation
+	\[
+		2x-y+z=0.
+	\]
+
+	Let $\ell=\mathcal P_1\cap \mathcal P_2$.  Since $\ell\subseteq \mathcal P_1$
+	and $\ell\subseteq\mathcal P_2$, every direction vector for $\ell$ is also
+	a direction vector for $\mathcal P_1$ and $\mathcal P_2$.
+
+	Let $\vec n_1=(1,1,1)$
+	be a normal vector for $\mathcal P_2$ and $\vec n_2=(2,-1,1)$ be a normal vector
+	for $\mathcal P_2$.  If $\vec d$ is a direction vector for $\ell$, then
+	$\vec n_1\cdot \vec d=0$ and $\vec n_2\cdot \vec d=0$.  Thus,
+	\[
+		\vec d=\vec n_1\times\vec n_2=\mat{2\\1\\-3}
+	\]
+	is a direction vector for $\ell$.  By guess and check we find that $\vec p=(0,1,1)$
+	satisfies $\vec p\in\mathcal P_1$ and $\vec p\in\mathcal P_2$ and so $\vec p\in\ell$.
+	Thus, we may write $\ell$ in vector form as
+	\[
+		\mat{x\\y\\z} = t\mat{2\\1\\-3}+\mat{0\\1\\1}.
+	\]
+\end{example}
+
+%  \begin{tikzpicture}
+%    \begin{axis}[grid=major,view={20}{40},z buffer=sort]
+%      %\addplot3 [surf, domain=0:360, domain y=5:10,samples=30, samples y=10]
+%      %{-y+5};
+%\addplot3[domain=4:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+%	    ({x},{118.89/x},{2*x});
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {0};
+%      %\addplot3 [domain=-10:10,samples=10, black,mark=none]
+%	%\addplot3[domain=0:30,samples=80,samples y=0,mark=none,black, opacity=0.5,thick]
+%	 %   ({x},{y},{x+y});
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {x+y};
+%      \addplot3 [data cs=cart,surf,domain=-10:10,samples=2, opacity=0.5]
+%      {-2*x+y+3};
+%      %\addplot3 [domain=0:360, samples y=0, samples=30, thick, z buffer=auto]
+%      %(x,5.1,0);
+%      %\addplot3 [surf,domain=0:360, domain y=0:5,samples=30, samples y=10]
+%      %{-y+5};
+%    \end{axis}
+%  \end{tikzpicture}
+
+
 
 \section{Projection}
 Another common vector operation is \emph{projection}\index{projection}.
@@ -2249,7 +2243,17 @@ Projection measures how much a vector points in the direction
 of another.  This quantity is encoded as a vector.  We make this
 definition mathematically precise as follows.
 
-\DefProjection
+\begin{restatable}[Projection]{definition}{DefProjection}
+	For a vector $\vec u$ and a non-zero vector $\vec v$,
+	the \emph{projection} of $\vec u$ onto $\vec v$ is written
+	as $\Proj_{\vec v}\vec u$ and is a vector in the direction
+	of $\vec v$ with the property that $\vec u-\Proj_{\vec v}\vec u$
+	is orthogonal to $\vec v$.
+
+	The vector $\vec u-\Proj_{\vec v}\vec u$ is called the
+	\emph{perpendicular component} of the projection of $\vec u$
+	onto $\vec v$ and is notated $\Perp_{\vec v}\vec u$.
+\end{restatable}
 
 We can visualize
 projections with the following diagram.

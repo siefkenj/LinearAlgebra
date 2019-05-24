@@ -1,5 +1,5 @@
-% arara: xelatex: { shell : yes }
-% arara: xelatex: { shell : yes }
+% arara: lualatex: { shell : yes }
+% arara: lualatex: { shell : yes }
 
 \documentclass[letter, 11pt, onesided]{memoir}
 %\documentclass[letter, 11pt, twosided, openright]{memoir}
@@ -361,15 +361,17 @@
 \DeclareMathOperator{\Arclen}{arc\,len}
 \newcommand{\Arclenfrom}[3]{\Arclen #1 \Big|_{#2}^{#3}}
 \newcommand{\proj}{\Proj}
-\newcommand{\xhat}{{\hat {\mathbf x}}}
-\newcommand{\yhat}{{\hat {\mathbf y}}}
-\newcommand{\zhat}{{\hat {\mathbf z}}}
+\newcommand{\sbasis}[1]{\vec { e}_{#1}}
+\newcommand{\xhat}{{\sbasis{1}}}
+\newcommand{\yhat}{{\sbasis{2}}}
+\newcommand{\zhat}{{\sbasis{3}}}
 \newcommand{\mat}[1]{\begin{bmatrix*}[r]#1\end{bmatrix*}}
 \newcommand{\matc}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\formarg}[2]{\big(#1;\, #2\big)}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\Abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\Norm{\lVert}{\rVert}
 % just to make sure it exists
 \providecommand\given{}
 % can be useful to refer to this outside \Set
@@ -934,3 +936,23 @@
 
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

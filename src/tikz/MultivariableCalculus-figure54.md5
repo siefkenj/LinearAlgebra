@@ -1,1 +1,0 @@
-\begingroup \toks 0={macro:-> \begin {axis}[grid=major,view={20}{20},z buffer=sort, colormap/copper ] \addplot 3[surf, domain=-4:4, samples=30]{x*y}; \end {axis} }\xdef \tikzexternallastkey {\the \toks 0 }\endgroup %
