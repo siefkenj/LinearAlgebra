@@ -1,1 +1,0 @@
-\begingroup \toks 0={macro:-> \begin {axis}[grid=major,view={25}{35},zmin=0, colormap/copper ] \addplot 3 [restrict z to domain=0:9, data cs=polar, domain=30:389, y domain=0:3, blue,smooth] (x, y, 9 - y^2); \end {axis} }\xdef \tikzexternallastkey {\the \toks 0 }\endgroup %

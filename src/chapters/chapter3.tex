@@ -2,175 +2,7 @@
 \section*{Exploration Questions}
 \addcontentsline{toc}{section}{Exploration Questions}
 
-\section{Span}
 
-Let $\vec u=\mat{1\\1}$ and $\vec v=\mat{-1\\2}$. Can the vectors $\vec w=\mat{2\\5}$ be obtained
-as a linear combination of $\vec u$ and $\vec v$?
-
-By drawing a picture, the answer appears to be \emph{yes}.
-
-XXX Figure
-
-Algebraically, we can use the definition of \emph{linear combination} to set up a system of equations.
-We know $\vec w$ can be expressed as a linear combination of $\vec u$ and $\vec v$ if and only if 
-the vector equation
-\[
-	\vec w = \mat{2\\5}=\alpha\mat{1\\1}+\beta\mat{-1\\2}=\alpha \vec u+\beta \vec v
-\]
-has a solution. By inspection, we see $\alpha=3$ and $\beta=1$ solve this equation.
-
-After initial success, we might be tempted to ask the following:
-\emph{what are all the locations in $\R^2$ that can be obtained
-as a linear combination of $\vec u$ and $\vec v$?} Geometrically, it appears
-any location can be reached. To verify this algebraically, we consider the vector equation
-\begin{equation}
-	\label{EQSPAN1}
-	\vec x=\mat{x\\y} = \alpha\mat{1\\1}+\beta\mat{-1\\2} = \alpha\vec u+\beta\vec v.
-\end{equation}
-Here $\vec x$ represents an arbitrary point in $\R^2$. Thus, if equation \eqref{EQSPAN1} always
-has a solution, any vector in $\R^2$ can be obtained as a linear combination of $\alpha$ and $\beta$.
-
-We can solve this equation for $\alpha$ and $\beta$ by considering the equations arising from the
-first and second components. Namely,
-\begin{alignat*}{3}
-	x &{}={}& \alpha &{}+{}& \beta\\
-	y &{}={}& \alpha &{}-{}& 2\beta.
-\end{alignat*}
-Subtracting the second equation from the first, we get $x-y=3\beta$ and so $\beta=(x-y)/3$. Plugging 
-$\beta$ into the first equation and solving, we get $\alpha=(2x+y)/3$. Thus, equation \eqref{EQSPAN1}
-\emph{always} has a solution. Namely,
-\begin{align*}
-	\alpha &= \tfrac{1}{3}(2x+y)\\
-	\beta &= \tfrac{1}{3}(x-y).
-\end{align*}
-
-There is a formal term for the set of vectors that can be obtained as linear combinations
-of others: \emph{span}\index{Span}.
-
-\begin{definition}[Span]
-	Let $\mathcal X$ be a set of vectors. The \emph{span} of $\mathcal X$, written $\Span \mathcal X$,
-	is the set of all linear combinations of vectors in $\mathcal X$. Formally,
-	\[
-	\Span \mathcal X = \Set{\vec x\given \vec x = \alpha_1\vec v_1+
-	\cdots+\alpha_n\vec v_n\text{ for some }\vec v_1,\ldots,\vec v_n\in\mathcal X
-	\text{ and scalars }\alpha_1,\ldots,\alpha_n}.
-	\]
-	Further, we define $\Span\emptyset =\Set{\vec 0}$.
-\end{definition}
-
-We just showed above that $\Span\Set*{\mat{1\\1},\mat{-1\\2}}=\R^2$.
-
-\begin{example}
-	Let $\vec u=\mat{-1\\2}$ and $\vec v=\mat{1\\-2}$. Find $\Span\Set{\vec u,\vec v}$.
-
-	XXX Finish
-\end{example}
-
-The objects that arise from spans are familiar. If $\vec v\neq\vec 0$, then $\Span\Set{\vec v}$
-is the line through the origin with direction vector $\vec v$. If $\vec v,\vec w\neq \vec 0$ and
-aren't parallel, $\Span\Set{\vec v,\vec w}$ is a plane through the origin. In fact, vector form of
-a line or a plane is nothing more than a \emph{translated span}.
-
-\section{Linear Independence}
-
-Let
-\[
-	\vec u=\mat{1\\0\\0}\qquad\vec v=\mat{0\\1\\0}\qquad \vec w=\mat{1\\1\\0}.
-\]
-Since $\vec w=\vec u+\vec v$, we know that $\vec w\in\Span\Set{\vec u,\vec v}$. It follows
-that if 
-\[
-	\vec r=\alpha\vec u+\beta\vec u+\gamma\vec w\in\Span\Set{\vec u,\vec v,\vec w},
-\] then
-\[
-	\vec r=\alpha\vec u+\beta\vec u+\gamma(\vec u+\vec v) 
-	= (\alpha+\gamma)\vec u+(\beta+\gamma)\vec v\in\Span\Set{\vec u,\vec v}.
-\]
-Thus, $\Span\Set{\vec u,\vec v,\vec w}\subseteq \Span\Set{\vec u,\vec v}$. In fact, 
-$\Span\Set{\vec u,\vec v,\vec w}= \Span\Set{\vec u,\vec v}$. In this case, $\vec w$ was a redundant
-vector.
-
-\begin{theorem}
-	Suppose $\vec w\in\Span\Set{\vec v_1,\ldots,\vec v_n}$. Then, 
-	$
-		\Span\Set{\vec v_1,\ldots,\vec v_n}=\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}.
-	$
-\end{theorem}
-\begin{proof}
-	First notice that if $\vec r=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n\in\Span\Set{\vec v_1,\ldots,\vec v_n}$,
-	then $\vec r=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n+0\vec w\in \Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$.
-	Thus $\Span\Set{\vec v_1,\ldots,\vec v_n}\subseteq \Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$ 
-	for any vector $\vec w$.
-
-	Now, suppose $\vec w\in \Span\Set{\vec v_1,\ldots,\vec v_n}$. By definition, $\vec w=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n$.
-	Fix $\vec r\in\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$.  We have
-	\begin{align*}
-		\vec r &=
-		\beta\vec w+\beta_1\vec v_1+\cdots+\beta_n\vec v_n \\ &=
-		\beta(\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n) + \beta_1\vec v_1+\cdots+\beta_n\vec v_n\\
-		&= (\beta\alpha_1+\beta_1)\vec v_1+\cdots+(\beta\alpha_n+\beta_n)\vec v_n\in\Span\Set{\vec v_1,\ldots,\vec v_n}.
-	\end{align*}
-	Thus, $\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}\subseteq \Span\Set{\vec v_1,\ldots,\vec v_n}$. We
-	conclude that $\Span\Set{\vec v_1,\ldots,\vec v_n}=\Span\Set{\vec w,\vec v_1,\ldots,\vec v_n}$.
-\end{proof}
-
-
-\begin{definition}[Linear Independence \& Linear Dependence (I)]
-	\label{DEFLININD}
-	The vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly dependent}\index{linearly independent} if 
-	for at least one $i$, 
-	\[
-		\vec v_i \in \Span\Set{\vec v_1,\ldots,\vec v_{i-1},\vec v_{i+1},\ldots,\vec v_n}.
-	\]
-	If there is no such $i$, the vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly
-	independent}\index{linearly dependent}.
-\end{definition}
-We will also refer to sets of vectors (for example $\Set{\vec v_1,\ldots,\vec v_n}$) as being linearly
-independent or linearly dependent. For technical reasons, we didn't state the definition in terms
-of sets\footnote{ The issue is, every element of a set is unique. Clearly, the vectors $\vec v$ and $\vec v$
-are linearly dependent, but $\Set{\vec v,\vec v}=\Set{\vec v}$, and so $\Set{\vec v,\vec v}$ is technically
-a linearly independent set. This issue would be resolved by talking about \emph{multisets} instead of sets,
-but it isn't worth the hassle.}.
-
-Definition \ref{DEFLININD} says that the vectors $\vec v_1,\ldots,\vec v_n$ are linearly dependent
-if you can remove at least one vector without changing the span. In other words, $\vec v_1,\ldots,\vec v_n$ 
-are linearly dependent \emph{if there is a redundant vector}.
-
-\begin{example}
-	Let $\vec u=\mat{1\\2}$, $\vec v=\mat{2\\3}$, and $\vec w=\mat{4\\5}$. Determine whether
-	$\Set{\vec u,\vec v,\vec w}$ is linearly independent or linearly dependent.
-
-	XXX Finish
-\end{example}
-
-\begin{example}
-	Determine whether the planes ... (given in vector form) are the same.
-
-	XXX Finish
-\end{example}
-
-The idea of a ``redundant vector'' is geometrically intuitive; algebraically, it can be hard
-to work with. Fortunately, there is another definition of linear independence more suitable
-for algebra.
-
-\begin{definition}[Trivial Linear Combination]
-	A linear combination $\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n$ is called
-	\emph{trivial}\index{trivial linear combination}
-	if $\alpha_1=\cdots=\alpha_n=0$. If at least one $\alpha_i\neq 0$,
-	the linear combination is called \emph{non-trivial}.
-\end{definition}
-
-\begin{definition}[Linear Independence \& Linear Dependence (II)]
-	\label{DEFLININDII}
-	The vectors $\vec v_1,\ldots,\vec v_n$ are called \emph{linearly independent}\index{linearly independent}
-	if for the only linear combination satisfying
-	\[
-		\vec 0=\alpha_1\vec v_1+\cdots+\alpha_n\vec v_n
-	\]
-	is the trivial linear combination (where $\alpha_1=\cdots=\alpha_n=0$).
-\end{definition}
-
-XXX Finish
 
 \section{Matrices}
 	Talking about matrices now may seem like a non sequitur, but we will soon be
@@ -1055,3 +887,44 @@ XXX Finish
 	then $\vec e_i$ must have $45$ components. 
 
 \section{Matrix Equations}
+
+\subsection{Images}
+
+There is one more important way to create geometric objects, and that is using functions
+and the idea of \emph{image}\index{image}.
+
+\DefImage
+
+In plain language, the image of a set $X$ under a function $f$ is the set
+of all outputs of $f$ when only points from $X$ are input.
+
+\begin{example}
+	Let $f:\R^2\to\R^2$ be defined as $f(x,y)=(2x,y)$ and let $C=\Set{\vec x\in\R^2\given
+	\norm{\vec x}=1}$ be the unit circle. Find $f(C)$.
+
+	The image $f(C)$ consists of all the points of $C$ after $f$ is applied.
+	Since $f$ doubles the $x$-coordinate, we $f(C)$ will be $C$ stretched in the $x$-direction
+	by $2$.
+
+	XXX Figure
+\end{example}
+
+Images allow exotic transformations of sets. For example, consider \[f(x,y)=((x+y)\sin x, (x+y)\cos x),\]
+and let $X=\Set{t\xhat\given t\geq 0}$ be the positive $x$-axis. The image $f(X)$ is a spiral!
+
+XXX Figure
+
+Nearly any geometric figure can be made using images and cleverly chosen functions, and multi-variable
+calculus studies how arbitrary functions (via taking images) change geometry. For our purposes, we will
+stick mainly with down to earth functions: linear functions\footnote{ Linear functions
+have the property that they always take lines to lines.} and translations. But, we can still get a 
+lot of utility out of images even in the restricted case of linear functions and translations.
+
+Let $T=\Set{\vec x\in\R^2\given \vec x=\alpha\xhat+\beta\yhat\text{ where } \alpha,\beta\geq 0\text{ and }
+\alpha+\beta \leq 1}$ be a triangle and let $R:\R^2\to\R^2$ be the function that rotates vectors 
+counter-clockwise by 90$^\circ$. That is $R(x,y)=(-y,x)$. And, let $V:\R^2\to\R^2$ defined by $V(\vec a)=
+\vec a+\yhat$ be vertical translation. Then, we can start making some fun pictures!
+
+XXX Figure ({T, R(T)}, {T, V of R(T)}, ...)
+
+

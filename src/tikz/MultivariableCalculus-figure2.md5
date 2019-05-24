@@ -1,1 +1,0 @@
-\begingroup \toks 0={macro:-> \coordinate (A) at (1,1); \coordinate (B) at (-.5,2); \par \draw [mypink,fill] (A) circle (1.5pt) node [right] {initial point}; \draw [mypink,fill] (B) circle (1.5pt) node [left] {terminal point}; \draw [->,thick,myred!60!white] (A) -- (B); }\xdef \tikzexternallastkey {\the \toks 0 }\endgroup %

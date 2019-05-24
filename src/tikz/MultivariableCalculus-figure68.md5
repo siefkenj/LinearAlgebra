@@ -1,1 +1,0 @@
-\begingroup \toks 0={macro:-> \begin {axis}[grid=major,view={-50}{25}, colormap/copper, name=plot0 ] \par \par \addplot 3[surf, domain=-2:2, shader=interp, opacity=1] {4-x^2-y^2}; \par \par \par \draw [fill] (0,0,4) circle (1.5pt) node[right] (A) {Global maximum}; \par \end {axis} }\xdef \tikzexternallastkey {\the \toks 0 }\endgroup %
